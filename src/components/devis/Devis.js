@@ -1,6 +1,6 @@
 
 import { Menu, Dropdown, Button, message, Tooltip, Typography } from 'antd';
-import { PrinterFilled, PlusSquareFilled , DeleteOutlined, FundViewOutlined, MailOutlined} from '@ant-design/icons';
+import { PrinterFilled, PlusSquareFilled, DeleteOutlined, FundViewOutlined, MailOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Link, } from 'react-router-dom';
 import { Table, Space, Tag } from 'antd';
@@ -31,16 +31,16 @@ function handleMenuClick(e) {
 const menu = (
   <Menu onClick={handleMenuClick}>
     <Menu.Item key="1" icon={<PrinterFilled />}>
-      Imprimer
+      <Link to="">Imprimer</Link>
     </Menu.Item>
     <Menu.Item key="2" icon={<FundViewOutlined />}>
-      Visualiser
+      <Link to="">Visualiser</Link>
     </Menu.Item>
     <Menu.Item key="3" icon={<MailOutlined />}>
-      Envoyer
+      <Link to="">Envoyer</Link>
     </Menu.Item>
     <Menu.Item key="4" icon={<DeleteOutlined />}>
-      Supprimer
+      <Link to="">Supprimer</Link>
     </Menu.Item>
   </Menu>
 );
@@ -61,7 +61,8 @@ export default function Devis() {
       ),
       sorter: {
         compare: (a, b) => a.nReference - b.nReference,
-        multiple: 3,}
+        multiple: 3,
+      }
 
 
     },
@@ -77,11 +78,12 @@ export default function Devis() {
 
           </>
         )
-        
+
       },
       sorter: {
         compare: (a, b) => a.nom - b.nom,
-        multiple: 3,}
+        multiple: 3,
+      }
 
     },
     {
@@ -99,7 +101,8 @@ export default function Devis() {
       },
       sorter: {
         compare: (a, b) => a.email - b.email,
-        multiple: 3,}
+        multiple: 3,
+      }
 
     },
     {
@@ -117,7 +120,8 @@ export default function Devis() {
       },
       sorter: {
         compare: (a, b) => a.telephone - b.telephone,
-        multiple: 3,}
+        multiple: 3,
+      }
 
     },
     {
@@ -135,7 +139,8 @@ export default function Devis() {
       },
       sorter: {
         compare: (a, b) => a.total - b.total,
-        multiple: 3,}
+        multiple: 3,
+      }
 
 
     },
@@ -154,7 +159,8 @@ export default function Devis() {
       },
       sorter: {
         compare: (a, b) => a.dateEmission - b.dateEmission,
-        multiple: 3,}
+        multiple: 3,
+      }
 
     },
     {
@@ -172,7 +178,8 @@ export default function Devis() {
       },
       sorter: {
         compare: (a, b) => a.condition - b.condition,
-        multiple: 3,}
+        multiple: 3,
+      }
 
     },
     {
@@ -218,7 +225,7 @@ export default function Devis() {
         <div className="card">
           <div className="card-body">
             <Table rowSelection={{ type: selectionType, ...rowSelection, }}
-              columns={columns} dataSource={devis} onChange={onChange}  />
+              columns={columns} dataSource={devis} onChange={onChange} />
           </div>
         </div>
       </div>

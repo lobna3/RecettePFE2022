@@ -373,20 +373,22 @@ export default function AjoutDevis1() {
                                     <div class="card">
                                         <div class="card-body">
                                             <Link to="">
+                                            
                                                 <h6 class="card-title"><FormOutlined /></h6>
-                                                <h6 class="card-subtitle mb-2 ">Visualiser</h6>
+                                                <h6 class="card-subtitle mb-2">Visualiser</h6>
                                                 <p class="card-subtitle mb-2 text-muted">Modifier votre devis</p>
                                                 <p class="card-text"></p>
                                             </Link>
                                         </div>
                                     </div>
+                                    <p class="text-muted" >Pour modifier votre devis <Link to=""> cliquez ici !</Link> </p>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
-                            <button type="button" class="btn btn-success">Accepter</button>
-                            <button type="button" class="btn btn-primary">Enregistrer</button>
+                            <Button type="dashed"  data-bs-dismiss="modal">Retour</Button>
+                            <Button type="danger" >Accepter</Button>
+                            <Button type="primary">Enregistrer</Button>
                         </div>
                     </div>
                 </div>

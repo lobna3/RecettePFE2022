@@ -238,7 +238,6 @@ class EditableTable extends React.Component {
   }
 }
 
-
  export function Test1() {
   const [componentSize, setComponentSize] = useState('default');
 
