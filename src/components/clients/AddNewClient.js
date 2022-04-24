@@ -7,16 +7,80 @@ const { Step } = Steps;
 
 const AddNewClient = ({ isOpen, handleClose }) => {
   const [current, setCurrent] = React.useState(0);
-  // const [canMove, setCanMove] = useState(false);
+  const [canMove, setCanMove] = useState(false);
+
+  const [data, setdata] = useState({
+    titre: "Mr.",
+    nom: "",
+    prenom: "",
+    email: "",
+    entreprise: "",
+    telephone: "",
+    siteinternet: "",
+    type: "",
+    nidentificationFiscale: "",
+    devis: "",
+    activite: "Agence ou Société comerciale",
+    conditionPaiement: "Personalisé",
+    adresse: "",
+    codePostal: "",
+    etat: "",
+    pays: "",
+    typeAdresse: "Facturation",
+    utilisateur: "6235e396cb3d6874fad966c0",
+  });
+
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    setdata((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  const [success, setsuccess] = useState(false);
+  const [error, seterror] = useState("");
+
+  const createClient = () => {
+    let obj = {
+      client: data,
+      adresses: [
+        {
+          adresse: data.adresse,
+          codePostal: data.codePostal,
+          etat: data.etat,
+          pays: data.pays,
+          typeAdresse: data.type,
+        },
+        {
+          adresse: data.adresse,
+          codePostal: data.codePostal,
+          etat: data.etat,
+          pays: data.pays,
+          typeAdresse: data.typeAdresse,
+        },
+      ],
+    };
+    axios
+      .post("ajouter_client", obj)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          setsuccess(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
 
   const watchCanMove = () => {
     let values = Object.values(watch());
     console.log("Values", values);
-    let result = values.findIndex((elm) => elm === "");
-    if (result === -1) {
-      return false;
-    } else {
+    let result = values.findIndex((elm) => elm == "");
+    if (result == -1) {
       return true;
+    } else {
+      return false;
     }
   };
   const next = () => {
@@ -82,13 +146,13 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                 <label class="form-label d-flex text-muted">Nom</label>
                 <Controller
                   name="nom"
-                  onChange={handleChange}
-                  value={data.nom}
                   control={control}
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
                       name="nom"
+                      onChange={handleChange}
+                      value={data.nom}
                       type="text"
                       class="form-control"
                       placeholder="Ben Foulen"
@@ -101,13 +165,13 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                 <label class="form-label d-flex text-muted">Entreprise</label>
                 <Controller
                   name="entreprise"
-                  onChange={handleChange}
-                  value={data.entreprise}
                   control={control}
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
                       name="entreprise"
+                      onChange={handleChange}
+                      value={data.entreprise}
                       type="text"
                       class="form-control"
                       placeholder="Foulen"
@@ -118,7 +182,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
               </div>
               <div class="col-md-4">
                 <label class="form-label d-flex text-muted">Email</label>
-
                 <Controller
                   name="email"
                   control={control}
@@ -137,16 +200,15 @@ const AddNewClient = ({ isOpen, handleClose }) => {
               </div>
               <div class="col-md-4">
                 <label class="form-label d-flex text-muted">Téléphone</label>
-
                 <Controller
                   name="telephone"
-                  onChange={handleChange}
-                  value={data.telephone}
                   control={control}
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
                       name="telephone"
+                      onChange={handleChange}
+                      value={data.telephone}
                       type="text"
                       class="form-control"
                       placeholder="123456789"
@@ -160,14 +222,14 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   Site Internet
                 </label>
                 <Controller
-                  name=" siteinternet"
-                  onChange={handleChange}
-                  value={data.siteinternet}
+                  name="siteinternet"
                   control={control}
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
-                      name=" siteinternet"
+                      onChange={handleChange}
+                      value={data.siteinternet}
+                      name="siteinternet"
                       type="text"
                       class="form-control"
                       placeholder="Site Internet"
@@ -190,18 +252,19 @@ const AddNewClient = ({ isOpen, handleClose }) => {
             {" "}
             <br />
             <div class="row g-3">
-              <fieldset
-                style={{ alignItems: "baseline" }}
-                class="col-12 d-flex"
-              >
-                <span class="col-form-label d-flex text-muted">Type: </span>
-                <div class="col-md-4 d-flex">
-                  <div class="form-check form-check-inline">
-                    <Controller
-                      name="type"
-                      control={control}
-                      rules={{ required: true }}
-                      render={({ field }) => (
+              <Controller
+                name="type"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <fieldset
+                    style={{ alignItems: "baseline" }}
+                    class="col-12 d-flex"
+                    {...field}
+                  >
+                    <span class="col-form-label d-flex text-muted">Type: </span>
+                    <div class="col-md-4 d-flex">
+                      <div class="form-check form-check-inline">
                         <input
                           onChange={handleChange}
                           name="type"
@@ -209,25 +272,17 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                           type="radio"
                           id="gridRadios2"
                           value="Entreprise"
-                          {...field}
                           checked={data.type === "Entreprise"}
                         />
-                      )}
-                    />
 
-                    <label
-                      class="form-check-label d-flex text-muted"
-                      for="gridRadios2"
-                    >
-                      Entreprise
-                    </label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <Controller
-                      name="type"
-                      control={control}
-                      rules={{ required: true }}
-                      render={({ field }) => (
+                        <label
+                          class="form-check-label d-flex text-muted"
+                          for="gridRadios2"
+                        >
+                          Entreprise
+                        </label>
+                      </div>
+                      <div class="form-check form-check-inline">
                         <input
                           onChange={handleChange}
                           name="type"
@@ -236,20 +291,20 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                           id="gridRadios1"
                           value="Particulier"
                           checked={data.type === "Particulier"}
-                          {...field}
                         />
-                      )}
-                    />
 
-                    <label
-                      class="form-check-label d-flex text-muted"
-                      for="gridRadios1"
-                    >
-                      Particulier
-                    </label>
-                  </div>
-                </div>
-              </fieldset>
+                        <label
+                          class="form-check-label d-flex text-muted"
+                          for="gridRadios1"
+                        >
+                          Particulier
+                        </label>
+                      </div>
+                    </div>
+                  </fieldset>
+                )}
+              />
+
               <div class="col-md-6">
                 <label class="form-label d-flex text-muted">
                   N identification fiscale
@@ -257,7 +312,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                 <Controller
                   name="nidentificationFiscale"
                   control={control}
-                  rules={{ required: true }}
+                  rules={{ required: false }}
                   render={({ field }) => (
                     <input
                       type="text"
@@ -562,11 +617,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
       },
     },
   ];
-  const { 
-    //handleSubmit, 
-    control,
-     //reset,
-      watch } = useForm({
+  const { handleSubmit, control, reset, watch } = useForm({
     defaultValues: {
       titre: "",
       nom: "",
@@ -575,82 +626,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
       email: "",
       telephone: "",
       siteinternet: "",
-      type: "",
-      nidentificationFiscale: "",
-      devis: "",
-      activite: "",
-      conditionPaiement: "",
-      adresse: "",
-      codePostal: "",
-      etat: "",
-      pays: "",
-      typeAdresse: "",
     },
   });
-
-  const [data, setdata] = useState({
-    titre: "Mr.",
-    nom: "",
-    prenom: "",
-    email: "",
-    entreprise: "",
-    telephone: "",
-    siteinternet: "",
-    type: "",
-    nidentificationFiscale: "",
-    devis: "",
-    activite: "Agence ou Société comerciale",
-    conditionPaiement: "Personalisé",
-    adresse: "",
-    codePostal: "",
-    etat: "",
-    pays: "",
-    typeAdresse: "Facturation",
-    utilisateur: "6235e396cb3d6874fad966c0",
-  });
-
-  const handleChange = (e) => {
-    const { value, name } = e.target;
-    setdata((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
- const [success, setsuccess] = useState(false);
-  //const [error, seterror] = useState("");
-
-  const createClient = () => {
-    let obj = {
-      client: data,
-      adresses: [
-        {
-          adresse: data.adresse,
-          codePostal: data.codePostal,
-          etat: data.etat,
-          pays: data.pays,
-          typeAdresse: data.type,
-        },
-        {
-          adresse: data.adresse,
-          codePostal: data.codePostal,
-          etat: data.etat,
-          pays: data.pays,
-          typeAdresse: data.typeAdresse,
-        },
-      ],
-    };
-    axios
-      .post("ajouter_client", obj)
-      .then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          setsuccess(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
-  };
 
   return (
     <Modal
