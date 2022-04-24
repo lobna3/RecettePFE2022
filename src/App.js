@@ -11,7 +11,6 @@ import AlertProtection from './components/AlertProtection';
 import Recette from './components/recette/Recette';
 import Devis from './components/devis/Devis';
 import AjoutDevis1 from './components/devis/AjoutDevis1';
-import AjoutDevis from './components/devis/AjoutDevis';
 import Facture from './components/factures/Facture';
 import Commande from './components/commandes/Commande';
 import Ventes from './components/ventes/Vente';
@@ -48,7 +47,6 @@ function App() {
         <Route path='/profile' element={<Profile />}/>
         <Route path='/recette' element={<Recette/>}/>
         <Route path='/devis' element={<Devis/>}/>
-        <Route path='/ajouter_devis' element={<AjoutDevis/>}/>
         <Route path='/factures' element={<Facture/>}/>
         <Route path='/commandes' element={<Commande/>}/>
         <Route path='/ventes' element={<Ventes/>}/>

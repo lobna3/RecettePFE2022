@@ -110,11 +110,11 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <select
                       style={{ width: "70px" }}
+                      {...field}
                       onChange={handleChange}
                       value={data.titre}
                       name="titre"
                       class="form-select"
-                      {...field}
                     >
                       <option>Mr.</option>
                       <option>Mlle.</option>
