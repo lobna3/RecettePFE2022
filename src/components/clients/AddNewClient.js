@@ -1,30 +1,22 @@
 import React, { useState } from "react";
 import { Modal, Steps, Button, message } from "antd";
 import { useForm, Controller } from "react-hook-form";
+import axios from "../../config/axios";
+
 const { Step } = Steps;
+
 const AddNewClient = ({ isOpen, handleClose }) => {
-  const { handleSubmit, control, reset, watch } = useForm({
-    defaultValues: {
-      type: "",
-      nom: "",
-      prenom: "",
-      entreprise: "",
-      email: "",
-      telephone: "",
-      site: "",
-    },
-  });
   const [current, setCurrent] = React.useState(0);
-  const [canMove, setCanMove] = useState(false);
+  // const [canMove, setCanMove] = useState(false);
 
   const watchCanMove = () => {
     let values = Object.values(watch());
     console.log("Values", values);
-    let result = values.findIndex((elm) => elm == "");
-    if (result == -1) {
-      return true;
-    } else {
+    let result = values.findIndex((elm) => elm === "");
+    if (result === -1) {
       return false;
+    } else {
+      return true;
     }
   };
   const next = () => {
@@ -32,7 +24,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
       setCurrent(current + 1);
     }
   };
-
   const prev = () => {
     setCurrent(current - 1);
   };
@@ -49,14 +40,14 @@ const AddNewClient = ({ isOpen, handleClose }) => {
               <div class="col-md-1">
                 <label class="form-label d-flex text-muted">Titre</label>
                 <Controller
-                  name="type"
+                  name="titre"
                   control={control}
                   rules={{ required: true }}
                   render={({ field }) => (
                     <select
-                      style={{ width: "80px" }}
-                      //   onChange={handleChange}
-                      //   value={data.titre}
+                      style={{ width: "70px" }}
+                      onChange={handleChange}
+                      value={data.titre}
                       name="titre"
                       class="form-select"
                       {...field}
@@ -76,6 +67,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
+                      name="prenom"
+                      onChange={handleChange}
+                      value={data.prenom}
                       type="text"
                       class="form-control"
                       placeholder="Foulen"
@@ -88,10 +82,13 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                 <label class="form-label d-flex text-muted">Nom</label>
                 <Controller
                   name="nom"
+                  onChange={handleChange}
+                  value={data.nom}
                   control={control}
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
+                      name="nom"
                       type="text"
                       class="form-control"
                       placeholder="Ben Foulen"
@@ -104,10 +101,13 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                 <label class="form-label d-flex text-muted">Entreprise</label>
                 <Controller
                   name="entreprise"
+                  onChange={handleChange}
+                  value={data.entreprise}
                   control={control}
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
+                      name="entreprise"
                       type="text"
                       class="form-control"
                       placeholder="Foulen"
@@ -125,7 +125,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
-                      type="email"
+                      name="email"
+                      onChange={handleChange}
+                      value={data.email}
                       class="form-control"
                       placeholder="Foulen"
                       {...field}
@@ -138,10 +140,13 @@ const AddNewClient = ({ isOpen, handleClose }) => {
 
                 <Controller
                   name="telephone"
+                  onChange={handleChange}
+                  value={data.telephone}
                   control={control}
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
+                      name="telephone"
                       type="text"
                       class="form-control"
                       placeholder="123456789"
@@ -155,11 +160,14 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   Site Internet
                 </label>
                 <Controller
-                  name="site"
+                  name=" siteinternet"
+                  onChange={handleChange}
+                  value={data.siteinternet}
                   control={control}
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
+                      name=" siteinternet"
                       type="text"
                       class="form-control"
                       placeholder="Site Internet"
@@ -174,29 +182,39 @@ const AddNewClient = ({ isOpen, handleClose }) => {
       },
     },
     {
-      title: "Information Professionnelles",
+      title: "Information Professionnlles",
       content: "Second-content",
       layout: () => {
         return (
           <>
+            {" "}
             <br />
             <div class="row g-3">
               <fieldset
                 style={{ alignItems: "baseline" }}
                 class="col-12 d-flex"
               >
-                <span class="col-form-label d-flex text-muted">Type:</span>
+                <span class="col-form-label d-flex text-muted">Type: </span>
                 <div class="col-md-4 d-flex">
                   <div class="form-check form-check-inline">
-                    <input
-                      //   onChange={handleChange}
+                    <Controller
                       name="type"
-                      class="form-check-input"
-                      type="radio"
-                      id="gridRadios2"
-                      value="Entreprise"
-                      //   checked={data.type === "Entreprise"}
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <input
+                          onChange={handleChange}
+                          name="type"
+                          class="form-check-input"
+                          type="radio"
+                          id="gridRadios2"
+                          value="Entreprise"
+                          {...field}
+                          checked={data.type === "Entreprise"}
+                        />
+                      )}
                     />
+
                     <label
                       class="form-check-label d-flex text-muted"
                       for="gridRadios2"
@@ -205,15 +223,24 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input
-                      //   onChange={handleChange}
+                    <Controller
                       name="type"
-                      class="form-check-input"
-                      type="radio"
-                      id="gridRadios1"
-                      value="Particulier"
-                      //   checked={data.type === "Particulier"}
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <input
+                          onChange={handleChange}
+                          name="type"
+                          class="form-check-input"
+                          type="radio"
+                          id="gridRadios1"
+                          value="Particulier"
+                          checked={data.type === "Particulier"}
+                          {...field}
+                        />
+                      )}
                     />
+
                     <label
                       class="form-check-label d-flex text-muted"
                       for="gridRadios1"
@@ -227,129 +254,84 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                 <label class="form-label d-flex text-muted">
                   N identification fiscale
                 </label>
-                <input
-                  type="text"
-                  //   onChange={handleChange}
-                  //   value={data.nidentificationFiscale}
+                <Controller
                   name="nidentificationFiscale"
-                  class="form-control"
-                  placeholder="123456789"
-                  //   {...("nidentificationFiscale",
-                  //   { required: true, minLength: 8 })}
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <input
+                      type="text"
+                      onChange={handleChange}
+                      value={data.nidentificationFiscale}
+                      name="nidentificationFiscale"
+                      class="form-control"
+                      placeholder="123456789"
+                      {...field}
+                    />
+                  )}
                 />
               </div>
               <div class="col-md-6">
                 <label class="form-label d-flex text-muted">Activité</label>
-                <select
-                  //   onChange={handleChange}
-                  //   value={data.activite}
+                <Controller
                   name="activite"
-                  class="form-select"
-                >
-                  <option>Agence ou Société comerciale</option>
-                  <option>Art et Design</option>
-                  <option>Services de santé</option>
-                </select>
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <select
+                      onChange={handleChange}
+                      value={data.activite}
+                      name="activite"
+                      class="form-select"
+                      {...field}
+                    >
+                      <option>Agence ou Société comerciale</option>
+                      <option>Art et Design</option>
+                      <option>Services de santé</option>
+                    </select>
+                  )}
+                />
               </div>
               <div class="col-md-6">
                 <label class="form-label d-flex text-muted">Devis</label>
-                <input
-                  type="text"
-                  //   onChange={handleChange}
-                  //   value={data.devis}
+                <Controller
                   name="devis"
-                  class="form-control"
-                  placeholder="0091234568"
-                  //   {...("devis", { required: true, minLength: 8 })}
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <input
+                      type="text"
+                      onChange={handleChange}
+                      value={data.devis}
+                      name="devis"
+                      class="form-control"
+                      placeholder="0091234568"
+                      {...field}
+                    />
+                  )}
                 />
               </div>
               <div class="col-md-6">
                 <label class="form-label d-flex text-muted">
                   Conditions de paiements
                 </label>
-                <select
-                  //   onChange={handleChange}
-                  //   value={data.conditionPaiement}
+                <Controller
                   name="conditionPaiement"
-                  class="form-select"
-                >
-                  <option>Personalisé</option>
-                  <option>échéance à la fin du mois</option>
-                  <option>échéance à la fin fu mois prochain</option>
-                </select>
-              </div>
-            </div>
-          </>
-        );
-      },
-    },
-    {
-      title: "Adresse Facturation",
-      content: "Last-content",
-      layout: () => {
-        return (
-          <>
-            <br />
-            <div class="row g-3">
-              <div class="col-md-3">
-                <label class="form-label d-flex text-muted">Type Adresse</label>
-                <select
-                  //   onChange={handleChange}
-                  //   value={data.typeAdresse}
-                  name="typeAdresse"
-                  class="form-select"
-                >
-                  <option>Facturation</option>
-                  <option>Livraison</option>
-                </select>
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label d-flex text-muted">Adresse</label>
-                <input
-                  type="text"
-                  //   onChange={handleChange}
-                  //   value={data.adresse}
-                  name="adresse"
-                  class="form-control"
-                  placeholder="Tunis"
-                  //   {...("adresse", { required: true, minLength: 4 })}
-                />
-              </div>
-              <div class="col-md-3">
-                <label class="form-label d-flex text-muted">Postal</label>
-                <input
-                  type="text"
-                  //   onChange={handleChange}
-                  //   value={data.codePostal}
-                  name="codePostal"
-                  class="form-control"
-                  placeholder="4000"
-                  //   {...("codePostal", { required: true, minLength: 4 })}
-                />
-              </div>
-              <div class="col-md-6">
-                <label class="form-label d-flex text-muted">Etat</label>
-                <input
-                  type="text"
-                  //   onChange={handleChange}
-                  //   value={data.etat}
-                  name="etat"
-                  class="form-control"
-                  placeholder="Lorem Ipsum is simply text"
-                  //   {...("etat", { required: true, minLength: 4 })}
-                />
-              </div>
-              <div class="col-md-6">
-                <label class="form-label d-flex text-muted">Pays</label>
-                <input
-                  type="text"
-                  //   onChange={handleChange}
-                  //   value={data.pays}
-                  name="pays"
-                  class="form-control"
-                  placeholder="Tunisie"
-                  //   {...("pays", { required: true, minLength: 4 })}
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <select
+                      onChange={handleChange}
+                      value={data.conditionPaiement}
+                      name="conditionPaiement"
+                      class="form-select"
+                      {...field}
+                    >
+                      <option>Personalisé</option>
+                      <option>échéance à la fin du mois</option>
+                      <option>échéance à la fin fu mois prochain</option>
+                    </select>
+                  )}
                 />
               </div>
             </div>
@@ -358,72 +340,220 @@ const AddNewClient = ({ isOpen, handleClose }) => {
       },
     },
     {
-      title: "Adresse Livraison",
+      title: "Adresse de Facturation",
       content: "Last-content",
       layout: () => {
         return (
           <>
+            {" "}
             <br />
             <div class="row g-3">
               <div class="col-md-3">
                 <label class="form-label d-flex text-muted">Type Adresse</label>
-                <select
-                  //   onChange={handleChange}
-                  //   value={data.typeAdresse}
+                <Controller
                   name="typeAdresse"
-                  class="form-select"
-                >
-                  <option>Facturation</option>
-                  <option>Livraison</option>
-                </select>
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <select
+                      onChange={handleChange}
+                      value={data.typeAdresse}
+                      name="typeAdresse"
+                      class="form-select"
+                      {...field}
+                    >
+                      <option>Facturation</option>
+                      <option>Livraison</option>
+                    </select>
+                  )}
+                />
               </div>
 
               <div class="col-md-6">
                 <label class="form-label d-flex text-muted">Adresse</label>
-                <input
-                  type="text"
-                  //   onChange={handleChange}
-                  //   value={data.adresse}
+                <Controller
                   name="adresse"
-                  class="form-control"
-                  placeholder="Tunis"
-                  //   {...("adresse", { required: true, minLength: 4 })}
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <input
+                      type="text"
+                      onChange={handleChange}
+                      value={data.adresse}
+                      name="adresse"
+                      class="form-control"
+                      placeholder="Tunis"
+                      {...field}
+                    />
+                  )}
                 />
               </div>
               <div class="col-md-3">
                 <label class="form-label d-flex text-muted">Postal</label>
-                <input
-                  type="text"
-                  //   onChange={handleChange}
-                  //   value={data.codePostal}
+                <Controller
                   name="codePostal"
-                  class="form-control"
-                  placeholder="4000"
-                  //   {...("codePostal", { required: true, minLength: 4 })}
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <input
+                      type="text"
+                      onChange={handleChange}
+                      value={data.codePostal}
+                      name="codePostal"
+                      class="form-control"
+                      placeholder="4000"
+                      {...field}
+                    />
+                  )}
                 />
               </div>
               <div class="col-md-6">
                 <label class="form-label d-flex text-muted">Etat</label>
-                <input
-                  type="text"
-                  //   onChange={handleChange}
-                  //   value={data.etat}
+                <Controller
                   name="etat"
-                  class="form-control"
-                  placeholder="Lorem Ipsum is simply text"
-                  //   {...("etat", { required: true, minLength: 4 })}
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <input
+                      type="text"
+                      onChange={handleChange}
+                      value={data.etat}
+                      name="etat"
+                      class="form-control"
+                      placeholder="Lorem Ipsum is simply text"
+                      {...field}
+                    />
+                  )}
                 />
               </div>
               <div class="col-md-6">
                 <label class="form-label d-flex text-muted">Pays</label>
-                <input
-                  type="text"
-                  //   onChange={handleChange}
-                  //   value={data.pays}
+                <Controller
                   name="pays"
-                  class="form-control"
-                  placeholder="Tunisie"
-                  //   {...("pays", { required: true, minLength: 4 })}
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <input
+                      type="text"
+                      onChange={handleChange}
+                      value={data.pays}
+                      name="pays"
+                      class="form-control"
+                      placeholder="Tunisie"
+                      {...field}
+                    />
+                  )}
+                />
+              </div>
+            </div>
+          </>
+        );
+      },
+    },
+    {
+      title: "Adresse  de Livraison",
+      content: "Last2-content",
+      layout: () => {
+        return (
+          <>
+            {" "}
+            <br />
+            <div class="row g-3">
+              <div class="col-md-3">
+                <label class="form-label d-flex text-muted">Type Adresse</label>
+                <Controller
+                  name="typeAdresse"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <select
+                      onChange={handleChange}
+                      value={data.typeAdresse}
+                      name="typeAdresse"
+                      class="form-select"
+                      {...field}
+                    >
+                      <option>Facturation</option>
+                      <option>Livraison</option>
+                    </select>
+                  )}
+                />
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label d-flex text-muted">Adresse</label>
+                <Controller
+                  name="adresse"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <input
+                      type="text"
+                      onChange={handleChange}
+                      value={data.adresse}
+                      name="adresse"
+                      class="form-control"
+                      placeholder="Tunis"
+                      {...field}
+                    />
+                  )}
+                />
+              </div>
+              <div class="col-md-3">
+                <label class="form-label d-flex text-muted">Postal</label>
+                <Controller
+                  name="codePostal"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <input
+                      type="text"
+                      onChange={handleChange}
+                      value={data.codePostal}
+                      name="codePostal"
+                      class="form-control"
+                      placeholder="4000"
+                      {...field}
+                    />
+                  )}
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label d-flex text-muted">Etat</label>
+                <Controller
+                  name="etat"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <input
+                      type="text"
+                      onChange={handleChange}
+                      value={data.etat}
+                      name="etat"
+                      class="form-control"
+                      placeholder="Lorem Ipsum is simply text"
+                      {...field}
+                    />
+                  )}
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label d-flex text-muted">Pays</label>
+                <Controller
+                  name="pays"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <input
+                      type="text"
+                      onChange={handleChange}
+                      value={data.pays}
+                      name="pays"
+                      class="form-control"
+                      placeholder="Tunisie"
+                      {...field}
+                    />
+                  )}
                 />
               </div>
             </div>
@@ -432,11 +562,107 @@ const AddNewClient = ({ isOpen, handleClose }) => {
       },
     },
   ];
+  const { 
+    //handleSubmit, 
+    control,
+     //reset,
+      watch } = useForm({
+    defaultValues: {
+      titre: "",
+      nom: "",
+      prenom: "",
+      entreprise: "",
+      email: "",
+      telephone: "",
+      siteinternet: "",
+      type: "",
+      nidentificationFiscale: "",
+      devis: "",
+      activite: "",
+      conditionPaiement: "",
+      adresse: "",
+      codePostal: "",
+      etat: "",
+      pays: "",
+      typeAdresse: "",
+    },
+  });
+
+  const [data, setdata] = useState({
+    titre: "Mr.",
+    nom: "",
+    prenom: "",
+    email: "",
+    entreprise: "",
+    telephone: "",
+    siteinternet: "",
+    type: "",
+    nidentificationFiscale: "",
+    devis: "",
+    activite: "Agence ou Société comerciale",
+    conditionPaiement: "Personalisé",
+    adresse: "",
+    codePostal: "",
+    etat: "",
+    pays: "",
+    typeAdresse: "Facturation",
+    utilisateur: "6235e396cb3d6874fad966c0",
+  });
+
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    setdata((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+ const [success, setsuccess] = useState(false);
+  //const [error, seterror] = useState("");
+
+  const createClient = () => {
+    let obj = {
+      client: data,
+      adresses: [
+        {
+          adresse: data.adresse,
+          codePostal: data.codePostal,
+          etat: data.etat,
+          pays: data.pays,
+          typeAdresse: data.type,
+        },
+        {
+          adresse: data.adresse,
+          codePostal: data.codePostal,
+          etat: data.etat,
+          pays: data.pays,
+          typeAdresse: data.typeAdresse,
+        },
+      ],
+    };
+    axios
+      .post("ajouter_client", obj)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          setsuccess(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+
   return (
     <Modal
+      footer={null}
       visible={isOpen}
       onCancel={handleClose}
-      width={950}
+      width={980}
+      title={
+        <div>
+          <h6 className="text-primary">Nouveau Client</h6>
+        </div>
+      }
       onOK={() => {
         handleClose();
       }}
@@ -446,24 +672,32 @@ const AddNewClient = ({ isOpen, handleClose }) => {
           <Step key={item.title} title={item.title}></Step>
         ))}
       </Steps>
-      <div className="steps-content">{steps[current].layout()}</div>
-      <div className="steps-action">
+      <div className="steps-content">
+        {steps[current].layout()}
+        <br />
+      </div>
+      <div
+        style={{ display: "flex", justifyContent: "flex-end" }}
+        className="steps-action"
+      >
         {current < steps.length - 1 && (
           <Button type="primary" onClick={() => next()}>
-            Next
+            Suivant
           </Button>
         )}
         {current === steps.length - 1 && (
           <Button
             type="primary"
-            onClick={() => message.success("Processing complete!")}
+            onClick={() =>
+              message.success("Client ajouté avec succès!") & createClient()
+            }
           >
-            Done
+            Ajouter
           </Button>
         )}
         {current > 0 && (
           <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
-            Previous
+            Retour
           </Button>
         )}
       </div>
@@ -748,5 +982,66 @@ export default AddNewClient;
     </div>
   </div>
 </div>
-</div> */
+</div>
+<div
+        class="modal fade"
+        id="disablebackdrop"
+        tabindex="-1"
+        data-bs-backdrop="false"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-primary">
+              <h6 class="modal-title text-white">Nouvelle opération</h6>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <h5 className="d-flex">
+                <i class="d-flex" style={{ margin: "0 8px" }}>
+                  {" "}
+                  <BsArrowLeftSquare />{" "}
+                </i>
+                Choissisez votre opération souhaité
+              </h5>
+              <div className="card">
+                <button class="btn btn-outline-primary">
+                  <Link to="/ajouter_devis">
+                    <i class="d-flex" style={{ margin: "0 8px" }}>
+                      <BsFillFileEarmarkPlusFill />{" "}
+                    </i>
+                    <span className="d-inline-block text-left  text-dark">
+                      {" "}
+                      Créer votre Devis
+                      <small className="font-weight-light d-block text-muted">
+                        Nouveau devis
+                      </small>
+                    </span>
+                  </Link>
+                </button>
+                <p></p>
+                <button class="btn btn-outline-primary">
+                  <i class="d-flex" style={{ margin: "0 8px" }}>
+                    <BsFillFileEarmarkPlusFill />
+                  </i>
+                  <span className="d-inline-block text-left text-dark">
+                    {" "}
+                    Créer votre Facture
+                    <small className="font-weight-light d-block text-muted">
+                      {" "}
+                      Nouvelle facture
+                    </small>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <div class="modal-footer"></div>
+          </div>
+        </div>
+      </div>
+ */
 }

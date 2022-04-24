@@ -1,34 +1,21 @@
 import React from "react";
 import { Modal } from "antd";
-import {
-  BsPersonPlusFill,
-  BsPersonSquare,
-  BsArrowLeftSquare,
-  BsFillFileEarmarkPlusFill,
-} from "react-icons/bs";
-const ModalHeader = () => {
-  return (
-    <div style={{ width: "100%", backgroundColor: "red", height: "100px" }}>
-      <h1>Nouvelle opération</h1>
-    </div>
-  );
-};
-const NewOpModal = ({
-  isOpen,
-  handleClose,
-  handleFirstBtn,
-  handleSecondBtn,
-}) => {
+import { BsArrowLeftSquare, BsFillFileEarmarkPlusFill } from "react-icons/bs";
+
+const ModalOP = ({ isOpen, handleClose, handleFirstBtn, handleSecondBtn }) => {
   return (
     <Modal
       footer={null}
       visible={isOpen}
       onCancel={handleClose}
       title={
-        <div >
+        <div>
           <h6 className="text-primary">Nouvelle opération</h6>
         </div>
       }
+      onOK={() => {
+        handleClose();
+      }}
     >
       {" "}
       <h5 className="d-flex">
@@ -42,31 +29,27 @@ const NewOpModal = ({
       <div className="card">
         <button class="btn btn-outline-primary" onClick={handleFirstBtn}>
           <i class="d-flex" style={{ margin: "0 8px" }}>
-            <BsPersonPlusFill />
+            <BsFillFileEarmarkPlusFill />
           </i>
           <span className="d-inline-block text-left text-dark">
             {" "}
-            Nouveau Client
+            Créer votre Devis
             <small className="font-weight-light d-block text-muted">
-              Créer un nouvelle client
+              Nouveau devis
             </small>
           </span>
         </button>
-          <p></p>
-          <p></p>
-        <button
-          class="btn btn-outline-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#ExtralargeModal"
-        >
+        <p></p>
+        <p></p>
+        <button class="btn btn-outline-primary" onClick={handleSecondBtn}>
           <i class="d-flex" style={{ margin: "0 8px" }}>
-            <BsPersonSquare />
+            <BsFillFileEarmarkPlusFill />
           </i>
           <span className="d-inline-block text-left text-dark">
             {" "}
-            Ancien Client
+            Créer votre Facture
             <small className="font-weight-light d-block text-muted">
-              Aller au tableau des clients
+              Nouvelle facture
             </small>
           </span>
         </button>
@@ -75,4 +58,4 @@ const NewOpModal = ({
   );
 };
 
-export default NewOpModal;
+export default ModalOP;
