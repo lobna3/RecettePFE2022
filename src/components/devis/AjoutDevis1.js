@@ -153,11 +153,8 @@ export default function AjoutDevis1() {
           })}
         >
           <Row>
-          </Row>
-
-          <Row>
             <Col span={8} push={16}>
-              <Card >
+              <Card>
                 <Button block>
                   Visualiser
                   <EyeOutlined />
@@ -191,6 +188,11 @@ export default function AjoutDevis1() {
                   <Switch />
                 </Form.Item>
                 <TextArea
+                  style={{
+                    borderWidth: 1,
+                    borderStyle: "dashed",
+                    borderColor: "#0d6efd",
+                  }}
                   onChange={handleChange}
                   value={data.note}
                   name="note"
@@ -199,6 +201,11 @@ export default function AjoutDevis1() {
                 />
                 <p></p>
                 <TextArea
+                  style={{
+                    borderWidth: 1,
+                    borderStyle: "dashed",
+                    borderColor: "#0d6efd",
+                  }}
                   onChange={handleChange}
                   value={data.remarque}
                   name="remarque"
@@ -207,7 +214,7 @@ export default function AjoutDevis1() {
                 />
               </Card>
             </Col>
-          
+
             <Col span={16} pull={8}>
               <Card>
                 <Form layout="vertical" initialValues={{ size: componentSize }}>
@@ -379,8 +386,9 @@ export default function AjoutDevis1() {
                   </Row>
                   <hr />
                   <Row>
-                    <Button  block>Ajouter article</Button>
-                    <Articles/>
+                    <Button block> + Ajouter article</Button>
+                    <p></p>
+                    <Articles />
                   </Row>
                   <br />
 
@@ -408,6 +416,11 @@ export default function AjoutDevis1() {
                         style={{ display: "inline-block", textAlign: "left" }}
                       >
                         <Input
+                          style={{
+                            borderWidth: 1,
+                            borderStyle: "dashed",
+                            borderColor: "#0d6efd",
+                          }}
                           onChange={handleChange}
                           value={data.remise}
                           name="remise"
@@ -425,6 +438,11 @@ export default function AjoutDevis1() {
                         style={{ display: "inline-block", textAlign: "left" }}
                       >
                         <Input
+                          style={{
+                            borderWidth: 1,
+                            borderStyle: "dashed",
+                            borderColor: "#0d6efd",
+                          }}
                           onChange={handleChange}
                           value={data.taxes}
                           name="taxes"
@@ -558,7 +576,6 @@ export default function AjoutDevis1() {
           </Row>
         </form>
       </Row>
-      
 
       <div class="modal fade" id="largeModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
