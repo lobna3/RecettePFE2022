@@ -21,69 +21,69 @@ const Dashbord = () => {
               <div class="row"></div>
             </div>
             <div class="col-lg-3">
-              <div class="card" style={{ margin: "0 15px" }}>
-                <img src="assets/img/card.jpg" class="card-img-top" alt="..." />
-                <div class="card-img-overlay">
-                  <div className="card-body">
-                    <h5 className="card-title text-center">
-                      Créer votre opération vente
-                    </h5>
-                    <div className="media text-center">
-                      <div className="media-body">
-                        <button
-                          type="button"
-                          className="btn btn-primary rounded-pill btn-sm"
-                          onClick={() => {
-                            setIsOpenOperation(true);
-                          }}
-                        >
-                          {" "}
-                          Nouvelle Opération
-                        </button>
-                      </div>
+              <div
+                className="card"
+                style={{ margin: "0 15px", height: "150px", width: "200px" }}
+              >
+                <div className="card-body">
+                  <p className=" text-center text-primary">
+                    Créer votre opération vente
+                  </p>
+                  <div className="media text-center">
+                    <div className="media-body">
+                      <button
+                        type="button"
+                        className="btn btn-primary rounded-pill btn-sm"
+                        onClick={() => {
+                          setIsOpenOperation(true);
+                        }}
+                      >
+                        {" "}
+                        Nouvelle Opération
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
               <br />
-              <div class="card" style={{ margin: "0 15px" }}>
-                <img src="assets/img/card.jpg" class="card-img-top" alt="..." />
-                <div class="card-img-overlay">
-                  <div className="card-body">
-                    <h5 className="card-title text-center ">
-                      Créer votre Projet
-                    </h5>
-                    <div className="media text-center">
-                      <div className="media-body">
-                        <button
-                          type="button"
-                          className="btn btn-primary rounded-pill btn-sm "
-                        >
-                          Nouveau Projet
-                        </button>
-                      </div>
+              <div
+                class="card"
+                style={{ margin: "0 15px", height: "150px", width: "200px" }}
+              >
+                <div className="card-body">
+                  <p className="text-center text-primary ">
+                    Créer votre Projet
+                  </p>
+                  <div className="media text-center">
+                    <div className="media-body">
+                      <button
+                        type="button"
+                        className="btn btn-primary rounded-pill btn-sm "
+                      >
+                        Nouveau Projet
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
               <br />
-              <div class="card" style={{ margin: "0 15px" }}>
-                <img src="assets/img/card.jpg" class="card-img-top" alt="..." />
-                <div class="card-img-overlay">
-                  <div className="card-body">
-                    <div className="media text-center">
-                      <div className="media-body">
-                        <div>
-                          <p></p>
-                          <br></br>
-                        </div>
-                        <button
-                          type="button"
-                          className="btn btn-primary rounded-pill btn-sm "
-                        >
-                          Contactez Nous
-                        </button>
+              <div
+                className="card"
+                style={{ margin: "0 15px", height: "150px", width: "200px" }}
+              >
+                <div className="card-body">
+                  <div className="media text-center">
+                    <div className="media-body">
+                      <div>
+                        <p></p>
+                        <br></br>
                       </div>
+                      <button
+                        type="button"
+                        className="btn btn-primary rounded-pill btn-sm "
+                      >
+                        Contactez Nous
+                      </button>
                     </div>
                   </div>
                 </div>

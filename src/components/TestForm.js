@@ -1,24 +1,24 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import { Typography, Space } from 'antd';
 
-export default function TestForm() {
-    const { register, formState: { errors }, handleSubmit ,onSubmit} = useForm();
+const { Text, Link } = Typography;
 
-    return (
-        /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-        <main id="main" class="main">
-            <br />
-            <br />
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <input {...register("firstName", { required: true })} />
-                {errors.firstName?.type === 'required' && "First name is required"}
-
-                <input {...register("lastName", { required: true })} />
-                {errors.lastName && "Last name is required"}
-
-                <input type="submit" />
-            </form>
-        </main>
-
-    );
-}
+export default () => (
+  <Space direction="vertical">
+    <Text>Ant Design (default)</Text>
+    <Text type="secondary">Ant Design (secondary)</Text>
+    <Text type="success">Ant Design (success)</Text>
+    <Text type="warning">Ant Design (warning)</Text>
+    <Text type="danger">Ant Design (danger)</Text>
+    <Text disabled>Ant Design (disabled)</Text>
+    <Text mark>Ant Design (mark)</Text>
+    <Text code>Ant Design (code)</Text>
+    <Text keyboard>Ant Design (keyboard)</Text>
+    <Text underline>Ant Design (underline)</Text>
+    <Text delete>Ant Design (delete)</Text>
+    <Text strong>Ant Design (strong)</Text>
+    <Text italic>Ant Design (italic)</Text>
+    <Link href="https://ant.design" target="_blank">
+      Ant Design (Link)
+    </Link>
+  </Space>
+);

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal, Steps, Button, message } from "antd";
 import { useForm, Controller } from "react-hook-form";
 import axios from "../../config/axios";
-
+import "./modal.css";
 const { Step } = Steps;
 
 const AddNewClient = ({ isOpen, handleClose }) => {
@@ -30,12 +30,17 @@ const AddNewClient = ({ isOpen, handleClose }) => {
     utilisateur: "6235e396cb3d6874fad966c0",
   });
 
-  const handleChange = (e) => {
+  {
+    /*const handleChange = (e) => {
     const { value, name } = e.target;
     setdata((prev) => ({
       ...prev,
       [name]: value,
     }));
+  };*/
+  }
+  const handleChange = (name) => (e) => {
+    setdata({ ...data, [name]: e.target.value });
   };
   const [success, setsuccess] = useState(false);
   const [error, seterror] = useState("");
@@ -110,11 +115,11 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <select
                       style={{ width: "70px" }}
-                      {...field}
-                      onChange={handleChange}
-                      value={data.titre}
-                      name="titre"
+                      //name="titre"
                       class="form-select"
+                      value={data.titre}
+                      onChange={handleChange("titre")}
+                      {...field}
                     >
                       <option>Mr.</option>
                       <option>Mlle.</option>
@@ -131,8 +136,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
-                      name="prenom"
-                      onChange={handleChange}
+                      //name="prenom"
+                      onChange={handleChange("prenom")}
                       value={data.prenom}
                       type="text"
                       class="form-control"
@@ -150,8 +155,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
-                      name="nom"
-                      onChange={handleChange}
+                      //name="nom"
+                      onChange={handleChange("nom")}
                       value={data.nom}
                       type="text"
                       class="form-control"
@@ -169,8 +174,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
-                      name="entreprise"
-                      onChange={handleChange}
+                      //name="entreprise"
+                      onChange={handleChange("entreprise")}
                       value={data.entreprise}
                       type="text"
                       class="form-control"
@@ -188,8 +193,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
-                      name="email"
-                      onChange={handleChange}
+                      //name="email"
+                      onChange={handleChange("email")}
                       value={data.email}
                       class="form-control"
                       placeholder="Foulen"
@@ -206,8 +211,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
-                      name="telephone"
-                      onChange={handleChange}
+                      //name="telephone"
+                      onChange={handleChange("telephone")}
                       value={data.telephone}
                       type="text"
                       class="form-control"
@@ -227,9 +232,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
-                      onChange={handleChange}
+                      onChange={handleChange("siteinternet")}
                       value={data.siteinternet}
-                      name="siteinternet"
+                      //name="siteinternet"
                       type="text"
                       class="form-control"
                       placeholder="Site Internet"
@@ -266,8 +271,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     <div class="col-md-4 d-flex">
                       <div class="form-check form-check-inline">
                         <input
-                          onChange={handleChange}
-                          name="type"
+                          onChange={handleChange("type")}
+                          //name="type"
                           class="form-check-input"
                           type="radio"
                           id="gridRadios2"
@@ -284,8 +289,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                       </div>
                       <div class="form-check form-check-inline">
                         <input
-                          onChange={handleChange}
-                          name="type"
+                          onChange={handleChange("type")}
+                          //name="type"
                           class="form-check-input"
                           type="radio"
                           id="gridRadios1"
@@ -316,9 +321,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      onChange={handleChange}
+                      onChange={handleChange("nidentificationFiscale")}
                       value={data.nidentificationFiscale}
-                      name="nidentificationFiscale"
+                      //name="nidentificationFiscale"
                       class="form-control"
                       placeholder="123456789"
                       {...field}
@@ -334,9 +339,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <select
-                      onChange={handleChange}
+                      onChange={handleChange("activite")}
                       value={data.activite}
-                      name="activite"
+                      //name="activite"
                       class="form-select"
                       {...field}
                     >
@@ -356,9 +361,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      onChange={handleChange}
+                      onChange={handleChange("devis")}
                       value={data.devis}
-                      name="devis"
+                      //name="devis"
                       class="form-control"
                       placeholder="0091234568"
                       {...field}
@@ -376,9 +381,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <select
-                      onChange={handleChange}
+                      onChange={handleChange("conditionPaiement")}
                       value={data.conditionPaiement}
-                      name="conditionPaiement"
+                      //name="conditionPaiement"
                       class="form-select"
                       {...field}
                     >
@@ -411,9 +416,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <select
-                      onChange={handleChange}
+                      onChange={handleChange("typeAdresse")}
                       value={data.typeAdresse}
-                      name="typeAdresse"
+                      //name="typeAdresse"
                       class="form-select"
                       {...field}
                     >
@@ -433,9 +438,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      onChange={handleChange}
+                      onChange={handleChange("adresse")}
                       value={data.adresse}
-                      name="adresse"
+                      //name="adresse"
                       class="form-control"
                       placeholder="Tunis"
                       {...field}
@@ -452,9 +457,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      onChange={handleChange}
+                      onChange={handleChange("codePostal")}
                       value={data.codePostal}
-                      name="codePostal"
+                      //name="codePostal"
                       class="form-control"
                       placeholder="4000"
                       {...field}
@@ -471,9 +476,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      onChange={handleChange}
+                      onChange={handleChange("etat")}
                       value={data.etat}
-                      name="etat"
+                      //name="etat"
                       class="form-control"
                       placeholder="Lorem Ipsum is simply text"
                       {...field}
@@ -490,9 +495,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      onChange={handleChange}
+                      onChange={handleChange("pays")}
                       value={data.pays}
-                      name="pays"
+                      //name="pays"
                       class="form-control"
                       placeholder="Tunisie"
                       {...field}
@@ -522,9 +527,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <select
-                      onChange={handleChange}
+                      onChange={handleChange("typeAdresse")}
                       value={data.typeAdresse}
-                      name="typeAdresse"
+                      //name="typeAdresse"
                       class="form-select"
                       {...field}
                     >
@@ -544,8 +549,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      onChange={handleChange}
-                      value={data.adresse}
+                      onChange={handleChange("adresse")}
+                      //value={data.adresse}
                       name="adresse"
                       class="form-control"
                       placeholder="Tunis"
@@ -563,9 +568,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      onChange={handleChange}
+                      onChange={handleChange("codePostal")}
                       value={data.codePostal}
-                      name="codePostal"
+                      //name="codePostal"
                       class="form-control"
                       placeholder="4000"
                       {...field}
@@ -582,9 +587,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      onChange={handleChange}
+                      onChange={handleChange("etat")}
                       value={data.etat}
-                      name="etat"
+                      //name="etat"
                       class="form-control"
                       placeholder="Lorem Ipsum is simply text"
                       {...field}
@@ -601,9 +606,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      onChange={handleChange}
+                      onChange={handleChange("pays")}
                       value={data.pays}
-                      name="pays"
+                      //name="pays"
                       class="form-control"
                       placeholder="Tunisie"
                       {...field}
@@ -631,13 +636,14 @@ const AddNewClient = ({ isOpen, handleClose }) => {
 
   return (
     <Modal
+      className="modalStyle"
       footer={null}
       visible={isOpen}
       onCancel={handleClose}
       width={980}
       title={
         <div>
-          <h6 className="text-primary">Nouveau Client</h6>
+          <h6 className="text-white">Nouveau Client</h6>
         </div>
       }
       onOK={() => {
