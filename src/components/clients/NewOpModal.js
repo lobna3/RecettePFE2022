@@ -9,7 +9,6 @@ import {
 import "./modal.css";
 const { Text } = Typography;
 
-
 const NewOpModal = ({
   isOpen,
   handleClose,
@@ -32,15 +31,19 @@ const NewOpModal = ({
       footer={null}
     >
       {" "}
-      <h6 className="d-flex">
+      <h5 className="d-flex">
         {" "}
         <i className="d-flex" style={{ margin: "0 8px" }}>
           {" "}
           <BsArrowLeftSquare />{" "}
         </i>{" "}
         Choissisez votre opération souhaité
-      </h6>
-      <Button onClick={handleFirstBtn} block style={{ height: "80px" }}>
+      </h5>
+      <Button
+        onClick={handleFirstBtn}
+        block
+        style={{ height: "80px", width: "370px", margin: "8px 40px" }}
+      >
         <i className="d-flex" style={{ margin: "0 8px" }}>
           <BsPersonPlusFill />
         </i>
@@ -52,9 +55,11 @@ const NewOpModal = ({
           </small>
         </span>
       </Button>
-      <p></p>
-      <p></p>
-      <Button onClick={handleSecondBtn} block style={{ height: "80px" }}>
+      <Button
+        onClick={handleSecondBtn}
+        block
+        style={{ height: "80px", width: "370px", margin: "8px 40px" }}
+      >
         <i className="d-flex" style={{ margin: "0 8px" }}>
           <BsPersonSquare />
         </i>

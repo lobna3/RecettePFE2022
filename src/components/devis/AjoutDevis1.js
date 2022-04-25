@@ -11,7 +11,6 @@ import {
   Select,
   DatePicker,
   Switch,
-  Alert,
 } from "antd";
 import {
   EyeOutlined,
@@ -22,10 +21,10 @@ import {
   MailOutlined,
   FormOutlined,
 } from "@ant-design/icons";
-import EditableTable from "../Test";
 import { Link } from "react-router-dom";
 import axios from "../../config/axios";
 import { useForm } from "react-hook-form";
+import Articles from "../articles/Articles";
 const { Text } = Typography;
 const { TextArea } = Input;
 
@@ -145,7 +144,7 @@ export default function AjoutDevis1() {
   const nFacture = watch("nFacture");
 
   return (
-    <main id="main" class="main">
+    <main id="main" class="main bg-light">
       <AjoutDHeader />
       <Row>
         <form
@@ -154,14 +153,11 @@ export default function AjoutDevis1() {
           })}
         >
           <Row>
-            <p>
-              <Alert message="Error Text" type="error" showIcon />
-            </p>
           </Row>
 
           <Row>
             <Col span={8} push={16}>
-              <Card>
+              <Card >
                 <Button block>
                   Visualiser
                   <EyeOutlined />
@@ -211,6 +207,7 @@ export default function AjoutDevis1() {
                 />
               </Card>
             </Col>
+          
             <Col span={16} pull={8}>
               <Card>
                 <Form layout="vertical" initialValues={{ size: componentSize }}>
@@ -382,7 +379,8 @@ export default function AjoutDevis1() {
                   </Row>
                   <hr />
                   <Row>
-                    <EditableTable />
+                    <Button  block>Ajouter article</Button>
+                    <Articles/>
                   </Row>
                   <br />
 
@@ -560,6 +558,7 @@ export default function AjoutDevis1() {
           </Row>
         </form>
       </Row>
+      
 
       <div class="modal fade" id="largeModal" tabindex="-1">
         <div class="modal-dialog modal-lg">

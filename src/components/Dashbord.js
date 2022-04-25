@@ -13,7 +13,7 @@ const Dashbord = () => {
 
   return (
     <div>
-      <main id="main" class="main">
+      <main id="main" class="main bg-light" >
         <BottomHeader />
         <section class="section dashboard">
           <div class="row">
@@ -90,6 +90,7 @@ const Dashbord = () => {
               </div>
             </div>
           </div>
+          <br/>
         </section>
       </main>
 
