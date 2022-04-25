@@ -325,7 +325,7 @@ export default function AjoutDevis1() {
                       label="Client"
                       style={{
                         display: "inline-block",
-                        width: "calc(45% - 8px)",
+                        width: "calc(37% - 8px)",
                         margin: "0 20px",
                         textAlign: "left",
                       }}
@@ -338,12 +338,22 @@ export default function AjoutDevis1() {
                         <Select.Option value="demo">Demo</Select.Option>
                       </Select>
                     </Form.Item>
+                    <Button
+                      type="primary"
+                      style={{
+                        display: "inline-block",
+                        width: "calc(13% - 8px)",
+                        textAlign: "left",
+                      }}
+                    >
+                      Ajouter
+                    </Button>
 
                     <Form.Item
                       label="N de réference"
                       style={{
                         display: "inline-block",
-                        width: "calc(45% - 8px)",
+                        width: "calc(40% - 8px)",
                         margin: "0 20px",
                         textAlign: "left",
                       }}
