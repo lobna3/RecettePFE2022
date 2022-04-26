@@ -1,9 +1,8 @@
-
-import { Menu, Dropdown, Button, message,  Typography } from 'antd';
-import { PrinterFilled, PlusSquareFilled, DeleteOutlined, FundViewOutlined, MailOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
+import { Menu, Dropdown,  message,  Typography } from 'antd';
+import { PrinterFilled, PlusSquareFilled, DeleteOutlined, FundViewOutlined, MailOutlined } from '@ant-design/icons';
 import { Link, } from 'react-router-dom';
-import { Table, Space, Tag } from 'antd';
+import { Table, Space} from 'antd';
 import axios from '../../config/axios';
 import { DevisHeader } from '../RacetteHeader';
 
@@ -206,7 +205,7 @@ export default function Devis() {
 
   return (
 
-    <main id="main" class="main">
+    <main id="main" class="main bg-light">
       <DevisHeader></DevisHeader>
 
 
@@ -222,10 +221,10 @@ export default function Devis() {
 
 
       <div className="col-lg-12 grid-margin stretch-card">
-        <div className="card">
+        <div className="card" style={{margin:"0 15px 40px 20px"}}>
           <div className="card-body">
             <Table rowSelection={{ type: selectionType, ...rowSelection, }}
-              columns={columns} dataSource={devis} onChange={onChange} />
+              columns={columns} dataSource={devis} onChange={onChange}/>
           </div>
         </div>
       </div>
