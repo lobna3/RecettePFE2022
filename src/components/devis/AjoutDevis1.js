@@ -11,6 +11,7 @@ import {
   Select,
   DatePicker,
   Switch,
+  Badge,
 } from "antd";
 import {
   EyeOutlined,
@@ -147,7 +148,6 @@ export default function AjoutDevis1() {
 
   return (
     <main id="main" class="main bg-light">
-  
       <AjoutDHeader />
       <Row>
         <form
@@ -157,69 +157,104 @@ export default function AjoutDevis1() {
         >
           <Row>
             <Col span={8} push={16}>
-              <Card style={{marginLeft:10,marginRight:20 , backgroundColor:"#f0f5ff"}}>
-                <Button block>
+              <Card
+                style={{
+                  marginLeft: 10,
+                  backgroundColor: "#f0f5ff",
+                }}
+              >
+                <Button
+                  style={{ borderColor: "#1890ff" }}
+                  block
+                  icon={
+                    <EyeOutlined
+                      style={{
+                        fontSize: "20px",
+                        color: "#1890ff",
+                      }}
+                    />
+                  }
+                >
                   Visualiser
-                  <EyeOutlined />
                 </Button>
                 <p></p>
-                <Button type="primary" danger block>
+                <Button
+                  block
+                  icon={
+                    <FileTextOutlined
+                      style={{ fontSize: "18px", color: "#ffff" }}
+                    />
+                  }
+                  type="primary"
+                  style={{ backgroundColor: "#52c41a", borderColor: "white" }}
+                >
                   Enregistrer dans le brouillon
-                  <FileTextOutlined />
-                </Button>{" "}
+                </Button>
                 <p></p>
                 <Button
                   type="primary"
+                  icon={
+                    <AuditOutlined
+                      style={{ fontSize: "18px", color: "#ffff" }}
+                    />
+                  }
                   block
                   data-bs-toggle="modal"
                   data-bs-target="#largeModal"
                 >
-                  Valider et générer <AuditOutlined />
+                  Valider et générer
                 </Button>
                 <p></p>
-                <Text strong>
-                  Paramétre de facture <SettingOutlined />
-                </Text>
+                <p>
+                  <Text strong>Paramétre de facture</Text>{" "}
+                  <SettingOutlined style={{ fontSize: "18px" }} />
+                </p>
                 <hr></hr>
-                <Form.Item
-                  label="Adresse de Facturation"
-                  valuePropName="checked"
-                >
-                  <Switch />
-                </Form.Item>
-                <Form.Item label="Adresse de Livraison" valuePropName="checked">
-                  <Switch />
-                </Form.Item>
-                <TextArea
-                  style={{
-                    borderWidth: 1,
-                    borderStyle: "dashed",
-                    borderColor: "#0d6efd",
-                  }}
-                  onChange={handleChange}
-                  value={data.note}
-                  name="note"
-                  placeholder="Note"
-                  autoSize={{ minRows: 3, maxRows: 5 }}
-                />
+                <p className="d-flex">
+                  <Text style={{ color: "#cf1322" }}>
+                    Adresse de Facturation <Switch size="small" />
+                  </Text>
+                </p>
+                <p className="d-flex">
+                  <Text style={{ color: "#cf1322" }}>
+                    Adresse de Livraison <Switch size="small" />
+                  </Text>
+                </p>
+                <Badge.Ribbon text="Note" color="">
+                  <TextArea
+                    style={{
+                      borderWidth: 1,
+                      borderStyle: "dashed",
+                      borderColor: "#0d6efd",
+                    }}
+                    onChange={handleChange}
+                    value={data.note}
+                    name="note"
+                    placeholder="Note"
+                    autoSize={{ minRows: 3, maxRows: 5 }}
+                  />
+                </Badge.Ribbon>
                 <p></p>
-                <TextArea
-                  style={{
-                    borderWidth: 1,
-                    borderStyle: "dashed",
-                    borderColor: "#0d6efd",
-                  }}
-                  onChange={handleChange}
-                  value={data.remarque}
-                  name="remarque"
-                  placeholder="Condition générale"
-                  autoSize={{ minRows: 3, maxRows: 5 }}
-                />
+                <Badge.Ribbon text="Condition" color="">
+                  {" "}
+                  <TextArea
+                    style={{
+                      borderWidth: 1,
+                      borderStyle: "dashed",
+                      borderColor: "#0d6efd",
+                    }}
+                    onChange={handleChange}
+                    value={data.remarque}
+                    name="remarque"
+                    placeholder="Condition générale"
+                    autoSize={{ minRows: 3, maxRows: 5 }}
+                  />
+                </Badge.Ribbon>
               </Card>
             </Col>
 
             <Col span={16} pull={8}>
-              <Card style={{marginLeft:20,marginBottom:20}}>
+              <Card style={{ marginLeft: 20, marginBottom: 20 }}>
                 <Form layout="vertical" initialValues={{ size: componentSize }}>
                   <Row>
                     <Form.Item
@@ -569,7 +604,7 @@ export default function AjoutDevis1() {
                         label="Total"
                         style={{
                           display: "inline-block",
-                          width: "calc(20% - 8px)",
+                          width: "calc(19% - 8px)",
                           margin: "0 8px",
                           textAlign: "left",
                         }}
@@ -590,31 +625,35 @@ export default function AjoutDevis1() {
         </form>
       </Row>
 
-      <div class="modal fade" id="largeModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header bg-primary">
-              <h6 class="modal-title  text-white">Traitement Devis</h6>
+      <div className="modal fade" id="largeModal" tabindex="-1">
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header bg-primary">
+              <h6 className="modal-title  text-white">Traitement Devis</h6>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <br />
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="card">
-                    <div class="card-body">
+              <div className="row">
+                <div className="col-md-4">
+                  <div className="card" style={{ marginLeft: 40, height: 200 }}>
+                    <div className="card-body">
                       <Link to="">
-                        <h6 class="card-title">
-                          {" "}
-                          <PrinterFilled></PrinterFilled>
+                        <h6 className="card-title">
+                          <PrinterFilled
+                            style={{
+                              fontSize: "42px",
+                              color: "#1890ff",
+                            }}
+                          />
                         </h6>
-                        <h6 class="card-subtitle mb-2 ">Imprimer</h6>
-                        <p class="card-subtitle mb-2 text-muted">
+                        <h6 className="card-subtitle mb-2 ">Imprimer</h6>
+                        <p className="card-subtitle mb-2 text-muted">
                           Imprimer votre devis
                         </p>
                         <p class="card-text"></p>
@@ -622,15 +661,23 @@ export default function AjoutDevis1() {
                     </div>
                   </div>
                 </div>
-                <div class="col-md-4">
-                  <div class="card">
-                    <div class="card-body">
+                <div className="col-md-4">
+                  <div
+                    className="card"
+                    style={{ marginLeft: 20, marginRight: 20, height: 200 }}
+                  >
+                    <div className="card-body">
                       <Link to="">
                         <h6 class="card-title">
-                          <MailOutlined />
+                          <MailOutlined
+                            style={{
+                              fontSize: "42px",
+                              color: "#1890ff",
+                            }}
+                          />
                         </h6>
-                        <h6 class="card-subtitle mb-2 ">Envoyer</h6>
-                        <p class="card-subtitle mb-2 text-muted">
+                        <h6 className="card-subtitle mb-2 ">Envoyer</h6>
+                        <p className="card-subtitle mb-2 text-muted">
                           Envoyer votre devis
                         </p>
                         <p class="card-text"></p>
@@ -638,32 +685,54 @@ export default function AjoutDevis1() {
                     </div>
                   </div>
                 </div>
-                <div class="col-md-4">
-                  <div class="card">
-                    <div class="card-body">
+                <div className="col-md-4">
+                  <div
+                    className="card"
+                    style={{ marginRight: 40, height: 200 }}
+                  >
+                    <div className="card-body">
                       <Link to="">
-                        <h6 class="card-title">
-                          <FormOutlined />
+                        <h6 className="card-title">
+                          <FormOutlined
+                            style={{
+                              fontSize: "42px",
+                              color: "#1890ff",
+                            }}
+                          />
                         </h6>
-                        <h6 class="card-subtitle mb-2">Visualiser</h6>
-                        <p class="card-subtitle mb-2 text-muted">
+                        <h6 className="card-subtitle mb-2">Visualiser</h6>
+                        <p className="card-subtitle mb-2 text-muted">
                           Modifier votre devis
                         </p>
-                        <p class="card-text"></p>
+                        <p className="card-text"></p>
                       </Link>
                     </div>
                   </div>
-                  <p class="text-muted">
-                    Pour modifier votre devis <Link to=""> cliquez ici !</Link>{" "}
-                  </p>
+                  <div className="card" style={{height:25,marginRight:40}}>
+                  <p className="text-muted">
+                      <small>
+                        Pour modifier votre devis
+                        <Link to=""> cliquez ici !</Link>
+                      </small>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="modal-footer">
-              <Button type="dashed" data-bs-dismiss="modal">
+            <div className="modal-footer">
+              <Button
+                type="primary"
+                style={{ backgroundColor: "#8c8c8c", borderColor: "white" }}
+                data-bs-dismiss="modal"
+              >
                 Retour
               </Button>
-              <Button type="danger">Accepter</Button>
+              <Button
+                type="primary"
+                style={{ backgroundColor: "#52c41a", borderColor: "white" }}
+              >
+                Accepter
+              </Button>
               <Button type="primary">Enregistrer</Button>
             </div>
           </div>
