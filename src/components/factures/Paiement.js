@@ -10,7 +10,7 @@ import {
 } from "@ant-design/icons";
 import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
-const { Text } = Typography;
+const { Text , Title } = Typography;
 const { Meta } = Card;
 const Paiement = () => {
   return (
@@ -19,9 +19,8 @@ const Paiement = () => {
       <Row>
         <Col lg={{ span: 8 }} style={{ marginBottom: 20 }}>
           <Card size="small" style={{ marginLeft: 20 }}>
-            <Text strong className="text-center">
-              Facture #000584
-            </Text>
+            <Title level={5}> Facture #000584</Title>
+            <p></p>
             <Table borderless>
               <tbody>
                 <tr>
@@ -110,9 +109,8 @@ const Paiement = () => {
         </Col>
         <Col lg={{ span: 8 }}>
           <Card size="small" style={{ marginRight: 20, marginLeft: 20 }}>
-            <Text strong className="text-center">
-              Opération financière
-            </Text>
+            <Title level={5}>Opération financière</Title>
+            <p></p>
             <Table borderless>
               <tbody>
                 <tr>
@@ -211,7 +209,7 @@ const Paiement = () => {
           </Card>
         </Col>
         <Col lg={{ span: 8 }}>
-          <Card size="small" style={{ marginRight: 20, height: 550 }}>
+          <Card size="small" style={{ marginRight: 20, height: 570 }}>
             <Text>
               {" "}
               <FileDoneOutlined

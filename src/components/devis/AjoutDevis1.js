@@ -157,7 +157,7 @@ export default function AjoutDevis1() {
         >
           <Row>
             <Col span={8} push={16}>
-              <Card>
+              <Card style={{marginLeft:10,marginRight:20 , backgroundColor:"#f0f5ff"}}>
                 <Button block>
                   Visualiser
                   <EyeOutlined />
@@ -219,7 +219,7 @@ export default function AjoutDevis1() {
             </Col>
 
             <Col span={16} pull={8}>
-              <Card>
+              <Card style={{marginLeft:20,marginBottom:20}}>
                 <Form layout="vertical" initialValues={{ size: componentSize }}>
                   <Row>
                     <Form.Item
@@ -377,7 +377,7 @@ export default function AjoutDevis1() {
                       label="Adresse de Facturation"
                       style={{
                         display: "inline-block",
-                        width: "calc(45% - 8px)",
+                        width: "calc(44% - 8px)",
                         margin: "0 20px",
                         textAlign: "left",
                       }}

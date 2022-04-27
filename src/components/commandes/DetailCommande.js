@@ -11,7 +11,7 @@ import {
   CheckCircleOutlined,
 } from "@ant-design/icons";
 import Table from "react-bootstrap/Table";
-import { Card, Typography, Space } from "antd";
+import { Card, Typography, Space, DatePicker } from "antd";
 import { Link } from "react-router-dom";
 const { Title, Text } = Typography;
 
@@ -32,59 +32,87 @@ function DetailCommande() {
             }}
           >
             <Title level={5}>Commande #003645</Title>
-            <Space style={{ display: "flex" }}>
-              <Text type="secondary">Date d'émission </Text>
-              <Text
-                type="secondary"
-                style={{ justifyContent: "flex-end", marginLeft: 80 }}
-              >
-                Date d'échéance
-              </Text>
-              <hr />
-            </Space>
-            <Space style={{ display: "flex" }}>
-              <Text type="secondary">26/04/2022</Text>
-              <Text
-                type="secondary"
-                style={{ justifyContent: "flex-end", marginLeft: 110 }}
-              >
-                30/04/2022
-              </Text>
-              <hr />
-            </Space>
-            <br />
-            <Text className="d-flex">Remarque:</Text>
-            <div
-              style={{
-                borderWidth: 1,
-                borderStyle: "dashed",
-                borderColor: "#0d6efd",
-                backgroundColor: "#f6ffed",
-              }}
-            >
-              {" "}
-              <Text type="secondary">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum is simply dummy text of the printing and
-                typesetting industry.
-              </Text>
-            </div>
-            <br />
-            <Text className="d-flex">
-              Contact: *{""} <Text type="secondary">Mouhamed@gmail.com</Text>{" "}
-            </Text>
-            <Text className="d-flex">
-              Société: *{""} <Text type="secondary">SuperVision plus+</Text>{" "}
-            </Text>
-            <Text className="d-flex">
-              Adresse: *{""} <Text type="secondary">Mouhamed@gmail.com</Text>{" "}
-            </Text>
+            <Table borderless>
+              <tbody>
+                <tr>
+                  <td>
+                    <Text type="secondary" className="d-flex">
+                      Date d'émission
+                    </Text>
+                  </td>
+                  <td>
+                    <Text type="secondary">Date d'échéance</Text>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <DatePicker />
+                    <hr />
+                  </td>
+                  <td>
+                    <DatePicker /> <hr />
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+            <Table borderless>
+              <tbody>
+                <tr>
+                  <td COLSPAN="2">
+                    <Text className="d-flex">Remarque:</Text>
+                    <div
+                      className="row"
+                      style={{
+                        borderWidth: 1,
+                        borderStyle: "dashed",
+                        borderColor: "#0d6efd",
+                        backgroundColor: "#f6ffed",
+                      }}
+                    >
+                      <Text type="secondary" className="">
+                        Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry. Lorem Ipsum has been the
+                        industry's standard dummy text ever since the 1500.
+                        <p>
+                          <br />
+                          <br />
+                        </p>
+                      </Text>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <Text className="d-flex">Contact:</Text>
+                  </td>
+                  <td>
+                    <Text type="secondary">Mouhamed@gmail.com</Text>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <Text className="d-flex">Société: </Text>
+                  </td>
+                  <td>
+                    <Text type="secondary">SuperVision plus+</Text>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <Text className="d-flex"> Adresse: </Text>
+                  </td>
+                  <td>
+                    <Text type="secondary">Oinville-sur-Montcient, France</Text>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+
             <hr />
           </Card>
         </Col>
         <Col span={12} lg={16}>
           <Row>
-            {" "}
             <Card
               size="small"
               style={{
@@ -96,7 +124,7 @@ function DetailCommande() {
               }}
             >
               <Table hover size="sm" borderless>
-                <thead style={{ borderWidth: 1}}>
+                <thead style={{ borderWidth: 1 }}>
                   <tr>
                     <td className="text-muted d-flex">Produits / Services</td>
                     <td className="text-muted">Qté</td>
@@ -104,7 +132,7 @@ function DetailCommande() {
                     <td className="text-muted">Récurrente</td>
                   </tr>
                 </thead>
-                <tbody style={{ borderWidth: 1}}>
+                <tbody style={{ borderWidth: 1 }}>
                   <tr>
                     <td className="d-flex">Produit1</td>
                     <td>
@@ -113,9 +141,10 @@ function DetailCommande() {
                           borderWidth: 1,
                           borderStyle: "dashed",
                           borderColor: "#0d6efd",
+                          padding: 2,
                         }}
                       >
-                        2
+                        200
                       </span>
                     </td>
                     <td>200Dt</td>
@@ -128,33 +157,84 @@ function DetailCommande() {
                       />
                     </td>
                   </tr>
+                  <tr>
+                    <td className="d-flex">Produit1</td>
+                    <td>
+                      <span
+                        style={{
+                          borderWidth: 1,
+                          borderStyle: "dashed",
+                          borderColor: "#0d6efd",
+                          padding: 2,
+                        }}
+                      >
+                        200
+                      </span>
+                    </td>
+                    <td>200Dt</td>
+                    <td>
+                      <Switch
+                        size="small"
+                        checkedChildren={<CheckOutlined />}
+                        unCheckedChildren={<CloseOutlined />}
+                        defaultChecked
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="d-flex">Produit1</td>
+                    <td >
+                      <span
+                        style={{
+                          borderWidth: 1,
+                          borderStyle: "dashed",
+                          borderColor: "#0d6efd",
+                          padding: 2,
+                        }}
+                      >
+                        200
+                      </span>
+                    </td>
+                    <td>200Dt</td>
+                    <td>
+                      <Switch
+                        size="small"
+                        checkedChildren={<CheckOutlined />}
+                        unCheckedChildren={<CloseOutlined />}
+                        defaultChecked
+                      />
+                    </td>
+                  </tr>
+                  <p></p>
                 </tbody>
               </Table>
-              <div
-                style={{
-                  borderWidth: 1,
-                  borderStyle: "solid",
-                  borderColor: "#e6f0fe",
-                }}
-              >
-                <Text type="secondary" className="d-flex">
-                  {" "}
-                  Status
-                  <Text type="success" style={{ marginLeft: 20 }}>
-                    <CheckCircleOutlined />
-                    Envoyé
-                  </Text>
-                  <Text strong style={{ marginLeft: 230 }}>
-                    Total:{" "}
-                  </Text>
-                  <Text style={{ marginLeft: 20 }}>20200 TND </Text>
-                </Text>
-              </div>
+              <Table hover size="sm">
+                <thead>
+                  <div
+                    style={{
+                      borderWidth: 1,
+                      borderStyle: "solid",
+                      borderColor: "#e6f0fe",
+                    }}
+                  >
+                    <Text type="secondary" className="d-flex">
+                      Status
+                      <Text type="success" style={{ marginLeft: 20 }}>
+                        <CheckCircleOutlined />
+                        Envoyé
+                      </Text>
+                      <Text strong style={{ marginLeft: 230 }}>
+                        Total:
+                      </Text>
+                      <Text style={{ marginLeft: 20 }}>20200 TND </Text>
+                    </Text>
+                  </div>
+                </thead>
+              </Table>
             </Card>
           </Row>
           <br />
           <Row>
-            {" "}
             <Card
               size="small"
               style={{
@@ -212,8 +292,8 @@ function DetailCommande() {
                       />
                     </td>
                     <td className="text-muted d-flex">
-                      La commande livré avec succées{" "}
-                        <Link to=""> Livreur: Timimi </Link>{" "}
+                      La commande livré avec succées
+                      <Link to=""> Livreur: Timimi </Link>
                     </td>
                     <td className="text-muted">Janvier04, 2022</td>
                     <td className="text-muted">11:40Am</td>
@@ -229,8 +309,8 @@ function DetailCommande() {
                       />
                     </td>
                     <td className="text-muted d-flex">
-                      La commande a été modifié par: {" "}
-                      <Link to=""> Mouhamed ben fraj</Link>{" "}
+                      La commande a été modifié par:
+                      <Link to=""> Mouhamed ben fraj</Link>
                     </td>
                     <td className="text-muted">Janvier04, 2022</td>
                     <td className="text-muted">11:40Am</td>
