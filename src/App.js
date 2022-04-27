@@ -23,6 +23,7 @@ import { store } from "./components/store";
 import { Provider } from "react-redux";
 import { useState } from "react";
 import DetailCommande from "./components/commandes/DetailCommande";
+import Paiement from "./components/factures/Paiement";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -57,6 +58,7 @@ function App() {
           <Route path="/modifier_devis/:id" element={<ModifierDevis />} />
           <Route path="/detail_devis/:id" element={<DetailDevis />} />
           <Route path="/detail_commande/:id" element={<DetailCommande />} />
+          <Route path="/paiement" element={<Paiement />} />
         </Routes>
 
         <Footer />

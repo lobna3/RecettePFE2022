@@ -283,6 +283,37 @@ export const CommandeDetailHeader = () => {
     )
 }
 
+export const PaiementHeader = () => {
+    return (
+        <>
+        <Menu />
+            <br/>
+        <div style={{ display: 'flex', justifyContent: 'space-between',margin: '0 20px' }} className="header_bottom">
+            <Breadcrumb>
+                <Breadcrumb.Item href="">
+                  
+                    <HomeOutlined />
+                </Breadcrumb.Item>
+                <Breadcrumb.Item href="">
+                   
+                <Link to="/Recette"><span>Recette</span></Link> 
+                </Breadcrumb.Item>
+                <Breadcrumb.Item><Link to="/factures">Facture</Link></Breadcrumb.Item>
+                <Breadcrumb.Item><Link to="/paiement">Paiement</Link></Breadcrumb.Item>
+            </Breadcrumb>
+            <div className="header_bottom_rigth">
+            <Space direction="vertical">
+           <Search placeholder="input search text" onSearch={Search} style={{ width: 250 }} />
+           </Space>
+            </div>
+          
+        </div>
+        <br/>
+        </>
+        
+    )
+}
+
 
 
 
