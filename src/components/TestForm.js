@@ -1,18 +1,16 @@
-import { Badge, Avatar } from 'antd';
+import { Switch } from 'antd';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 
 export default () => (
   <>
-    <Badge count={99}>
-      <Avatar shape="square" size="large" />
-    </Badge>
-    <Badge count={100}>
-      <Avatar shape="square" size="large" />
-    </Badge>
-    <Badge count={99} overflowCount={10}>
-      <Avatar shape="square" size="large" />
-    </Badge>
-    <Badge count={1000} overflowCount={999}>
-      <Avatar shape="square" size="large" />
-    </Badge>
+    <Switch checkedChildren="开启" unCheckedChildren="关闭" defaultChecked />
+    <br />
+    <Switch checkedChildren="1" unCheckedChildren="0" />
+    <br />
+    <Switch
+      checkedChildren={<CheckOutlined />}
+      unCheckedChildren={<CloseOutlined />}
+      defaultChecked
+    />
   </>
 );

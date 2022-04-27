@@ -57,7 +57,7 @@ export const RecettesHeader = () => {
                 </Breadcrumb.Item>
                 <Breadcrumb.Item href="">
                    
-                    <span>Recette</span>
+                <Link to="/Recette"><span>Recette</span></Link> 
                 </Breadcrumb.Item>
             </Breadcrumb>
             <div className="header_bottom_rigth">
@@ -86,9 +86,9 @@ export const DevisHeader = () => {
                 </Breadcrumb.Item>
                 <Breadcrumb.Item href="">
                    
-                    <span>Recette</span>
+                <Link to="/Recette"><span>Recette</span></Link> 
                 </Breadcrumb.Item>
-                <Breadcrumb.Item>Devis en cours</Breadcrumb.Item>
+                <Breadcrumb.Item><Link to='/devis'>Devis en cours</Link></Breadcrumb.Item>
             </Breadcrumb>
             <div className="header_bottom_rigth">
             <Space direction="vertical">
@@ -116,7 +116,7 @@ export const CommandeHeader = () => {
                 </Breadcrumb.Item>
                 <Breadcrumb.Item href="">
                    
-                    <span>Recette</span>
+                <Link to="/Recette"><span>Recette</span></Link> 
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>Commande en cours</Breadcrumb.Item>
             </Breadcrumb>
@@ -146,7 +146,7 @@ export const FactureHeader = () => {
                 </Breadcrumb.Item>
                 <Breadcrumb.Item href="">
                    
-                    <span>Recette</span>
+                <Link to="/Recette"><span>Recette</span></Link> 
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>Facture</Breadcrumb.Item>
             </Breadcrumb>
@@ -176,7 +176,7 @@ export const VenteHeader = () => {
                 </Breadcrumb.Item>
                 <Breadcrumb.Item href="">
                    
-                    <span>Recette</span>
+                <Link to="/Recette"><span>Recette</span></Link> 
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>Vente</Breadcrumb.Item>
             </Breadcrumb>
@@ -206,7 +206,7 @@ export const BrouillonHeader = () => {
                 </Breadcrumb.Item>
                 <Breadcrumb.Item href="">
                    
-                    <span>Recette</span>
+                <Link to="/Recette"><span>Recette</span></Link> 
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>Brouillon</Breadcrumb.Item>
             </Breadcrumb>
@@ -251,5 +251,38 @@ export const AjoutDHeader = () => {
         
     )
 }
+
+export const CommandeDetailHeader = () => {
+    return (
+        <>
+        <Menu />
+            <br/>
+        <div style={{ display: 'flex', justifyContent: 'space-between', margin: '0 20px' }} className="header_bottom">
+            <Breadcrumb>
+                <Breadcrumb.Item href="">
+                  
+                    <HomeOutlined />
+                </Breadcrumb.Item>
+                <Breadcrumb.Item href="">
+                   
+                <Link to="/Recette"><span>Recette</span></Link> 
+                </Breadcrumb.Item>
+                <Breadcrumb.Item><Link to='/commandes'>Commandes en cours</Link></Breadcrumb.Item>
+                <Breadcrumb.Item><Link to='/detail_commande'>Détail commande</Link></Breadcrumb.Item>
+            </Breadcrumb>
+            <div className="header_bottom_rigth">
+            <Space direction="vertical">
+           <Search placeholder="input search text" onSearch={Search} style={{ width: 250 }} />
+           </Space>
+            </div>
+          
+        </div>
+        <br/>
+        </>
+        
+    )
+}
+
+
 
 

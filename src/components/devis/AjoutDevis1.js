@@ -25,6 +25,7 @@ import { Link } from "react-router-dom";
 import axios from "../../config/axios";
 import { useForm } from "react-hook-form";
 import Articles from "../articles/Articles";
+import { ToastContainer, toast } from "react-toastify";
 const { Text } = Typography;
 const { TextArea } = Input;
 
@@ -122,7 +123,8 @@ export default function AjoutDevis1() {
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
-          setsuccess(true);
+          //setsuccess(true);
+          toast.success(res.data);
         }
       })
       .catch((err) => {
@@ -145,6 +147,7 @@ export default function AjoutDevis1() {
 
   return (
     <main id="main" class="main bg-light">
+  
       <AjoutDHeader />
       <Row>
         <form

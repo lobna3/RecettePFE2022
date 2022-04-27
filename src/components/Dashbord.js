@@ -13,7 +13,7 @@ const Dashbord = () => {
 
   return (
     <div>
-      <main id="main" class="main bg-light" >
+      <main id="main" class="main bg-light">
         <BottomHeader />
         <section class="section dashboard">
           <div class="row">
@@ -23,7 +23,13 @@ const Dashbord = () => {
             <div class="col-lg-3">
               <div
                 className="card"
-                style={{ margin: "0 15px", height: "150px", width: "200px" }}
+                style={{
+                  margin: "0 15px",
+                  height: "150px",
+                  width: "200px",
+                  borderWidth: 2,
+                  backgroundColor: "#f0f6fa",
+                }}
               >
                 <div className="card-body">
                   <p className=" text-center text-primary">
@@ -48,7 +54,13 @@ const Dashbord = () => {
               <br />
               <div
                 class="card"
-                style={{ margin: "0 15px", height: "150px", width: "200px" }}
+                style={{
+                  margin: "0 15px",
+                  height: "150px",
+                  width: "200px",
+                  borderWidth: 2,
+                  backgroundColor: "#f0f6fa",
+                }}
               >
                 <div className="card-body">
                   <p className="text-center text-primary ">
@@ -69,7 +81,13 @@ const Dashbord = () => {
               <br />
               <div
                 className="card"
-                style={{ margin: "0 15px", height: "150px", width: "200px" }}
+                style={{
+                  margin: "0 15px",
+                  height: "150px",
+                  width: "200px",
+                  borderWidth: 2,
+                  backgroundColor: "#f0f6fa",
+                }}
               >
                 <div className="card-body">
                   <div className="media text-center">
@@ -90,7 +108,7 @@ const Dashbord = () => {
               </div>
             </div>
           </div>
-          <br/>
+          <br />
         </section>
       </main>
 
