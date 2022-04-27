@@ -196,7 +196,7 @@ export default function Vente() {
     
   return (
     
-    <main id="main" class="main">
+    <main id="main" class="main bg-light">
 
 
         <VenteHeader/>
@@ -212,7 +212,7 @@ export default function Vente() {
 
 
         <div className="col-lg-12 grid-margin stretch-card">
-          <div className="card">
+          <div className="card" style={{ margin: "0 15px 40px 20px" }}>
             <div className="card-body">
               <Table rowSelection={{type: selectionType, ...rowSelection,}} 
               columns={columns} dataSource={devis} />

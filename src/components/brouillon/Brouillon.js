@@ -4,7 +4,7 @@ export default function Brouilon(){
 
     
     return(
-        <main id="main" class="main">
+        <main id="main" class="main bg-light">
               <BrouillonHeader />
        </main>
     );

@@ -17,7 +17,7 @@ const { Title, Text } = Typography;
 
 function DetailCommande() {
   return (
-    <main id="main" class="main bg-light">
+    <main id="main" className="main bg-light">
       <CommandeDetailHeader />
       <Row>
         <Col span={8}>
@@ -28,7 +28,7 @@ function DetailCommande() {
               marginBottom: 40,
               height: 525,
               marginLeft: 30,
-              borderWidth: 3,
+              borderWidth: 1,
             }}
           >
             <Title level={5}>Commande #003645</Title>
@@ -59,7 +59,7 @@ function DetailCommande() {
                 borderWidth: 1,
                 borderStyle: "dashed",
                 borderColor: "#0d6efd",
-                backgroundColor: "#e6f0fe",
+                backgroundColor: "#f6ffed",
               }}
             >
               {" "}
@@ -91,12 +91,12 @@ function DetailCommande() {
                 width: 800,
                 marginLeft: 50,
                 height: 200,
-                borderWidth: 3,
+                borderWidth: 1,
                 marginRight: 20,
               }}
             >
               <Table hover size="sm" borderless>
-                <thead style={{ borderWidth: 2 }}>
+                <thead style={{ borderWidth: 1}}>
                   <tr>
                     <td className="text-muted d-flex">Produits / Services</td>
                     <td className="text-muted">Qté</td>
@@ -104,7 +104,7 @@ function DetailCommande() {
                     <td className="text-muted">Récurrente</td>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody style={{ borderWidth: 1}}>
                   <tr>
                     <td className="d-flex">Produit1</td>
                     <td>
@@ -162,7 +162,7 @@ function DetailCommande() {
                 height: 300,
                 marginLeft: 50,
                 marginBottom: 40,
-                borderWidth: 3,
+                borderWidth: 1,
                 marginRight: 20,
               }}
             >

@@ -1,6 +1,11 @@
 import React from "react";
 import { Modal, Button, Typography } from "antd";
 import { BsArrowLeftSquare, BsFillFileEarmarkPlusFill } from "react-icons/bs";
+import {
+  UserAddOutlined,
+  TeamOutlined,
+  LeftSquareTwoTone,FileAddTwoTone
+} from "@ant-design/icons";
 import "./modal.css";
 import { Link } from "react-router-dom";
 const { Text } = Typography;
@@ -25,7 +30,7 @@ const ModalOP = ({ isOpen, handleClose, handleFirstBtn, handleSecondBtn }) => {
         {" "}
         <i class="d-flex" style={{ margin: "0 8px" }}>
           {" "}
-          <BsArrowLeftSquare />{" "}
+          <LeftSquareTwoTone style={{ fontSize: "24px" }}/>{" "}
         </i>{" "}
         Choissisez votre opération souhaité
       </h5>
@@ -36,7 +41,7 @@ const ModalOP = ({ isOpen, handleClose, handleFirstBtn, handleSecondBtn }) => {
           block
         >
           <i class="d-flex" style={{ margin: "0 8px" }}>
-            <BsFillFileEarmarkPlusFill />
+            <FileAddTwoTone style={{ fontSize: "24px", color: "#1890ff" }}/>
           </i>
           <span className="d-inline-block text-left text-dark">
             {" "}
@@ -54,7 +59,7 @@ const ModalOP = ({ isOpen, handleClose, handleFirstBtn, handleSecondBtn }) => {
           block
         >
           <i class="d-flex" style={{ margin: "0 8px" }}>
-            <BsFillFileEarmarkPlusFill />
+            <FileAddTwoTone style={{ fontSize: "24px", color: "#1890ff" }} />
           </i>
           <span className="d-inline-block text-left text-dark">
             {" "}

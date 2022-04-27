@@ -1,11 +1,11 @@
 import React from "react";
 import { Modal, Button, Typography } from "antd";
-import "antd/dist/antd.css";
 import {
-  BsPersonPlusFill,
-  BsPersonSquare,
-  BsArrowLeftSquare,
-} from "react-icons/bs";
+  UserAddOutlined,
+  TeamOutlined,
+  LeftSquareTwoTone,
+} from "@ant-design/icons";
+import "antd/dist/antd.css";
 import "./modal.css";
 const { Text } = Typography;
 
@@ -35,7 +35,7 @@ const NewOpModal = ({
         {" "}
         <i className="d-flex" style={{ margin: "0 8px" }}>
           {" "}
-          <BsArrowLeftSquare />{" "}
+          <LeftSquareTwoTone style={{ fontSize: "24px" }} />{" "}
         </i>{" "}
         Choissisez votre opération souhaité
       </h5>
@@ -45,7 +45,7 @@ const NewOpModal = ({
         style={{ height: "80px", width: "370px", margin: "8px 40px" }}
       >
         <i className="d-flex" style={{ margin: "0 8px" }}>
-          <BsPersonPlusFill />
+          <UserAddOutlined style={{ fontSize: "24px", color: "#1890ff" }} />
         </i>
         <span className="d-inline-block text-left text-dark">
           {" "}
@@ -61,7 +61,7 @@ const NewOpModal = ({
         style={{ height: "80px", width: "370px", margin: "8px 40px" }}
       >
         <i className="d-flex" style={{ margin: "0 8px" }}>
-          <BsPersonSquare />
+          <TeamOutlined style={{ fontSize: "24px", color: "#1890ff" }} />
         </i>
         <span className="d-inline-block text-left text-dark">
           {" "}

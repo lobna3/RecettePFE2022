@@ -27,8 +27,8 @@ const Dashbord = () => {
                   margin: "0 15px",
                   height: "150px",
                   width: "200px",
-                  borderWidth: 2,
-                  backgroundColor: "#f0f6fa",
+                  borderWidth: 1,
+                  backgroundColor: "#fafafa",
                 }}
               >
                 <div className="card-body">
@@ -58,8 +58,8 @@ const Dashbord = () => {
                   margin: "0 15px",
                   height: "150px",
                   width: "200px",
-                  borderWidth: 2,
-                  backgroundColor: "#f0f6fa",
+                  borderWidth: 1,
+                  backgroundColor: "#fafafa",
                 }}
               >
                 <div className="card-body">
@@ -85,8 +85,8 @@ const Dashbord = () => {
                   margin: "0 15px",
                   height: "150px",
                   width: "200px",
-                  borderWidth: 2,
-                  backgroundColor: "#f0f6fa",
+                  borderWidth: 1,
+                  backgroundColor: "#fafafa",
                 }}
               >
                 <div className="card-body">

@@ -1,9 +1,8 @@
-import { Menu, Dropdown, message, Typography} from 'antd';
+import { Menu, Dropdown, message, Typography,Table, Space } from 'antd';
 import {StopOutlined,PlusSquareFilled,FileDoneOutlined,FormOutlined 
   ,DeleteOutlined ,AuditOutlined ,MailOutlined,DollarOutlined  } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Link, } from 'react-router-dom';
-import { Table, Space } from 'antd';
 import axios from '../../config/axios';
 import {FactureHeader} from '../RacetteHeader';
 
@@ -206,7 +205,7 @@ export default function Facture() {
     
   return (
     
-    <main id="main" class="main">
+    <main id="main" class="main bg-light">
 
       <FactureHeader/>
         <div class="pagetitle">
@@ -221,7 +220,7 @@ export default function Facture() {
 
 
         <div className="col-lg-12 grid-margin stretch-card">
-          <div className="card">
+          <div className="card" style={{ margin: "0 15px 40px 20px" }}>
             <div className="card-body">
               <Table rowSelection={{type: selectionType, ...rowSelection,}} 
               columns={columns} dataSource={devis} />
