@@ -27,6 +27,8 @@ import axios from "../../config/axios";
 import { useForm } from "react-hook-form";
 import Articles from "../articles/Articles";
 import { ToastContainer, toast } from "react-toastify";
+import Table from "react-bootstrap/Table";
+import "./devis1.css";
 const { Text } = Typography;
 const { TextArea } = Input;
 
@@ -255,7 +257,7 @@ export default function AjoutDevis1() {
 
             <Col span={16} pull={8}>
               <Card style={{ marginLeft: 20, marginBottom: 20 }}>
-                <Form layout="vertical" initialValues={{ size: componentSize }}>
+                <Form initialValues={{ size: componentSize }}>
                   <Row>
                     <Form.Item
                       label="Date émission"
@@ -436,187 +438,193 @@ export default function AjoutDevis1() {
                   <Row>
                     <Button block> + Ajouter article</Button>
                     <p></p>
-                    <Articles />
-                  </Row>
-                  <br />
-
-                  <Row>
-                    <Col lg={{ span: 24, offset: 8 }}>
-                      <Form.Item
-                        label="Total"
-                        style={{ display: "inline-block", textAlign: "left" }}
-                      >
-                        <Input
-                          onChange={handleChange}
-                          value={data.total}
-                          name="total"
-                          placeholder="20.000TND"
-                          {...("total", { required: true, minLength: 6 })}
-                        />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col lg={{ span: 24, offset: 8 }}>
-                      <Form.Item
-                        label="Rmise"
-                        style={{ display: "inline-block", textAlign: "left" }}
-                      >
-                        <Input
-                          style={{
-                            borderWidth: 1,
-                            borderStyle: "dashed",
-                            borderColor: "#0d6efd",
-                          }}
-                          onChange={handleChange}
-                          value={data.remise}
-                          name="remise"
-                          placeholder=""
-                          {...("remise", { required: true, minLength: 6 })}
-                        />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col lg={{ span: 24, offset: 8 }}>
-                      <Form.Item
-                        label="Taxes"
-                        style={{ display: "inline-block", textAlign: "left" }}
-                      >
-                        <Input
-                          style={{
-                            borderWidth: 1,
-                            borderStyle: "dashed",
-                            borderColor: "#0d6efd",
-                          }}
-                          onChange={handleChange}
-                          value={data.taxes}
-                          name="taxes"
-                          placeholder=""
-                          {...("taxes", { required: true, minLength: 6 })}
-                        />
-                      </Form.Item>
-                    </Col>
+                    {/**<Articles />*/}
                   </Row>
                   <hr />
-                  <Row>
-                    <Col lg={{ span: 24, offset: 8 }}>
-                      <Form.Item
-                        label="TotalTTC"
-                        style={{ display: "inline-block", textAlign: "left" }}
-                      >
-                        <Input
-                          onChange={handleChange}
-                          value={data.totalTtc}
-                          name="totalTtc"
-                          placeholder="20.000TND"
-                          {...("totalTtc", { required: true, minLength: 6 })}
-                        />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col lg={{ span: 24, offset: 8 }}>
-                      <Form.Item
-                        label="Payé"
-                        style={{ display: "inline-block", textAlign: "left" }}
-                      >
-                        <Input
-                          onChange={handleChange}
-                          value={data.paye}
-                          name="paye"
-                          placeholder="-0.000TND"
-                          {...("paye", { required: true, minLength: 6 })}
-                        />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col lg={{ span: 24, offset: 8 }}>
-                      <Form.Item
-                        label="Solde"
-                        style={{ display: "inline-block", textAlign: "left" }}
-                      >
-                        <Input
-                          onChange={handleChange}
-                          value={data.solde}
-                          name="solde"
-                          placeholder="20.000TND"
-                          {...("solde", { required: true, minLength: 6 })}
-                        />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-
-                  <Card bordered>
-                    <Row>
-                      <Form.Item
+                  <Card
+                    size="small"
+                    style={{
+                      marginLeft: 400,
+                      borderRadius: "20px",
+                      overflow: "hidden",
+                      bordered: false,
+                    }}
+                  >
+                    <Form.Item
+                      label="Total"
+                      wrapperCol={{
+                        span: 16,
+                      }}
+                      labelCol={{
+                        span: 8,
+                      }}
+                    >
+                      <Input
+                        onChange={handleChange}
+                        value={data.total}
+                        name="total"
+                        placeholder="20.000TND"
+                        {...("total", { required: true, minLength: 6 })}
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      label="Rmise"
+                      wrapperCol={{
+                        span: 16,
+                      }}
+                      labelCol={{
+                        span: 8,
+                      }}
+                    >
+                      <Input
                         style={{
-                          display: "inline-block",
-                          width: "calc(20% - 8px)",
-                          margin: "0 50px",
+                          borderWidth: 1,
+                          borderStyle: "dashed",
+                          borderColor: "#0d6efd",
                         }}
-                      >
-                        <Button type="primary" onClick={() => createCommande()}>
-                          Payé
-                        </Button>
-                      </Form.Item>
-
-                      <Form.Item
-                        label="Remise"
+                        onChange={handleChange}
+                        value={data.remise}
+                        name="remise"
+                        placeholder=""
+                        {...("remise", { required: true, minLength: 6 })}
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      label="Taxes"
+                      wrapperCol={{
+                        span: 16,
+                      }}
+                      labelCol={{
+                        span: 8,
+                      }}
+                    >
+                      <Input
                         style={{
-                          display: "inline-block",
-                          width: "calc(20% - 8px)",
-                          margin: "0 8px",
-                          textAlign: "left",
+                          borderWidth: 1,
+                          borderStyle: "dashed",
+                          borderColor: "#0d6efd",
                         }}
-                      >
-                        <Input
-                          onChange={handleChange}
-                          value={data.remise}
-                          name="remise"
-                          placeholder="75.000Dt"
-                        ></Input>
-                      </Form.Item>
-
-                      <Form.Item
-                        label="Taxes"
-                        style={{
-                          display: "inline-block",
-                          width: "calc(20% - 8px)",
-                          margin: "0 8px",
-                          textAlign: "left",
-                        }}
-                      >
-                        <Input
-                          onChange={handleChange}
-                          value={data.taxes}
-                          name="taxes"
-                          placeholder="25.000Dt"
-                        ></Input>
-                      </Form.Item>
-
-                      <Form.Item
-                        label="Total"
-                        style={{
-                          display: "inline-block",
-                          width: "calc(19% - 8px)",
-                          margin: "0 8px",
-                          textAlign: "left",
-                        }}
-                      >
-                        <Input
-                          onChange={handleChange}
-                          value={data.total}
-                          name="total"
-                          placeholder="95.000"
-                        ></Input>
-                      </Form.Item>
-                    </Row>
+                        onChange={handleChange}
+                        value={data.taxes}
+                        name="taxes"
+                        placeholder=""
+                        {...("taxes", { required: true, minLength: 6 })}
+                      />
+                    </Form.Item>
+                    <hr />
+                    <Form.Item
+                      label="TotalTTC"
+                      wrapperCol={{
+                        span: 16,
+                      }}
+                      labelCol={{
+                        span: 8,
+                      }}
+                    >
+                      <Input
+                        onChange={handleChange}
+                        value={data.totalTtc}
+                        name="totalTtc"
+                        placeholder="20.000TND"
+                        {...("totalTtc", { required: true, minLength: 6 })}
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      label="Payé"
+                      wrapperCol={{
+                        span: 16,
+                      }}
+                      labelCol={{
+                        span: 8,
+                      }}
+                    >
+                      <td></td>
+                      <Input
+                        onChange={handleChange}
+                        value={data.paye}
+                        name="paye"
+                        placeholder="-0.000TND"
+                        {...("paye", { required: true, minLength: 6 })}
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      label="Solde"
+                      wrapperCol={{
+                        span: 16,
+                      }}
+                      labelCol={{
+                        span: 8,
+                      }}
+                    >
+                      <Input
+                        onChange={handleChange}
+                        value={data.solde}
+                        name="solde"
+                        placeholder="20.000TND"
+                        {...("solde", { required: true, minLength: 6 })}
+                      />
+                    </Form.Item>
+                  </Card>
+                  <br />
+                  <Card
+                    size="small"
+                    style={{ backgroundColor: "#f9f0ff", borderRadius: "20px" }}
+                  >
+                    <Button
+                      type="primary"
+                      onClick={() => createCommande()}
+                      style={{ marginTop: 30 }}
+                    >
+                      Payé
+                    </Button>
+                    <Form.Item
+                      label="Remise"
+                      style={{
+                        display: "inline-block",
+                        width: "calc(25% - 8px)",
+                        marginLeft: 82,
+                        textAlign: "left",
+                      }}
+                    >
+                      <Input
+                        onChange={handleChange}
+                        value={data.remise}
+                        name="remise"
+                        placeholder="75.000Dt"
+                      ></Input>
+                    </Form.Item>
+                    <Form.Item
+                      label="Taxes"
+                      style={{
+                        display: "inline-block",
+                        width: "calc(25% - 8px)",
+                        marginLeft: 8,
+                        textAlign: "left",
+                      }}
+                    >
+                      <Input
+                        onChange={handleChange}
+                        value={data.taxes}
+                        name="taxes"
+                        placeholder="25.000Dt"
+                      ></Input>
+                    </Form.Item>
+                    <Form.Item
+                      label="Total"
+                      style={{
+                        display: "inline-block",
+                        width: "calc(25% - 8px)",
+                        marginLeft: 8,
+                        textAlign: "left",
+                      }}
+                    >
+                      <Input
+                        onChange={handleChange}
+                        value={data.total}
+                        name="total"
+                        placeholder="95.000"
+                      ></Input>
+                    </Form.Item>
                   </Card>
                 </Form>
               </Card>
@@ -708,8 +716,8 @@ export default function AjoutDevis1() {
                       </Link>
                     </div>
                   </div>
-                  <div className="card" style={{height:25,marginRight:40}}>
-                  <p className="text-muted">
+                  <div className="card" style={{ height: 25, marginRight: 40 }}>
+                    <p className="text-muted">
                       <small>
                         Pour modifier votre devis
                         <Link to=""> cliquez ici !</Link>
@@ -740,4 +748,117 @@ export default function AjoutDevis1() {
       </div>
     </main>
   );
+}
+
+{
+  /*<Row>
+                    <Col lg={{ span: 24, offset: 8 }}>
+                      <Form.Item
+                        label="Total"
+                        style={{ display: "inline-block", textAlign: "left" }}
+                      >
+                        <Input
+                          onChange={handleChange}
+                          value={data.total}
+                          name="total"
+                          placeholder="20.000TND"
+                          {...("total", { required: true, minLength: 6 })}
+                        />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col lg={{ span: 24, offset: 8 }}>
+                      <Form.Item
+                        label="Rmise"
+                        style={{ display: "inline-block", textAlign: "left" }}
+                      >
+                        <Input
+                          style={{
+                            borderWidth: 1,
+                            borderStyle: "dashed",
+                            borderColor: "#0d6efd",
+                          }}
+                          onChange={handleChange}
+                          value={data.remise}
+                          name="remise"
+                          placeholder=""
+                          {...("remise", { required: true, minLength: 6 })}
+                        />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col lg={{ span: 24, offset: 8 }}>
+                      <Form.Item
+                        label="Taxes"
+                        style={{ display: "inline-block", textAlign: "left" }}
+                      >
+                        <Input
+                          style={{
+                            borderWidth: 1,
+                            borderStyle: "dashed",
+                            borderColor: "#0d6efd",
+                          }}
+                          onChange={handleChange}
+                          value={data.taxes}
+                          name="taxes"
+                          placeholder=""
+                          {...("taxes", { required: true, minLength: 6 })}
+                        />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+  <Row>
+                    <Col lg={{ span: 24, offset: 8 }}>
+                      <Form.Item
+                        label="TotalTTC"
+                        style={{ display: "inline-block", textAlign: "left" }}
+                      >
+                        <Input
+                          onChange={handleChange}
+                          value={data.totalTtc}
+                          name="totalTtc"
+                          placeholder="20.000TND"
+                          {...("totalTtc", { required: true, minLength: 6 })}
+                        />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col lg={{ span: 24, offset: 8 }}>
+                      <Form.Item
+                        label="Payé"
+                        style={{ display: "inline-block", textAlign: "left" }}
+                      >
+                        <Input
+                          onChange={handleChange}
+                          value={data.paye}
+                          name="paye"
+                          placeholder="-0.000TND"
+                          {...("paye", { required: true, minLength: 6 })}
+                        />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col lg={{ span: 24, offset: 8 }}>
+                      <Form.Item
+                        label="Solde"
+                        style={{ display: "inline-block", textAlign: "left" }}
+                      >
+                        <Input
+                          onChange={handleChange}
+                          value={data.solde}
+                          name="solde"
+                          placeholder="20.000TND"
+                          {...("solde", { required: true, minLength: 6 })}
+                        />
+                      </Form.Item>
+                    </Col>
+                  </Row> */
 }

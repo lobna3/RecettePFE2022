@@ -17,6 +17,7 @@ const NewOpModal = ({
 }) => {
   return (
     <Modal
+    
       className="modalStyle"
       visible={isOpen}
       onCancel={handleClose}
