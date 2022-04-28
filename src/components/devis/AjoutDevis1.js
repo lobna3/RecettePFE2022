@@ -146,7 +146,7 @@ export default function AjoutDevis1() {
     },
   });
 
-  const nFacture = watch("nFacture");
+  //const nFacture = watch("nFacture");
 
   return (
     <main id="main" class="main bg-light">
@@ -163,10 +163,10 @@ export default function AjoutDevis1() {
                 style={{
                   marginLeft: 10,
                   backgroundColor: "#f0f5ff",
+                  borderRadius: "20px",
                 }}
               >
                 <Button
-                  style={{ borderColor: "#1890ff" }}
                   block
                   icon={
                     <EyeOutlined
@@ -208,8 +208,10 @@ export default function AjoutDevis1() {
                 </Button>
                 <p></p>
                 <p>
-                  <Text strong>Paramétre de facture</Text>{" "}
-                  <SettingOutlined style={{ fontSize: "18px" }} />
+                  <Text strong className="d-flex">
+                    Paramétre de facture
+                    <SettingOutlined style={{ fontSize: "18px" }} />
+                  </Text>
                 </p>
                 <hr></hr>
                 <p className="d-flex">
@@ -228,6 +230,7 @@ export default function AjoutDevis1() {
                       borderWidth: 1,
                       borderStyle: "dashed",
                       borderColor: "#0d6efd",
+                      borderRadius: "10px",
                     }}
                     onChange={handleChange}
                     value={data.note}
@@ -238,12 +241,12 @@ export default function AjoutDevis1() {
                 </Badge.Ribbon>
                 <p></p>
                 <Badge.Ribbon text="Condition" color="">
-                  {" "}
                   <TextArea
                     style={{
                       borderWidth: 1,
                       borderStyle: "dashed",
                       borderColor: "#0d6efd",
+                      borderRadius: "10px",
                     }}
                     onChange={handleChange}
                     value={data.remarque}
@@ -256,7 +259,13 @@ export default function AjoutDevis1() {
             </Col>
 
             <Col span={16} pull={8}>
-              <Card style={{ marginLeft: 20, marginBottom: 20 }}>
+              <Card
+                style={{
+                  marginLeft: 20,
+                  marginBottom: 20,
+                  borderRadius: "20px",
+                }}
+              >
                 <Form initialValues={{ size: componentSize }}>
                   <Row>
                     <Form.Item
@@ -318,30 +327,22 @@ export default function AjoutDevis1() {
                     </Form.Item>
                   </Row>
                   <hr />
-                  <Row></Row>
-                  <br></br>
                   <Row>
-                    <Form.Item
-                      label="Facture N"
-                      style={{
-                        display: "inline-block",
-                        margin: "0  8px",
-                        width: "calc(15% - 8px)",
-                        textAlign: "left",
-                      }}
-                    ></Form.Item>
+                    <Text type="primary" style={{ color: "#1890ff" , marginRight:10,marginLeft:20}}>
+                      Facture N:
+                    </Text>
                     <Form.Item>
                       <Button
                         label=""
                         type="primary"
-                        style={{ display: "inline-block", margin: "0  8px" }}
+                        style={{ display: "inline-block", marginLeft: 4 }}
                       >
                         Auto
                       </Button>
                     </Form.Item>
                     <Form.Item>
                       <Button
-                        style={{ displaay: "inline-block", margin: "0 8px" }}
+                        style={{ displaay: "inline-block", marginLeft: 8 }}
                       >
                         Manuel
                       </Button>
@@ -352,7 +353,7 @@ export default function AjoutDevis1() {
                         value={data.nFacture}
                         name="nFacture"
                         {...("nFacture", { required: true, minLength: 6 })}
-                        style={{ display: "inline-block", margin: "0 8px" }}
+                        style={{ display: "inline-block", marginLeft: 8 }}
                         placeholder="00001"
                       />
                       <span>{data.nFacture}</span>
@@ -365,7 +366,7 @@ export default function AjoutDevis1() {
                       label="Client"
                       style={{
                         display: "inline-block",
-                        width: "calc(37% - 8px)",
+                        width: "calc(45% - 8px)",
                         margin: "0 20px",
                         textAlign: "left",
                       }}
@@ -378,22 +379,11 @@ export default function AjoutDevis1() {
                         <Select.Option value="demo">Demo</Select.Option>
                       </Select>
                     </Form.Item>
-                    <Button
-                      type="primary"
-                      style={{
-                        display: "inline-block",
-                        width: "calc(13% - 8px)",
-                        textAlign: "left",
-                      }}
-                    >
-                      Ajouter
-                    </Button>
-
                     <Form.Item
                       label="N de réference"
                       style={{
                         display: "inline-block",
-                        width: "calc(40% - 8px)",
+                        width: "calc(44% - 8px)",
                         margin: "0 20px",
                         textAlign: "left",
                       }}
@@ -408,7 +398,6 @@ export default function AjoutDevis1() {
                       <span>{errors.nReference?.message}</span>
                     </Form.Item>
                   </Row>
-                  <br></br>
                   <Row>
                     <Form.Item
                       label="Adresse de Facturation"
@@ -421,7 +410,6 @@ export default function AjoutDevis1() {
                     >
                       <Input placeholder="Sousse, Tunis..."></Input>
                     </Form.Item>
-
                     <Form.Item
                       label="Adresse de Livraison"
                       style={{
@@ -438,7 +426,7 @@ export default function AjoutDevis1() {
                   <Row>
                     <Button block> + Ajouter article</Button>
                     <p></p>
-                    {/**<Articles />*/}
+                    <Articles />
                   </Row>
                   <hr />
                   <Card
