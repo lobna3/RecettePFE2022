@@ -34,7 +34,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
     codePostal: "",
     etat: "",
     pays: "",
-    typeAdresse: "Facturation",
     utilisateur: "6235e396cb3d6874fad966c0",
   });
 
@@ -62,14 +61,12 @@ const AddNewClient = ({ isOpen, handleClose }) => {
           codePostal: data.codePostal,
           etat: data.etat,
           pays: data.pays,
-          typeAdresse: data.type,
         },
         {
           adresse: data.adresse,
           codePostal: data.codePostal,
           etat: data.etat,
           pays: data.pays,
-          typeAdresse: data.typeAdresse,
         },
       ],
     };
@@ -127,10 +124,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <select
                       style={{ width: "70px" }}
-                      //name="titre"
                       class="form-select"
-                      //value={data.titre}
-                      // onChange={handleChange("titre")}
                       {...field}
                     >
                       <option value={"Mr."}>Mr.</option>
@@ -148,8 +142,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
-                      //name="prenom"
-
                       type="text"
                       class="form-control"
                       placeholder="Foulen"
@@ -166,8 +158,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
-                      //name="nom"
-
                       value={data.nom}
                       type="text"
                       class="form-control"
@@ -185,8 +175,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
-                      //name="entreprise"
-
                       type="text"
                       class="form-control"
                       placeholder="Foulen"
@@ -203,11 +191,10 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
-                      //name="email"
-
                       class="form-control"
                       placeholder="Foulen"
                       {...field}
+                      type="email"
                     />
                   )}
                 />
@@ -223,8 +210,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
-                      //name="telephone"
-
                       type="text"
                       class="form-control"
                       placeholder="123456789"
@@ -243,7 +228,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
-                      //name="siteinternet"
                       type="text"
                       class="form-control"
                       placeholder="Site Internet"
@@ -254,7 +238,11 @@ const AddNewClient = ({ isOpen, handleClose }) => {
               </div>
             </div>
             <div
-              style={{ display: "flex", justifyContent: "flex-end" }}
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                marginTop: 20,
+              }}
               className="steps-action"
             >
               <button type="submit" className="btn btn-primary">
@@ -277,7 +265,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
         };
         return (
           <form onSubmit={handleSubmit(submitSecondStep)}>
-            {" "}
             <br />
             <div class="row g-3">
               <Controller
@@ -294,7 +281,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     <div class="col-md-4 d-flex">
                       <div class="form-check form-check-inline">
                         <input
-                          //name="type"
                           class="form-check-input"
                           type="radio"
                           id="gridRadios2"
@@ -310,7 +296,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                       </div>
                       <div class="form-check form-check-inline">
                         <input
-                          //name="type"
                           class="form-check-input"
                           type="radio"
                           id="gridRadios1"
@@ -340,7 +325,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      //name="nidentificationFiscale"
                       class="form-control"
                       placeholder="123456789"
                       {...field}
@@ -356,7 +340,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <select
-                      //name="activite"
                       class="form-select"
                       {...field}
                     >
@@ -380,7 +363,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      //name="devis"
                       class="form-control"
                       placeholder="0091234568"
                       {...field}
@@ -398,7 +380,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <select
-                      //name="conditionPaiement"
                       class="form-select"
                       {...field}
                     >
@@ -418,18 +399,17 @@ const AddNewClient = ({ isOpen, handleClose }) => {
               style={{
                 display: "flex",
                 justifyContent: "flex-end",
-
                 width: "100%",
                 flexDirection: "row",
-                gap: "5px",
-                marginTop: "0.4em",
+                gap: "20px",
+                marginTop: "2em",
               }}
               className="steps-action"
             >
               <button className="btn btn-primary" type="submit">
                 Suivant
               </button>
-              <button className="btn btn-success" onClick={() => prev()}>
+              <button className="btn btn-secondary" onClick={() => prev()}>
                 Retour
               </button>
             </div>
@@ -448,28 +428,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
         };
         return (
           <form onSubmit={handleSubmit(submitThirdStep)}>
-            {" "}
+           
             <br />
             <div class="row g-3">
-              <div class="col-md-3">
-                <label class="form-label d-flex text-muted">Type Adresse</label>
-                <Controller
-                  name="typeAdresse"
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <select
-                      //name="typeAdresse"
-                      class="form-select"
-                      {...field}
-                    >
-                      <option value={"Facturation"}>Facturation</option>
-                      <option value={"Livraison"}>Livraison</option>
-                    </select>
-                  )}
-                />
-              </div>
-
               <div class="col-md-6">
                 <label class="form-label d-flex text-muted">Adresse</label>
                 <Controller
@@ -479,7 +440,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      //name="adresse"
                       class="form-control"
                       placeholder="Tunis"
                       {...field}
@@ -496,7 +456,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      //name="codePostal"
                       class="form-control"
                       placeholder="4000"
                       {...field}
@@ -513,7 +472,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      //name="etat"
                       class="form-control"
                       placeholder="Lorem Ipsum is simply text"
                       {...field}
@@ -530,7 +488,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      //name="pays"
                       class="form-control"
                       placeholder="Tunisie"
                       {...field}
@@ -548,11 +505,10 @@ const AddNewClient = ({ isOpen, handleClose }) => {
               }}
               className="steps-action"
             >
-              {" "}
               <button className="btn btn-primary" type="submit">
                 Suivant
               </button>
-              <button className="btn btn-success" onClick={() => prev()}>
+              <button className="btn btn-secondary" onClick={() => prev()}>
                 Retour
               </button>
             </div>
@@ -570,28 +526,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
         };
         return (
           <form onSubmit={handleSubmit(submitFinalForm)}>
-            {" "}
             <br />
             <div class="row g-3">
-              <div class="col-md-3">
-                <label class="form-label d-flex text-muted">Type Adresse</label>
-                <Controller
-                  name="typeAdresse"
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <select
-                      //name="typeAdresse"
-                      class="form-select"
-                      {...field}
-                    >
-                      <option value={"Facturation"}>Facturation</option>
-                      <option value={"Livraison"}>Livraison</option>
-                    </select>
-                  )}
-                />
-              </div>
-
               <div class="col-md-6">
                 <label class="form-label d-flex text-muted">Adresse</label>
                 <Controller
@@ -617,7 +553,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      //name="codePostal"
                       class="form-control"
                       placeholder="4000"
                       {...field}
@@ -634,7 +569,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      //name="etat"
                       class="form-control"
                       placeholder="Lorem Ipsum is simply text"
                       {...field}
@@ -651,7 +585,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      //name="pays"
                       class="form-control"
                       placeholder="Tunisie"
                       {...field}
@@ -669,11 +602,10 @@ const AddNewClient = ({ isOpen, handleClose }) => {
               }}
               className="steps-action"
             >
-              {" "}
               <button className="btn btn-primary" type="submit">
-                Terminer
+                Ajouter
               </button>
-              <button className="btn btn-success" onClick={() => prev()}>
+              <button className="btn btn-secondary" onClick={() => prev()}>
                 Retour
               </button>
             </div>
@@ -687,15 +619,20 @@ const AddNewClient = ({ isOpen, handleClose }) => {
       titre: "Mr.",
       nom: "",
       prenom: "",
-      entreprise: "",
       email: "",
+      entreprise: "",
       telephone: "",
       siteinternet: "",
-      typeAdresse: "Facturation",
-      conditionPaiement:"échéance à la fin du mois",
-      activite:"Agence ou Société comerciale",
-      pays:"Tunisie",
-      type:"Entreprise"
+      type: "",
+      nidentificationFiscale: "",
+      devis: "",
+      activite: "Agence ou Société comerciale",
+      conditionPaiement: "Personalisé",
+      adresse: "",
+      codePostal: "",
+      etat: "",
+      pays: "",
+      utilisateur: "6235e396cb3d6874fad966c0",
     },
   });
 

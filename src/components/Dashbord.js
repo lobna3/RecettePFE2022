@@ -17,17 +17,17 @@ const Dashbord = () => {
         <BottomHeader />
         <section class="section dashboard">
           <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-9">
               <div class="row"></div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
               <div
                 className="card"
                 style={{
                   marginTop:20,
                   margin: "0 0",
                   height: "120px",
-                  width: "350px",
+                  width: "300px",
                   borderWidth: 1,
                   backgroundColor: "#fafafa",
                   borderRadius: "60px 0 0 10px",
@@ -60,7 +60,7 @@ const Dashbord = () => {
                 style={{
                   margin: "0 0",
                   height: "120px",
-                  width: "350px",
+                  width: "300px",
                   borderWidth: 1,
                   backgroundColor: "#fafafa",
                   borderRadius: "60px 0 0 10px",
@@ -88,7 +88,7 @@ const Dashbord = () => {
                 style={{
                   margin: "0 0px",
                   height: "200px",
-                  width: "350px",
+                  width: "300px",
                   borderWidth: 1,
                   backgroundColor: "#fafafa",
                   borderRadius: "60px 0  0 10px",
@@ -103,7 +103,7 @@ const Dashbord = () => {
                       </div>
                       <button
                         type="button" 
-                        style={{ marginTop: 100, marginLeft:170 ,backgroundColor:"#0050b3"}}
+                        style={{ marginTop: 80, marginLeft:60 ,backgroundColor:"#0050b3"}}
                         className="btn btn-primary rounded-pill btn-sm"
                       >
                         Contactez Nous

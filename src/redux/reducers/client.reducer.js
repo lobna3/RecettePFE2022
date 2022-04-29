@@ -26,7 +26,6 @@ const clientInitState = {
     codePostal: "",
     etat: "",
     pays: "",
-    typeAdresse: "Facturation",
     utilisateur: "6235e396cb3d6874fad966c0",
     stepOneValidated: false,
     stepTwoValidated: false,
@@ -76,7 +75,7 @@ const clientReducer = (state = clientInitState, action) => {
       };
 
     case ADD_THIRD_STEP:
-      let { adresse, codePostal, etat, pays, typeAdresse } = payload;
+      let { adresse, codePostal, etat, pays } = payload;
       return {
         ...state,
         addClientInfo: {
@@ -87,14 +86,12 @@ const clientReducer = (state = clientInitState, action) => {
               codePostal: codePostal,
               etat: etat,
               pays: pays,
-              typeAdresse: typeAdresse,
               adresse: adresse,
             },
           ],
           codePostal: codePostal,
           etat: etat,
           pays: pays,
-          typeAdresse: typeAdresse,
           adresse: adresse,
 
           stepThreValidated: true,
@@ -113,7 +110,6 @@ const clientReducer = (state = clientInitState, action) => {
               codePostal: payload.codePostal,
               etat: payload.etat,
               pays: payload.pays,
-              typeAdresse: payload.typeAdresse,
               adresse: payload.adresse,
             },
           ],
