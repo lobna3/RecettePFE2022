@@ -201,10 +201,10 @@ export default function Commande() {
   }, []);
 
   return (
-    <main id="main" class="main bg-light">
+    <main id="main" className="main bg-light">
       <CommandeHeader />
 
-      <div class="pagetitle">
+      <div className="pagetitle">
         <div
           style={{ display: "flex", justifyContent: "flex-end" }}
           className="col-lg-12 "

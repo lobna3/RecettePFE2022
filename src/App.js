@@ -19,11 +19,12 @@ import Brouillon from "./components/brouillon/Brouillon";
 import ModifierDevis from "./components/devis/ModifierDevis";
 import DetailDevis from "./components/devis/DetailDevis";
 import { Routes, Route } from "react-router-dom";
-import { store } from "./components/store";
+//import { store } from "./components/store";
 import { Provider } from "react-redux";
 import { useState } from "react";
 import DetailCommande from "./components/commandes/DetailCommande";
 import Paiement from "./components/factures/Paiement";
+import store from "./redux/store";
 
 function App() {
   const [user, setUser] = useState(null);

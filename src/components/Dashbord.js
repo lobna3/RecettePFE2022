@@ -17,28 +17,31 @@ const Dashbord = () => {
         <BottomHeader />
         <section class="section dashboard">
           <div class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-8">
               <div class="row"></div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-4">
               <div
                 className="card"
                 style={{
-                  margin: "0 15px",
-                  height: "150px",
-                  width: "200px",
+                  marginTop:20,
+                  margin: "0 0",
+                  height: "120px",
+                  width: "350px",
                   borderWidth: 1,
                   backgroundColor: "#fafafa",
+                  borderRadius: "60px 0 0 10px",
+                 
                 }}
               >
                 <div className="card-body">
                   <p className=" text-center text-primary">
                     Créer votre opération vente
                   </p>
-                  <div className="media text-center">
+                  <div className="media text-center" >
                     <div className="media-body">
                       <button
-                        type="button"
+                        type="button" style={{backgroundColor:"#0050b3"}}
                         className="btn btn-primary rounded-pill btn-sm"
                         onClick={() => {
                           setIsOpenOperation(true);
@@ -55,11 +58,12 @@ const Dashbord = () => {
               <div
                 class="card"
                 style={{
-                  margin: "0 15px",
-                  height: "150px",
-                  width: "200px",
+                  margin: "0 0",
+                  height: "120px",
+                  width: "350px",
                   borderWidth: 1,
                   backgroundColor: "#fafafa",
+                  borderRadius: "60px 0 0 10px",
                 }}
               >
                 <div className="card-body">
@@ -69,7 +73,7 @@ const Dashbord = () => {
                   <div className="media text-center">
                     <div className="media-body">
                       <button
-                        type="button"
+                        type="button" style={{backgroundColor:"#0050b3"}}
                         className="btn btn-primary rounded-pill btn-sm "
                       >
                         Nouveau Projet
@@ -82,11 +86,12 @@ const Dashbord = () => {
               <div
                 className="card"
                 style={{
-                  margin: "0 15px",
-                  height: "150px",
-                  width: "200px",
+                  margin: "0 0px",
+                  height: "200px",
+                  width: "350px",
                   borderWidth: 1,
                   backgroundColor: "#fafafa",
+                  borderRadius: "60px 0  0 10px",
                 }}
               >
                 <div className="card-body">
@@ -97,8 +102,9 @@ const Dashbord = () => {
                         <br></br>
                       </div>
                       <button
-                        type="button"
-                        className="btn btn-primary rounded-pill btn-sm "
+                        type="button" 
+                        style={{ marginTop: 100, marginLeft:170 ,backgroundColor:"#0050b3"}}
+                        className="btn btn-primary rounded-pill btn-sm"
                       >
                         Contactez Nous
                       </button>
