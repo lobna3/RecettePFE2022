@@ -103,7 +103,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
   };
   const steps = [
     {
-      title: "Information Générale",
+      title: "Information générale",
       content: "First-content",
       layout: () => {
         const firstStepSubmit = (data) => {
@@ -149,6 +149,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
+                  {errors.prenom && (
+                  <span className="text-danger">Tapez votre prénom !</span>
+                )}
               </div>
               <div class="col-md-3">
                 <label class="form-label d-flex text-muted">Nom</label>
@@ -166,6 +169,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
+                 {errors.nom && (
+                  <span className="text-danger">Tapez votre nom !</span>
+                )}
               </div>
               <div class="col-md-5">
                 <label class="form-label d-flex text-muted">Entreprise</label>
@@ -182,6 +188,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
+                 {errors.entreprise && (
+                  <span className="text-danger">Tapez le nom de votre entreprise !</span>
+                )}
               </div>
               <div class="col-md-4">
                 <label class="form-label d-flex text-muted">Email</label>
@@ -192,14 +201,14 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       class="form-control"
-                      placeholder="Foulen"
+                      placeholder="test@gmail.com"
                       {...field}
                       type="email"
                     />
                   )}
                 />
-                {error.email && (
-                  <span className="text-danger">Email invalide</span>
+                {errors.email && (
+                  <span className="text-danger">Email invalide ! exemple:test@gmail.com</span>
                 )}
               </div>
               <div class="col-md-4">
@@ -217,6 +226,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
+                 {errors.telephone && (
+                  <span className="text-danger">Tapez votre numéro de téléphone !</span>
+                )}
               </div>
               <div class="col-md-4">
                 <label class="form-label d-flex text-muted">
@@ -235,6 +247,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
+                 {errors.siteinternet&& (
+                  <span className="text-danger">Tapez le nom de votre site Internet !</span>
+                )}
               </div>
             </div>
             <div
@@ -249,13 +264,13 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                 Suivant
               </button>
             </div>
-            {error && <span>errors</span>}
+            {errors && <span className="text-danger"> Vérifier vos informations !!! </span>}
           </form>
         );
       },
     },
     {
-      title: "Information Professionnlles",
+      title: "Information professionnelles",
       content: "Second-content",
       layout: () => {
         const submitSecondStep = (data) => {
@@ -321,7 +336,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                 <Controller
                   name="nidentificationFiscale"
                   control={control}
-                  rules={{ required: false }}
+                  rules={{ required: true }}
                   render={({ field }) => (
                     <input
                       type="text"
@@ -331,6 +346,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
+                 {errors.nidentificationFiscale && (
+                  <span className="text-danger">Tapez votre numéro d'identification fiscale !</span>
+                )}
               </div>
               <div class="col-md-6">
                 <label class="form-label d-flex text-muted">Activité</label>
@@ -353,6 +371,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     </select>
                   )}
                 />
+                
               </div>
               <div class="col-md-6">
                 <label class="form-label d-flex text-muted">Devis</label>
@@ -369,6 +388,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
+                 {errors.devis && (
+                  <span className="text-danger">Tapez le numéro de votre devis!</span>
+                )}
               </div>
               <div class="col-md-6">
                 <label class="form-label d-flex text-muted">
@@ -440,12 +462,15 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       placeholder="Tunis"
                       {...field}
                     />
                   )}
                 />
+                 {errors.adresse && (
+                  <span className="text-danger">Tapez votre adresse !</span>
+                )}
               </div>
               <div class="col-md-3">
                 <label class="form-label d-flex text-muted">Postal</label>
@@ -456,12 +481,15 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       placeholder="4000"
                       {...field}
                     />
                   )}
                 />
+                 {errors.codePostal && (
+                  <span className="text-danger">Tapez le numéro de votre code Postal !</span>
+                )}
               </div>
               <div class="col-md-6">
                 <label class="form-label d-flex text-muted">Etat</label>
@@ -472,12 +500,15 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       placeholder="Lorem Ipsum is simply text"
                       {...field}
                     />
                   )}
                 />
+                 {errors.etat && (
+                  <span className="text-danger">Tapez votre texte !</span>
+                )}
               </div>
               <div class="col-md-6">
                 <label class="form-label d-flex text-muted">Pays</label>
@@ -488,12 +519,15 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       placeholder="Tunisie"
                       {...field}
                     />
                   )}
                 />
+                 {errors.pays && (
+                  <span className="text-danger">Tapez le nom de votre pays !</span>
+                )}
               </div>
             </div>
             <div
@@ -537,12 +571,15 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       placeholder="Tunis"
                       {...field}
                     />
                   )}
                 />
+                 {errors.adresse && (
+                  <span className="text-danger">Tapez votre adresse !</span>
+                )}
               </div>
               <div class="col-md-3">
                 <label class="form-label d-flex text-muted">Postal</label>
@@ -559,6 +596,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
+                 {errors.codePostal && (
+                  <span className="text-danger">Tapez le numéro de votre code Postal !</span>
+                )}
               </div>
               <div class="col-md-6">
                 <label class="form-label d-flex text-muted">Etat</label>
@@ -575,6 +615,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
+                 {errors.etat && (
+                  <span className="text-danger">Tapez votre text !</span>
+                )}
               </div>
               <div class="col-md-6">
                 <label class="form-label d-flex text-muted">Pays</label>
@@ -591,6 +634,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
+                 {errors.pays && (
+                  <span className="text-danger">Tapez le nom de votre pays !</span>
+                )}
               </div>
             </div>
             <div
@@ -614,7 +660,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
       },
     },
   ];
-  const { handleSubmit, control, reset, watch } = useForm({
+  const { handleSubmit, control, reset, watch,formState:{ errors } } = useForm({
     defaultValues: {
       titre: "Mr.",
       nom: "",
