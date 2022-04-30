@@ -32,7 +32,7 @@ const NewOpModal = ({
     >
       <h5 className="d-flex">
         <i className="d-flex" style={{ margin: "0 8px" }}>
-          <LeftSquareTwoTone style={{ fontSize: "24px" }} />
+          <LeftSquareTwoTone style={{ fontSize: "24px"}} />
         </i>
         Choissisez votre opération souhaité
       </h5>
@@ -46,12 +46,12 @@ const NewOpModal = ({
           borderRadius: "10px 10px",
         }}
       >
-        <i className="d-flex" style={{ margin: "0 8px" }}>
+        <i  className="d-flex" style={{ margin: "0 8px"}}>
           <UserAddOutlined style={{ fontSize: "24px", color: "#1890ff" }} />
         </i>
-        <span className="d-inline-block text-left text-dark">
+        <span className="d-inline-block text-left text-dark"  >
           <Text strong>Nouveau Client</Text>
-          <small className="font-weight-light d-block text-muted">
+          <small className="font-weight-light d-block text-muted" >
             Créer un nouvelle client
           </small>
         </span>
