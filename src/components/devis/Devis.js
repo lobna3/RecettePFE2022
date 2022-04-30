@@ -47,25 +47,24 @@ export default function Devis() {
   const [selectionType, setSelectionType] = useState("checkbox");
 
   const menu = (
-      <Menu onClick={handleMenuClick}>
-        <Menu.Item key="1" icon={<PrinterFilled />}>
-          <Link to="/">Imprimer</Link>
-        </Menu.Item>
-        <Menu.Item key="2" icon={<FundViewOutlined />}>
-          <Link to= {"/detail_devis/${devis.id}"}>Visualiser</Link>
-        </Menu.Item>
-        <Menu.Item key="5" icon={<FundViewOutlined />}>
-          <Link to={"/modifier_devis/${devis.id}"}>Modifier</Link>
-        </Menu.Item>
-        <Menu.Item key="3" icon={<MailOutlined />}>
-          <Link to="">Envoyer</Link>
-        </Menu.Item>
-        <Menu.Item key="4" icon={<DeleteOutlined />}>
+    <Menu onClick={handleMenuClick}>
+      <Menu.Item key="1" icon={<PrinterFilled />}>
+        <Link to="/">Imprimer</Link>
+      </Menu.Item>
+      <Menu.Item key="2" icon={<FundViewOutlined />}>
+        <Link to={"/detail_devis/${devis.id}"}>Visualiser</Link>
+      </Menu.Item>
+      <Menu.Item key="5" icon={<FundViewOutlined />}>
+        <Link to={"/modifier_devis/${devis.id}"}>Modifier</Link>
+      </Menu.Item>
+      <Menu.Item key="3" icon={<MailOutlined />}>
+        <Link to="">Envoyer</Link>
+      </Menu.Item>
+      <Menu.Item key="4" icon={<DeleteOutlined />}>
         <Link to="/">Supprimer</Link>
-        </Menu.Item>
-      </Menu>
-    );
-
+      </Menu.Item>
+    </Menu>
+  );
 
   const columns = [
     {
@@ -228,11 +227,11 @@ export default function Devis() {
   console.log("devis=>", devis);
 
   return (
-    <main id="main" class="main bg-light">
+    <main id="main" className="main bg-light">
       <ToastContainer position="top-center" />
       <DevisHeader></DevisHeader>
 
-      <div class="pagetitle">
+      <div className="pagetitle">
         <div
           style={{ display: "flex", justifyContent: "flex-end" }}
           className="col-lg-12 "
@@ -254,11 +253,19 @@ export default function Devis() {
             <PlusSquareFilled /> Nouvelle Opération
           </button>
         </div>
+
         <br />
       </div>
-
       <div className="col-lg-12 grid-margin stretch-card">
-        <div className="card" style={{ margin: "0 15px 40px 20px" }}>
+        <div
+          className="card"
+          style={{
+            marginLeft: 20,
+            marginRight: 15,
+            marginTop: 0,
+            marginBottom: 40,
+          }}
+        >
           <div className="card-body">
             <Table
               rowSelection={{ type: selectionType, ...rowSelection }}

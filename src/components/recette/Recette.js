@@ -3,12 +3,13 @@ import { Card, Col, Row, Progress } from "antd";
 import { RecettesHeader } from "../RacetteHeader";
 export default function Recette() {
   return (
-    <main id="main" class="main bg-light">
+    <main id="main" className="main bg-light">
       <RecettesHeader />
 
       <Row>
         <Col span={12}>
           <Card
+         
             size="small"
             title="Impayé"
             extra={
@@ -16,17 +17,17 @@ export default function Recette() {
                 + 28% depuis le mois dernier
               </span>
             }
-            style={{ height: 160, width: 480, margin: "0 40px" }}
+            style={{ height: 160, width: 480, margin: "0 40px", borderRadius: "10px 10px", }}
           >
             <div className="d-flex flex-row">
-              {" "}
-              <h6 className="text-primary">18</h6>{" "}
+            
+              <h6 className="text-primary">18</h6>
               <h6 className="text-danger" style={{ margin: "0 420px" }}>
                 9
               </h6>
             </div>
             <div className="d-flex flex-row">
-              {" "}
+          
               <h6 className="text-primary">EnAttente</h6>{" "}
               <h6 className="text-danger" style={{ margin: "0 320px" }}>
                 EnRetard
@@ -34,8 +35,8 @@ export default function Recette() {
             </div>
             <Progress percent={50} showInfo={false} />
             <div className="d-flex flex-row">
-              {" "}
-              <h6>900.450.000DT</h6>{" "}
+           
+              <h6>900.450.000DT</h6>
               <h6 style={{ margin: "0 230px" }}>900.450.000DT</h6>
             </div>
           </Card>
@@ -49,7 +50,7 @@ export default function Recette() {
                 + 10% depuis le mois dernier
               </span>
             }
-            style={{ height: 160, width: 480, margin: "0 20px" }}
+            style={{ height: 160, width: 480, margin: "0 20px", borderRadius: "10px 10px", }}
           >
             <div className="d-flex flex-row">
               {" "}

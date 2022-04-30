@@ -18,7 +18,7 @@ const Paiement = () => {
       <PaiementHeader />
       <Row>
         <Col lg={{ span: 8 }} style={{ marginBottom: 20 }}>
-          <Card size="small" style={{ marginLeft: 20 }}>
+          <Card size="small" style={{ marginLeft: 20 , borderRadius: "10px 10px",}}>
             <Title level={5}> Facture #000584</Title>
             <p></p>
             <Table borderless>
@@ -87,6 +87,7 @@ const Paiement = () => {
                         borderStyle: "dashed",
                         borderColor: "#0d6efd",
                         backgroundColor: "#f6ffed",
+                        borderRadius: "10px 10px",
                       }}
                     >
                       <Text type="secondary" className="">
@@ -94,7 +95,7 @@ const Paiement = () => {
                         typesetting industry. Lorem Ipsum has been the
                         industry's standard dummy text ever since the 1500.
                         <p>
-                          {" "}
+                         
                           <br />
                           <br />
                           <br />
@@ -108,7 +109,7 @@ const Paiement = () => {
           </Card>
         </Col>
         <Col lg={{ span: 8 }}>
-          <Card size="small" style={{ marginRight: 20, marginLeft: 20 }}>
+          <Card size="small" style={{ marginRight: 20, marginLeft: 20,   borderRadius: "10px 10px", }}>
             <Title level={5}>Opération financière</Title>
             <p></p>
             <Table borderless>
@@ -209,9 +210,9 @@ const Paiement = () => {
           </Card>
         </Col>
         <Col lg={{ span: 8 }}>
-          <Card size="small" style={{ marginRight: 20, height: 570 }}>
+          <Card size="small" style={{ marginRight: 20, height: 570 ,   borderRadius: "10px 10px",}}>
             <Text>
-              {" "}
+             
               <FileDoneOutlined
                 style={{ fontSize: "28px", color: "#fff566" }}
               />

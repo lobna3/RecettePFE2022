@@ -5,7 +5,7 @@ import { Input, Space } from 'antd';
 import { Link, } from 'react-router-dom';
 const { Search } = Input;
 
-export default () => {
+/*export default () => {
     return (
         <>
             <Menu />
@@ -13,23 +13,23 @@ export default () => {
             <BottomHeader />
         </>
     )
-}
+}*/
 
 export const BottomHeader = () => {
     return (
         <>
         <br/>
-         <div style={{ display: 'flex', justifyContent: 'space-between', margin: '0 20px'}} className="header_bottom">
+         <div style={{ display: 'flex', justifyContent: 'space-between',marginLeft:20,marginTop:10}} className="header_bottom">
             <Breadcrumb>
                 <Breadcrumb.Item href="">
                   
-                    <HomeOutlined />
+                    <HomeOutlined  style={{ fontSize: "25px", color: "#595959", }}/>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item href="">
                    
                     <span>Home</span>
                 </Breadcrumb.Item>
-                <Breadcrumb.Item>Dashbord</Breadcrumb.Item>
+                <Breadcrumb.Item>Tableau du bord</Breadcrumb.Item>
             </Breadcrumb>
             <div className="header_bottom_rigth">
             <Space direction="vertical">
@@ -53,7 +53,7 @@ export const RecettesHeader = () => {
             <Breadcrumb>
                 <Breadcrumb.Item href="">
                   
-                    <HomeOutlined />
+                    <HomeOutlined style={{ fontSize: "25px", color: "#595959", }}/>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item href="">
                    
@@ -82,7 +82,7 @@ export const DevisHeader = () => {
             <Breadcrumb>
                 <Breadcrumb.Item href="">
                   
-                    <HomeOutlined />
+                    <HomeOutlined style={{ fontSize: "25px", color: "#595959", }}/>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item href="">
                    
@@ -112,13 +112,13 @@ export const CommandeHeader = () => {
             <Breadcrumb>
                 <Breadcrumb.Item href="">
                   
-                    <HomeOutlined />
+                    <HomeOutlined style={{ fontSize: "25px", color: "#595959", }} />
                 </Breadcrumb.Item>
                 <Breadcrumb.Item href="">
                    
                 <Link to="/Recette"><span>Recette</span></Link> 
                 </Breadcrumb.Item>
-                <Breadcrumb.Item>Commande en cours</Breadcrumb.Item>
+                <Breadcrumb.Item><Link to="/commandes">Commande en cours</Link></Breadcrumb.Item>
             </Breadcrumb>
             <div className="header_bottom_rigth">
             <Space direction="vertical">
@@ -142,13 +142,13 @@ export const FactureHeader = () => {
             <Breadcrumb>
                 <Breadcrumb.Item href="">
                   
-                    <HomeOutlined />
+                    <HomeOutlined style={{ fontSize: "25px", color: "#595959", }}/>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item href="">
                    
                 <Link to="/Recette"><span>Recette</span></Link> 
                 </Breadcrumb.Item>
-                <Breadcrumb.Item>Facture</Breadcrumb.Item>
+                <Breadcrumb.Item><Link to="/factures">Facture</Link></Breadcrumb.Item>
             </Breadcrumb>
             <div className="header_bottom_rigth">
             <Space direction="vertical">
@@ -172,13 +172,13 @@ export const VenteHeader = () => {
             <Breadcrumb>
                 <Breadcrumb.Item href="">
                   
-                    <HomeOutlined />
+                    <HomeOutlined style={{ fontSize: "25px", color: "#595959", }}/>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item href="">
                    
                 <Link to="/Recette"><span>Recette</span></Link> 
                 </Breadcrumb.Item>
-                <Breadcrumb.Item>Vente</Breadcrumb.Item>
+                <Breadcrumb.Item><Link to="/ventes">Vente</Link></Breadcrumb.Item>
             </Breadcrumb>
             <div className="header_bottom_rigth">
             <Space direction="vertical">
@@ -202,13 +202,13 @@ export const BrouillonHeader = () => {
             <Breadcrumb>
                 <Breadcrumb.Item href="">
                   
-                    <HomeOutlined />
+                    <HomeOutlined style={{ fontSize: "25px", color: "#595959", }}/>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item href="">
                    
                 <Link to="/Recette"><span>Recette</span></Link> 
                 </Breadcrumb.Item>
-                <Breadcrumb.Item>Brouillon</Breadcrumb.Item>
+                <Breadcrumb.Item><Link to="/brouillon">Brouillon</Link></Breadcrumb.Item>
             </Breadcrumb>
             <div className="header_bottom_rigth">
             <Space direction="vertical">
@@ -227,11 +227,11 @@ export const AjoutDHeader = () => {
     return (
         <>
         <br/>
-        <div style={{ display: 'flex', justifyContent: 'space-between',margin: '0 20px' }} className="header_bottom">
+        <div style={{ display: 'flex', justifyContent: 'space-between',margin: '0 20px',marginTop:10 }} className="header_bottom">
             <Breadcrumb>
                 <Breadcrumb.Item href="">
                   
-                    <HomeOutlined />
+                    <HomeOutlined style={{ fontSize: "25px", color: "#595959", }}/>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item href="">
                    
@@ -261,7 +261,7 @@ export const CommandeDetailHeader = () => {
             <Breadcrumb>
                 <Breadcrumb.Item href="">
                   
-                    <HomeOutlined />
+                    <HomeOutlined style={{ fontSize: "25px", color: "#595959", }}/>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item href="">
                    
@@ -292,7 +292,7 @@ export const PaiementHeader = () => {
             <Breadcrumb>
                 <Breadcrumb.Item href="">
                   
-                    <HomeOutlined />
+                    <HomeOutlined style={{ fontSize: "25px", color: "#595959", }}/>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item href="">
                    

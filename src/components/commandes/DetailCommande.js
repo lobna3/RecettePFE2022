@@ -29,6 +29,7 @@ function DetailCommande() {
               height: 525,
               marginLeft: 30,
               borderWidth: 1,
+              borderRadius: "15px 15px",
             }}
           >
             <Title level={5}>Commande #003645</Title>
@@ -67,6 +68,7 @@ function DetailCommande() {
                         borderStyle: "dashed",
                         borderColor: "#0d6efd",
                         backgroundColor: "#f6ffed",
+                        borderRadius: "10px 10px",
                       }}
                     >
                       <Text type="secondary" className="">
@@ -121,10 +123,11 @@ function DetailCommande() {
                 height: 200,
                 borderWidth: 1,
                 marginRight: 20,
+                borderRadius: "15px 15px",
               }}
             >
               <Table hover size="sm" borderless>
-                <thead style={{ borderWidth: 1 }}>
+                <thead style={{ borderWidth: 1}}>
                   <tr>
                     <td className="text-muted d-flex">Produits / Services</td>
                     <td className="text-muted">Qté</td>
@@ -244,6 +247,7 @@ function DetailCommande() {
                 marginBottom: 40,
                 borderWidth: 1,
                 marginRight: 20,
+                borderRadius: "15px 15px",
               }}
             >
               <Title level={5} className="d-flex">

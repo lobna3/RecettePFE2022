@@ -5,7 +5,9 @@ import {BsFillCartFill,
   BsCashCoin,
   BsSortUp
 } from 'react-icons/bs';
-import {FaFileInvoiceDollar,FaDonate,FaBalanceScaleLeft,FaArrowRight} from 'react-icons/fa';
+import {FaFileInvoiceDollar,FaDonate,FaBalanceScaleLeft,
+  //FaArrowRight
+} from 'react-icons/fa';
 import {MdAssignmentInd} from 'react-icons/md';
 import { HomeOutlined} from '@ant-design/icons';
 import React from 'react';
@@ -25,12 +27,17 @@ const SideBar = () => {
       <span>Tableau du bord</span>
     </Link>
   </li>
-
   <li className="nav-item">
+    <Link className="nav-link collapsed" to="/recette">
+      <i><FaBalanceScaleLeft /></i>
+      <span>Recette</span>
+    </Link>
+  </li>
+  {/*<li className="nav-item">
         <Link className="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" to="/Recette">
           <i><FaBalanceScaleLeft/></i><span>Recette</span><i className="bi bi-chevron-down ms-auto"></i>
         </Link>
-        <ul id="components-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <ul id="components-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <Link to="/Recette">
               <i><FaArrowRight/></i><span>Recette</span>
@@ -64,7 +71,9 @@ const SideBar = () => {
           
          
         </ul>
-  </li>
+  </li> */}
+
+  
 
   <li className="nav-item">
     <Link className="nav-link collapsed" to="">

@@ -21,15 +21,15 @@ import DetailDevis from "./components/devis/DetailDevis";
 import { Routes, Route } from "react-router-dom";
 //import { store } from "./components/store";
 import { Provider } from "react-redux";
-import { useState } from "react";
+//import { useState } from "react";
 import DetailCommande from "./components/commandes/DetailCommande";
 import Paiement from "./components/factures/Paiement";
 import store from "./redux/store";
 
 function App() {
-  const [user, setUser] = useState(null);
-  const login = () => setUser({ name: "test", role: "admin" });
-  const logout = () => setUser(null);
+ // const [user, setUser] = useState(null);
+ // const login = () => setUser({ name: "test", role: "admin" });
+ // const logout = () => setUser(null);
 
   return (
     <div className="App">
@@ -37,12 +37,9 @@ function App() {
         <Navbare />
         <SideBar />
 
-        {!user ? (
-          <button onClick={login}> se connecter</button>
-        ) : (
-          <button onClick={logout}> se déconnecter</button>
-        )}
-
+        <p>
+          <br />
+        </p>
         <Routes>
           <Route path="/*" element={<p>There's nothing here : 401 !</p>} />
           <Route path="/login/:id" element={<Login />} />

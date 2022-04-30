@@ -10,7 +10,7 @@ export default function Menu() {
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav" style={{margin: '0 200px'}}>
+        <div className="collapse navbar-collapse" id="navbarNav" style={{margin: '0 200px',marginTop:10}}>
           <ul className="navbar-nav">
             <li className="nav-item active">
               <Link className="nav-link" to="/recette">Recette </Link>
