@@ -1,23 +1,25 @@
 import React, { useState } from "react";
-import { Modal, Steps} from "antd";
+import { Modal, Steps } from "antd";
 import { useForm, Controller } from "react-hook-form";
-//import axios from "../../config/axios";
+import { useToasts } from "react-toast-notifications";
 import "./modal.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  addClientApi,
   addFirstStep,
   addFourStep,
   addSecondStep,
-  addThedStep,
+  addThirdStep,
 } from "../../redux/actions/client.actions";
 const { Step } = Steps;
 
 const AddNewClient = ({ isOpen, handleClose }) => {
   const [current, setCurrent] = React.useState(0);
+  const { addToast } = useToasts();
   //const [canMove, setCanMove] = useState(false);
   const { addClientInfo } = useSelector((state) => state.client);
   const dispatch = useDispatch();
-  const [data] = useState({
+  const [data, setState] = useState({
     titre: "Mr.",
     nom: "",
     prenom: "",
@@ -48,7 +50,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
     }
   };*/
 
- /* const next = () => {
+  /* const next = () => {
     if (watchCanMove()) {
       setCurrent(current + 1);
     }
@@ -104,7 +106,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
-                  {errors.prenom && (
+                {errors.prenom && (
                   <span className="text-danger">Tapez votre prénom !</span>
                 )}
               </div>
@@ -124,12 +126,14 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
-                 {errors.nom && (
+                {errors.nom && (
                   <span className="text-danger">Tapez votre nom !</span>
                 )}
               </div>
               <div className="col-md-5">
-                <label className="form-label d-flex text-muted">Entreprise</label>
+                <label className="form-label d-flex text-muted">
+                  Entreprise
+                </label>
                 <Controller
                   name="entreprise"
                   control={control}
@@ -143,8 +147,10 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
-                 {errors.entreprise && (
-                  <span className="text-danger">Tapez le nom de votre entreprise !</span>
+                {errors.entreprise && (
+                  <span className="text-danger">
+                    Tapez le nom de votre entreprise !
+                  </span>
                 )}
               </div>
               <div className="col-md-4">
@@ -163,11 +169,15 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   )}
                 />
                 {errors.email && (
-                  <span className="text-danger">Email invalide ! exemple:test@gmail.com</span>
+                  <span className="text-danger">
+                    Email invalide ! exemple:test@gmail.com
+                  </span>
                 )}
               </div>
               <div className="col-md-4">
-                <label className="form-label d-flex text-muted">Téléphone</label>
+                <label className="form-label d-flex text-muted">
+                  Téléphone
+                </label>
                 <Controller
                   name="telephone"
                   control={control}
@@ -181,8 +191,10 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
-                 {errors.telephone && (
-                  <span className="text-danger">Tapez votre numéro de téléphone !</span>
+                {errors.telephone && (
+                  <span className="text-danger">
+                    Tapez votre numéro de téléphone !
+                  </span>
                 )}
               </div>
               <div className="col-md-4">
@@ -202,8 +214,10 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
-                 {errors.siteinternet&& (
-                  <span className="text-danger">Tapez le nom de votre site Internet !</span>
+                {errors.siteinternet && (
+                  <span className="text-danger">
+                    Tapez le nom de votre site Internet !
+                  </span>
                 )}
               </div>
             </div>
@@ -219,7 +233,12 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                 Suivant
               </button>
             </div>
-            {errors && <span className="text-danger"> Vérifier vos informations !!! </span>}
+            {errors && (
+              <span className="text-danger">
+                {" "}
+                Vérifier vos informations !!!{" "}
+              </span>
+            )}
           </form>
         );
       },
@@ -247,7 +266,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     class="col-12 d-flex"
                     {...field}
                   >
-                    <span className="col-form-label d-flex text-muted">Type: </span>
+                    <span className="col-form-label d-flex text-muted">
+                      Type:{" "}
+                    </span>
                     <div className="col-md-4 d-flex">
                       <div className="form-check form-check-inline">
                         <input
@@ -301,8 +322,10 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
-                 {errors.nidentificationFiscale && (
-                  <span className="text-danger">Tapez votre numéro d'identification fiscale !</span>
+                {errors.nidentificationFiscale && (
+                  <span className="text-danger">
+                    Tapez votre numéro d'identification fiscale !
+                  </span>
                 )}
               </div>
               <div className="col-md-6">
@@ -312,10 +335,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   control={control}
                   rules={{ required: true }}
                   render={({ field }) => (
-                    <select
-                      className="form-select"
-                      {...field}
-                    >
+                    <select className="form-select" {...field}>
                       <option value={"Agence ou Société comerciale"}>
                         Agence ou Société comerciale
                       </option>
@@ -326,7 +346,6 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     </select>
                   )}
                 />
-                
               </div>
               <div className="col-md-6">
                 <label className="form-label d-flex text-muted">Devis</label>
@@ -343,8 +362,10 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
-                 {errors.devis && (
-                  <span className="text-danger">Tapez le numéro de votre devis!</span>
+                {errors.devis && (
+                  <span className="text-danger">
+                    Tapez le numéro de votre devis!
+                  </span>
                 )}
               </div>
               <div className="col-md-6">
@@ -356,10 +377,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   control={control}
                   rules={{ required: true }}
                   render={({ field }) => (
-                    <select
-                      className="form-select"
-                      {...field}
-                    >
+                    <select className="form-select" {...field}>
                       <option value={"Personalisé"}>Personalisé</option>
                       <option value={" échéance à la fin du mois"}>
                         échéance à la fin du mois
@@ -400,12 +418,11 @@ const AddNewClient = ({ isOpen, handleClose }) => {
       layout: () => {
         const submitThirdStep = (data) => {
           console.log(data);
-          dispatch(addThedStep(data));
+          dispatch(addThirdStep(data));
           setCurrent(current + 1);
         };
         return (
           <form onSubmit={handleSubmit(submitThirdStep)}>
-           
             <br />
             <div className="row g-3">
               <div className="col-md-6">
@@ -423,7 +440,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
-                 {errors.adresse && (
+                {errors.adresse && (
                   <span className="text-danger">Tapez votre adresse !</span>
                 )}
               </div>
@@ -442,8 +459,10 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
-                 {errors.codePostal && (
-                  <span className="text-danger">Tapez le numéro de votre code Postal !</span>
+                {errors.codePostal && (
+                  <span className="text-danger">
+                    Tapez le numéro de votre code Postal !
+                  </span>
                 )}
               </div>
               <div className="col-md-6">
@@ -461,7 +480,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
-                 {errors.etat && (
+                {errors.etat && (
                   <span className="text-danger">Tapez votre texte !</span>
                 )}
               </div>
@@ -480,8 +499,10 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
-                 {errors.pays && (
-                  <span className="text-danger">Tapez le nom de votre pays !</span>
+                {errors.pays && (
+                  <span className="text-danger">
+                    Tapez le nom de votre pays !
+                  </span>
                 )}
               </div>
             </div>
@@ -507,11 +528,52 @@ const AddNewClient = ({ isOpen, handleClose }) => {
     },
     {
       title: "Adresse  de Livraison",
-      content: "Last2-content",
+      content: "Four-content",
       layout: () => {
         const submitFinalForm = (data) => {
           dispatch(addFourStep(data));
           console.log("Client Info", addClientInfo);
+          let {
+            titre,
+            nom,
+            prenom,
+            email,
+            entreprise,
+            telephone,
+            siteinternet,
+            type,
+            nidentificationFiscale,
+            devis,
+            activite,
+            conditionPaiement,
+            adresse,
+            codePostal,
+            etat,
+            pays,
+          } = addClientInfo;
+          let client = {
+            titre,
+            nom,
+            prenom,
+            email,
+            entreprise,
+            telephone,
+            siteinternet,
+            type,
+            nidentificationFiscale,
+            devis,
+            activite,
+            conditionPaiement,
+            adresse,
+            codePostal,
+            etat,
+            pays,
+            utilisateur: "6235e396cb3d6874fad966c0",
+          };
+          let { adresses } = addClientInfo;
+          dispatch(
+            addClientApi({ client: client, adresses: adresses }, addToast,handleClose)
+          );
         };
         return (
           <form onSubmit={handleSubmit(submitFinalForm)}>
@@ -532,7 +594,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
-                 {errors.adresse && (
+                {errors.adresse && (
                   <span className="text-danger">Tapez votre adresse !</span>
                 )}
               </div>
@@ -551,8 +613,10 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
-                 {errors.codePostal && (
-                  <span className="text-danger">Tapez le numéro de votre code Postal !</span>
+                {errors.codePostal && (
+                  <span className="text-danger">
+                    Tapez le numéro de votre code Postal !
+                  </span>
                 )}
               </div>
               <div className="col-md-6">
@@ -570,7 +634,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
-                 {errors.etat && (
+                {errors.etat && (
                   <span className="text-danger">Tapez votre text !</span>
                 )}
               </div>
@@ -589,8 +653,10 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     />
                   )}
                 />
-                 {errors.pays && (
-                  <span className="text-danger">Tapez le nom de votre pays !</span>
+                {errors.pays && (
+                  <span className="text-danger">
+                    Tapez le nom de votre pays !
+                  </span>
                 )}
               </div>
             </div>
@@ -615,7 +681,11 @@ const AddNewClient = ({ isOpen, handleClose }) => {
       },
     },
   ];
-  const { handleSubmit, control,formState:{ errors } } = useForm({
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       titre: "Mr.",
       nom: "",
@@ -668,9 +738,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
 
 export default AddNewClient;
 
-
-
-  /*const handleChange = (e) => {
+/*const handleChange = (e) => {
   const { value, name } = e.target;
   setdata((prev) => ({
     ...prev,
@@ -682,9 +750,8 @@ export default AddNewClient;
   setdata({ ...data, [name]: e.target.value });
 }; */
 
-// const [success, setsuccess] = useState(false);
+//const [success, setsuccess] = useState(false);
 //const [error, seterror] = useState("");
-
 /*const createClient = () => {
   let obj = {
     client: data,
@@ -716,8 +783,7 @@ export default AddNewClient;
     });
 }; */
 
-
-  /* <div class="modal fade" id="largeModal" tabindex="-1">
+/* <div class="modal fade" id="largeModal" tabindex="-1">
 <div class="modal-dialog modal-xl">
   <div class="modal-content">
     <div class="modal-header bg-primary text-white">
@@ -1053,4 +1119,3 @@ export default AddNewClient;
         </div>
       </div>
  */
-

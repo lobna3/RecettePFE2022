@@ -1,9 +1,10 @@
 import {
   ADD_FIRST_STEP,
-  ADD_USER,
+  ADD_CLIENT,
   ADD_SECOND_STEP,
   ADD_THIRD_STEP,
   ADD_FOUR_STEP,
+  GET_CLIENT_LIST_SUCCESS,
 } from "../actionTypes";
 
 const clientInitState = {
@@ -38,7 +39,7 @@ const clientInitState = {
 const clientReducer = (state = clientInitState, action) => {
   let { type, payload } = action;
   switch (type) {
-    case ADD_USER:
+    case ADD_CLIENT:
       return { ...state, loading: true };
     case ADD_SECOND_STEP:
       let { type, nidentificationFiscale, devis, activite, conditionPaiement } =
@@ -94,7 +95,7 @@ const clientReducer = (state = clientInitState, action) => {
           pays: pays,
           adresse: adresse,
 
-          stepThreValidated: true,
+          stepThreeValidated: true,
         },
       };
 
@@ -117,7 +118,8 @@ const clientReducer = (state = clientInitState, action) => {
           stepFourValidated: true,
         },
       };
-
+    case GET_CLIENT_LIST_SUCCESS:
+      return {...state,clientList:payload}
     default:
       return state;
   }

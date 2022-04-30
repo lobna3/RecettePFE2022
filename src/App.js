@@ -25,6 +25,7 @@ import { Provider } from "react-redux";
 import DetailCommande from "./components/commandes/DetailCommande";
 import Paiement from "./components/factures/Paiement";
 import store from "./redux/store";
+import { ToastProvider } from 'react-toast-notifications';
 
 function App() {
  // const [user, setUser] = useState(null);
@@ -33,6 +34,7 @@ function App() {
 
   return (
     <div className="App">
+      <ToastProvider>
       <Provider store={store}>
         <Navbare />
         <SideBar />
@@ -61,6 +63,7 @@ function App() {
 
         <Footer />
       </Provider>
+      </ToastProvider>
     </div>
   );
 }
