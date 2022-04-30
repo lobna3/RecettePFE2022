@@ -17,7 +17,6 @@ const NewOpModal = ({
 }) => {
   return (
     <Modal
-    
       className="modalStyle"
       visible={isOpen}
       onCancel={handleClose}
@@ -31,25 +30,26 @@ const NewOpModal = ({
       }}
       footer={null}
     >
-      {" "}
       <h5 className="d-flex">
-        {" "}
         <i className="d-flex" style={{ margin: "0 8px" }}>
-          {" "}
-          <LeftSquareTwoTone style={{ fontSize: "24px" }} />{" "}
-        </i>{" "}
+          <LeftSquareTwoTone style={{ fontSize: "24px" }} />
+        </i>
         Choissisez votre opération souhaité
       </h5>
       <Button
         onClick={handleFirstBtn}
         block
-        style={{ height: "80px", width: "370px", margin: "8px 40px" }}
+        style={{
+          height: "80px",
+          width: "370px",
+          margin: "8px 40px",
+          borderRadius: "10px 10px",
+        }}
       >
         <i className="d-flex" style={{ margin: "0 8px" }}>
           <UserAddOutlined style={{ fontSize: "24px", color: "#1890ff" }} />
         </i>
         <span className="d-inline-block text-left text-dark">
-          {" "}
           <Text strong>Nouveau Client</Text>
           <small className="font-weight-light d-block text-muted">
             Créer un nouvelle client
@@ -59,13 +59,17 @@ const NewOpModal = ({
       <Button
         onClick={handleSecondBtn}
         block
-        style={{ height: "80px", width: "370px", margin: "8px 40px" }}
+        style={{
+          height: "80px",
+          width: "370px",
+          margin: "8px 40px",
+          borderRadius: "10px 10px",
+        }}
       >
         <i className="d-flex" style={{ margin: "0 8px" }}>
           <TeamOutlined style={{ fontSize: "24px", color: "#1890ff" }} />
         </i>
         <span className="d-inline-block text-left text-dark">
-          {" "}
           <Text strong>Ancien Client</Text>
           <small className="font-weight-light d-block text-muted">
             Aller au tableau des clients

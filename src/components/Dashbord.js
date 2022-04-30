@@ -15,12 +15,12 @@ const Dashbord = () => {
     <div>
       <main id="main" class="main bg-light">
         <BottomHeader />
-        <section class="section dashboard">
-          <div class="row">
-            <div class="col-lg-9">
-              <div class="row"></div>
+        <section className="section dashboard">
+          <div className="row">
+            <div className="col-lg-9">
+              <div className="row"></div>
             </div>
-            <div class="col-lg-3">
+            <div className="col-lg-3">
               <div
                 className="card"
                 style={{

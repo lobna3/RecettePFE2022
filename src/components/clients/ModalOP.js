@@ -1,11 +1,6 @@
 import React from "react";
 import { Modal, Button, Typography } from "antd";
-import { BsArrowLeftSquare, BsFillFileEarmarkPlusFill } from "react-icons/bs";
-import {
-  UserAddOutlined,
-  TeamOutlined,
-  LeftSquareTwoTone,FileAddTwoTone
-} from "@ant-design/icons";
+import { LeftSquareTwoTone, FileAddTwoTone } from "@ant-design/icons";
 import "./modal.css";
 import { Link } from "react-router-dom";
 const { Text } = Typography;
@@ -25,26 +20,22 @@ const ModalOP = ({ isOpen, handleClose, handleFirstBtn, handleSecondBtn }) => {
         handleClose();
       }}
     >
-      {" "}
       <h5 className="d-flex">
-        {" "}
-        <i class="d-flex" style={{ margin: "0 8px" }}>
-          {" "}
-          <LeftSquareTwoTone style={{ fontSize: "24px" }}/>{" "}
-        </i>{" "}
+        <i className="d-flex" style={{ margin: "0 8px" }}>
+          <LeftSquareTwoTone style={{ fontSize: "24px" }} />
+        </i>
         Choissisez votre opération souhaité
       </h5>
       <Link to="/ajouter_devis1">
         <Button
-          style={{ height: "80px", width: "370px", margin: "8px 40px" }}
+          style={{ height: "80px", width: "370px", margin: "8px 40px",borderRadius: "10px 10px", }}
           onClick={handleFirstBtn}
           block
         >
-          <i class="d-flex" style={{ margin: "0 8px" }}>
-            <FileAddTwoTone style={{ fontSize: "24px", color: "#1890ff" }}/>
+          <i className="d-flex" style={{ margin: "0 8px" }}>
+            <FileAddTwoTone style={{ fontSize: "24px", color: "#1890ff" }} />
           </i>
           <span className="d-inline-block text-left text-dark">
-            {" "}
             <Text strong> Créer votre Devis</Text>
             <small className="font-weight-light d-block text-muted">
               Nouveau devis
@@ -54,7 +45,7 @@ const ModalOP = ({ isOpen, handleClose, handleFirstBtn, handleSecondBtn }) => {
       </Link>
       <Link to="/">
         <Button
-          style={{ height: "80px", width: "370px", margin: "8px 40px" }}
+          style={{ height: "80px", width: "370px", margin: "8px 40px",  borderRadius: "10px 10px", }}
           onClick={handleSecondBtn}
           block
         >
@@ -62,7 +53,6 @@ const ModalOP = ({ isOpen, handleClose, handleFirstBtn, handleSecondBtn }) => {
             <FileAddTwoTone style={{ fontSize: "24px", color: "#1890ff" }} />
           </i>
           <span className="d-inline-block text-left text-dark">
-            {" "}
             <Text strong>Créer votre Facture</Text>
             <small className="font-weight-light d-block text-muted">
               Nouvelle facture

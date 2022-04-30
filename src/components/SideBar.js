@@ -16,21 +16,21 @@ const SideBar = () => {
     return (
 <div>
       
-<aside id="sidebar" class="sidebar">
-  <ul class="sidebar-nav" id="sidebar-nav">
+<aside id="sidebar" className="sidebar">
+  <ul className="sidebar-nav" id="sidebar-nav">
     
-   <li class="nav-item">
-    <Link class="nav-link " to="/">
+   <li className="nav-item">
+    <Link className="nav-link " to="/">
       <i><HomeOutlined /></i>
       <span>Tableau du bord</span>
     </Link>
   </li>
 
-  <li class="nav-item">
-        <Link class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" to="/Recette">
-          <i><FaBalanceScaleLeft/></i><span>Recette</span><i class="bi bi-chevron-down ms-auto"></i>
+  <li className="nav-item">
+        <Link className="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" to="/Recette">
+          <i><FaBalanceScaleLeft/></i><span>Recette</span><i className="bi bi-chevron-down ms-auto"></i>
         </Link>
-        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="components-nav" className="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <Link to="/Recette">
               <i><FaArrowRight/></i><span>Recette</span>
@@ -66,64 +66,64 @@ const SideBar = () => {
         </ul>
   </li>
 
-  <li class="nav-item">
-    <Link class="nav-link collapsed" to="">
+  <li className="nav-item">
+    <Link className="nav-link collapsed" to="">
       <i><FaDonate/></i>
       <span>Projets</span>
     </Link>
   </li>
 
-  <li class="nav-item">
-    <Link class="nav-link collapsed" to="">
+  <li className="nav-item">
+    <Link className="nav-link collapsed" to="">
       <i><BsFillFileEarmarkMedicalFill/></i>
       <span>Contrat</span>
     </Link>
   </li>
 
-  <li class="nav-item">
-    <Link class="nav-link collapsed" to="">
+  <li className="nav-item">
+    <Link className="nav-link collapsed" to="">
       <i><MdAssignmentInd/></i>
       <span>Bénéficiaires</span>
     </Link>
   </li>
 
-  <li class="nav-item">
-    <Link class="nav-link collapsed" to="">
+  <li className="nav-item">
+    <Link className="nav-link collapsed" to="">
       <i><BsSortUp/></i>
       <span>Dépenses</span>
     </Link>
   </li>
 
-  <li class="nav-item">
-    <Link class="nav-link collapsed" to="">
+  <li className="nav-item">
+    <Link className="nav-link collapsed" to="">
       <i><FaFileInvoiceDollar/></i>
       <span>Mes Opérations</span>
     </Link>
   </li>
 
-  <li class="nav-item">
-    <Link class="nav-link collapsed" to="">
+  <li className="nav-item">
+    <Link className="nav-link collapsed" to="">
       <i><BsCashCoin/></i>
       <span>Trésorerie</span>
     </Link>
   </li>
 
-  <li class="nav-item">
-    <Link class="nav-link collapsed" to="/">
+  <li className="nav-item">
+    <Link className="nav-link collapsed" to="/">
       <i><BsFillCartFill/></i>
       <span>Produit/Services</span>
     </Link>
   </li>
 
-  <li class="nav-item">
-    <Link class="nav-link collapsed" to="">
+  <li className="nav-item">
+    <Link className="nav-link collapsed" to="">
       <i><BsBank2/></i>
       <span>Banque</span>
     </Link>
   </li>
   
-  <li class="nav-item">
-    <Link class="nav-link collapsed" to="">
+  <li className="nav-item">
+    <Link className="nav-link collapsed" to="">
       <i><BsFillGearFill/></i>
       <span>Configuration</span>
     </Link>

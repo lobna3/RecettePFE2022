@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Modal, Steps, Button, message } from "antd";
+import { Modal, Steps} from "antd";
 import { useForm, Controller } from "react-hook-form";
-import axios from "../../config/axios";
+//import axios from "../../config/axios";
 import "./modal.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -14,10 +14,10 @@ const { Step } = Steps;
 
 const AddNewClient = ({ isOpen, handleClose }) => {
   const [current, setCurrent] = React.useState(0);
-  const [canMove, setCanMove] = useState(false);
+  //const [canMove, setCanMove] = useState(false);
   const { addClientInfo } = useSelector((state) => state.client);
   const dispatch = useDispatch();
-  const [data, setdata] = useState({
+  const [data] = useState({
     titre: "Mr.",
     nom: "",
     prenom: "",
@@ -37,67 +37,22 @@ const AddNewClient = ({ isOpen, handleClose }) => {
     utilisateur: "6235e396cb3d6874fad966c0",
   });
 
-  {
-    /*const handleChange = (e) => {
-    const { value, name } = e.target;
-    setdata((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };*/
-  }
-  const handleChange = (name) => (e) => {
-    setdata({ ...data, [name]: e.target.value });
-  };
-  const [success, setsuccess] = useState(false);
-  const [error, seterror] = useState("");
-
-  const createClient = () => {
-    let obj = {
-      client: data,
-      adresses: [
-        {
-          adresse: data.adresse,
-          codePostal: data.codePostal,
-          etat: data.etat,
-          pays: data.pays,
-        },
-        {
-          adresse: data.adresse,
-          codePostal: data.codePostal,
-          etat: data.etat,
-          pays: data.pays,
-        },
-      ],
-    };
-    axios
-      .post("ajouter_client", obj)
-      .then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          setsuccess(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
-  };
-
-  const watchCanMove = () => {
+  /*const watchCanMove = () => {
     let values = Object.values(watch());
     console.log("Values", values);
-    let result = values.findIndex((elm) => elm == "");
-    if (result == -1) {
+    let result = values.findIndex((elm) => elm === "");
+    if (result === -1) {
       return true;
     } else {
       return false;
     }
-  };
-  const next = () => {
+  };*/
+
+ /* const next = () => {
     if (watchCanMove()) {
       setCurrent(current + 1);
     }
-  };
+  };*/
   const prev = () => {
     setCurrent(current - 1);
   };
@@ -114,9 +69,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
         return (
           <form onSubmit={handleSubmit(firstStepSubmit)}>
             <br />
-            <div class="form-group row g-3">
-              <div class="col-md-1">
-                <label class="form-label d-flex text-muted">Titre</label>
+            <div className="form-group row g-3">
+              <div className="col-md-1">
+                <label className="form-label d-flex text-muted">Titre</label>
                 <Controller
                   name="titre"
                   control={control}
@@ -124,7 +79,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <select
                       style={{ width: "70px" }}
-                      class="form-select"
+                      className="form-select"
                       {...field}
                     >
                       <option value={"Mr."}>Mr.</option>
@@ -134,8 +89,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   )}
                 />
               </div>
-              <div class="col-md-3">
-                <label class="form-label d-flex text-muted">Prénom</label>
+              <div className="col-md-3">
+                <label className="form-label d-flex text-muted">Prénom</label>
                 <Controller
                   name="prenom"
                   control={control}
@@ -143,7 +98,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       placeholder="Foulen"
                       {...field}
                     />
@@ -153,8 +108,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   <span className="text-danger">Tapez votre prénom !</span>
                 )}
               </div>
-              <div class="col-md-3">
-                <label class="form-label d-flex text-muted">Nom</label>
+              <div className="col-md-3">
+                <label className="form-label d-flex text-muted">Nom</label>
                 <Controller
                   name="nom"
                   control={control}
@@ -163,7 +118,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     <input
                       value={data.nom}
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       placeholder="Ben Foulen"
                       {...field}
                     />
@@ -173,8 +128,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   <span className="text-danger">Tapez votre nom !</span>
                 )}
               </div>
-              <div class="col-md-5">
-                <label class="form-label d-flex text-muted">Entreprise</label>
+              <div className="col-md-5">
+                <label className="form-label d-flex text-muted">Entreprise</label>
                 <Controller
                   name="entreprise"
                   control={control}
@@ -182,7 +137,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       placeholder="Foulen"
                       {...field}
                     />
@@ -192,15 +147,15 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   <span className="text-danger">Tapez le nom de votre entreprise !</span>
                 )}
               </div>
-              <div class="col-md-4">
-                <label class="form-label d-flex text-muted">Email</label>
+              <div className="col-md-4">
+                <label className="form-label d-flex text-muted">Email</label>
                 <Controller
                   name="email"
                   control={control}
                   rules={{ required: true }}
                   render={({ field }) => (
                     <input
-                      class="form-control"
+                      className="form-control"
                       placeholder="test@gmail.com"
                       {...field}
                       type="email"
@@ -211,8 +166,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   <span className="text-danger">Email invalide ! exemple:test@gmail.com</span>
                 )}
               </div>
-              <div class="col-md-4">
-                <label class="form-label d-flex text-muted">Téléphone</label>
+              <div className="col-md-4">
+                <label className="form-label d-flex text-muted">Téléphone</label>
                 <Controller
                   name="telephone"
                   control={control}
@@ -220,7 +175,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       placeholder="123456789"
                       {...field}
                     />
@@ -230,8 +185,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   <span className="text-danger">Tapez votre numéro de téléphone !</span>
                 )}
               </div>
-              <div class="col-md-4">
-                <label class="form-label d-flex text-muted">
+              <div className="col-md-4">
+                <label className="form-label d-flex text-muted">
                   Site Internet
                 </label>
                 <Controller
@@ -241,7 +196,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       placeholder="Site Internet"
                       {...field}
                     />
@@ -281,7 +236,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
         return (
           <form onSubmit={handleSubmit(submitSecondStep)}>
             <br />
-            <div class="row g-3">
+            <div className="row g-3">
               <Controller
                 name="type"
                 control={control}
@@ -292,33 +247,33 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                     class="col-12 d-flex"
                     {...field}
                   >
-                    <span class="col-form-label d-flex text-muted">Type: </span>
-                    <div class="col-md-4 d-flex">
-                      <div class="form-check form-check-inline">
+                    <span className="col-form-label d-flex text-muted">Type: </span>
+                    <div className="col-md-4 d-flex">
+                      <div className="form-check form-check-inline">
                         <input
-                          class="form-check-input"
+                          className="form-check-input"
                           type="radio"
                           id="gridRadios2"
                           value="Entreprise"
                         />
 
                         <label
-                          class="form-check-label d-flex text-muted"
+                          className="form-check-label d-flex text-muted"
                           for="gridRadios2"
                         >
                           Entreprise
                         </label>
                       </div>
-                      <div class="form-check form-check-inline">
+                      <div className="form-check form-check-inline">
                         <input
-                          class="form-check-input"
+                          className="form-check-input"
                           type="radio"
                           id="gridRadios1"
                           value="Particulier"
                         />
 
                         <label
-                          class="form-check-label d-flex text-muted"
+                          className="form-check-label d-flex text-muted"
                           for="gridRadios1"
                         >
                           Particulier
@@ -329,8 +284,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                 )}
               />
 
-              <div class="col-md-6">
-                <label class="form-label d-flex text-muted">
+              <div className="col-md-6">
+                <label className="form-label d-flex text-muted">
                   N identification fiscale
                 </label>
                 <Controller
@@ -340,7 +295,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       placeholder="123456789"
                       {...field}
                     />
@@ -350,15 +305,15 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   <span className="text-danger">Tapez votre numéro d'identification fiscale !</span>
                 )}
               </div>
-              <div class="col-md-6">
-                <label class="form-label d-flex text-muted">Activité</label>
+              <div className="col-md-6">
+                <label className="form-label d-flex text-muted">Activité</label>
                 <Controller
                   name="activite"
                   control={control}
                   rules={{ required: true }}
                   render={({ field }) => (
                     <select
-                      class="form-select"
+                      className="form-select"
                       {...field}
                     >
                       <option value={"Agence ou Société comerciale"}>
@@ -373,8 +328,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                 />
                 
               </div>
-              <div class="col-md-6">
-                <label class="form-label d-flex text-muted">Devis</label>
+              <div className="col-md-6">
+                <label className="form-label d-flex text-muted">Devis</label>
                 <Controller
                   name="devis"
                   control={control}
@@ -382,7 +337,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       placeholder="0091234568"
                       {...field}
                     />
@@ -392,8 +347,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   <span className="text-danger">Tapez le numéro de votre devis!</span>
                 )}
               </div>
-              <div class="col-md-6">
-                <label class="form-label d-flex text-muted">
+              <div className="col-md-6">
+                <label className="form-label d-flex text-muted">
                   Conditions de paiements
                 </label>
                 <Controller
@@ -402,7 +357,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <select
-                      class="form-select"
+                      className="form-select"
                       {...field}
                     >
                       <option value={"Personalisé"}>Personalisé</option>
@@ -452,9 +407,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
           <form onSubmit={handleSubmit(submitThirdStep)}>
            
             <br />
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label class="form-label d-flex text-muted">Adresse</label>
+            <div className="row g-3">
+              <div className="col-md-6">
+                <label className="form-label d-flex text-muted">Adresse</label>
                 <Controller
                   name="adresse"
                   control={control}
@@ -472,8 +427,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   <span className="text-danger">Tapez votre adresse !</span>
                 )}
               </div>
-              <div class="col-md-3">
-                <label class="form-label d-flex text-muted">Postal</label>
+              <div className="col-md-3">
+                <label className="form-label d-flex text-muted">Postal</label>
                 <Controller
                   name="codePostal"
                   control={control}
@@ -491,8 +446,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   <span className="text-danger">Tapez le numéro de votre code Postal !</span>
                 )}
               </div>
-              <div class="col-md-6">
-                <label class="form-label d-flex text-muted">Etat</label>
+              <div className="col-md-6">
+                <label className="form-label d-flex text-muted">Etat</label>
                 <Controller
                   name="etat"
                   control={control}
@@ -510,8 +465,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   <span className="text-danger">Tapez votre texte !</span>
                 )}
               </div>
-              <div class="col-md-6">
-                <label class="form-label d-flex text-muted">Pays</label>
+              <div className="col-md-6">
+                <label className="form-label d-flex text-muted">Pays</label>
                 <Controller
                   name="pays"
                   control={control}
@@ -561,9 +516,9 @@ const AddNewClient = ({ isOpen, handleClose }) => {
         return (
           <form onSubmit={handleSubmit(submitFinalForm)}>
             <br />
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label class="form-label d-flex text-muted">Adresse</label>
+            <div className="row g-3">
+              <div className="col-md-6">
+                <label className="form-label d-flex text-muted">Adresse</label>
                 <Controller
                   name="adresse"
                   control={control}
@@ -581,8 +536,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   <span className="text-danger">Tapez votre adresse !</span>
                 )}
               </div>
-              <div class="col-md-3">
-                <label class="form-label d-flex text-muted">Postal</label>
+              <div className="col-md-3">
+                <label className="form-label d-flex text-muted">Postal</label>
                 <Controller
                   name="codePostal"
                   control={control}
@@ -590,7 +545,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       placeholder="4000"
                       {...field}
                     />
@@ -600,8 +555,8 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   <span className="text-danger">Tapez le numéro de votre code Postal !</span>
                 )}
               </div>
-              <div class="col-md-6">
-                <label class="form-label d-flex text-muted">Etat</label>
+              <div className="col-md-6">
+                <label className="form-label d-flex text-muted">Etat</label>
                 <Controller
                   name="etat"
                   control={control}
@@ -609,7 +564,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       placeholder="Lorem Ipsum is simply text"
                       {...field}
                     />
@@ -628,7 +583,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
                   render={({ field }) => (
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       placeholder="Tunisie"
                       {...field}
                     />
@@ -660,7 +615,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
       },
     },
   ];
-  const { handleSubmit, control, reset, watch,formState:{ errors } } = useForm({
+  const { handleSubmit, control,formState:{ errors } } = useForm({
     defaultValues: {
       titre: "Mr.",
       nom: "",
@@ -713,7 +668,55 @@ const AddNewClient = ({ isOpen, handleClose }) => {
 
 export default AddNewClient;
 
-{
+
+
+  /*const handleChange = (e) => {
+  const { value, name } = e.target;
+  setdata((prev) => ({
+    ...prev,
+    [name]: value,
+  }));
+};*/
+
+/* const handleChange = (name) => (e) => {
+  setdata({ ...data, [name]: e.target.value });
+}; */
+
+// const [success, setsuccess] = useState(false);
+//const [error, seterror] = useState("");
+
+/*const createClient = () => {
+  let obj = {
+    client: data,
+    adresses: [
+      {
+        adresse: data.adresse,
+        codePostal: data.codePostal,
+        etat: data.etat,
+        pays: data.pays,
+      },
+      {
+        adresse: data.adresse,
+        codePostal: data.codePostal,
+        etat: data.etat,
+        pays: data.pays,
+      },
+    ],
+  };
+  axios
+    .post("ajouter_client", obj)
+    .then((res) => {
+      console.log(res);
+      if (res.status === 200) {
+        setsuccess(true);
+      }
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
+}; */
+
+
   /* <div class="modal fade" id="largeModal" tabindex="-1">
 <div class="modal-dialog modal-xl">
   <div class="modal-content">
@@ -1050,4 +1053,4 @@ export default AddNewClient;
         </div>
       </div>
  */
-}
+
