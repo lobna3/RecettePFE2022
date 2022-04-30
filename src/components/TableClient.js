@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Table, Space, Typography } from "antd";
-import axios from "../config/axios";
+//import axios from "../config/axios";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getClientListApi } from "../redux/actions/client.actions";
@@ -25,11 +25,11 @@ const TableClient = () => {
   const [selectionType, setSelectionType] = useState("checkbox");
   const displayStatus = (status) => {
     if (status == "devis en cours") {
-      return <span className="text-danger">{status}</span>;
-    } else if (status == "Non payé") {
-      return <span className="text-success">{status}</span>;
+      return <span className="badge bg-danger">{status}</span>;
+    } else if (status == "Commande en cours") {
+      return <span className="badge bg-success">{status}</span>;
     } else {
-      return <span className="text-success">{status}</span>;
+      return <span className="badge bg-warning">{status}</span>;
     }
   };
   const columns = [
