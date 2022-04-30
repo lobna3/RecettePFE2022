@@ -11,8 +11,9 @@ import {
 } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "../../config/axios";
 import { FactureHeader } from "../RacetteHeader";
+import { useDispatch, useSelector } from "react-redux";
+import { getCommandeListApi } from "../../redux/actions/commande.actions";
 
 const { Text } = Typography;
 const rowSelection = {
@@ -39,6 +40,15 @@ function handleMenuClick(e) {
   message.info("Click on menu item.");
   console.log("click", e);
 }
+const displayEtat = (etat) => {
+  if (etat == "NonPayé") {
+    return <span className="badge bg-danger">{etat}</span>;
+  } else if (etat == "Payé") {
+    return <span className="badge bg-success">{etat}</span>;
+  } else {
+    return <span className="badge bg-warning">{etat}</span>;
+  }
+};
 const menu = (
   <Menu onClick={handleMenuClick}>
     <Menu.Item key="2" icon={<DollarOutlined />}>
@@ -175,13 +185,11 @@ export default function Facture() {
     },
     {
       title: "Etat",
-      dataIndex: "condition",
+      dataIndex: "etat",
       render: (text, record) => {
         return (
           <>
-            <Space direction="vertical">
-              <Text mark>{record.condition}</Text>
-            </Space>
+            <Space direction="vertical">{displayEtat(record.etat)}</Space>
           </>
         );
       },
@@ -203,18 +211,15 @@ export default function Facture() {
     },
   ];
 
-  const [devis, setdevis] = useState([]);
-
+  const { commandeList } = useSelector((state) => state.commande);
+  const dispatch = useDispatch();
   useEffect(() => {
-    axios.get("commandes").then((res) => {
-      setdevis(res.data);
-    });
+    dispatch(getCommandeListApi());
   }, []);
-
   return (
-    <main id="main" class="main bg-light">
+    <main id="main" className="main bg-light">
       <FactureHeader />
-      <div class="pagetitle">
+      <div className="pagetitle">
         <div
           style={{ display: "flex", justifyContent: "flex-end" }}
           className="col-lg-12 "
@@ -245,7 +250,7 @@ export default function Facture() {
             <Table
               rowSelection={{ type: selectionType, ...rowSelection }}
               columns={columns}
-              dataSource={devis}
+              dataSource={commandeList}
             />
           </div>
         </div>

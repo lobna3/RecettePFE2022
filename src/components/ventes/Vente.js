@@ -1,11 +1,12 @@
-import { Menu, Dropdown, Button, message, Tooltip ,Typography} from 'antd';
-import { DownOutlined, FileDoneOutlined ,PlusSquareFilled ,
+import { Menu, Dropdown,message, Typography} from 'antd';
+import { FileDoneOutlined ,PlusSquareFilled ,
   MailOutlined,DollarOutlined  } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Link, } from 'react-router-dom';
-import { Table, Space,Tag } from 'antd';
-import axios from '../../config/axios';
+import { Table, Space } from 'antd';
 import {VenteHeader} from '../RacetteHeader';
+import { useDispatch, useSelector } from "react-redux";
+import { getCommandeListApi } from "../../redux/actions/commande.actions";
 
 const { Text} = Typography;
 const rowSelection = {
@@ -28,6 +29,15 @@ function handleMenuClick(e) {
   message.info('Click on menu item.');
   console.log('click', e);
 }
+const displayEtat = (etat) => {
+  if (etat== "NonPayé") {
+    return <span className="badge bg-danger">{etat}</span>;
+  } else if (etat == "Payé") {
+    return <span className="badge bg-success">{etat}</span>;
+  } else {
+    return <span className="badge bg-warning">{etat}</span>;
+  }
+};
 const menu = (
   <Menu onClick={handleMenuClick}>
     <Menu.Item key="1" icon={<FileDoneOutlined />}>
@@ -156,12 +166,12 @@ export default function Vente() {
     },
     {
       title: 'Etat',
-      dataIndex: 'condition',
+      dataIndex: 'etat',
       render: (text, record) => {
         return (
           <>
           <Space direction="vertical">
-          <Text mark>{record.condition}</Text>
+          {displayEtat(record.etat)}
           </Space>
            
           </>
@@ -185,14 +195,11 @@ export default function Vente() {
    
   ];
   
-  const [devis, setdevis] = useState([])
-  
-    useEffect(() => {
-      axios.get('commandes')
-        .then(res => {
-          setdevis(res.data)
-        })
-    }, [])
+  const { commandeList } = useSelector((state) => state.commande);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCommandeListApi());
+  }, []);
     
   return (
     
@@ -215,7 +222,7 @@ export default function Vente() {
           <div className="card" style={{ margin: "0 15px 40px 20px" }}>
             <div className="card-body">
               <Table rowSelection={{type: selectionType, ...rowSelection,}} 
-              columns={columns} dataSource={devis} />
+              columns={columns} dataSource={commandeList} />
             </div>
           </div>
         </div>

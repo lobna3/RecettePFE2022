@@ -9,10 +9,10 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { Table, Space } from "antd";
-import axios from "../../config/axios";
 import { DevisHeader } from "../RacetteHeader";
-import { ToastContainer, toast } from "react-toastify";
-import { get } from "react-hook-form";
+import { ToastContainer} from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { getCommandeListApi } from "../../redux/actions/commande.actions";
 
 const { Text } = Typography;
 const rowSelection = {
@@ -45,6 +45,15 @@ function onChange(pagination, filters, sorter, extra) {
 }
 export default function Devis() {
   const [selectionType, setSelectionType] = useState("checkbox");
+  const displayEtat = (etat) => {
+    if (etat== "NonPayé") {
+      return <span className="badge bg-danger">{etat}</span>;
+    } else if (etat == "Payé") {
+      return <span className="badge bg-success">{etat}</span>;
+    } else {
+      return <span className="badge bg-warning">{etat}</span>;
+    }
+  };
 
   const menu = (
     <Menu onClick={handleMenuClick}>
@@ -169,12 +178,12 @@ export default function Devis() {
     },
     {
       title: "Etat",
-      dataIndex: "condition",
+      dataIndex: "etat",
       render: (text, record) => {
         return (
           <>
             <Space direction="vertical">
-              <Text mark>{record.condition}</Text>
+            {displayEtat(record.etat)}
             </Space>
           </>
         );
@@ -197,35 +206,13 @@ export default function Devis() {
     },
   ];
 
-  const [devis, setdevis] = useState([]);
-  const [success, setsuccess] = useState(false);
+
+  const { commandeList } = useSelector((state) => state.commande);
+  const dispatch = useDispatch();
   useEffect(() => {
-    axios.get("commandes").then((res) => {
-      setdevis(res.data);
-    });
+    dispatch(getCommandeListApi());
   }, []);
-
-  const suprimerCommande = async (id) => {
-    if (window.confirm("Vous voulez supprimer cette commande")) {
-      const response = await axios
-        .delete("delete_commande/${id}")
-        .then((res) => {
-          console.log(res);
-
-          if (res.status === 200) {
-            setsuccess(true);
-            toast.success(res.data);
-            get("commandes");
-          }
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
-    }
-  };
-
-  console.log("devis=>", devis);
-
+ 
   return (
     <main id="main" className="main bg-light">
       <ToastContainer position="top-center" />
@@ -243,7 +230,7 @@ export default function Devis() {
               className="btn btn-primary btn-sm ml-8 "
             >
               <PlusSquareFilled /> Ajout Devis
-            </button>{" "}
+            </button>
           </Link>
           <button
             style={{ margin: "0 20px" }}
@@ -270,7 +257,7 @@ export default function Devis() {
             <Table
               rowSelection={{ type: selectionType, ...rowSelection }}
               columns={columns}
-              dataSource={devis}
+              dataSource={commandeList}
               onChange={onChange}
             />
           </div>

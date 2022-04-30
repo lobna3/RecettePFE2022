@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 import { Table, Space, Tag } from "antd";
 import axios from "../../config/axios";
 import { CommandeHeader } from "../RacetteHeader";
+import { useDispatch, useSelector } from "react-redux";
+import { getCommandeListApi } from "../../redux/actions/commande.actions";
 
 const { Text } = Typography;
 const rowSelection = {
@@ -44,6 +46,15 @@ function onChange(pagination, filters, sorter, extra) {
 
 export default function Commande() {
   const [selectionType, setSelectionType] = useState("checkbox");
+  const displayEtat = (etat) => {
+    if (etat== "NonPayé") {
+      return <span className="badge bg-danger">{etat}</span>;
+    } else if (etat == "Payé") {
+      return <span className="badge bg-success">{etat}</span>;
+    } else {
+      return <span className="badge bg-warning">{etat}</span>;
+    }
+  };
   const menu = (
     <Menu onClick={handleMenuClick}>
       <Menu.Item key="1" icon={<PrinterFilled />}>
@@ -164,12 +175,12 @@ export default function Commande() {
     },
     {
       title: "Etat",
-      dataIndex: "condition",
+      dataIndex: "etat",
       render: (text, record) => {
         return (
           <>
             <Space direction="vertical">
-              <Text mark>{record.condition}</Text>
+            {displayEtat(record.etat)}
             </Space>
           </>
         );
@@ -192,12 +203,10 @@ export default function Commande() {
     },
   ];
 
-  const [devis, setdevis] = useState([]);
-
+  const { commandeList } = useSelector((state) => state.commande);
+  const dispatch = useDispatch();
   useEffect(() => {
-    axios.get("commandes").then((res) => {
-      setdevis(res.data);
-    });
+    dispatch(getCommandeListApi());
   }, []);
 
   return (
@@ -235,7 +244,7 @@ export default function Commande() {
             <Table
               rowSelection={{ type: selectionType, ...rowSelection }}
               columns={columns}
-              dataSource={devis}
+              dataSource={commandeList}
             />
           </div>
         </div>

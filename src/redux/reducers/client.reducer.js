@@ -118,6 +118,7 @@ const clientReducer = (state = clientInitState, action) => {
           stepFourValidated: true,
         },
       };
+    
     case GET_CLIENT_LIST_SUCCESS:
       return {...state,clientList:payload}
     default:
