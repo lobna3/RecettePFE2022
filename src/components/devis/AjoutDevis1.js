@@ -268,8 +268,8 @@ export default function AjoutDevis1() {
                           }}
                         >
                           <DatePicker
-                            //selected={data.dateEmission}
-
+                        
+                           {...field}
                             dateFormat="DD MMM YYYY"
                           />
                         </Form.Item>
@@ -291,8 +291,8 @@ export default function AjoutDevis1() {
                           }}
                         >
                           <DatePicker
-                            // selected={data.dateEcheance}
-
+                         
+                             {...field}
                             dateFormat="DD MMM YYYY"
                           />
                         </Form.Item>
