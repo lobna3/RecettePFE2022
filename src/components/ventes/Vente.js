@@ -35,7 +35,7 @@ const displayEtat = (etat) => {
   } else if (etat == "Payé") {
     return <span className="badge bg-success">{etat}</span>;
   } else {
-    return <span className="badge bg-warning">{etat}</span>;
+    return <span className="badge bg-info">{etat}</span>;
   }
 };
 const menu = (

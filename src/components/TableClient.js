@@ -24,12 +24,12 @@ const { Text } = Typography;
 const TableClient = () => {
   const [selectionType, setSelectionType] = useState("checkbox");
   const displayStatus = (status) => {
-    if (status == "devis en cours") {
+    if (status == "Impayé") {
       return <span className="badge bg-danger">{status}</span>;
-    } else if (status == "Commande en cours") {
+    } else if (status == "Payé") {
       return <span className="badge bg-success">{status}</span>;
     } else {
-      return <span className="badge bg-warning">{status}</span>;
+      return <span className="badge bg-secondary">{status}</span>;
     }
   };
   const columns = [

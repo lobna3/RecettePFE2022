@@ -41,12 +41,15 @@ function handleMenuClick(e) {
   console.log("click", e);
 }
 const displayEtat = (etat) => {
-  if (etat == "NonPayé") {
+  if (etat == "Retard - 4 jours") {
     return <span className="badge bg-danger">{etat}</span>;
-  } else if (etat == "Payé") {
+  } else if (etat == "Déposé") {
     return <span className="badge bg-success">{etat}</span>;
-  } else {
+  } else if (etat == "Echéance - 2 jours") {
     return <span className="badge bg-warning">{etat}</span>;
+  } 
+  else {
+    return <span className="badge bg-info">{etat}</span>;
   }
 };
 const menu = (

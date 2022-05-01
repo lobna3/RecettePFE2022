@@ -45,7 +45,7 @@ export const addClientApi =
       let result = await postApi("ajouter_client", data);
       console.log("Result", result);
       if (result.success) {
-        addToast("Client Ajouter", { appearance: "success" });
+        addToast("Client Ajouter avec succées", { appearance: "success" });
       } else {
         addToast("Erreur c'est produite , ressayer", { appearance: "error" });
       }

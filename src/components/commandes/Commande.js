@@ -47,12 +47,22 @@ function onChange(pagination, filters, sorter, extra) {
 export default function Commande() {
   const [selectionType, setSelectionType] = useState("checkbox");
   const displayEtat = (etat) => {
-    if (etat== "NonPayé") {
+    if (etat== "Refusé") {
       return <span className="badge bg-danger">{etat}</span>;
-    } else if (etat == "Payé") {
+    } else if (etat == "Accepté") {
       return <span className="badge bg-success">{etat}</span>;
-    } else {
+    } 
+    else if (etat == "En attente") {
       return <span className="badge bg-warning">{etat}</span>;
+    } 
+    else if (etat == "Annuler") {
+      return <span className="badge bg-secondary">{etat}</span>;
+    } 
+    else if (etat == "Arrivé à l'échéance") {
+      return <span className="badge bg-primary">{etat}</span>;
+    } 
+    else {
+      return <span className="badge bg-info">{etat}</span>;
     }
   };
   const menu = (
