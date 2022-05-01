@@ -24,16 +24,65 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import axios from "../../config/axios";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import Articles from "../articles/Articles";
-import { ToastContainer, toast } from "react-toastify";
-import Table from "react-bootstrap/Table";
 import "./devis1.css";
 const { Text } = Typography;
 const { TextArea } = Input;
 
 export default function AjoutDevis1() {
   const [componentSize, setComponentSize] = useState("default");
+
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      dateEmission: Date,
+      dateEcheance: Date,
+      condition: "Personalisé",
+      nFacture: "",
+      nReference: "",
+      total: "",
+      taxes: "",
+      remise: "",
+      totalTtc: "",
+      paye: "",
+      solde: "",
+      note: "",
+      remarque: "",
+      recurrente: "oui",
+      status: "Devis",
+      etat: "NonPayé",
+      client: "625d279312fbb95eed52430a",
+
+      qte: "5",
+      pu: "150",
+      taxe: "8",
+      prix: "250",
+      service: "623efa58cef38dae7b89e586",
+
+      typeS: "modifier",
+      titreS: "CommandeF",
+      descriptionS: "Commande vu par Monsieur Foulen Ben Foulen",
+
+      soldeP: "10000",
+      typePaiement: "chéque",
+      regPaiement: "carte",
+      etatP: "non payé",
+      reste: "10",
+      avance: "20",
+      mis: "2",
+      nCarte: "123456789",
+      ccv: "2",
+      dateP: Date,
+      montantP: "20000",
+    },
+  });
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   const [data, setdata] = useState({
     dateEmission: Date,
@@ -76,16 +125,7 @@ export default function AjoutDevis1() {
     dateP: Date,
     montantP: "20000",
   });
-  const handleChange = (e) => {
-    const { value, name } = e.target;
-    setdata((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
-  const [success, setsuccess] = useState(false);
-  const [error, seterror] = useState("");
   const createCommande = () => {
     let obj = {
       commande: data,
@@ -127,7 +167,6 @@ export default function AjoutDevis1() {
         console.log(res);
         if (res.status === 200) {
           //setsuccess(true);
-          toast.success(res.data);
         }
       })
       .catch((err) => {
@@ -135,28 +174,11 @@ export default function AjoutDevis1() {
       });
   };
 
-  const {
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      nFacture: "",
-      nReference: "",
-    },
-  });
-
-  //const nFacture = watch("nFacture");
-
   return (
-    <main id="main" class="main bg-light">
+    <main id="main" className="main bg-light">
       <AjoutDHeader />
       <Row>
-        <form
-          onSubmit={handleSubmit((data) => {
-            console.log(data);
-          })}
-        >
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Row>
             <Col span={8} push={16}>
               <Card
@@ -232,8 +254,6 @@ export default function AjoutDevis1() {
                       borderColor: "#0d6efd",
                       borderRadius: "10px",
                     }}
-                    onChange={handleChange}
-                    value={data.note}
                     name="note"
                     placeholder="Note"
                     autoSize={{ minRows: 3, maxRows: 5 }}
@@ -248,8 +268,6 @@ export default function AjoutDevis1() {
                       borderColor: "#0d6efd",
                       borderRadius: "10px",
                     }}
-                    onChange={handleChange}
-                    value={data.remarque}
                     name="remarque"
                     placeholder="Condition générale"
                     autoSize={{ minRows: 3, maxRows: 5 }}
@@ -268,43 +286,57 @@ export default function AjoutDevis1() {
               >
                 <Form initialValues={{ size: componentSize }}>
                   <Row>
-                    <Form.Item
-                      label="Date émission"
-                      style={{
-                        display: "inline-block",
-                        width: "calc(25% - 8px)",
-                        margin: "0 20px",
-                        textAlign: "left",
-                      }}
-                    >
-                      <DatePicker
-                        onChange={handleChange}
-                        selected={data.dateEmission}
-                        name="dateEmission"
-                        dateFormat="DD MMM YYYY"
-                        {...("dateEmission", { required: true })}
-                      />
-                    </Form.Item>
+                    <Controller
+                      name="dateEmission"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <Form.Item
+                          {...field}
+                          label="Date émission"
+                          style={{
+                            display: "inline-block",
+                            width: "calc(25% - 8px)",
+                            margin: "0 20px",
+                            textAlign: "left",
+                          }}
+                        >
+                          <DatePicker
+                            //selected={data.dateEmission}
 
-                    <Form.Item
-                      label="Date échéance"
-                      style={{
-                        display: "inline-block",
-                        width: "calc(25% - 8px)",
-                        margin: "0 20px",
-                        textAlign: "left",
-                      }}
-                    >
-                      <DatePicker
-                        onChange={handleChange}
-                        selected={data.dateEcheance}
-                        name="dateEcheance"
-                        dateFormat="DD MMM YYYY"
-                        {...("dateEcheance", { required: true })}
-                      />
-                    </Form.Item>
+                            dateFormat="DD MMM YYYY"
+                          />
+                        </Form.Item>
+                      )}
+                    />
+                    <Controller
+                      name="dateEcheance"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <Form.Item
+                          {...field}
+                          label="Date échéance"
+                          style={{
+                            display: "inline-block",
+                            width: "calc(25% - 8px)",
+                            margin: "0 20px",
+                            textAlign: "left",
+                          }}
+                        >
+                          <DatePicker
+                            // selected={data.dateEcheance}
 
-                    <Form.Item
+                            dateFormat="DD MMM YYYY"
+                          />
+                        </Form.Item>
+                      )}
+                    />
+                    <Controller
+                      name="condition"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) =>  <Form.Item
                       label="Condition"
                       style={{
                         display: "inline-block",
@@ -313,22 +345,25 @@ export default function AjoutDevis1() {
                         textAlign: "left",
                       }}
                     >
-                      <Select
-                        onChange={handleChange}
-                        value={data.condition}
-                        name="condition"
-                      >
-                        <Select.Option>Personnalisé</Select.Option>
-                        <Select.Option>échéance à la fin du mois</Select.Option>
-                        <Select.Option>
-                          échéance à la fiin du mois prochain
+                      <Select  {...field}>
+                        <Select.Option value={"Personnalisé"}>Personnalisé</Select.Option>
+                        <Select.Option value={"échéance à la fin du mois"}></Select.Option>
+                        <Select.Option value={"échéance à la fin du mois prochain"}>  
                         </Select.Option>
                       </Select>
-                    </Form.Item>
+                    </Form.Item>}
+                    /> 
                   </Row>
                   <hr />
                   <Row>
-                    <Text type="primary" style={{ color: "#1890ff" , marginRight:10,marginLeft:20}}>
+                    <Text
+                      type="primary"
+                      style={{
+                        color: "#1890ff",
+                        marginRight: 10,
+                        marginLeft: 20,
+                      }}
+                    >
                       Facture N:
                     </Text>
                     <Form.Item>
@@ -349,15 +384,11 @@ export default function AjoutDevis1() {
                     </Form.Item>
                     <Form.Item>
                       <Input
-                        onChange={handleChange}
-                        value={data.nFacture}
                         name="nFacture"
                         {...("nFacture", { required: true, minLength: 6 })}
                         style={{ display: "inline-block", marginLeft: 8 }}
                         placeholder="00001"
                       />
-                      <span>{data.nFacture}</span>
-                      <span>{errors.nFacture?.message}</span>
                     </Form.Item>
                   </Row>
                   <hr />
@@ -371,11 +402,7 @@ export default function AjoutDevis1() {
                         textAlign: "left",
                       }}
                     >
-                      <Select
-                        onChange={handleChange}
-                        value={data.client}
-                        name="client"
-                      >
+                      <Select name="client">
                         <Select.Option value="demo">Demo</Select.Option>
                       </Select>
                     </Form.Item>
@@ -389,13 +416,9 @@ export default function AjoutDevis1() {
                       }}
                     >
                       <Input
-                        onChange={handleChange}
-                        value={data.nReference}
                         name="nReference"
                         {...("nReference", { required: true, minLength: 6 })}
                       />
-                      <span>{data.nReference}</span>
-                      <span>{errors.nReference?.message}</span>
                     </Form.Item>
                   </Row>
                   <Row>
@@ -448,8 +471,6 @@ export default function AjoutDevis1() {
                       }}
                     >
                       <Input
-                        onChange={handleChange}
-                        value={data.total}
                         name="total"
                         placeholder="20.000TND"
                         {...("total", { required: true, minLength: 6 })}
@@ -470,8 +491,6 @@ export default function AjoutDevis1() {
                           borderStyle: "dashed",
                           borderColor: "#0d6efd",
                         }}
-                        onChange={handleChange}
-                        value={data.remise}
                         name="remise"
                         placeholder=""
                         {...("remise", { required: true, minLength: 6 })}
@@ -492,8 +511,6 @@ export default function AjoutDevis1() {
                           borderStyle: "dashed",
                           borderColor: "#0d6efd",
                         }}
-                        onChange={handleChange}
-                        value={data.taxes}
                         name="taxes"
                         placeholder=""
                         {...("taxes", { required: true, minLength: 6 })}
@@ -510,8 +527,6 @@ export default function AjoutDevis1() {
                       }}
                     >
                       <Input
-                        onChange={handleChange}
-                        value={data.totalTtc}
                         name="totalTtc"
                         placeholder="20.000TND"
                         {...("totalTtc", { required: true, minLength: 6 })}
@@ -528,8 +543,6 @@ export default function AjoutDevis1() {
                     >
                       <td></td>
                       <Input
-                        onChange={handleChange}
-                        value={data.paye}
                         name="paye"
                         placeholder="-0.000TND"
                         {...("paye", { required: true, minLength: 6 })}
@@ -545,8 +558,6 @@ export default function AjoutDevis1() {
                       }}
                     >
                       <Input
-                        onChange={handleChange}
-                        value={data.solde}
                         name="solde"
                         placeholder="20.000TND"
                         {...("solde", { required: true, minLength: 6 })}
@@ -558,11 +569,7 @@ export default function AjoutDevis1() {
                     size="small"
                     style={{ backgroundColor: "#f9f0ff", borderRadius: "20px" }}
                   >
-                    <Button
-                      type="primary"
-                      onClick={() => createCommande()}
-                      style={{ marginTop: 30 }}
-                    >
+                    <Button type="primary" style={{ marginTop: 30 }}>
                       Payé
                     </Button>
                     <Form.Item
@@ -574,12 +581,7 @@ export default function AjoutDevis1() {
                         textAlign: "left",
                       }}
                     >
-                      <Input
-                        onChange={handleChange}
-                        value={data.remise}
-                        name="remise"
-                        placeholder="75.000Dt"
-                      ></Input>
+                      <Input name="remise" placeholder="75.000Dt"></Input>
                     </Form.Item>
                     <Form.Item
                       label="Taxes"
@@ -590,12 +592,7 @@ export default function AjoutDevis1() {
                         textAlign: "left",
                       }}
                     >
-                      <Input
-                        onChange={handleChange}
-                        value={data.taxes}
-                        name="taxes"
-                        placeholder="25.000Dt"
-                      ></Input>
+                      <Input name="taxes" placeholder="25.000Dt"></Input>
                     </Form.Item>
                     <Form.Item
                       label="Total"
@@ -606,18 +603,20 @@ export default function AjoutDevis1() {
                         textAlign: "left",
                       }}
                     >
-                      <Input
-                        onChange={handleChange}
-                        value={data.total}
-                        name="total"
-                        placeholder="95.000"
-                      ></Input>
+                      <Input name="total" placeholder="95.000"></Input>
                     </Form.Item>
                   </Card>
                 </Form>
               </Card>
             </Col>
           </Row>
+          <button
+            type="submit"
+            className="btn btn-primary "
+            style={{ marginBottom: 20 }}
+          >
+            Ajouter
+          </button>
         </form>
       </Row>
 
@@ -738,8 +737,7 @@ export default function AjoutDevis1() {
   );
 }
 
-{
-  /*<Row>
+/*<Row>
                     <Col lg={{ span: 24, offset: 8 }}>
                       <Form.Item
                         label="Total"
@@ -849,4 +847,3 @@ export default function AjoutDevis1() {
                       </Form.Item>
                     </Col>
                   </Row> */
-}
