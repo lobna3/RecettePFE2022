@@ -23,7 +23,6 @@ import {
   FormOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import axios from "../../config/axios";
 import { useForm, Controller } from "react-hook-form";
 import Articles from "../articles/Articles";
 import "./devis1.css";
@@ -56,6 +55,8 @@ export default function AjoutDevis1() {
       status: "Devis",
       etat: "NonPayé",
       client: "625d279312fbb95eed52430a",
+      adresseFacturation: "",
+      adresseLivraison: "",
 
       qte: "5",
       pu: "150",
@@ -126,54 +127,6 @@ export default function AjoutDevis1() {
     montantP: "20000",
   });
 
-  const createCommande = () => {
-    let obj = {
-      commande: data,
-      articles: [
-        {
-          qte: data.qte,
-          pu: data.pu,
-          taxe: data.taxe,
-          prix: data.prix,
-          service: data.service,
-        },
-      ],
-      suivies: [
-        {
-          typeS: data.typeS,
-          titreS: data.titreS,
-          descriptionS: data.descriptionS,
-        },
-      ],
-      paiements: [
-        {
-          soldeP: data.soldeP,
-          typePaiement: data.typePaiement,
-          regPaiement: data.regPaiement,
-          etatP: data.etatP,
-          reste: data.reste,
-          avance: data.avance,
-          mis: data.mis,
-          nCarte: data.nCarte,
-          ccv: data.ccv,
-          dateP: data.dateP,
-          montantP: data.montantP,
-        },
-      ],
-    };
-    axios
-      .post("ajouter_commande", obj)
-      .then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          //setsuccess(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
-  };
-
   return (
     <main id="main" className="main bg-light">
       <AjoutDHeader />
@@ -210,7 +163,7 @@ export default function AjoutDevis1() {
                     />
                   }
                   type="primary"
-                  style={{ backgroundColor: "#52c41a", borderColor: "white" }}
+                  style={{ backgroundColor: "#95de64", borderColor: "white" }}
                 >
                   Enregistrer dans le brouillon
                 </Button>
@@ -247,31 +200,44 @@ export default function AjoutDevis1() {
                   </Text>
                 </p>
                 <Badge.Ribbon text="Note" color="">
-                  <TextArea
-                    style={{
-                      borderWidth: 1,
-                      borderStyle: "dashed",
-                      borderColor: "#0d6efd",
-                      borderRadius: "10px",
-                    }}
+                  <Controller
                     name="note"
-                    placeholder="Note"
-                    autoSize={{ minRows: 3, maxRows: 5 }}
+                    control={control}
+                    rules={{ required: false }}
+                    render={({ field }) => (
+                      <TextArea
+                        {...field}
+                        style={{
+                          borderWidth: 1,
+                          borderStyle: "dashed",
+                          borderColor: "#0d6efd",
+                          borderRadius: "10px",
+                        }}
+                        placeholder="Note"
+                        autoSize={{ minRows: 3, maxRows: 5 }}
+                      />
+                    )}
                   />
                 </Badge.Ribbon>
                 <p></p>
                 <Badge.Ribbon text="Condition" color="">
-                  <TextArea
+                  <Controller
+                    name="remarque"
+                    control={control}
+                    rules={{ required: false }}
+                    render={({ field }) =>  <TextArea {...field}
                     style={{
                       borderWidth: 1,
                       borderStyle: "dashed",
                       borderColor: "#0d6efd",
                       borderRadius: "10px",
                     }}
-                    name="remarque"
+                   
                     placeholder="Condition générale"
                     autoSize={{ minRows: 3, maxRows: 5 }}
+                  />}
                   />
+                 
                 </Badge.Ribbon>
               </Card>
             </Col>
@@ -435,49 +401,66 @@ export default function AjoutDevis1() {
                       name="nReference"
                       control={control}
                       rules={{ required: true }}
-                      render={({ field }) =>  <Form.Item
-                      label="N de réference"
-                      style={{
-                        display: "inline-block",
-                        width: "calc(44% - 8px)",
-                        margin: "0 20px",
-                        textAlign: "left",
-                      }}
-                    >
-                      <Input 
-                      {...field}
-                      />
-                    </Form.Item>}
+                      render={({ field }) => (
+                        <Form.Item
+                          label="N de réference"
+                          style={{
+                            display: "inline-block",
+                            width: "calc(44% - 8px)",
+                            margin: "0 20px",
+                            textAlign: "left",
+                          }}
+                        >
+                          <Input {...field} />
+                        </Form.Item>
+                      )}
                     />
-                   {errors.nReference && (
+                    {errors.nReference && (
                       <span className="text-danger">
                         Numéro de réference obligatoire !
                       </span>
                     )}
                   </Row>
                   <Row>
-                    <Form.Item
-                      label="Adresse de Facturation"
-                      style={{
-                        display: "inline-block",
-                        width: "calc(44% - 8px)",
-                        margin: "0 20px",
-                        textAlign: "left",
-                      }}
-                    >
-                      <Input placeholder="Sousse, Tunis..."></Input>
-                    </Form.Item>
-                    <Form.Item
-                      label="Adresse de Livraison"
-                      style={{
-                        display: "inline-block",
-                        width: "calc(45% - 8px)",
-                        margin: "0 20px",
-                        textAlign: "left",
-                      }}
-                    >
-                      <Input placeholder="Tunis, Sousse..." />
-                    </Form.Item>
+                    <Controller
+                      name="adresseFacturation"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <Form.Item
+                          label="Adresse de Facturation"
+                          style={{
+                            display: "inline-block",
+                            width: "calc(44% - 8px)",
+                            margin: "0 20px",
+                            textAlign: "left",
+                          }}
+                        >
+                          <Input
+                            {...field}
+                            placeholder="Sousse, Tunis..."
+                          ></Input>
+                        </Form.Item>
+                      )}
+                    />
+                    <Controller
+                      name="adresseLivraison"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <Form.Item
+                          label="Adresse de Livraison"
+                          style={{
+                            display: "inline-block",
+                            width: "calc(45% - 8px)",
+                            margin: "0 20px",
+                            textAlign: "left",
+                          }}
+                        >
+                          <Input {...field} placeholder="Tunis, Sousse..." />
+                        </Form.Item>
+                      )}
+                    />
                   </Row>
                   <hr />
                   <Row>
@@ -490,118 +473,161 @@ export default function AjoutDevis1() {
                     size="small"
                     style={{
                       marginLeft: 400,
-                      borderRadius: "20px",
+                      borderRadius: "5px",
                       overflow: "hidden",
-                      bordered: false,
+                      borderColor: "#ffffff",
+                    
+                  
                     }}
                   >
-                    <Form.Item
-                      label="Total"
-                      wrapperCol={{
-                        span: 16,
-                      }}
-                      labelCol={{
-                        span: 8,
-                      }}
-                    >
-                      <Input
-                        name="total"
-                        placeholder="20.000TND"
-                        {...("total", { required: true, minLength: 6 })}
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      label="Rmise"
-                      wrapperCol={{
-                        span: 16,
-                      }}
-                      labelCol={{
-                        span: 8,
-                      }}
-                    >
-                      <Input
-                        style={{
-                          borderWidth: 1,
-                          borderStyle: "dashed",
-                          borderColor: "#0d6efd",
-                        }}
-                        name="remise"
-                        placeholder=""
-                        {...("remise", { required: true, minLength: 6 })}
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      label="Taxes"
-                      wrapperCol={{
-                        span: 16,
-                      }}
-                      labelCol={{
-                        span: 8,
-                      }}
-                    >
-                      <Input
-                        style={{
-                          borderWidth: 1,
-                          borderStyle: "dashed",
-                          borderColor: "#0d6efd",
-                        }}
-                        name="taxes"
-                        placeholder=""
-                        {...("taxes", { required: true, minLength: 6 })}
-                      />
-                    </Form.Item>
+                    <Controller
+                      name="total"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <Form.Item
+                          label="Total"
+                          wrapperCol={{
+                            span: 16,
+                          }}
+                          labelCol={{
+                            span: 8,
+                          }}
+                        >
+                          <Input
+                            {...field}
+                            placeholder="20.000TND"
+                            style={{ borderRadius: "5px 5px" }}
+                          />
+                        </Form.Item>
+                      )}
+                    />
+                    <Controller
+                      name="remise"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <Form.Item
+                          label="Rmise"
+                          wrapperCol={{
+                            span: 16,
+                          }}
+                          labelCol={{
+                            span: 8,
+                          }}
+                        >
+                          <Input
+                            {...field}
+                            style={{
+                              borderWidth: 1,
+                              borderStyle: "dashed",
+                              borderRadius: "5px 5px",
+                              borderColor: "#0d6efd",
+                            }}
+                            placeholder=""
+                          />
+                        </Form.Item>
+                      )}
+                    />
+                    <Controller
+                      name="taxes"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <Form.Item
+                          label="Taxes"
+                          wrapperCol={{
+                            span: 16,
+                          }}
+                          labelCol={{
+                            span: 8,
+                          }}
+                        >
+                          <Input
+                            {...field}
+                            style={{
+                              borderWidth: 1,
+                              borderStyle: "dashed",
+                              borderColor: "#0d6efd",
+                              borderRadius: "5px 5px",
+                            }}
+                            placeholder=""
+                          />
+                        </Form.Item>
+                      )}
+                    />
                     <hr />
-                    <Form.Item
-                      label="TotalTTC"
-                      wrapperCol={{
-                        span: 16,
-                      }}
-                      labelCol={{
-                        span: 8,
-                      }}
-                    >
-                      <Input
-                        name="totalTtc"
-                        placeholder="20.000TND"
-                        {...("totalTtc", { required: true, minLength: 6 })}
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      label="Payé"
-                      wrapperCol={{
-                        span: 16,
-                      }}
-                      labelCol={{
-                        span: 8,
-                      }}
-                    >
-                      <td></td>
-                      <Input
-                        name="paye"
-                        placeholder="-0.000TND"
-                        {...("paye", { required: true, minLength: 6 })}
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      label="Solde"
-                      wrapperCol={{
-                        span: 16,
-                      }}
-                      labelCol={{
-                        span: 8,
-                      }}
-                    >
-                      <Input
-                        name="solde"
-                        placeholder="20.000TND"
-                        {...("solde", { required: true, minLength: 6 })}
-                      />
-                    </Form.Item>
+                    <Controller
+                      name="totalTtc"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <Form.Item
+                          label="TotalTTC"
+                          wrapperCol={{
+                            span: 16,
+                          }}
+                          labelCol={{
+                            span: 8,
+                          }}
+                        >
+                          <Input
+                            {...field}
+                            placeholder="20.000TND"
+                            style={{ borderRadius: "5px 5px" }}
+                          />
+                        </Form.Item>
+                      )}
+                    />
+                    <Controller
+                      name="paye"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <Form.Item
+                          label="Payé"
+                          wrapperCol={{
+                            span: 16,
+                          }}
+                          labelCol={{
+                            span: 8,
+                          }}
+                        >
+                          <Input
+                            {...field}
+                            placeholder="-0.000TND"
+                            style={{ borderRadius: "5px 5px" }}
+                          />
+                        </Form.Item>
+                      )}
+                    />
+                    <Controller
+                      name="solde"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <Form.Item
+                          label="Solde"
+                          wrapperCol={{
+                            span: 16,
+                          }}
+                          labelCol={{
+                            span: 8,
+                          }}
+                        >
+                          <Input
+                            {...field}
+                            placeholder="20.000TND"
+                            style={{ borderRadius: "5px 5px" }}
+                          />
+                        </Form.Item>
+                      )}
+                    />
                   </Card>
                   <br />
                   <Card
                     size="small"
-                    style={{ backgroundColor: "#f9f0ff", borderRadius: "20px" }}
+                    style={{  borderRadius: "5px" ,borderWidth:2}}
                   >
                     <Button type="primary" style={{ marginTop: 30 }}>
                       Payé
@@ -613,9 +639,10 @@ export default function AjoutDevis1() {
                         width: "calc(25% - 8px)",
                         marginLeft: 82,
                         textAlign: "left",
+                      
                       }}
                     >
-                      <Input name="remise" placeholder="75.000Dt"></Input>
+                      <Input name="remise" placeholder="75.000Dt"  style={{ borderRadius: "5px 5px" }}></Input>
                     </Form.Item>
                     <Form.Item
                       label="Taxes"
@@ -626,7 +653,7 @@ export default function AjoutDevis1() {
                         textAlign: "left",
                       }}
                     >
-                      <Input name="taxes" placeholder="25.000Dt"></Input>
+                      <Input name="taxes" placeholder="25.000Dt" style={{ borderRadius: "5px 5px" }}></Input>
                     </Form.Item>
                     <Form.Item
                       label="Total"
@@ -637,7 +664,7 @@ export default function AjoutDevis1() {
                         textAlign: "left",
                       }}
                     >
-                      <Input name="total" placeholder="95.000"></Input>
+                      <Input name="total" placeholder="95.000" style={{ borderRadius: "5px 5px" }}></Input>
                     </Form.Item>
                   </Card>
                 </Form>
@@ -770,114 +797,3 @@ export default function AjoutDevis1() {
     </main>
   );
 }
-
-/*<Row>
-                    <Col lg={{ span: 24, offset: 8 }}>
-                      <Form.Item
-                        label="Total"
-                        style={{ display: "inline-block", textAlign: "left" }}
-                      >
-                        <Input
-                          onChange={handleChange}
-                          value={data.total}
-                          name="total"
-                          placeholder="20.000TND"
-                          {...("total", { required: true, minLength: 6 })}
-                        />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col lg={{ span: 24, offset: 8 }}>
-                      <Form.Item
-                        label="Rmise"
-                        style={{ display: "inline-block", textAlign: "left" }}
-                      >
-                        <Input
-                          style={{
-                            borderWidth: 1,
-                            borderStyle: "dashed",
-                            borderColor: "#0d6efd",
-                          }}
-                          onChange={handleChange}
-                          value={data.remise}
-                          name="remise"
-                          placeholder=""
-                          {...("remise", { required: true, minLength: 6 })}
-                        />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col lg={{ span: 24, offset: 8 }}>
-                      <Form.Item
-                        label="Taxes"
-                        style={{ display: "inline-block", textAlign: "left" }}
-                      >
-                        <Input
-                          style={{
-                            borderWidth: 1,
-                            borderStyle: "dashed",
-                            borderColor: "#0d6efd",
-                          }}
-                          onChange={handleChange}
-                          value={data.taxes}
-                          name="taxes"
-                          placeholder=""
-                          {...("taxes", { required: true, minLength: 6 })}
-                        />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-  <Row>
-                    <Col lg={{ span: 24, offset: 8 }}>
-                      <Form.Item
-                        label="TotalTTC"
-                        style={{ display: "inline-block", textAlign: "left" }}
-                      >
-                        <Input
-                          onChange={handleChange}
-                          value={data.totalTtc}
-                          name="totalTtc"
-                          placeholder="20.000TND"
-                          {...("totalTtc", { required: true, minLength: 6 })}
-                        />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col lg={{ span: 24, offset: 8 }}>
-                      <Form.Item
-                        label="Payé"
-                        style={{ display: "inline-block", textAlign: "left" }}
-                      >
-                        <Input
-                          onChange={handleChange}
-                          value={data.paye}
-                          name="paye"
-                          placeholder="-0.000TND"
-                          {...("paye", { required: true, minLength: 6 })}
-                        />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col lg={{ span: 24, offset: 8 }}>
-                      <Form.Item
-                        label="Solde"
-                        style={{ display: "inline-block", textAlign: "left" }}
-                      >
-                        <Input
-                          onChange={handleChange}
-                          value={data.solde}
-                          name="solde"
-                          placeholder="20.000TND"
-                          {...("solde", { required: true, minLength: 6 })}
-                        />
-                      </Form.Item>
-                    </Col>
-                  </Row> */
