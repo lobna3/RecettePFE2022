@@ -89,7 +89,6 @@ export default function AjoutDevis1() {
   });
   const onSubmit = (data) => {
     dispatch(addStep(data));
-
     console.log("Commande info", addCommandeInfo);
     let {
       dateEmission,
@@ -167,7 +166,9 @@ export default function AjoutDevis1() {
       montantP,
     };
 
-    let { articles, suivies, paiements } = addCommandeInfo;
+    let { articles} = addCommandeInfo;
+    let{suivies}=addCommandeInfo;
+    let{paiements}=addCommandeInfo;
     dispatch(
       addCommandetApi(
         {
