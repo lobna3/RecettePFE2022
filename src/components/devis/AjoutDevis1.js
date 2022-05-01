@@ -26,11 +26,17 @@ import { Link } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import Articles from "../articles/Articles";
 import "./devis1.css";
+import { useToasts } from "react-toast-notifications";
+import { useDispatch, useSelector } from "react-redux";
+import { addCommandetApi, addStep } from "../../redux/actions/commande.actions";
 const { Text } = Typography;
 const { TextArea } = Input;
 
 export default function AjoutDevis1() {
   const [componentSize, setComponentSize] = useState("default");
+  const { addToast } = useToasts();
+  const { addCommandeInfo } = useSelector((state) => state.commande);
+  const dispatch = useDispatch();
 
   const {
     handleSubmit,
@@ -55,8 +61,8 @@ export default function AjoutDevis1() {
       status: "Devis",
       etat: "NonPayé",
       client: "625d279312fbb95eed52430a",
-      adresseFacturation: "",
-      adresseLivraison: "",
+      // adresseFacturation: "",
+      // adresseLivraison: "",
 
       qte: "5",
       pu: "150",
@@ -82,50 +88,98 @@ export default function AjoutDevis1() {
     },
   });
   const onSubmit = (data) => {
-    console.log(data);
+    dispatch(addStep(data));
+
+    console.log("Commande info", addCommandeInfo);
+    let {
+      dateEmission,
+      dateEcheance,
+      condition,
+      nFacture,
+      nReference,
+      total,
+      taxes,
+      remise,
+      totalTtc,
+      paye,
+      solde,
+      note,
+      remarque,
+      recurrente,
+      status,
+      qte,
+      pu,
+      taxe,
+      prix,
+      service,
+      etat,
+      typeS,
+      titreS,
+      descriptionS,
+      soldeP: soldeP,
+      typePaiement,
+      regPaiement,
+      etatP,
+      reste,
+      avance,
+      mis,
+      nCarte,
+      ccv,
+      dataP,
+      montantP,
+    } = addCommandeInfo;
+    let commande = {
+      dateEmission,
+      dateEcheance,
+      condition,
+      nFacture,
+      nReference,
+      total,
+      taxes,
+      remise,
+      totalTtc,
+      paye,
+      solde,
+      note,
+      remarque,
+      recurrente,
+      status,
+      etat,
+      client: "625d279312fbb95eed52430a",
+      qte,
+      pu,
+      taxe,
+      prix,
+      service:"623efa58cef38dae7b89e586",
+      typeS,
+      titreS,
+      descriptionS,
+      soldeP: soldeP,
+      typePaiement,
+      regPaiement,
+      etatP,
+      reste,
+      avance,
+      mis,
+      nCarte,
+      ccv,
+      dataP,
+      montantP,
+    };
+
+    let { articles, suivies, paiements } = addCommandeInfo;
+    dispatch(
+      addCommandetApi(
+        {
+          commande: commande,
+          articles: articles,
+          suivies: suivies,
+          paiements: paiements,
+        },
+        addToast
+      )
+    );
   };
-
-  const [data, setdata] = useState({
-    dateEmission: Date,
-    dateEcheance: Date,
-    condition: "Personalisé",
-    nFacture: "",
-    nReference: "",
-    total: "",
-    taxes: "",
-    remise: "",
-    totalTtc: "",
-    paye: "",
-    solde: "",
-    note: "",
-    remarque: "",
-    recurrente: "oui",
-    status: "Devis",
-    etat: "NonPayé",
-    client: "625d279312fbb95eed52430a",
-
-    qte: "5",
-    pu: "150",
-    taxe: "8",
-    prix: "250",
-    service: "623efa58cef38dae7b89e586",
-
-    typeS: "modifier",
-    titreS: "CommandeF",
-    descriptionS: "Commande vu par Monsieur Foulen Ben Foulen",
-
-    soldeP: "10000",
-    typePaiement: "chéque",
-    regPaiement: "carte",
-    etatP: "non payé",
-    reste: "10",
-    avance: "20",
-    mis: "2",
-    nCarte: "123456789",
-    ccv: "2",
-    dateP: Date,
-    montantP: "20000",
-  });
 
   return (
     <main id="main" className="main bg-light">
@@ -225,19 +279,20 @@ export default function AjoutDevis1() {
                     name="remarque"
                     control={control}
                     rules={{ required: false }}
-                    render={({ field }) =>  <TextArea {...field}
-                    style={{
-                      borderWidth: 1,
-                      borderStyle: "dashed",
-                      borderColor: "#0d6efd",
-                      borderRadius: "10px",
-                    }}
-                   
-                    placeholder="Condition générale"
-                    autoSize={{ minRows: 3, maxRows: 5 }}
-                  />}
+                    render={({ field }) => (
+                      <TextArea
+                        {...field}
+                        style={{
+                          borderWidth: 1,
+                          borderStyle: "dashed",
+                          borderColor: "#0d6efd",
+                          borderRadius: "10px",
+                        }}
+                        placeholder="Condition générale"
+                        autoSize={{ minRows: 3, maxRows: 5 }}
+                      />
+                    )}
                   />
-                 
                 </Badge.Ribbon>
               </Card>
             </Col>
@@ -267,11 +322,7 @@ export default function AjoutDevis1() {
                             textAlign: "left",
                           }}
                         >
-                          <DatePicker
-                        
-                           {...field}
-                            dateFormat="DD MMM YYYY"
-                          />
+                          <DatePicker {...field} dateFormat="DD MMM YYYY" />
                         </Form.Item>
                       )}
                     />
@@ -290,11 +341,7 @@ export default function AjoutDevis1() {
                             textAlign: "left",
                           }}
                         >
-                          <DatePicker
-                         
-                             {...field}
-                            dateFormat="DD MMM YYYY"
-                          />
+                          <DatePicker {...field} dateFormat="DD MMM YYYY" />
                         </Form.Item>
                       )}
                     />
@@ -392,7 +439,9 @@ export default function AjoutDevis1() {
                           }}
                         >
                           <Select {...field}>
-                            <Select.Option value="demo">Demo</Select.Option>
+                            <Select.Option value={"625d279312fbb95eed52430a"}>
+                              Client
+                            </Select.Option>
                           </Select>
                         </Form.Item>
                       )}
@@ -421,7 +470,7 @@ export default function AjoutDevis1() {
                       </span>
                     )}
                   </Row>
-                  <Row>
+                  {/* <Row>
                     <Controller
                       name="adresseFacturation"
                       control={control}
@@ -461,7 +510,8 @@ export default function AjoutDevis1() {
                         </Form.Item>
                       )}
                     />
-                  </Row>
+                  </Row>*/}
+
                   <hr />
                   <Row>
                     <Button block> + Ajouter article</Button>
@@ -476,8 +526,6 @@ export default function AjoutDevis1() {
                       borderRadius: "5px",
                       overflow: "hidden",
                       borderColor: "#ffffff",
-                    
-                  
                     }}
                   >
                     <Controller
@@ -627,7 +675,7 @@ export default function AjoutDevis1() {
                   <br />
                   <Card
                     size="small"
-                    style={{  borderRadius: "5px" ,borderWidth:2}}
+                    style={{ borderRadius: "5px", borderWidth: 2 }}
                   >
                     <Button type="primary" style={{ marginTop: 30 }}>
                       Payé
@@ -639,10 +687,13 @@ export default function AjoutDevis1() {
                         width: "calc(25% - 8px)",
                         marginLeft: 82,
                         textAlign: "left",
-                      
                       }}
                     >
-                      <Input name="remise" placeholder="75.000Dt"  style={{ borderRadius: "5px 5px" }}></Input>
+                      <Input
+                        name="remise"
+                        placeholder="75.000Dt"
+                        style={{ borderRadius: "5px 5px" }}
+                      ></Input>
                     </Form.Item>
                     <Form.Item
                       label="Taxes"
@@ -653,7 +704,11 @@ export default function AjoutDevis1() {
                         textAlign: "left",
                       }}
                     >
-                      <Input name="taxes" placeholder="25.000Dt" style={{ borderRadius: "5px 5px" }}></Input>
+                      <Input
+                        name="taxes"
+                        placeholder="25.000Dt"
+                        style={{ borderRadius: "5px 5px" }}
+                      ></Input>
                     </Form.Item>
                     <Form.Item
                       label="Total"
@@ -664,7 +719,11 @@ export default function AjoutDevis1() {
                         textAlign: "left",
                       }}
                     >
-                      <Input name="total" placeholder="95.000" style={{ borderRadius: "5px 5px" }}></Input>
+                      <Input
+                        name="total"
+                        placeholder="95.000"
+                        style={{ borderRadius: "5px 5px" }}
+                      ></Input>
                     </Form.Item>
                   </Card>
                 </Form>

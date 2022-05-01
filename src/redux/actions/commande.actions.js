@@ -1,20 +1,28 @@
 import { getApi, postApi } from "../../utils/apiHelpers";
-import {ADD_COMMANDE,GET_COMMANDE_LIST_SUCCESS,} from "../actionTypes";
-  
+import {ADD_COMMANDE,GET_COMMANDE_LIST_SUCCESS,ADD_COMMANDE_SUCCESS} from "../actionTypes";
+
+
+
+export const addStep = (data) => {
+  return {
+    type: ADD_COMMANDE,
+    payload: data,
+  };
+};
 export const addCommandetApi =
-  (data, addToast, handleClose) => async (dispatch) => {
+  (data, addToast) => async (dispatch) => {
     try {
       dispatch({
-        type: ADD_COMMANDE,
+        type: ADD_COMMANDE_SUCCESS,
       });
       let result = await postApi("ajouter_commande", data);
       console.log("Result", result);
       if (result.success) {
-        addToast("Commande ajouter avec succées", { appearance: "success" });
+        addToast("Commande créer avec succées", { appearance: "success" });
       } else {
         addToast("Erreur c'est produite , ressayer", { appearance: "error" });
       }
-      handleClose();
+   
     } catch (error) {}
   };
 

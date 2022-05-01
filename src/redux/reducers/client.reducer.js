@@ -41,22 +41,6 @@ const clientReducer = (state = clientInitState, action) => {
   switch (type) {
     case ADD_CLIENT:
       return { ...state, loading: true };
-    case ADD_SECOND_STEP:
-      let { type, nidentificationFiscale, devis, activite, conditionPaiement } =
-        payload;
-      return {
-        ...state,
-        addClientInfo: {
-          ...state.addClientInfo,
-          type: type,
-          nidentificationFiscale: nidentificationFiscale,
-          devis: devis,
-          activite: activite,
-          conditionPaiement: conditionPaiement,
-          stepTwoValidated: true,
-        },
-      };
-
     case ADD_FIRST_STEP:
       let { email, entreprise, nom, prenom, telephone, titre, siteinternet } =
         payload;
@@ -74,7 +58,21 @@ const clientReducer = (state = clientInitState, action) => {
           stepOneValidated: true,
         },
       };
-
+    case ADD_SECOND_STEP:
+      let { type, nidentificationFiscale, devis, activite, conditionPaiement } =
+        payload;
+      return {
+        ...state,
+        addClientInfo: {
+          ...state.addClientInfo,
+          type: type,
+          nidentificationFiscale: nidentificationFiscale,
+          devis: devis,
+          activite: activite,
+          conditionPaiement: conditionPaiement,
+          stepTwoValidated: true,
+        },
+      };
     case ADD_THIRD_STEP:
       let { adresse, codePostal, etat, pays } = payload;
       return {
@@ -98,7 +96,6 @@ const clientReducer = (state = clientInitState, action) => {
           stepThreeValidated: true,
         },
       };
-
     case ADD_FOUR_STEP:
       return {
         ...state,
@@ -118,9 +115,9 @@ const clientReducer = (state = clientInitState, action) => {
           stepFourValidated: true,
         },
       };
-    
+
     case GET_CLIENT_LIST_SUCCESS:
-      return {...state,clientList:payload}
+      return { ...state, clientList: payload };
     default:
       return state;
   }
