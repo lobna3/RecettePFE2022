@@ -336,23 +336,30 @@ export default function AjoutDevis1() {
                       name="condition"
                       control={control}
                       rules={{ required: true }}
-                      render={({ field }) =>  <Form.Item
-                      label="Condition"
-                      style={{
-                        display: "inline-block",
-                        width: "calc(30% - 8px)",
-                        margin: "0 20px",
-                        textAlign: "left",
-                      }}
-                    >
-                      <Select  {...field}>
-                        <Select.Option value={"Personnalisé"}>Personnalisé</Select.Option>
-                        <Select.Option value={"échéance à la fin du mois"}></Select.Option>
-                        <Select.Option value={"échéance à la fin du mois prochain"}>  
-                        </Select.Option>
-                      </Select>
-                    </Form.Item>}
-                    /> 
+                      render={({ field }) => (
+                        <Form.Item
+                          label="Condition"
+                          style={{
+                            display: "inline-block",
+                            width: "calc(30% - 8px)",
+                            margin: "0 20px",
+                            textAlign: "left",
+                          }}
+                        >
+                          <Select {...field}>
+                            <Select.Option value={"Personnalisé"}>
+                              Personnalisé
+                            </Select.Option>
+                            <Select.Option
+                              value={"échéance à la fin du mois"}
+                            ></Select.Option>
+                            <Select.Option
+                              value={"échéance à la fin du mois prochain"}
+                            ></Select.Option>
+                          </Select>
+                        </Form.Item>
+                      )}
+                    />
                   </Row>
                   <hr />
                   <Row>
@@ -382,31 +389,53 @@ export default function AjoutDevis1() {
                         Manuel
                       </Button>
                     </Form.Item>
-                    <Form.Item>
-                      <Input
-                        name="nFacture"
-                        {...("nFacture", { required: true, minLength: 6 })}
-                        style={{ display: "inline-block", marginLeft: 8 }}
-                        placeholder="00001"
-                      />
-                    </Form.Item>
+                    <Controller
+                      name="nFacture"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <Form.Item>
+                          <Input
+                            {...field}
+                            style={{ display: "inline-block", marginLeft: 8 }}
+                            placeholder="00001"
+                          />
+                        </Form.Item>
+                      )}
+                    />
+                    {errors.nFacture && (
+                      <span className="text-danger">
+                        Numéro de facture obligatoire !
+                      </span>
+                    )}
                   </Row>
                   <hr />
                   <Row>
-                    <Form.Item
-                      label="Client"
-                      style={{
-                        display: "inline-block",
-                        width: "calc(45% - 8px)",
-                        margin: "0 20px",
-                        textAlign: "left",
-                      }}
-                    >
-                      <Select name="client">
-                        <Select.Option value="demo">Demo</Select.Option>
-                      </Select>
-                    </Form.Item>
-                    <Form.Item
+                    <Controller
+                      name="client"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <Form.Item
+                          label="Client"
+                          style={{
+                            display: "inline-block",
+                            width: "calc(45% - 8px)",
+                            margin: "0 20px",
+                            textAlign: "left",
+                          }}
+                        >
+                          <Select {...field}>
+                            <Select.Option value="demo">Demo</Select.Option>
+                          </Select>
+                        </Form.Item>
+                      )}
+                    />
+                    <Controller
+                      name="nReference"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) =>  <Form.Item
                       label="N de réference"
                       style={{
                         display: "inline-block",
@@ -415,11 +444,16 @@ export default function AjoutDevis1() {
                         textAlign: "left",
                       }}
                     >
-                      <Input
-                        name="nReference"
-                        {...("nReference", { required: true, minLength: 6 })}
+                      <Input 
+                      {...field}
                       />
-                    </Form.Item>
+                    </Form.Item>}
+                    />
+                   {errors.nReference && (
+                      <span className="text-danger">
+                        Numéro de réference obligatoire !
+                      </span>
+                    )}
                   </Row>
                   <Row>
                     <Form.Item
