@@ -3,6 +3,7 @@ import {
   ADD_ARTICLE,
   GET_ARTICLE_LIST,
   GET_ARTICLE_LIST_SUCCESS,
+  UPDATE_ARTICLE,
 } from "../actionTypes";
 
 const articleInitState = {
@@ -22,7 +23,7 @@ const articleReducer = (state = articleInitState, action) => {
       return { ...state, loading: true };
     case GET_ARTICLE_LIST_SUCCESS:
       return { ...state, loading: false, articleList: payload };
-    case UPDATE_CATEGORY:
+    case UPDATE_ARTICLE:
       return { ...state, selectedCategory: payload };
 
     default:
