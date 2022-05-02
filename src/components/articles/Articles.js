@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table, Space, Typography } from "antd";
-import axios from "../../config/axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getArticlesApi } from "../../redux/actions/article.action";
 
 const { Text } = Typography;
 
@@ -105,15 +106,15 @@ const Articles = () => {
       ),
     },
   ];
-  const [artciles, setarticles] = useState([]);
 
+  const { articleList } = useSelector((state) => state.article);
+  const dispatch = useDispatch();
   useEffect(() => {
-    axios.get("articles").then((res) => {
-      setarticles(res.data);
-    });
+    dispatch(getArticlesApi());
   }, []);
+ 
 
-  return <Table columns={columns} dataSource={artciles} />;
+  return <Table columns={columns} dataSource={articleList} />;
 };
 
 export default Articles;

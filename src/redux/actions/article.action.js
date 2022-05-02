@@ -1,7 +1,6 @@
 import { getApi, postApi,deleteApi,updateApi } from "../../utils/apiHelpers";
-import {ADD_ARTICLE,ADD_ARTICLE_SUCCESS,GET_ARTICLE_LIST,GET_ARTICLE_LIST_SUCCESS,
-    UPDATE_ARTICLE,DELETE_ARTICLE
-} from "../actionTypes";
+import {ADD_ARTICLE,GET_ARTICLE_LIST,GET_ARTICLE_LIST_SUCCESS,
+    UPDATE_ARTICLE} from "../actionTypes";
 
 
 export const addArticle = () => {
