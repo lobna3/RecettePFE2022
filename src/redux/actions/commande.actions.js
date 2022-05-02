@@ -1,7 +1,25 @@
-import { getApi, postApi } from "../../utils/apiHelpers";
-import {ADD_COMMANDE,GET_COMMANDE_LIST_SUCCESS,ADD_COMMANDE_SUCCESS} from "../actionTypes";
+import { getApi, postApi,deleteApi,updateApi } from "../../utils/apiHelpers";
+import {ADD_COMMANDE,GET_COMMANDE_LIST_SUCCESS,ADD_COMMANDE_SUCCESS,
+   GET_COMMANDE_LIST, UPDATE_COMMANDE} from "../actionTypes";
 
+export const addCommande = () => {
+  return {
+      type: ADD_COMMANDE,
+  }
+};
 
+export const getCommande = () => {
+  return {
+      type: GET_COMMANDE_LIST
+  }
+};
+
+export const updateCommande = (data) => {
+  return {
+      type: UPDATE_COMMANDE,
+      payload: data
+  }
+}
 
 export const addStep = (data) => {
   return {
@@ -9,6 +27,7 @@ export const addStep = (data) => {
     payload: data,
   };
 };
+
 export const addCommandetApi =
   (data, addToast) => async (dispatch) => {
     try {
@@ -34,5 +53,33 @@ export const getCommandeListApi = () => async (dispatch) => {
         type: GET_COMMANDE_LIST_SUCCESS,
         payload:result
       });
-    } catch (error) {}
+    } catch (error) { console.log("ERROR", error.message)}
   };
+
+  export const deleteCommande = (id) => async dispatch => {
+    try {
+        dispatch(addCommande());
+        let result = await deleteApi('delete_commande/' + id);
+        if (result) {
+            dispatch(getCommandeListApi());
+        }
+    } catch (error) {console.log("ERROR", error.message)
+     
+    }
+
+};
+
+export const updateCommandeApi = (body, id) => async dispatch => {
+
+  try {
+      let result = await updateApi('maj_commande/' + id, body);
+      if (result) {
+          dispatch(getCommandeListApi());
+      }
+  } catch (error) {
+
+  }
+}
+
+
+

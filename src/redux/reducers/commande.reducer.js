@@ -2,11 +2,14 @@ import {
   ADD_COMMANDE,
   ADD_COMMANDE_SUCCESS,
   GET_COMMANDE_LIST_SUCCESS,
+  UPDATE_COMMANDE,
+  DELETE_COMMANDE,
 } from "../actionTypes";
 
 const commandeInitState = {
   loading: false,
   commandeList: [],
+  selectedCommande: {},
   addCommandeInfo: {
     dateEmission: Date,
     dateEcheance: Date,
@@ -175,9 +178,12 @@ const commandeReducer = (state = commandeInitState, action) => {
         dateP: dataP,
         montantP: montantP,
       };
-
     case GET_COMMANDE_LIST_SUCCESS:
       return { ...state, commandeList: payload };
+    case UPDATE_COMMANDE:
+      return { ...state, selectedCommande: payload };
+    case DELETE_COMMANDE:
+        return { ...state, loading: true };
     default:
       return state;
   }
