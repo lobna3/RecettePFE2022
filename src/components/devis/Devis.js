@@ -8,11 +8,19 @@ import {
   MailOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+
 import { Table, Space } from "antd";
 import { DevisHeader } from "../RacetteHeader";
-import { ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { getCommandeListApi } from "../../redux/actions/commande.actions";
+import {
+  getCommandesApi,
+  deleteCommandeApi,
+  updateCommandeApi,
+} from "../../redux/actions/commande.actions";
+import ModifierDevis from "./ModifierDevis";
+import DetailDevis from "./DetailDevis";
+import Swal from "sweetalert2";
 
 const { Text } = Typography;
 const rowSelection = {
@@ -44,23 +52,24 @@ function onChange(pagination, filters, sorter, extra) {
   console.log("params", pagination, filters, sorter, extra);
 }
 export default function Devis() {
+  const { commandeList } = useSelector((state) => state.commande);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCommandesApi());
+  }, []);
   const [selectionType, setSelectionType] = useState("checkbox");
   const displayEtat = (etat) => {
-    if (etat== "Refusé") {
+    if (etat == "Refusé") {
       return <span className="badge bg-danger">{etat}</span>;
     } else if (etat == "Accepté") {
       return <span className="badge bg-success">{etat}</span>;
-    } 
-    else if (etat == "En attente") {
+    } else if (etat == "En attente") {
       return <span className="badge bg-warning">{etat}</span>;
-    } 
-    else if (etat == "Annuler") {
+    } else if (etat == "Annuler") {
       return <span className="badge bg-secondary">{etat}</span>;
-    } 
-    else if (etat == "Arrivé à l'échéance") {
+    } else if (etat == "Arrivé à l'échéance") {
       return <span className="badge bg-primary">{etat}</span>;
-    } 
-    else {
+    } else {
       return <span className="badge bg-info">{etat}</span>;
     }
   };
@@ -68,19 +77,36 @@ export default function Devis() {
   const menu = (
     <Menu onClick={handleMenuClick}>
       <Menu.Item key="1" icon={<PrinterFilled />}>
-        <Link to="/">Imprimer</Link>
+        <Link to=""> Imprimer</Link>
       </Menu.Item>
       <Menu.Item key="2" icon={<FundViewOutlined />}>
-        <Link to={"/detail_devis/${devis.id}"}>Visualiser</Link>
+        <Link to="/detail_devis/:id"> Visualiser</Link>
       </Menu.Item>
       <Menu.Item key="5" icon={<FundViewOutlined />}>
-        <Link to={"/modifier_devis/${devis.id}"}>Modifier</Link>
+        <Link to=""> Modifier</Link>
       </Menu.Item>
       <Menu.Item key="3" icon={<MailOutlined />}>
-        <Link to="">Envoyer</Link>
+        <Link to=""> Envoyer</Link>
       </Menu.Item>
       <Menu.Item key="4" icon={<DeleteOutlined />}>
-        <Link to="/">Supprimer</Link>
+        <span
+          onClick={() => {
+            Swal.fire({
+              title: "Vous etes sure de supprimer cette commande ?",
+              showCancelButton: true,
+              confirmButtonText: `Confirmer`,
+              cancelButtonText: `Annuler`,
+            }).then((result) => {
+              /* Read more about isConfirmed, isDenied below */
+              if (result.isConfirmed) {
+                dispatch(deleteCommandeApi(commandeList._id));
+              }
+            });
+          }}
+        >
+          Supprimer
+        </span>
+      
       </Menu.Item>
     </Menu>
   );
@@ -192,9 +218,7 @@ export default function Devis() {
       render: (text, record) => {
         return (
           <>
-            <Space direction="vertical">
-            {displayEtat(record.etat)}
-            </Space>
+            <Space direction="vertical">{displayEtat(record.etat)}</Space>
           </>
         );
       },
@@ -216,13 +240,6 @@ export default function Devis() {
     },
   ];
 
-
-  const { commandeList } = useSelector((state) => state.commande);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getCommandeListApi());
-  }, []);
- 
   return (
     <main id="main" className="main bg-light">
       <ToastContainer position="top-center" />
