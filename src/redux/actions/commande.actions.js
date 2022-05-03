@@ -5,6 +5,8 @@ import {
   ADD_COMMANDE_SUCCESS,
   GET_COMMANDE_LIST,
   UPDATE_COMMANDE,
+  GET_DETAILS,
+  GET_DETAILS_SUCCESS
 } from "../actionTypes";
 
 export const addCommande = () => {
@@ -136,3 +138,44 @@ export const updateCommandeApi = (body, id) => async (dispatch) => {
     console.log(result);
   } catch (error) { console.log("ERROR", error.message);}
 };
+
+export const getCommandeDetails = (commandeId) => {
+  return {
+      type: GET_DETAILS, 
+      payload:commandeId
+  }
+};
+
+export const getCommandeDetailsSuccess = (payload) => {
+  return {
+      type: GET_DETAILS_SUCCESS,
+      payload: payload
+  }
+};
+
+export const getCommandeDetailsApi = (commandeId) => async dispatch => {
+
+  try {
+      let config = {
+          headers: {
+              'Authorization': localStorage.getItem('token')
+          }
+      }
+      dispatch(getCommandeDetails(commandeId));
+      let result = await getApi("commandeById/" + commandeId, config);
+      if (result.success) {
+          console.log("RESULT DETAILS", result);
+          if(result.details==null)
+          {
+              dispatch(getCommandeDetailsSuccess([]));
+          }else 
+          {
+              dispatch(getCommandeDetailsSuccess(result.details));
+          }
+          
+      }
+
+  } catch (error) {
+    console.log("ERROR", error.message);
+  }
+}

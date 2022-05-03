@@ -1,4 +1,7 @@
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { CommandeDetailHeader } from "../RacetteHeader";
 import { Row, Col, Switch } from "antd";
 import {
@@ -11,17 +14,21 @@ import {
   CheckCircleOutlined,
 } from "@ant-design/icons";
 import Table from "react-bootstrap/Table";
-import { Card, Typography,  DatePicker } from "antd";
-import { Link ,useParams} from "react-router-dom";
+import { Card, Typography, DatePicker } from "antd";
+import { Link, useParams } from "react-router-dom";
+import { getCommandeDetailsApi } from "../../redux/actions/commande.actions";
 const { Title, Text } = Typography;
 
 const DetailDevis = () => {
-  const {detail} = useParams();
+  const { detail } = useParams();
+  const dispatch = useDispatch();
+  const [selectedCommande, setSelectedCommande] = useState("");
+  const { commandeDetails } = useSelector((state) => state.commande);
+
   return (
     <main id="main" class="main bg-light">
       <CommandeDetailHeader />
       <Row>
-      
         <Col span={8}>
           <Card
             size="small"
@@ -34,7 +41,9 @@ const DetailDevis = () => {
               borderRadius: "15px 15px",
             }}
           >
-              <h1>{detail}</h1>
+            <h1>{detail}</h1>
+            
+
             <Title level={5}>Devis #003645</Title>
             <Table borderless>
               <tbody>
@@ -91,7 +100,7 @@ const DetailDevis = () => {
                     <Text className="d-flex">Contact:</Text>
                   </td>
                   <td>
-                    <Text type="secondary">Mouhamed@gmail.com</Text>
+                    <Text type="secondary">Mouhamed@gmail.com </Text>
                   </td>
                 </tr>
                 <tr>
@@ -112,7 +121,7 @@ const DetailDevis = () => {
                 </tr>
               </tbody>
             </Table>
-
+           
             <hr />
           </Card>
         </Col>
@@ -130,7 +139,7 @@ const DetailDevis = () => {
               }}
             >
               <Table hover size="sm" borderless>
-                <thead style={{ borderWidth: 1}}>
+                <thead style={{ borderWidth: 1 }}>
                   <tr>
                     <td className="text-muted d-flex">Produits / Services</td>
                     <td className="text-muted">Qté</td>
@@ -189,7 +198,7 @@ const DetailDevis = () => {
                   </tr>
                   <tr>
                     <td className="d-flex">Produit1</td>
-                    <td >
+                    <td>
                       <span
                         style={{
                           borderWidth: 1,
@@ -327,7 +336,6 @@ const DetailDevis = () => {
             </Card>
           </Row>
         </Col>
-    
       </Row>
     </main>
   );

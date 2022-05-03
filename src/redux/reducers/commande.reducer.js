@@ -5,11 +5,14 @@ import {
   GET_COMMANDE_LIST_SUCCESS,
   UPDATE_COMMANDE,
   DELETE_COMMANDE,
+  GET_DETAILS,
+  GET_DETAILS_SUCCESS
 } from "../actionTypes";
 
 const commandeInitState = {
   loading: false,
   commandeList: [],
+  commandeDetails: [],
   selectedCommande: {},
   addCommandeInfo: {
     dateEmission: Date,
@@ -64,7 +67,7 @@ const commandeReducer = (state = commandeInitState, action) => {
     case ADD_COMMANDE_SUCCESS:
       return { ...state, loading: true };
     //case ADD_COMMANDE:
-        //return { ...state, loading: true };
+    //return { ...state, loading: true };
     case ADD_COMMANDE:
       let {
         dateEmission,
@@ -188,7 +191,11 @@ const commandeReducer = (state = commandeInitState, action) => {
     case UPDATE_COMMANDE:
       return { ...state, selectedCommande: payload };
     case DELETE_COMMANDE:
-        return { ...state, loading: true };
+      return { ...state, loading: true };
+    case GET_DETAILS:
+      return { ...state, loading: true, selectedCommande: payload };
+    case GET_DETAILS_SUCCESS:
+      return { ...state, loading: false, commandeDetails: payload };
     default:
       return state;
   }
