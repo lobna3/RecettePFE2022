@@ -6,6 +6,7 @@ import {
   DeleteOutlined,
   FundViewOutlined,
   MailOutlined,
+  FormOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
@@ -75,40 +76,44 @@ export default function Devis() {
   };
 
   const menu = (
-    <Menu onClick={handleMenuClick}>
-      <Menu.Item key="1" icon={<PrinterFilled />}>
-        <Link to=""> Imprimer</Link>
-      </Menu.Item>
-      <Menu.Item key="2" icon={<FundViewOutlined />}>
-        <Link to="/detail_devis/:id"> Visualiser</Link>
-      </Menu.Item>
-      <Menu.Item key="5" icon={<FundViewOutlined />}>
-        <Link to="/modifier_devis/:id"> Modifier</Link>
-      </Menu.Item>
-      <Menu.Item key="3" icon={<MailOutlined />}>
-        <Link to=""> Envoyer</Link>
-      </Menu.Item>
-      <Menu.Item key="4" icon={<DeleteOutlined />}>
-        <span
-          onClick={() => {
-            Swal.fire({
-              title: "Vous etes sure de supprimer cette commande ?",
-              showCancelButton: true,
-              confirmButtonText: `Confirmer`,
-              cancelButtonText: `Annuler`,
-            }).then((result) => {
-              /* Read more about isConfirmed, isDenied below */
-              if (result.isConfirmed) {
-                dispatch(deleteCommandeApi(commandeList._id));
-              }
-            });
-          }}
-        >
-          Supprimer
-        </span>
-      
-      </Menu.Item>
-    </Menu>
+    <>
+      {commandeList.map((elm) => (
+        <Menu onClick={handleMenuClick}>
+          <Menu.Item key="1" icon={<PrinterFilled />}>
+            <Link to=""> Imprimer</Link>
+          </Menu.Item>
+          <Menu.Item key="2" icon={<FundViewOutlined />}>
+            <Link to="/detail_devis/:id"> Visualiser</Link>
+          </Menu.Item>
+          <Menu.Item key="5" icon={<FormOutlined />}>
+            <Link to="/modifier_devis/:id"> Modifier</Link>
+          </Menu.Item>
+          <Menu.Item key="3" icon={<MailOutlined />}>
+            <Link to=""> Envoyer</Link>
+          </Menu.Item>
+          <Menu.Item key="4" icon={<DeleteOutlined />}>
+            <span
+              type="button"
+              onClick={() => {
+                Swal.fire({
+                  title: "Vous êtes sure de supprimer cet Commande ?",
+                  showCancelButton: true,
+                  confirmButtonText: `Confirmer`,
+                  cancelButtonText: `Annuler`,
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    dispatch(deleteCommandeApi(elm._id));
+                  }
+                });
+              }}
+            >
+              Supprimer
+            </span>
+          </Menu.Item>
+        </Menu>
+      ))}
+      ,
+    </>
   );
 
   const columns = [

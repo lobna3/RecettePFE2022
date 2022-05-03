@@ -99,7 +99,7 @@ export const deleteCommandeApi = (id) => async (dispatch) => {
     if (result) {
       dispatch(getCommandesApi());
     }
-    console.log(result);
+    console.log("Resultat",result);
   } catch (error) {
     console.log("ERROR", error.message);
   }
