@@ -86,10 +86,10 @@ export default function Devis() {
             <Link to=""> Imprimer</Link>
           </Menu.Item>
           <Menu.Item key="2" icon={<FundViewOutlined />}>
-            <Link to="/devis/:detail"> Visualiser</Link>
+            <Link to={`/devis/${elm._id}`}> Visualiser</Link>
           </Menu.Item>
           <Menu.Item key="5" icon={<FormOutlined />}>
-            <Link to="/devi/:modifier"> Modifier</Link>
+            <Link to={`/devi/${elm._id}`}> Modifier</Link>
           </Menu.Item>
           <Menu.Item key="3" icon={<MailOutlined />}>
             <Link to=""> Envoyer</Link>

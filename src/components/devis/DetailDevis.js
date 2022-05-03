@@ -21,7 +21,7 @@ const DetailDevis = () => {
     <main id="main" class="main bg-light">
       <CommandeDetailHeader />
       <Row>
-       
+      
         <Col span={8}>
           <Card
             size="small"
@@ -34,6 +34,7 @@ const DetailDevis = () => {
               borderRadius: "15px 15px",
             }}
           >
+              <h1>{detail}</h1>
             <Title level={5}>Devis #003645</Title>
             <Table borderless>
               <tbody>
