@@ -11,15 +11,17 @@ import {
   CheckCircleOutlined,
 } from "@ant-design/icons";
 import Table from "react-bootstrap/Table";
-import { Card, Typography, Space, DatePicker } from "antd";
-import { Link } from "react-router-dom";
+import { Card, Typography,  DatePicker } from "antd";
+import { Link ,useParams} from "react-router-dom";
 const { Title, Text } = Typography;
 
 const DetailDevis = () => {
+  const {detail} = useParams();
   return (
     <main id="main" class="main bg-light">
       <CommandeDetailHeader />
       <Row>
+       
         <Col span={8}>
           <Card
             size="small"
@@ -324,6 +326,7 @@ const DetailDevis = () => {
             </Card>
           </Row>
         </Col>
+    
       </Row>
     </main>
   );

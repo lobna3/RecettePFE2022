@@ -8,7 +8,7 @@ import {
   MailOutlined,
   FormOutlined,
 } from "@ant-design/icons";
-import { Link ,useLocation,useParams,matchRoutes} from "react-router-dom";
+import { Link ,useLocation,useMatch} from "react-router-dom";
 import { Table, Space } from "antd";
 import { DevisHeader } from "../RacetteHeader";
 import { ToastContainer } from "react-toastify";
@@ -52,9 +52,9 @@ function onChange(pagination, filters, sorter, extra) {
 
 
 export default function Devis() {
+
   const location = useLocation();
- 
- 
+
   const { commandeList } = useSelector((state) => state.commande);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -86,11 +86,10 @@ export default function Devis() {
             <Link to=""> Imprimer</Link>
           </Menu.Item>
           <Menu.Item key="2" icon={<FundViewOutlined />}>
-            <Link to="/detail_devis/:id"> Visualiser</Link>
+            <Link to="/devis/:detail"> Visualiser</Link>
           </Menu.Item>
           <Menu.Item key="5" icon={<FormOutlined />}>
-          
-            <Link to="/modifier_devis/:id"> Modifier</Link>
+            <Link to="/devi/:modifier"> Modifier</Link>
           </Menu.Item>
           <Menu.Item key="3" icon={<MailOutlined />}>
             <Link to=""> Envoyer</Link>
@@ -298,8 +297,9 @@ export default function Devis() {
             />
           </div>
         </div>
+      
       </div>
- 
+   
     </main>
   );
 }

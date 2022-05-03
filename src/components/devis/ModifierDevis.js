@@ -22,7 +22,7 @@ import {
   MailOutlined,
   FormOutlined,
 } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link ,useParams,Route} from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import Articles from "../articles/Articles";
 import "./devis1.css";
@@ -30,6 +30,7 @@ import "./devis1.css";
 const { Text } = Typography;
 const { TextArea } = Input;
 const ModifierDevis = () => {
+  const {modifier} = useParams();
 const [componentSize, setComponentSize] = useState("default");
 const { handleSubmit, control, reset ,formState: { errors }} = useForm({
   defaultValues: {

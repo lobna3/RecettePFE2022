@@ -48,8 +48,8 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/recette" element={<Recette />} />
           <Route path="/devis" element={<Devis />} />
-          <Route path="/modifier_devis/:id" element={<ModifierDevis />} />
-          <Route path="/detail_devis/:id" element={<DetailDevis />} />
+          <Route path="/devis/:detail" element={<DetailDevis />} />
+          <Route path="/devi/:modifier" element={<ModifierDevis />} />
           <Route path="/factures" element={<Facture />} />
           <Route path="/commandes" element={<Commande />} />
           <Route path="/ventes" element={<Ventes />} />
