@@ -39,8 +39,6 @@ export default function AjoutDevis1() {
   const { addCommandeInfo } = useSelector((state) => state.commande);
   const dispatch = useDispatch();
 
- 
-
   const {
     handleSubmit,
     control,
@@ -739,7 +737,7 @@ export default function AjoutDevis1() {
             className="btn btn-primary "
             style={{ marginBottom: 20 }}
           >
-            Ajouter
+            Ajouter Commande
           </button>
         </form>
       </Row>

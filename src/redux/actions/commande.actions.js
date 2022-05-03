@@ -94,7 +94,7 @@ export const deleteCommandeApi = (id) => async (dispatch) => {
         Authorization: localStorage.getItem("token"),
       },
     };
-     dispatch(addCommande());
+    // dispatch(addCommande());
     let result = await deleteApi("delete_commande/" + id, config);
     if (result) {
       dispatch(getCommandesApi());
