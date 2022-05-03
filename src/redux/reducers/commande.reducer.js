@@ -63,6 +63,8 @@ const commandeReducer = (state = commandeInitState, action) => {
   switch (type) {
     case ADD_COMMANDE_SUCCESS:
       return { ...state, loading: true };
+    //case ADD_COMMANDE:
+        //return { ...state, loading: true };
     case ADD_COMMANDE:
       let {
         dateEmission,
@@ -179,8 +181,10 @@ const commandeReducer = (state = commandeInitState, action) => {
         dateP: dataP,
         montantP: montantP,
       };
+    case GET_COMMANDE_LIST:
+      return { ...state, loading: true };
     case GET_COMMANDE_LIST_SUCCESS:
-      return { ...state, commandeList: payload };
+      return { ...state, loading: false, commandeList: payload };
     case UPDATE_COMMANDE:
       return { ...state, selectedCommande: payload };
     case DELETE_COMMANDE:
