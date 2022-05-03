@@ -8,8 +8,7 @@ import {
   MailOutlined,
   FormOutlined,
 } from "@ant-design/icons";
-import { Link } from "react-router-dom";
-
+import { Link ,useLocation,useParams,matchRoutes} from "react-router-dom";
 import { Table, Space } from "antd";
 import { DevisHeader } from "../RacetteHeader";
 import { ToastContainer } from "react-toastify";
@@ -17,10 +16,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getCommandesApi,
   deleteCommandeApi,
-  updateCommandeApi,
+  updateCommande
 } from "../../redux/actions/commande.actions";
-import ModifierDevis from "./ModifierDevis";
-import DetailDevis from "./DetailDevis";
 import Swal from "sweetalert2";
 
 const { Text } = Typography;
@@ -52,11 +49,17 @@ function handleMenuClick(e) {
 function onChange(pagination, filters, sorter, extra) {
   console.log("params", pagination, filters, sorter, extra);
 }
+
+
 export default function Devis() {
+  const location = useLocation();
+ 
+ 
   const { commandeList } = useSelector((state) => state.commande);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCommandesApi());
+    console.log("URL", location.pathname);
   }, []);
   const [selectionType, setSelectionType] = useState("checkbox");
   const displayEtat = (etat) => {
@@ -86,6 +89,7 @@ export default function Devis() {
             <Link to="/detail_devis/:id"> Visualiser</Link>
           </Menu.Item>
           <Menu.Item key="5" icon={<FormOutlined />}>
+          
             <Link to="/modifier_devis/:id"> Modifier</Link>
           </Menu.Item>
           <Menu.Item key="3" icon={<MailOutlined />}>
@@ -112,7 +116,7 @@ export default function Devis() {
           </Menu.Item>
         </Menu>
       ))}
-      ,
+    
     </>
   );
 
@@ -207,7 +211,7 @@ export default function Devis() {
         return (
           <>
             <Space direction="vertical">
-              <Text strong>{record.dateEmission}</Text>
+              <Text strong>{(record.dateEmission)}</Text>
             </Space>
           </>
         );
@@ -295,6 +299,7 @@ export default function Devis() {
           </div>
         </div>
       </div>
+ 
     </main>
   );
 }

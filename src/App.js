@@ -18,7 +18,7 @@ import Brouillon from "./components/brouillon/Brouillon";
 //import ProtectedRoute from './components/ProtectedRoute';
 import ModifierDevis from "./components/devis/ModifierDevis";
 import DetailDevis from "./components/devis/DetailDevis";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route,Outlet } from "react-router-dom";
 //import { store } from "./components/store";
 import { Provider } from "react-redux";
 //import { useState } from "react";
@@ -48,6 +48,8 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/recette" element={<Recette />} />
           <Route path="/devis" element={<Devis />} />
+          <Route path="/modifier_devis/:id" element={<ModifierDevis />} />
+          <Route path="/detail_devis/:id" element={<DetailDevis />} />
           <Route path="/factures" element={<Facture />} />
           <Route path="/commandes" element={<Commande />} />
           <Route path="/ventes" element={<Ventes />} />
@@ -55,8 +57,6 @@ function App() {
           <Route path="/not_connected" element={<AlertProtection />} />
           <Route path="/" element={<Dashbord />} />
           <Route path="/ajouter_devis1" element={<AjoutDevis1 />} />
-          <Route path="/modifier_devis/:id" element={<ModifierDevis />} />
-          <Route path="/detail_devis/:id" element={<DetailDevis />} />
           <Route path="/detail_commande/:id" element={<DetailCommande />} />
           <Route path="/paiement" element={<Paiement />} />
         </Routes>
