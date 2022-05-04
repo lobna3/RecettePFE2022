@@ -122,7 +122,7 @@ export const getCommandeById = (id) => async (dispatch) => {
   } catch (error) {console.log("ERROR", error.message);}
 };
 
-export const updateCommandeApi = (body, id) => async (dispatch) => {
+export const updateCommandeApi = (data, id) => async (dispatch) => {
   try {
     let config = {
       headers: {
@@ -130,7 +130,7 @@ export const updateCommandeApi = (body, id) => async (dispatch) => {
       },
     };
 
-    let result = await updateApi("maj_commande/" + id, body, config);
+    let result = await updateApi("maj_commande/" + id, data, config);
     if (result) {
       dispatch(getCommandesApi());
     }

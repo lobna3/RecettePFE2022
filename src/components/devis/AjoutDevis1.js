@@ -175,7 +175,6 @@ export default function AjoutDevis1() {
       dataP,
       montantP,
     };
-
     let { articles } = addCommandeInfo;
     let { suivies } = addCommandeInfo;
     let { paiements } = addCommandeInfo;

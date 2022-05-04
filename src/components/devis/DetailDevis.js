@@ -29,6 +29,50 @@ const DetailDevis = () => {
     console.log("URL", location.pathname);
   }, []);
 
+  const displayIcon = (description) => {
+    if (description == "Commande créer") {
+      return <>  <td
+      style={{ backgroundColor: "#95de64" }}
+      className="rounded-circle"
+    >
+      <FormOutlined
+        style={{ fontSize: "24px", color: "#ffff" }}
+      />{description}
+    </td>
+      </>
+      
+    } else if (description == "La commande vu par") {
+      return  <td
+      style={{ backgroundColor: "#bfbfbf" }}
+      className="rounded-circle"
+    >
+      <EyeOutlined
+        style={{ fontSize: "24px", color: "#ffff" }}
+      />
+    </td>;
+    } else if (description == "La commande livré avec succées") {
+      return  <td
+      style={{ backgroundColor: "#135200" }}
+      className="rounded-circle"
+    >
+      <DollarCircleOutlined
+        style={{ fontSize: "24px", color: "#ffff" }}
+      />{description}
+    </td>;
+    } else if (description == "La commande a été modifié ") {
+      return <td
+      style={{ backgroundColor: "#ff7875" }}
+      className="rounded-circle"
+    >
+      <SyncOutlined
+        style={{ fontSize: "24px", color: "#ffff" }}
+      />{description}
+    </td>;
+    } else {
+      return {description};
+    }
+  };
+
   return (
     <main id="main" class="main bg-light">
       <CommandeDetailHeader />
@@ -104,7 +148,7 @@ const DetailDevis = () => {
                     <Text className="d-flex">Contact:</Text>
                   </td>
                   <td>
-                    <Text type="secondary">{commandeDetails.client.email} </Text>
+                    <Text type="secondary">{/*{commandeDetails.client.email} */} </Text>
                   </td>
                 </tr>
                 <tr>
@@ -112,7 +156,7 @@ const DetailDevis = () => {
                     <Text className="d-flex">Société: </Text>
                   </td>
                   <td>
-                    <Text type="secondary">{commandeDetails.client.entreprise}</Text>
+                    <Text type="secondary">{/* {commandeDetails.client.entreprise}*/}</Text>
                   </td>
                 </tr>
                 <tr>
@@ -120,7 +164,7 @@ const DetailDevis = () => {
                     <Text className="d-flex"> Adresse: </Text>
                   </td>
                   <td>
-                    <Text type="secondary">{commandeDetails.client.siteinternet}</Text>
+                    <Text type="secondary">{/*{commandeDetails.client.siteinternet} */}</Text>
                   </td>
                 </tr>
               </tbody>
@@ -152,7 +196,7 @@ const DetailDevis = () => {
                 </thead>
                 <tbody style={{ borderWidth: 1 }}>
                   <tr>
-                    <td className="d-flex">{commandeDetails.articles.service}</td>
+                    <td className="d-flex">{/* {commandeDetails.articles.service}*/}</td>
                     <td>
                       <span
                         style={{
@@ -162,10 +206,10 @@ const DetailDevis = () => {
                           padding: 2,
                         }}
                       >
-                     {commandeDetails.articles.qte}
+                    {/* {commandeDetails.articles.qte}*/}
                       </span>
                     </td>
-                    <td>{commandeDetails.articles.prix}</td>
+                    <td>{/*{commandeDetails.articles.prix} */}</td>
                     <td>
                       <Switch
                         size="small"
@@ -192,12 +236,12 @@ const DetailDevis = () => {
                       Status
                       <Text type="success" style={{ marginLeft: 20 }}>
                         <CheckCircleOutlined />
-                        Envoyé
+                         {commandeDetails.status}
                       </Text>
                       <Text strong style={{ marginLeft: 230 }}>
                         Total:
                       </Text>
-                      <Text style={{ marginLeft: 20 }}>20200 TND </Text>
+                      <Text style={{ marginLeft: 20 }}>{commandeDetails.total} </Text>
                     </Text>
                   </div>
                 </thead>
@@ -232,9 +276,9 @@ const DetailDevis = () => {
                         style={{ fontSize: "24px", color: "#ffff" }}
                       />
                     </td>
-                    <td className="text-muted d-flex">Commande crée </td>
-                    <td className="text-muted">Janvier04, 2022</td>
-                    <td className="text-muted">11:40Am</td>
+                    <td className="text-muted d-flex">{/*{commandeDetails.suivies.titre} */} </td>
+                    <td className="text-muted">{/*{commandeDetails.suivies.createdAt} */}</td>
+                    <td className="text-muted">{/*{commandeDetails.suivies.createdAt}*/}</td>
                   </tr>
                   <p></p>
                   <tr>

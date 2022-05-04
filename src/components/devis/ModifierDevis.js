@@ -1,4 +1,5 @@
-import React , { useState } from "react";
+import React , { useState,useEffect } from "react";
+import { useSelector , useDispatch} from 'react-redux'
 import { DevisHeader } from "../RacetteHeader";
 import {
   Row,
@@ -22,22 +23,35 @@ import {
   MailOutlined,
   FormOutlined,
 } from "@ant-design/icons";
-import { Link ,useParams,Route} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import Articles from "../articles/Articles";
+import {updateCommandeApi } from '../../redux/actions/commande.actions';
 import "./devis1.css";
 
 const { Text } = Typography;
 const { TextArea } = Input;
 const ModifierDevis = () => {
-  const {modifier} = useParams();
-const [componentSize, setComponentSize] = useState("default");
-const { handleSubmit, control, reset ,formState: { errors }} = useForm({
+//const {modifier} = useParams();
+const [componentSize] = useState("default");
+const {  control,formState: { errors }} = useForm({
   defaultValues: {
   
   }
 });
-const onSubmit = data => console.log(data);
+const [name, setName] = useState('');
+const dispatch = useDispatch();
+const { selectedCommande } = useSelector((state) => state.commande);
+useEffect(() => {
+  setName(selectedCommande.name);
+}, [selectedCommande])
+
+const confirmAdd = () => {
+  let data = { name: name }
+  dispatch(updateCommandeApi(data,selectedCommande._id))
+  
+}
+
   return (
     <main id="main" class="main bg-light">
       <DevisHeader />
@@ -588,9 +602,10 @@ const onSubmit = data => console.log(data);
             </Col>
           </Row>
           <button
-            type="submit"
+            type="button"
             className="btn btn-primary "
             style={{ marginBottom: 20 }}
+            onClick={confirmAdd}
           >
             Modifier Commande
           </button>
