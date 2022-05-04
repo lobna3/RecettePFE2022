@@ -89,6 +89,8 @@ const commandeReducer = (state = commandeInitState, action) => {
         taxe,
         prix,
         service,
+        adresseFacturation,
+        adresseLivraison,
         typeS,
         titreS,
         descriptionS,
@@ -124,6 +126,8 @@ const commandeReducer = (state = commandeInitState, action) => {
           recurrente: recurrente,
           status: status,
           etat: etat,
+          adresseFacturation,
+          adresseLivraison,
         },
         ...state.addCommandeInfo,
         articles: [

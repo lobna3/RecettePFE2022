@@ -24,7 +24,6 @@ const DetailDevis = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { commandeDetails } = useSelector((state) => state.detailsCommande);
-  const [selectedCommande, setSelectedCommande] = useState("");
   useEffect(() => {
     dispatch(getCommandesListDetailsApi(detail));
     console.log("URL", location.pathname);
@@ -46,13 +45,8 @@ const DetailDevis = () => {
               borderRadius: "15px 15px",
             }}
           >
-            <p>{detail}</p>
-
-            <div>
-             
-            </div>
-
-            <Title level={5}>Devis #003645</Title>
+           
+            <Title level={5}>Devis #{commandeDetails.nFacture}</Title>
 
             <Table borderless>
               <tbody>
@@ -69,10 +63,13 @@ const DetailDevis = () => {
                 <tr>
                   <td>
                     <DatePicker />
+                    {commandeDetails.dateEcheance}
                     <hr />
                   </td>
                   <td>
-                    <DatePicker /> <hr />
+                    <DatePicker />
+                    {commandeDetails.dateEmission}
+                     <hr />
                   </td>
                 </tr>
               </tbody>
@@ -93,9 +90,7 @@ const DetailDevis = () => {
                       }}
                     >
                       <Text type="secondary" className="">
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500.
+                        {commandeDetails.remarque}
                         <p>
                           <br />
                           <br />
@@ -109,7 +104,7 @@ const DetailDevis = () => {
                     <Text className="d-flex">Contact:</Text>
                   </td>
                   <td>
-                    <Text type="secondary">Mouhamed@gmail.com </Text>
+                    <Text type="secondary">{commandeDetails.client.email} </Text>
                   </td>
                 </tr>
                 <tr>
@@ -117,7 +112,7 @@ const DetailDevis = () => {
                     <Text className="d-flex">Société: </Text>
                   </td>
                   <td>
-                    <Text type="secondary">SuperVision plus+</Text>
+                    <Text type="secondary">{commandeDetails.client.entreprise}</Text>
                   </td>
                 </tr>
                 <tr>
@@ -125,7 +120,7 @@ const DetailDevis = () => {
                     <Text className="d-flex"> Adresse: </Text>
                   </td>
                   <td>
-                    <Text type="secondary">Oinville-sur-Montcient, France</Text>
+                    <Text type="secondary">{commandeDetails.client.siteinternet}</Text>
                   </td>
                 </tr>
               </tbody>
@@ -157,7 +152,7 @@ const DetailDevis = () => {
                 </thead>
                 <tbody style={{ borderWidth: 1 }}>
                   <tr>
-                    <td className="d-flex">Produit1</td>
+                    <td className="d-flex">{commandeDetails.articles.service}</td>
                     <td>
                       <span
                         style={{
@@ -167,10 +162,10 @@ const DetailDevis = () => {
                           padding: 2,
                         }}
                       >
-                        200
+                     {commandeDetails.articles.qte}
                       </span>
                     </td>
-                    <td>200Dt</td>
+                    <td>{commandeDetails.articles.prix}</td>
                     <td>
                       <Switch
                         size="small"
@@ -180,54 +175,7 @@ const DetailDevis = () => {
                       />
                     </td>
                   </tr>
-                  <tr>
-                    <td className="d-flex">Produit1</td>
-                    <td>
-                      <span
-                        style={{
-                          borderWidth: 1,
-                          borderStyle: "dashed",
-                          borderColor: "#0d6efd",
-                          padding: 2,
-                        }}
-                      >
-                        200
-                      </span>
-                    </td>
-                    <td>200Dt</td>
-                    <td>
-                      <Switch
-                        size="small"
-                        checkedChildren={<CheckOutlined />}
-                        unCheckedChildren={<CloseOutlined />}
-                        defaultChecked
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="d-flex">Produit1</td>
-                    <td>
-                      <span
-                        style={{
-                          borderWidth: 1,
-                          borderStyle: "dashed",
-                          borderColor: "#0d6efd",
-                          padding: 2,
-                        }}
-                      >
-                        200
-                      </span>
-                    </td>
-                    <td>200Dt</td>
-                    <td>
-                      <Switch
-                        size="small"
-                        checkedChildren={<CheckOutlined />}
-                        unCheckedChildren={<CloseOutlined />}
-                        defaultChecked
-                      />
-                    </td>
-                  </tr>
+                  
                   <p></p>
                 </tbody>
               </Table>

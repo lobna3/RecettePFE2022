@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { AjoutDHeader } from "../RacetteHeader";
 import {
   Row,
@@ -40,6 +40,9 @@ export default function AjoutDevis1() {
   const { clientList } = useSelector((state) => state.client);
   const [selectedClient, setSelectedClient] = useState("");
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getClientListApi());
+  }, []);
 
   const {
     handleSubmit,
@@ -64,8 +67,8 @@ export default function AjoutDevis1() {
       status: "Devis",
       etat: "NonPayé",
       client: "625d279312fbb95eed52430a",
-      // adresseFacturation: "",
-      // adresseLivraison: "",
+      adresseFacturation: "",
+      adresseLivraison: "",
 
       qte: "5",
       pu: "150",
@@ -109,6 +112,8 @@ export default function AjoutDevis1() {
       remarque,
       recurrente,
       status,
+      adresseFacturation,
+      adresseLivraison,
       qte,
       pu,
       taxe,
@@ -148,6 +153,8 @@ export default function AjoutDevis1() {
       status,
       etat,
       client: "625d279312fbb95eed52430a",
+      adresseFacturation,
+      adresseLivraison,
       qte,
       pu,
       taxe,
@@ -448,11 +455,11 @@ export default function AjoutDevis1() {
                               dispatch(getClientListApi);
                           }} 
                           >
-                            <Select.Option value="625d279312fbb95eed52430a">
+                            <Select.Option >
                               Selectionner un client
                             </Select.Option>
                             {clientList.map((elm) => (
-                              <Select.Option value={elm._id}>{elm.nom}</Select.Option>
+                              <Select.Option value={elm._id}>{elm.nom} {elm.prenom}</Select.Option>
                             ))}
                           </Select>
                         </Form.Item>
@@ -482,7 +489,7 @@ export default function AjoutDevis1() {
                       </span>
                     )}
                   </Row>
-                  {/* <Row>
+                  <Row>
                     <Controller
                       name="adresseFacturation"
                       control={control}
@@ -522,7 +529,7 @@ export default function AjoutDevis1() {
                         </Form.Item>
                       )}
                     />
-                  </Row>*/}
+                  </Row>
 
                   <hr />
                   <Row>
