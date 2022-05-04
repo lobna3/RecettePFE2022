@@ -106,7 +106,7 @@ export const deleteCommandeApi = (id) => async (dispatch) => {
   }
 };
 
-export const getCommandeById = (id) => async (dispatch) => {
+export const getCommandeByUser = (id) => async (dispatch) => {
   try {
     dispatch(getCommandesList());
     let config = {
