@@ -7,7 +7,7 @@ const postApi = async (url, body, config = {}) => {
     let response = await axios.post(`${BASE_URL}/${url}`, body, config);
     return response.data;
   } catch (error) {
-    console.log("error", error.message);
+    console.log("POST error", error.message);
     return null;
   }
 };
@@ -17,7 +17,7 @@ const updateApi = async (url, body, config = {}) => {
     let response = await axios.put(`${BASE_URL}/${url}`, body, config);
     return response.data;
   } catch (error) {
-    console.log("error", error.message);
+    console.log("PUT error", error.message);
     return null;
   }
 };
@@ -27,7 +27,7 @@ const getApi = async (url, config = {}) => {
     let response = await axios.get(`${BASE_URL}/${url}`, config);
     return response.data;
   } catch (error) {
-    console.log("error", error.message);
+    console.log("GET error", error.message);
     return null;
   }
 };
@@ -37,7 +37,7 @@ const deleteApi = async (url, body, config = {}) => {
     let response = await axios.delete(`${BASE_URL}/${url}`, body, config);
     return response.data;
   } catch (error) {
-    console.log("error", error.message);
+    console.log("DELETE error", error.message);
     return null;
   }
 };
