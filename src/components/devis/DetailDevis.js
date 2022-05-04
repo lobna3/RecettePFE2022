@@ -15,15 +15,20 @@ import {
 } from "@ant-design/icons";
 import Table from "react-bootstrap/Table";
 import { Card, Typography, DatePicker } from "antd";
-import { Link, useParams } from "react-router-dom";
-import { getCommandeDetailsApi } from "../../redux/actions/commande.actions";
+import { Link, useParams, useLocation } from "react-router-dom";
+import {getCommandesListDetailsApi } from "../../redux/actions/commande.details.actions";
 const { Title, Text } = Typography;
 
 const DetailDevis = () => {
   const { detail } = useParams();
+  const location = useLocation();
   const dispatch = useDispatch();
-  const [selectedCommande, setSelectedCommande] = useState("");
-  const { commandeDetails } = useSelector((state) => state.commande);
+  const { commandeDetails } = useSelector((state) => state.detailsCommande);
+  const [selectedCommande, setSelectedCommande] = useState('');
+  useEffect(() => {
+    dispatch(getCommandesListDetailsApi(detail));
+    console.log("URL", location.pathname);
+  }, []);
 
   return (
     <main id="main" class="main bg-light">
@@ -41,9 +46,8 @@ const DetailDevis = () => {
               borderRadius: "15px 15px",
             }}
           >
-            <h1>{detail}</h1>
-            
-
+            <p>{detail}</p>
+      
             <Title level={5}>Devis #003645</Title>
             <Table borderless>
               <tbody>
@@ -121,7 +125,6 @@ const DetailDevis = () => {
                 </tr>
               </tbody>
             </Table>
-           
             <hr />
           </Card>
         </Col>

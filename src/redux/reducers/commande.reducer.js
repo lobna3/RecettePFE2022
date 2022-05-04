@@ -5,14 +5,12 @@ import {
   GET_COMMANDE_LIST_SUCCESS,
   UPDATE_COMMANDE,
   DELETE_COMMANDE,
-  GET_DETAILS,
-  GET_DETAILS_SUCCESS
+
 } from "../actionTypes";
 
 const commandeInitState = {
   loading: false,
   commandeList: [],
-  commandeDetails: [],
   selectedCommande: {},
   addCommandeInfo: {
     dateEmission: Date,
@@ -127,7 +125,7 @@ const commandeReducer = (state = commandeInitState, action) => {
           status: status,
           etat: etat,
         },
-        ...state.addClientInfo,
+        ...state.addCommandeInfo,
         articles: [
           ...state.addCommandeInfo.articles,
           {
@@ -143,7 +141,7 @@ const commandeReducer = (state = commandeInitState, action) => {
         taxe: taxe,
         prix: prix,
         service: service,
-        ...state.addClientInfo,
+        ...state.addCommandeInfo,
         suivies: [
           ...state.addCommandeInfo.suivies,
           {
@@ -155,7 +153,7 @@ const commandeReducer = (state = commandeInitState, action) => {
         typeS: typeS,
         titreS: titreS,
         descriptionS: descriptionS,
-        ...state.addClientInfo,
+        ...state.addCommandeInfo,
         paiements: [
           ...state.addCommandeInfo.paiements,
           {
@@ -192,10 +190,7 @@ const commandeReducer = (state = commandeInitState, action) => {
       return { ...state, selectedCommande: payload };
     case DELETE_COMMANDE:
       return { ...state, loading: true };
-    case GET_DETAILS:
-      return { ...state, loading: true, selectedCommande: payload };
-    case GET_DETAILS_SUCCESS:
-      return { ...state, loading: false, commandeDetails: payload };
+  
     default:
       return state;
   }

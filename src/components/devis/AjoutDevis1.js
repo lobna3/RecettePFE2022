@@ -29,7 +29,7 @@ import "./devis1.css";
 import { useToasts } from "react-toast-notifications";
 import { useDispatch, useSelector } from "react-redux";
 import { addCommandetApi, addStep } from "../../redux/actions/commande.actions";
-
+import { getClientListApi } from "../../redux/actions/client.actions";
 const { Text } = Typography;
 const { TextArea } = Input;
 
@@ -37,6 +37,8 @@ export default function AjoutDevis1() {
   const [componentSize, setComponentSize] = useState("default");
   const { addToast } = useToasts();
   const { addCommandeInfo } = useSelector((state) => state.commande);
+  const { clientList } = useSelector((state) => state.client);
+  const [selectedClient, setSelectedClient] = useState("");
   const dispatch = useDispatch();
 
   const {
@@ -150,7 +152,7 @@ export default function AjoutDevis1() {
       pu,
       taxe,
       prix,
-      service:"623efa58cef38dae7b89e586",
+      service: "623efa58cef38dae7b89e586",
       typeS,
       titreS,
       descriptionS,
@@ -167,9 +169,9 @@ export default function AjoutDevis1() {
       montantP,
     };
 
-    let { articles} = addCommandeInfo;
-    let{suivies}=addCommandeInfo;
-    let{paiements}=addCommandeInfo;
+    let { articles } = addCommandeInfo;
+    let { suivies } = addCommandeInfo;
+    let { paiements } = addCommandeInfo;
     dispatch(
       addCommandetApi(
         {
@@ -440,10 +442,18 @@ export default function AjoutDevis1() {
                             textAlign: "left",
                           }}
                         >
-                          <Select {...field}>
-                            <Select.Option value={"625d279312fbb95eed52430a"}>
-                              Client
+                          <Select
+                            {...field}
+                            onClick={() => {
+                              dispatch(getClientListApi);
+                          }} 
+                          >
+                            <Select.Option value="625d279312fbb95eed52430a">
+                              Selectionner un client
                             </Select.Option>
+                            {clientList.map((elm) => (
+                              <Select.Option value={elm._id}>{elm.nom}</Select.Option>
+                            ))}
                           </Select>
                         </Form.Item>
                       )}
