@@ -12,6 +12,7 @@ import { Link, useLocation, useMatch } from "react-router-dom";
 import { Table, Space } from "antd";
 import { DevisHeader } from "../RacetteHeader";
 import { ToastContainer } from "react-toastify";
+import { useToasts } from "react-toast-notifications";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCommandesApi,
@@ -52,6 +53,7 @@ function onChange(pagination, filters, sorter, extra) {
 
 export default function Devis() {
   const location = useLocation();
+  const { addToast } = useToasts();
   const { commandeList } = useSelector((state) => state.commande);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -91,7 +93,7 @@ export default function Devis() {
 
   const menu = (
     <>
-      {commandeList.map((elm) => (
+      {commandeList && commandeList.map((elm) => (
         <Menu onClick={handleMenuClick}>
           <Menu.Item key="1" icon={<PrinterFilled />}>
             <Link to=""> Imprimer</Link>
@@ -116,7 +118,7 @@ export default function Devis() {
                   cancelButtonText: `Annuler`,
                 }).then((result) => {
                   if (result.isConfirmed) {
-                    dispatch(deleteCommandeApi(elm._id));
+                    dispatch(deleteCommandeApi(elm._id,addToast));
                   }
                 });
               }}

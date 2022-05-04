@@ -88,7 +88,7 @@ export const getCommandeListApi = () => async (dispatch) => {
   }
 };
 
-export const deleteCommandeApi = (id) => async (dispatch) => {
+export const deleteCommandeApi = (id, addToast) => async (dispatch) => {
   try {
     let config = {
       headers: {
@@ -99,6 +99,9 @@ export const deleteCommandeApi = (id) => async (dispatch) => {
     let result = await deleteApi("delete_commande/" + id, config);
     if (result) {
       dispatch(getCommandesApi());
+      addToast("Commande supprimer avec succées", { appearance: "success" });
+    } else {
+      addToast("Erreur c'est produite , ressayer", { appearance: "error" });
     }
     console.log("Resultat",result);
   } catch (error) {
@@ -117,7 +120,9 @@ export const getCommandeByUser = (id) => async (dispatch) => {
     let result = await getApi("commandeById/" + id, config);
     if (result) {
       dispatch(getCommandesListSuccess(result));
+   
     }
+   
     console.log("details commandes",result);
   } catch (error) {console.log("ERROR", error.message);}
 };

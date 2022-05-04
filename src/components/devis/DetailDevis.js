@@ -26,7 +26,7 @@ const DetailDevis = () => {
   useEffect(() => {
     dispatch(getCommandesListDetailsApi(detail));
     console.log("URL", location.pathname);
-  }, []);
+  }, [detail]);
 
   const displayIcon = (description) => {
     if (description == "Commande créer") {
@@ -264,7 +264,7 @@ const DetailDevis = () => {
               <Title level={5} className="d-flex">
                 Suivie
               </Title>
-              <Table hover borderless>
+              <Table  borderless>
                 <tbody>
                   <tr>
                     <td
