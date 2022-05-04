@@ -8,7 +8,7 @@ import {
   MailOutlined,
   FormOutlined,
 } from "@ant-design/icons";
-import { Link ,useLocation,useMatch} from "react-router-dom";
+import { Link, useLocation, useMatch } from "react-router-dom";
 import { Table, Space } from "antd";
 import { DevisHeader } from "../RacetteHeader";
 import { ToastContainer } from "react-toastify";
@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getCommandesApi,
   deleteCommandeApi,
-  updateCommande
+  updateCommande,
 } from "../../redux/actions/commande.actions";
 import Swal from "sweetalert2";
 
@@ -50,17 +50,15 @@ function onChange(pagination, filters, sorter, extra) {
   console.log("params", pagination, filters, sorter, extra);
 }
 
-
 export default function Devis() {
-
   const location = useLocation();
-
   const { commandeList } = useSelector((state) => state.commande);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCommandesApi());
     console.log("URL", location.pathname);
   }, []);
+
   const [selectionType, setSelectionType] = useState("checkbox");
   const displayEtat = (etat) => {
     if (etat == "Refusé") {
@@ -75,6 +73,19 @@ export default function Devis() {
       return <span className="badge bg-primary">{etat}</span>;
     } else {
       return <span className="badge bg-info">{etat}</span>;
+    }
+  };
+  const displayRole = (status) => {
+    switch (status) {
+      case 1:
+        return "Facture";
+      case 2:
+        return "Commandes en cours";
+      case 0:
+        return "Devis en cours";
+
+      default:
+        return "Devis en cours";
     }
   };
 
@@ -115,7 +126,6 @@ export default function Devis() {
           </Menu.Item>
         </Menu>
       ))}
-    
     </>
   );
 
@@ -210,7 +220,7 @@ export default function Devis() {
         return (
           <>
             <Space direction="vertical">
-              <Text strong>{(record.dateEmission)}</Text>
+              <Text strong>{record.dateEmission}</Text>
             </Space>
           </>
         );
@@ -297,9 +307,7 @@ export default function Devis() {
             />
           </div>
         </div>
-      
       </div>
-   
     </main>
   );
 }

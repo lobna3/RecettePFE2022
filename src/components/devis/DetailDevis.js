@@ -16,7 +16,7 @@ import {
 import Table from "react-bootstrap/Table";
 import { Card, Typography, DatePicker } from "antd";
 import { Link, useParams, useLocation } from "react-router-dom";
-import {getCommandesListDetailsApi } from "../../redux/actions/commande.details.actions";
+import { getCommandesListDetailsApi } from "../../redux/actions/commande.details.actions";
 const { Title, Text } = Typography;
 
 const DetailDevis = () => {
@@ -24,7 +24,7 @@ const DetailDevis = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { commandeDetails } = useSelector((state) => state.detailsCommande);
-  const [selectedCommande, setSelectedCommande] = useState('');
+  const [selectedCommande, setSelectedCommande] = useState("");
   useEffect(() => {
     dispatch(getCommandesListDetailsApi(detail));
     console.log("URL", location.pathname);
@@ -47,8 +47,13 @@ const DetailDevis = () => {
             }}
           >
             <p>{detail}</p>
-      
+
+            <div>
+             
+            </div>
+
             <Title level={5}>Devis #003645</Title>
+
             <Table borderless>
               <tbody>
                 <tr>
