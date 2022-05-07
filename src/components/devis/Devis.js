@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
-import { Menu, message, Typography } from "antd";
+import {  message, Typography } from "antd";
 import {
   PrinterFilled,
   PlusSquareFilled,
@@ -36,32 +36,21 @@ const rowSelection = {
     nReference: record.nReference,
   }),
 };
-
-function handleButtonClick(e) {
-  message.info("Click on left button.");
-  console.log("click left button", e);
-}
-
-function handleMenuClick(e) {
-  message.info("Click on menu item.");
-  console.log("click", e);
-}
-
 function onChange(pagination, filters, sorter, extra) {
   console.log("params", pagination, filters, sorter, extra);
 }
 
 export default function Devis() {
+  const [selectionType] = useState("checkbox");
   const location = useLocation();
+  const dispatch = useDispatch();
   const { addToast } = useToasts();
   const { commandeList } = useSelector((state) => state.commande);
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCommandesApi());
     console.log("URL", location.pathname);
   }, []);
 
-  const [selectionType] = useState("checkbox");
   const displayEtat = (etat) => {
     if (etat == "Refusé") {
       return <span className="badge bg-danger">{etat}</span>;
@@ -90,47 +79,6 @@ export default function Devis() {
         return "Devis en cours";
     }
   };
-
-  const menu = (
-    <>
-      {commandeList &&
-        commandeList.map((elm) => (
-          <Menu onClick={handleMenuClick}>
-            <Menu.Item key="1" icon={<PrinterFilled />}>
-              <Link to=""> Imprimer</Link>
-            </Menu.Item>
-            <Menu.Item key="2" icon={<FundViewOutlined />}>
-              <Link to={`/devis/${elm._id}`}> Visualiser</Link>
-            </Menu.Item>
-            <Menu.Item key="5" icon={<FormOutlined />}>
-              <Link to={`/devi/${elm._id}`}> Modifier</Link>
-            </Menu.Item>
-            <Menu.Item key="3" icon={<MailOutlined />}>
-              <Link to=""> Envoyer</Link>
-            </Menu.Item>
-            <Menu.Item key="4" icon={<DeleteOutlined />}>
-              <span
-                type="button"
-                onClick={() => {
-                  Swal.fire({
-                    title: "Vous êtes sure de supprimer cet Commande ?",
-                    showCancelButton: true,
-                    confirmButtonText: `Confirmer`,
-                    cancelButtonText: `Annuler`,
-                  }).then((result) => {
-                    if (result.isConfirmed) {
-                      dispatch(deleteCommandeApi(elm._id, addToast));
-                    }
-                  });
-                }}
-              >
-                Supprimer
-              </span>
-            </Menu.Item>
-          </Menu>
-        ))}
-    </>
-  );
 
   const columns = [
     {
