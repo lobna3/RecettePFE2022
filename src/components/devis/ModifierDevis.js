@@ -27,6 +27,7 @@ import { Link } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import Articles from "../articles/Articles";
 import {updateCommandeApi } from '../../redux/actions/commande.actions';
+import { getClientListApi } from "../../redux/actions/client.actions";
 import "./devis1.css";
 
 const { Text } = Typography;
@@ -34,21 +35,83 @@ const { TextArea } = Input;
 const ModifierDevis = () => {
 //const {modifier} = useParams();
 const [componentSize] = useState("default");
-const {  control,formState: { errors }} = useForm({
+const {
+  handleSubmit,
+  control,
+  formState: { errors },
+} = useForm({
   defaultValues: {
-  
-  }
+    dateEmission: Date,
+    dateEcheance: Date,
+    condition: "Personalisé",
+    nFacture: "",
+    nReference: "",
+    total: "",
+    taxes: "",
+    remise: "",
+    totalTtc: "",
+    paye: "",
+    solde: "",
+    note: "",
+    remarque: "",
+    recurrente: "oui",
+    status: "Devis",
+    etat: "NonPayé",
+    client: "625d279312fbb95eed52430a",
+    adresseFacturation: "",
+    adresseLivraison: "",
+
+   
+  },
 });
-const [name, setName] = useState('');
+
 const dispatch = useDispatch();
 const { selectedCommande } = useSelector((state) => state.commande);
+const { clientList } = useSelector((state) => state.client);
 useEffect(() => {
-  setName(selectedCommande.name);
-}, [selectedCommande])
-
+  dispatch(getClientListApi());
+}, []);
 const confirmAdd = () => {
-  let data = { name: name }
-  dispatch(updateCommandeApi(data,selectedCommande._id))
+  let {
+    dateEmission,
+    dateEcheance,
+    condition,
+    nFacture,
+    nReference,
+    total,
+    taxes,
+    remise,
+    totalTtc,
+    paye,
+    solde,
+    note,
+    remarque,
+    recurrente,
+    status,
+    adresseFacturation,
+    adresseLivraison,
+    qte,
+    pu,
+    taxe,
+    prix,
+    service,
+    etat,
+    typeS,
+    titreS,
+    descriptionS,
+    soldeP: soldeP,
+    typePaiement,
+    regPaiement,
+    etatP,
+    reste,
+    avance,
+    mis,
+    nCarte,
+    ccv,
+    dataP,
+    montantP,
+  } = selectedCommande;
+  dispatch(updateCommandeApi(selectedCommande,selectedCommande._id))
   
 }
 
@@ -295,7 +358,7 @@ const confirmAdd = () => {
                   </Row>
                   <hr />
                   <Row>
-                    <Controller
+                  <Controller
                       name="client"
                       control={control}
                       rules={{ required: true }}
@@ -309,10 +372,18 @@ const confirmAdd = () => {
                             textAlign: "left",
                           }}
                         >
-                          <Select {...field}>
-                            <Select.Option value={"625d279312fbb95eed52430a"}>
-                              Client
+                          <Select
+                            {...field}
+                            onClick={() => {
+                              dispatch(getClientListApi);
+                          }} 
+                          >
+                            <Select.Option >
+                              Selectionner un client
                             </Select.Option>
+                            {clientList.map((elm) => (
+                              <Select.Option value={elm._id}>{elm.nom} {elm.prenom}</Select.Option>
+                            ))}
                           </Select>
                         </Form.Item>
                       )}
@@ -341,7 +412,7 @@ const confirmAdd = () => {
                       </span>
                     )}
                   </Row>
-                  {/* <Row>
+                   <Row>
                     <Controller
                       name="adresseFacturation"
                       control={control}
@@ -381,7 +452,7 @@ const confirmAdd = () => {
                         </Form.Item>
                       )}
                     />
-                  </Row>*/}
+                  </Row>
 
                   <hr />
                   <Row>
