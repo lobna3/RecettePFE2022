@@ -34,11 +34,11 @@ const { Text } = Typography;
 const { TextArea } = Input;
 
 export default function AjoutDevis1() {
-  const [componentSize, setComponentSize] = useState("default");
+  const [componentSize] = useState("default");
   const { addToast } = useToasts();
   const { addCommandeInfo } = useSelector((state) => state.commande);
   const { clientList } = useSelector((state) => state.client);
-  const [selectedClient, setSelectedClient] = useState("");
+ // const [selectedClient, setSelectedClient] = useState("");
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getClientListApi());

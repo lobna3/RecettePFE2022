@@ -27,6 +27,8 @@ import Paiement from "./components/factures/Paiement";
 import store from "./redux/store";
 import { ToastProvider } from 'react-toast-notifications';
 
+
+
 function App() {
  // const [user, setUser] = useState(null);
  // const login = () => setUser({ name: "test", role: "admin" });
@@ -38,7 +40,6 @@ function App() {
       <Provider store={store}>
         <Navbare />
         <SideBar />
-
         <p>
           <br />
         </p>
@@ -48,6 +49,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/recette" element={<Recette />} />
           <Route path="/devis" element={<Devis />} />
+          <Route path="/ajouter_devis" element={<AjoutDevis1 />} />
           <Route path="/devis/:detail" element={<DetailDevis />} />
           <Route path="/devi/:modifier" element={<ModifierDevis />} />
           <Route path="/factures" element={<Facture />} />
@@ -56,9 +58,10 @@ function App() {
           <Route path="/brouillon" element={<Brouillon />} />
           <Route path="/not_connected" element={<AlertProtection />} />
           <Route path="/" element={<Dashbord />} />
-          <Route path="/ajouter_devis1" element={<AjoutDevis1 />} />
           <Route path="/detail_commande/:id" element={<DetailCommande />} />
           <Route path="/paiement" element={<Paiement />} />
+         
+     
         </Routes>
 
         <Footer />

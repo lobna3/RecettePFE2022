@@ -270,7 +270,7 @@ export default function Devis() {
           style={{ display: "flex", justifyContent: "flex-end" }}
           className="col-lg-12 "
         >
-          <Link className="" to="/ajouter_devis1">
+          <Link className="" to="/ajouter_devis">
             <button
               style={{ margin: "0 20px" }}
               type="button"
