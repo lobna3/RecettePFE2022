@@ -20,6 +20,8 @@ import {
   deleteCommandeApi,
 } from "../../redux/actions/commande.actions";
 import Swal from "sweetalert2";
+import EnvoyerEmail from "./EnvoyerEmail";
+import { triggerFocus } from "antd/lib/input/Input";
 
 const { Text } = Typography;
 const rowSelection = {
@@ -40,7 +42,8 @@ function onChange(pagination, filters, sorter, extra) {
   console.log("params", pagination, filters, sorter, extra);
 }
 
-export default function Devis() {
+const Devis = () => {
+  const [isOpen, setIsopen] = useState(false);
   const [selectionType] = useState("checkbox");
   const location = useLocation();
   const dispatch = useDispatch();
@@ -203,7 +206,7 @@ export default function Devis() {
           <Dropdown>
             <Dropdown.Toggle variant="" id="dropdown-basic"></Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item icon={<PrinterFilled />}>
+              <Dropdown.Item>
                 <Link to="">
                   <PrinterFilled /> Imprimer
                 </Link>
@@ -218,24 +221,37 @@ export default function Devis() {
                   <FormOutlined /> Modifier
                 </Link>
               </Dropdown.Item>
-              <Dropdown.Item> <Link to=""> <MailOutlined /> Envoyer</Link></Dropdown.Item>
-              <Dropdown.Item><DeleteOutlined   style={{ color: "#1890ff" }}/> <span className="text-primary"
-                type="button"
-                onClick={() => {
-                  Swal.fire({
-                    title: "Vous êtes sure de supprimer cet Commande ?",
-                    showCancelButton: true,
-                    confirmButtonText: `Confirmer`,
-                    cancelButtonText: `Annuler`,
-                  }).then((result) => {
-                    if (result.isConfirmed) {
-                      dispatch(deleteCommandeApi(record._id, addToast));
-                    }
-                  });
-                }}
-              >
-                Supprimer 
-              </span></Dropdown.Item>
+              <Dropdown.Item>
+                <span
+                  className="text-primary"
+                  onClick={() => {
+                    setIsopen(true);
+                  }}
+                >
+                  <MailOutlined style={{ color: "#1890ff" }} /> Envoyer
+                </span>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <DeleteOutlined style={{ color: "#1890ff" }} />
+                <span
+                  className="text-primary"
+                  type="button"
+                  onClick={() => {
+                    Swal.fire({
+                      title: "Vous êtes sure de supprimer cet Commande ?",
+                      showCancelButton: true,
+                      confirmButtonText: `Confirmer`,
+                      cancelButtonText: `Annuler`,
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        dispatch(deleteCommandeApi(record._id, addToast));
+                      }
+                    });
+                  }}
+                >
+                  Supprimer
+                </span>
+              </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Space>
@@ -244,55 +260,65 @@ export default function Devis() {
   ];
 
   return (
-    <main id="main" className="main bg-light">
-      <ToastContainer position="top-center" />
-      <DevisHeader></DevisHeader>
+    <div>
+      <main id="main" className="main bg-light">
+        <ToastContainer position="top-center" />
+        <DevisHeader></DevisHeader>
 
-      <div className="pagetitle">
-        <div
-          style={{ display: "flex", justifyContent: "flex-end" }}
-          className="col-lg-12 "
-        >
-          <Link className="" to="/ajouter_devis">
+        <div className="pagetitle">
+          <div
+            style={{ display: "flex", justifyContent: "flex-end" }}
+            className="col-lg-12 "
+          >
+            <Link className="" to="/ajouter_devis">
+              <button
+                style={{ margin: "0 20px" }}
+                type="button"
+                className="btn btn-primary btn-sm ml-8 "
+              >
+                <PlusSquareFilled /> Ajout Devis
+              </button>
+            </Link>
             <button
               style={{ margin: "0 20px" }}
               type="button"
-              className="btn btn-primary btn-sm ml-8 "
+              className="btn btn-primary  btn-sm ml-8 "
             >
-              <PlusSquareFilled /> Ajout Devis
+              <PlusSquareFilled /> Nouvelle Opération
             </button>
-          </Link>
-          <button
-            style={{ margin: "0 20px" }}
-            type="button"
-            className="btn btn-primary  btn-sm ml-8 "
-          >
-            <PlusSquareFilled /> Nouvelle Opération
-          </button>
-        </div>
+          </div>
 
-        <br />
-      </div>
-      <div className="col-lg-12 grid-margin stretch-card">
-        <div
-          className="card"
-          style={{
-            marginLeft: 20,
-            marginRight: 15,
-            marginTop: 0,
-            marginBottom: 40,
-          }}
-        >
-          <div className="card-body">
-            <Table
-              rowSelection={{ type: selectionType, ...rowSelection }}
-              columns={columns}
-              dataSource={commandeList}
-              onChange={onChange}
-            />
+          <br />
+        </div>
+        <div className="col-lg-12 grid-margin stretch-card">
+          <div
+            className="card"
+            style={{
+              marginLeft: 20,
+              marginRight: 15,
+              marginTop: 0,
+              marginBottom: 40,
+            }}
+          >
+            <div className="card-body">
+              <Table
+                rowSelection={{ type: selectionType, ...rowSelection }}
+                columns={columns}
+                dataSource={commandeList}
+                onChange={onChange}
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+      <EnvoyerEmail
+        isOpen={isOpen}
+        handleClose={() => {
+          setIsopen(false);
+        }}
+      />
+    </div>
   );
-}
+};
+
+export default Devis;
