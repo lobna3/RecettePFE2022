@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
-import {  message, Typography } from "antd";
+import { Typography } from "antd";
 import {
   PrinterFilled,
   PlusSquareFilled,
@@ -219,7 +219,7 @@ export default function Devis() {
                 </Link>
               </Dropdown.Item>
               <Dropdown.Item> <Link to=""> <MailOutlined /> Envoyer</Link></Dropdown.Item>
-              <Dropdown.Item><DeleteOutlined /> <span
+              <Dropdown.Item><DeleteOutlined   style={{ color: "#1890ff" }}/> <span className="text-primary"
                 type="button"
                 onClick={() => {
                   Swal.fire({
@@ -234,7 +234,7 @@ export default function Devis() {
                   });
                 }}
               >
-                Supprimer
+                Supprimer 
               </span></Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
