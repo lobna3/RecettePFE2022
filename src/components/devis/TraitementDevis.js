@@ -8,7 +8,8 @@ import {
 } from "@ant-design/icons";
 import "../../components/clients/modal.css";
 
-const TraitementDevis = ({ isOpen, handleClose }) => {
+const TraitementDevis = ({ isOpen, handleClose, handleFirstBtn,
+    handleSecondBtn }) => {
   return (
     <Modal
       className="modalStyle"
@@ -37,8 +38,8 @@ const TraitementDevis = ({ isOpen, handleClose }) => {
     >
       <div className="row">
         <div className="col-md-4">
-          <div className="card" style={{ marginLeft: 40, height: 200 }}>
-            <div className="card-body">
+          <div className="card" style={{ marginLeft: 20, height: 200 }}>
+            <div className="card-body text-center">
               <Link to="">
                 <h6 className="card-title">
                   <PrinterFilled
@@ -60,9 +61,9 @@ const TraitementDevis = ({ isOpen, handleClose }) => {
         <div className="col-md-4">
           <div
             className="card"
-            style={{ marginLeft: 20, marginRight: 20, height: 200 }}
+            style={{ marginLeft: 10, marginRight: 10, height: 200 }}
           >
-            <div className="card-body">
+            <div className="card-body text-center">
               <Link to="">
                 <h6 class="card-title">
                   <MailOutlined
@@ -82,8 +83,8 @@ const TraitementDevis = ({ isOpen, handleClose }) => {
           </div>
         </div>
         <div className="col-md-4">
-          <div className="card" style={{ marginRight: 40, height: 200 }}>
-            <div className="card-body">
+          <div className="card" style={{ marginRight: 20, height: 200 }}>
+            <div className="card-body text-center">
               <Link to="">
                 <h6 className="card-title">
                   <FormOutlined
@@ -101,11 +102,10 @@ const TraitementDevis = ({ isOpen, handleClose }) => {
               </Link>
             </div>
           </div>
-          <div className="card" style={{ height: 25, marginRight: 40 }}>
+          <div className="card" style={{ height: 25, marginRight: 15 }}>
             <p className="text-muted">
               <small>
-                Pour modifier votre devis
-                <Link to=""> cliquez ici !</Link>
+                Pour modifier votre devis <Link to=""> cliquez ici !</Link>
               </small>
             </p>
           </div>
