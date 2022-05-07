@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Menu, Dropdown, message, Typography } from "antd";
+import { Dropdown } from "react-bootstrap";
+import { Menu, message, Typography } from "antd";
 import {
   PrinterFilled,
   PlusSquareFilled,
@@ -8,7 +9,7 @@ import {
   MailOutlined,
   FormOutlined,
 } from "@ant-design/icons";
-import { Link, useLocation} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Table, Space } from "antd";
 import { DevisHeader } from "../RacetteHeader";
 import { ToastContainer } from "react-toastify";
@@ -17,7 +18,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getCommandesApi,
   deleteCommandeApi,
-  //updateCommande,
 } from "../../redux/actions/commande.actions";
 import Swal from "sweetalert2";
 
@@ -93,41 +93,42 @@ export default function Devis() {
 
   const menu = (
     <>
-      {commandeList && commandeList.map((elm) => (
-        <Menu onClick={handleMenuClick}>
-          <Menu.Item key="1" icon={<PrinterFilled />}>
-            <Link to=""> Imprimer</Link>
-          </Menu.Item>
-          <Menu.Item key="2" icon={<FundViewOutlined />}>
-            <Link to={`/devis/${elm._id}`}> Visualiser</Link>
-          </Menu.Item>
-          <Menu.Item key="5" icon={<FormOutlined />}>
-            <Link to={`/devi/${elm._id}`}> Modifier</Link>
-          </Menu.Item>
-          <Menu.Item key="3" icon={<MailOutlined />}>
-            <Link to=""> Envoyer</Link>
-          </Menu.Item>
-          <Menu.Item key="4" icon={<DeleteOutlined />}>
-            <span
-              type="button"
-              onClick={() => {
-                Swal.fire({
-                  title: "Vous êtes sure de supprimer cet Commande ?",
-                  showCancelButton: true,
-                  confirmButtonText: `Confirmer`,
-                  cancelButtonText: `Annuler`,
-                }).then((result) => {
-                  if (result.isConfirmed) {
-                    dispatch(deleteCommandeApi(elm._id,addToast));
-                  }
-                });
-              }}
-            >
-              Supprimer
-            </span>
-          </Menu.Item>
-        </Menu>
-      ))}
+      {commandeList &&
+        commandeList.map((elm) => (
+          <Menu onClick={handleMenuClick}>
+            <Menu.Item key="1" icon={<PrinterFilled />}>
+              <Link to=""> Imprimer</Link>
+            </Menu.Item>
+            <Menu.Item key="2" icon={<FundViewOutlined />}>
+              <Link to={`/devis/${elm._id}`}> Visualiser</Link>
+            </Menu.Item>
+            <Menu.Item key="5" icon={<FormOutlined />}>
+              <Link to={`/devi/${elm._id}`}> Modifier</Link>
+            </Menu.Item>
+            <Menu.Item key="3" icon={<MailOutlined />}>
+              <Link to=""> Envoyer</Link>
+            </Menu.Item>
+            <Menu.Item key="4" icon={<DeleteOutlined />}>
+              <span
+                type="button"
+                onClick={() => {
+                  Swal.fire({
+                    title: "Vous êtes sure de supprimer cet Commande ?",
+                    showCancelButton: true,
+                    confirmButtonText: `Confirmer`,
+                    cancelButtonText: `Annuler`,
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      dispatch(deleteCommandeApi(elm._id, addToast));
+                    }
+                  });
+                }}
+              >
+                Supprimer
+              </span>
+            </Menu.Item>
+          </Menu>
+        ))}
     </>
   );
 
@@ -251,10 +252,44 @@ export default function Devis() {
       title: "Action",
       render: (text, record) => (
         <Space wrap size="middle">
-          <Dropdown.Button
-            onClick={handleButtonClick}
-            overlay={menu}
-          ></Dropdown.Button>
+          <Dropdown>
+            <Dropdown.Toggle variant="" id="dropdown-basic"></Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item icon={<PrinterFilled />}>
+                <Link to="">
+                  <PrinterFilled /> Imprimer
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Link to={`/devis/${record._id}`}>
+                  <FundViewOutlined /> Visualiser
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Link to={`/devi/${record._id}`}>
+                  <FormOutlined /> Modifier
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item> <Link to=""> <MailOutlined /> Envoyer</Link></Dropdown.Item>
+              <Dropdown.Item><DeleteOutlined /> <span
+                type="button"
+                onClick={() => {
+                  Swal.fire({
+                    title: "Vous êtes sure de supprimer cet Commande ?",
+                    showCancelButton: true,
+                    confirmButtonText: `Confirmer`,
+                    cancelButtonText: `Annuler`,
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      dispatch(deleteCommandeApi(record._id, addToast));
+                    }
+                  });
+                }}
+              >
+                Supprimer
+              </span></Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Space>
       ),
     },

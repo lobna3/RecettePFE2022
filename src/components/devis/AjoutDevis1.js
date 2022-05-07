@@ -38,7 +38,6 @@ export default function AjoutDevis1() {
   const { addToast } = useToasts();
   const { addCommandeInfo } = useSelector((state) => state.commande);
   const { clientList } = useSelector((state) => state.client);
- // const [selectedClient, setSelectedClient] = useState("");
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getClientListApi());
