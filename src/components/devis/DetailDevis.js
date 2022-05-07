@@ -29,7 +29,7 @@ const DetailDevis = () => {
   }, [detail]);
 
   const displayIcon = (description) => {
-    if (description == "Commande créer") {
+    if (description === "Commande créer") {
       return <>  <td
       style={{ backgroundColor: "#95de64" }}
       className="rounded-circle"
@@ -40,7 +40,7 @@ const DetailDevis = () => {
     </td>
       </>
       
-    } else if (description == "La commande vu par") {
+    } else if (description === "La commande vu par") {
       return  <td
       style={{ backgroundColor: "#bfbfbf" }}
       className="rounded-circle"
@@ -49,7 +49,7 @@ const DetailDevis = () => {
         style={{ fontSize: "24px", color: "#ffff" }}
       />
     </td>;
-    } else if (description == "La commande livré avec succées") {
+    } else if (description === "La commande livré avec succées") {
       return  <td
       style={{ backgroundColor: "#135200" }}
       className="rounded-circle"
@@ -58,7 +58,7 @@ const DetailDevis = () => {
         style={{ fontSize: "24px", color: "#ffff" }}
       />{description}
     </td>;
-    } else if (description == "La commande a été modifié ") {
+    } else if (description === "La commande a été modifié ") {
       return <td
       style={{ backgroundColor: "#ff7875" }}
       className="rounded-circle"

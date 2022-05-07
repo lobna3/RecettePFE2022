@@ -8,7 +8,7 @@ import {
   MailOutlined,
   FormOutlined,
 } from "@ant-design/icons";
-import { Link, useLocation, useMatch } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 import { Table, Space } from "antd";
 import { DevisHeader } from "../RacetteHeader";
 import { ToastContainer } from "react-toastify";
@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getCommandesApi,
   deleteCommandeApi,
-  updateCommande,
+  //updateCommande,
 } from "../../redux/actions/commande.actions";
 import Swal from "sweetalert2";
 
@@ -61,7 +61,7 @@ export default function Devis() {
     console.log("URL", location.pathname);
   }, []);
 
-  const [selectionType, setSelectionType] = useState("checkbox");
+  const [selectionType] = useState("checkbox");
   const displayEtat = (etat) => {
     if (etat == "Refusé") {
       return <span className="badge bg-danger">{etat}</span>;
