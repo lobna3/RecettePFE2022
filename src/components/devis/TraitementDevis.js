@@ -64,7 +64,7 @@ const TraitementDevis = ({ isOpen, handleClose, handleFirstBtn,
             style={{ marginLeft: 10, marginRight: 10, height: 200 }}
           >
             <div className="card-body text-center">
-              <Link to="">
+              <span type="button" onClick={handleFirstBtn}>
                 <h6 class="card-title">
                   <MailOutlined
                     style={{
@@ -78,7 +78,7 @@ const TraitementDevis = ({ isOpen, handleClose, handleFirstBtn,
                   Envoyer votre devis
                 </p>
                 <p class="card-text"></p>
-              </Link>
+              </span>
             </div>
           </div>
         </div>

@@ -31,11 +31,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCommandetApi, addStep } from "../../redux/actions/commande.actions";
 import { getClientListApi } from "../../redux/actions/client.actions";
 import TraitementDevis from "./TraitementDevis";
+import EnvoyerEmail from "./EnvoyerEmail";
 const { Text } = Typography;
 const { TextArea } = Input;
 
 export default function AjoutDevis1() {
   const [isOpen, setIsopen] = useState(false);
+  const [isOpenOperation, setIsOpenOperation] = useState(false);
   const [componentSize] = useState("default");
   const { addToast } = useToasts();
   const { addCommandeInfo } = useSelector((state) => state.commande);
@@ -763,10 +765,22 @@ export default function AjoutDevis1() {
           </form>
         </Row>
       </main>
-      <TraitementDevis   isOpen={isOpen}
+      <TraitementDevis
+        isOpen={isOpen}
         handleClose={() => {
           setIsopen(false);
-        }}/>
+        }}
+        handleFirstBtn={() => {
+          setIsOpenOperation(true);
+          setIsopen(false);
+        }}
+      />
+      <EnvoyerEmail
+        isOpen={isOpenOperation}
+        handleClose={() => {
+          setIsOpenOperation(false);
+        }}
+      />
     </div>
   );
 }

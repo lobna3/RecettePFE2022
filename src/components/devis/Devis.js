@@ -21,7 +21,7 @@ import {
 } from "../../redux/actions/commande.actions";
 import Swal from "sweetalert2";
 import EnvoyerEmail from "./EnvoyerEmail";
-import { triggerFocus } from "antd/lib/input/Input";
+
 
 const { Text } = Typography;
 const rowSelection = {
