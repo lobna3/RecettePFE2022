@@ -10,6 +10,7 @@ import {
 const commandeInitState = {
   loading: false,
   commandeList: [],
+  selectedArticles: [],
   selectedCommande: {},
   addCommandeInfo: {
     dateEmission: Date,
@@ -139,7 +140,6 @@ const commandeReducer = (state = commandeInitState, action) => {
           taxe: taxe,
           prix: prix,
           service: service,
-         
 
           suivies: [
             ...state.addCommandeInfo.suivies,
@@ -152,7 +152,7 @@ const commandeReducer = (state = commandeInitState, action) => {
           typeS: typeS,
           titreS: titreS,
           descriptionS: descriptionS,
-        
+
           paiements: [
             ...state.addCommandeInfo.paiements,
             {
@@ -192,13 +192,30 @@ const commandeReducer = (state = commandeInitState, action) => {
       return { ...state, selectedCommande: payload };
     case DELETE_COMMANDE:
       return { ...state, loading: true };
-
+    case "SET_SELECTED_ARTICLE":
+      return {
+        ...state,
+        loading: false,
+        selectedArticles: [...state.selectedArticles, ...payload],
+      };
+    case "UPDATE_QTE_ARTICLE":
+      console.log(payload);
+      let newList = state.selectedArticles.map((elm) => {
+        if (elm._id != payload.id) {
+          return elm;
+        } else {
+          return { ...elm, qte: payload.value };
+        }
+      });
+      return { ...state, selectedArticles: newList };
+    case "DELETE_SELECTED_ARTICLE":
+      let filtredItem = state.selectedArticles.filter(
+        (elm) => elm._id != payload
+      );
+      return { ...state, selectedArticles: filtredItem };
     default:
       return state;
   }
 };
 
 export default commandeReducer;
-
-
-     

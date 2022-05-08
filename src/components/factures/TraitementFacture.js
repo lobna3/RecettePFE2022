@@ -1,6 +1,7 @@
 import React from "react";
-import { Modal } from "antd";
+import { Modal, Steps } from "antd";
 import "../../components/clients/modal.css";
+const { Step } = Steps;
 
 const TraitementFacture = ({ isOpen, handleClose }) => {
   return (
@@ -23,12 +24,15 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
         <div className="col-md-6">
           <div className="card">
             <h6>NFacture:</h6>
+            <Steps direction="vertical" current={1}>
+              <Step title="Finished" description="This is a description." />
+              <Step title="In Progress" description="This is a description." />
+              <Step title="Waiting" description="This is a description." />
+            </Steps>
           </div>
         </div>
         <div className="col-md-6">
-          <div className="card">
-              
-          </div>
+          <div className="card"></div>
         </div>
       </div>
     </Modal>

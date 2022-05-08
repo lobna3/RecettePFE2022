@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Space, Typography } from "antd";
+import { Table, Space, Typography, Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getArticlesApi } from "../../redux/actions/article.action";
 
@@ -14,11 +14,17 @@ const Articles = () => {
       render: (text, record) => (
         <>
           <Space direction="vertical">
-            <span
+            <button
+              onClick={() => {
+                dispatch({
+                  type: "DELETE_SELECTED_ARTICLE",
+                  payload: record._id,
+                });
+              }}
               style={{
                 margin: 10,
                 paddingLeft: 10,
-                height: 300,
+              
                 marginBottom: 10,
                 borderWidth: 1,
                 borderStyle: "solid",
@@ -26,7 +32,7 @@ const Articles = () => {
               }}
             >
               <Text strong>{record.service.titre} *</Text>
-            </span>
+            </button>
           </Space>
         </>
       ),
@@ -37,19 +43,19 @@ const Articles = () => {
       render: (text, record) => (
         <>
           <Space direction="vertical">
-            <span
-              style={{
-                margin: 10,
-                paddingLeft: 10,
-                height: 300,
-                marginBottom: 10,
-                borderWidth: 1,
-                borderStyle: "dashed",
-                borderColor: "#0d6efd",
+            <Input
+              value={record.qte}
+              type="text"
+              onChange={(event) => {
+                dispatch({
+                  type: "UPDATE_QTE_ARTICLE",
+                  payload: {
+                    id: record._id,
+                    value: event.target.value,
+                  },
+                });
               }}
-            >
-              <Text>{record.qte}</Text>
-            </span>
+            />
           </Space>
         </>
       ),
@@ -107,14 +113,14 @@ const Articles = () => {
     },
   ];
 
-  const { articleList } = useSelector((state) => state.article);
+  //const { articleList } = useSelector((state) => state.article);
+  const { selectedArticles } = useSelector((state) => state.commande);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getArticlesApi());
   }, []);
- 
 
-  return <Table columns={columns} dataSource={articleList} />;
+  return <Table columns={columns} dataSource={selectedArticles} />;
 };
 
 export default Articles;

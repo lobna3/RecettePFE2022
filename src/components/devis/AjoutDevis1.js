@@ -30,10 +30,12 @@ import { getClientListApi } from "../../redux/actions/client.actions";
 import TraitementDevis from "./TraitementDevis";
 import EnvoyerEmail from "./EnvoyerEmail";
 import TraitementFacture from "../factures/TraitementFacture";
+import AddArticleModal from "../AddArticleModal";
 const { Text } = Typography;
 const { TextArea } = Input;
 
 export default function AjoutDevis1() {
+  const [showAddArticle, setAddArticle] = useState(false);
   const [isOpen, setIsopen] = useState(false);
   const [isOpenOperation, setIsOpenOperation] = useState(false);
   const [isOpenListe, setIsOpenListe] = useState(false);
@@ -41,14 +43,12 @@ export default function AjoutDevis1() {
   const { addToast } = useToasts();
   const { addCommandeInfo } = useSelector((state) => state.commande);
   const { clientList } = useSelector((state) => state.client);
+  const { selectedArticles } = useSelector((state) => state.commande);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getClientListApi());
-  }, []);
-
   const {
     handleSubmit,
     control,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -95,6 +95,42 @@ export default function AjoutDevis1() {
       montantP: "20000",
     },
   });
+  const calculateValues = () => {
+    let initTotal = 0;
+    let initRemise = 0;
+    let totalTaxe = 0;
+    selectedArticles.forEach((article) => {
+      console.log("article",article)
+      initTotal = initTotal + Number(article.prix);
+      if (article.taxe != "") {
+        totalTaxe = totalTaxe + (Number(article.taxe) * article.prix) / 100;
+        console.log("Taxe",totalTaxe)
+      }
+
+      //initRemise =  Number(article.pu) - initRemise ;
+    });
+    console.log("Total", initTotal);
+    setValue("total", initTotal);
+    setValue("taxes", totalTaxe);
+    setValue("totalTtc", totalTaxe+initTotal);
+    setValue("remise", 0);
+  };
+
+  const calculateRmise = () => {
+    let initRemise = 15;
+
+    selectedArticles.forEach((article) => {
+      initRemise = Number(article.pu) - initRemise;
+    });
+    console.log("Remise", initRemise);
+    setValue("remise", initRemise);
+  };
+  useEffect(() => {
+    dispatch(getClientListApi());
+    calculateValues();
+    // calculateRmise();
+  }, [selectedArticles]);
+
   const onSubmit = (data) => {
     dispatch(addStep(data));
     console.log("Commande info", addCommandeInfo);
@@ -225,7 +261,7 @@ export default function AjoutDevis1() {
                   </Link>
 
                   <p></p>
-                  <Button 
+                  <Button
                     block
                     icon={
                       <FileTextOutlined
@@ -541,7 +577,16 @@ export default function AjoutDevis1() {
 
                     <hr />
                     <Row>
-                      <Button block> + Ajouter article</Button>
+                      <AddArticleModal
+                        showModal={showAddArticle}
+                        handleClose={() => {
+                          setAddArticle(false);
+                        }}
+                      />
+                      <Button block onClick={() => setAddArticle(true)}>
+                        {" "}
+                        + Ajouter article
+                      </Button>
                       <p></p>
                       <Articles />
                     </Row>
@@ -704,9 +749,13 @@ export default function AjoutDevis1() {
                       size="small"
                       style={{ borderRadius: "5px", borderWidth: 2 }}
                     >
-                      <Button type="primary" style={{ marginTop: 30 }} onClick={() => {
-                      setIsOpenListe(true);
-                    }}>
+                      <Button
+                        type="primary"
+                        style={{ marginTop: 30 }}
+                        onClick={() => {
+                          setIsOpenListe(true);
+                        }}
+                      >
                         Payé
                       </Button>
                       <Form.Item
@@ -785,10 +834,12 @@ export default function AjoutDevis1() {
           setIsOpenOperation(false);
         }}
       />
-      <TraitementFacture  isOpen={isOpenListe}
+      <TraitementFacture
+        isOpen={isOpenListe}
         handleClose={() => {
           setIsOpenListe(false);
-        }}/>
+        }}
+      />
     </div>
   );
 }
