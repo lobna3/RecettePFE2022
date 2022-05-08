@@ -22,7 +22,6 @@ import {
 import Swal from "sweetalert2";
 import EnvoyerEmail from "./EnvoyerEmail";
 
-
 const { Text } = Typography;
 const rowSelection = {
   onChange: (selectedRowKeys, selectedRows) => {
@@ -66,9 +65,10 @@ const Devis = () => {
     } else if (etat == "Arrivé à l'échéance") {
       return <span className="badge bg-primary">{etat}</span>;
     } else {
-      return <span className="badge bg-info">{etat}</span>;
+      return <span className="badge bg-danger">{etat}</span>;
     }
   };
+
   const displayRole = (status) => {
     switch (status) {
       case 1:
@@ -81,6 +81,10 @@ const Devis = () => {
       default:
         return "Devis en cours";
     }
+  };
+  
+  const imprimer_page = () => {
+    window.print();
   };
 
   const columns = [
@@ -207,9 +211,13 @@ const Devis = () => {
             <Dropdown.Toggle variant="" id="dropdown-basic"></Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item>
-                <Link to="">
+                <span  className="text-primary"
+                  onClick={() => {
+                    imprimer_page();
+                  }}
+                >
                   <PrinterFilled /> Imprimer
-                </Link>
+                </span>
               </Dropdown.Item>
               <Dropdown.Item>
                 <Link to={`/devis/${record._id}`}>

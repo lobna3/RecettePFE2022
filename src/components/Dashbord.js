@@ -131,9 +131,11 @@ const Dashbord = () => {
         }}
         handleFirstBtn={() => {
           setIsopen(true);
+          setIsOpenOperation(false);
         }}
         handleSecondBtn={() => {
           setIsOpenListe(true);
+          setIsOpenOperation(false);
         }}
       />
       <ListeClients
@@ -143,6 +145,7 @@ const Dashbord = () => {
         }}
         handleFirstBtn={() => {
           setIsOpenModal(true);
+          setIsOpenListe(false);
         }}
       />
       <ModalOP

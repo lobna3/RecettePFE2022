@@ -26,7 +26,7 @@ const ModalOP = ({ isOpen, handleClose, handleFirstBtn, handleSecondBtn }) => {
         </i>
         Choissisez votre opération souhaité
       </h5>
-      <Link to="/ajouter_devis1">
+      <Link to="/ajouter_devis">
         <Button
           style={{ height: "80px", width: "370px", margin: "8px 40px",borderRadius: "10px 10px", }}
           onClick={handleFirstBtn}

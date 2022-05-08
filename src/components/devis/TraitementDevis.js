@@ -1,15 +1,19 @@
 import React from "react";
-import { Modal ,Button} from "antd";
+import { Modal, Button } from "antd";
 import { Link } from "react-router-dom";
-import {
-  PrinterFilled,
-  MailOutlined,
-  FormOutlined,
-} from "@ant-design/icons";
+import { PrinterFilled, MailOutlined, FormOutlined } from "@ant-design/icons";
 import "../../components/clients/modal.css";
 
-const TraitementDevis = ({ isOpen, handleClose, handleFirstBtn,
-    handleSecondBtn }) => {
+const TraitementDevis = ({
+  isOpen,
+  handleClose,
+  handleFirstBtn,
+  handleSecondBtn,
+}) => {
+  
+  const imprimer_page = () => {
+    window.print();
+  };
   return (
     <Modal
       className="modalStyle"
@@ -27,13 +31,12 @@ const TraitementDevis = ({ isOpen, handleClose, handleFirstBtn,
       footer={[
         <Button onClick={handleClose}>Retour</Button>,
         <Button
-        type="primary"
-        style={{ backgroundColor: "#95de64", borderColor: "white" }}
-      >
-        Accepter
-      </Button>,
-      <Button type="primary">Enregistrer</Button>
-        
+          type="primary"
+          style={{ backgroundColor: "#95de64", borderColor: "white" }}
+        >
+          Accepter
+        </Button>,
+        <Button type="primary">Enregistrer</Button>,
       ]}
     >
       <div className="row">
@@ -41,6 +44,9 @@ const TraitementDevis = ({ isOpen, handleClose, handleFirstBtn,
           <div className="card" style={{ marginLeft: 20, height: 200 }}>
             <div className="card-body text-center">
               <Link to="">
+                <span onClick={() => {
+                    imprimer_page();
+                  }}>
                 <h6 className="card-title">
                   <PrinterFilled
                     style={{
@@ -54,6 +60,7 @@ const TraitementDevis = ({ isOpen, handleClose, handleFirstBtn,
                   Imprimer votre devis
                 </p>
                 <p class="card-text"></p>
+                </span>
               </Link>
             </div>
           </div>
@@ -85,7 +92,7 @@ const TraitementDevis = ({ isOpen, handleClose, handleFirstBtn,
         <div className="col-md-4">
           <div className="card" style={{ marginRight: 20, height: 200 }}>
             <div className="card-body text-center">
-              <Link to="">
+              <Link to="/devi/:modifier">
                 <h6 className="card-title">
                   <FormOutlined
                     style={{
@@ -105,7 +112,7 @@ const TraitementDevis = ({ isOpen, handleClose, handleFirstBtn,
           <div className="card" style={{ height: 25, marginRight: 15 }}>
             <p className="text-muted">
               <small>
-                Pour modifier votre devis <Link to=""> cliquez ici !</Link>
+                Pour modifier votre devis <Link to="/devi/:modifier"> cliquez ici !</Link>
               </small>
             </p>
           </div>

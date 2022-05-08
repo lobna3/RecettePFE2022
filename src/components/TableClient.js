@@ -23,13 +23,13 @@ const { Text } = Typography;
 
 const TableClient = () => {
   const [selectionType, setSelectionType] = useState("checkbox");
-  const displayStatus = (status) => {
-    if (status == "Impayé") {
-      return <span className="badge bg-danger">{status}</span>;
-    } else if (status == "Payé") {
-      return <span className="badge bg-success">{status}</span>;
+  const displayStatus = (etat) => {
+    if (etat == "NonPayé") {
+      return <span className="badge bg-danger">{etat}</span>;
+    } else if (etat == "Payé") {
+      return <span className="badge bg-success">{etat}</span>;
     } else {
-      return <span className="badge bg-secondary">{status}</span>;
+      return <span className="badge bg-secondary">{etat}</span>;
     }
   };
   const columns = [
@@ -59,7 +59,7 @@ const TableClient = () => {
     },
     {
       title: "Status de paiemet",
-      dataIndex: "status",
+      dataIndex: "etat",
       render: (text, record) => {
         return (
           <>
@@ -67,7 +67,7 @@ const TableClient = () => {
               return (
                 <>
                   <Space direction="vertical">
-                    {displayStatus(item.status)}
+                    {displayStatus(item.etat)}
                   </Space>
                 </>
               );
