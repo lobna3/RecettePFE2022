@@ -29,12 +29,14 @@ import { addCommandetApi, addStep } from "../../redux/actions/commande.actions";
 import { getClientListApi } from "../../redux/actions/client.actions";
 import TraitementDevis from "./TraitementDevis";
 import EnvoyerEmail from "./EnvoyerEmail";
+import TraitementFacture from "../factures/TraitementFacture";
 const { Text } = Typography;
 const { TextArea } = Input;
 
 export default function AjoutDevis1() {
   const [isOpen, setIsopen] = useState(false);
   const [isOpenOperation, setIsOpenOperation] = useState(false);
+  const [isOpenListe, setIsOpenListe] = useState(false);
   const [componentSize] = useState("default");
   const { addToast } = useToasts();
   const { addCommandeInfo } = useSelector((state) => state.commande);
@@ -206,21 +208,24 @@ export default function AjoutDevis1() {
                     borderRadius: "20px",
                   }}
                 >
-                  <Button
-                    block
-                    icon={
-                      <EyeOutlined
-                        style={{
-                          fontSize: "20px",
-                          color: "#1890ff",
-                        }}
-                      />
-                    }
-                  >
-                    Visualiser
-                  </Button>
+                  <Link to="/devis/:detail">
+                    <Button
+                      block
+                      icon={
+                        <EyeOutlined
+                          style={{
+                            fontSize: "20px",
+                            color: "#1890ff",
+                          }}
+                        />
+                      }
+                    >
+                      Visualiser
+                    </Button>
+                  </Link>
+
                   <p></p>
-                  <Button
+                  <Button 
                     block
                     icon={
                       <FileTextOutlined
@@ -699,7 +704,9 @@ export default function AjoutDevis1() {
                       size="small"
                       style={{ borderRadius: "5px", borderWidth: 2 }}
                     >
-                      <Button type="primary" style={{ marginTop: 30 }}>
+                      <Button type="primary" style={{ marginTop: 30 }} onClick={() => {
+                      setIsOpenListe(true);
+                    }}>
                         Payé
                       </Button>
                       <Form.Item
@@ -778,6 +785,10 @@ export default function AjoutDevis1() {
           setIsOpenOperation(false);
         }}
       />
+      <TraitementFacture  isOpen={isOpenListe}
+        handleClose={() => {
+          setIsOpenListe(false);
+        }}/>
     </div>
   );
 }

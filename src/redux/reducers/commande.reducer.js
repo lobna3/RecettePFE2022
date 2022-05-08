@@ -184,8 +184,6 @@ const commandeReducer = (state = commandeInitState, action) => {
       };
     case ADD_COMMANDE_SUCCESS:
       return { ...state, loading: true };
-    //case ADD_COMMANDE:
-    //return { ...state, loading: true };
     case GET_COMMANDE_LIST:
       return { ...state, loading: true };
     case GET_COMMANDE_LIST_SUCCESS:
