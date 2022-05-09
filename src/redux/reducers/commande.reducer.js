@@ -65,7 +65,6 @@ const commandeInitState = {
 const commandeReducer = (state = commandeInitState, action) => {
   let { type, payload } = action;
   switch (type) {
-
     case ADD_COMMANDE:
       let {
         dateEmission,
@@ -242,24 +241,24 @@ const commandeReducer = (state = commandeInitState, action) => {
       });
       return { ...state, selectedArticles: newList3 };
 
-      case "UPDATE_PRIX_ARTICLE":
-        console.log(payload);
-        let newList4 = state.selectedArticles.map((elm) => {
-          if (elm._id != payload.id) {
-            return elm;
-          } else {
-            return { ...elm, prix: payload.value };
-          }
-        });
-        return { ...state, selectedArticles: newList4 };
+    case "UPDATE_PRIX_ARTICLE":
+      console.log(payload);
+      let newList4 = state.selectedArticles.map((elm) => {
+        if (elm._id != payload.id) {
+          return elm;
+        } else {
+          return { ...elm, prix: payload.value };
+        }
+      });
+      return { ...state, selectedArticles: newList4 };
 
     case "DELETE_SELECTED_ARTICLE":
       let filtredItem = state.selectedArticles.filter(
         (elm) => elm._id != payload
       );
       return { ...state, selectedArticles: filtredItem };
-   
-      default:
+
+    default:
       return state;
   }
 };

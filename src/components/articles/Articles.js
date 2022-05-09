@@ -26,8 +26,8 @@ const Articles = () => {
             >
               <Text strong>
                 {record.service.titre} {"  "}
-                <span>
-                  <CloseCircleOutlined style={{ fontSize: "22px" }} />
+                <span style={{ marginLeft: 50 }}>
+                  <CloseCircleOutlined />
                 </span>
               </Text>
             </button>
@@ -134,7 +134,7 @@ const Articles = () => {
             style={{
               padding: 0,
               borderColor: "#ffff",
-              width: 80,
+              width: 50,
             }}
             value={record.prix}
             type="text"
@@ -160,7 +160,13 @@ const Articles = () => {
     dispatch(getArticlesApi());
   }, []);
 
-  return <Table columns={columns} dataSource={selectedArticles} style={{width:1000}} />;
+  return (
+    <Table
+      columns={columns}
+      dataSource={selectedArticles}
+      style={{ width: 1000 }}
+    />
+  );
 };
 
 export default Articles;
