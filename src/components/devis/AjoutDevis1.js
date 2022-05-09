@@ -107,7 +107,7 @@ export default function AjoutDevis1() {
         console.log("Taxe",totalTaxe)
       }
 
-      //initRemise =  Number(article.pu) - initRemise ;
+     
     });
     console.log("Total", initTotal);
     setValue("total", initTotal);
@@ -116,15 +116,7 @@ export default function AjoutDevis1() {
     setValue("remise", 0);
   };
 
-  const calculateRmise = () => {
-    let initRemise = 15;
 
-    selectedArticles.forEach((article) => {
-      initRemise = Number(article.pu) - initRemise;
-    });
-    console.log("Remise", initRemise);
-    setValue("remise", initRemise);
-  };
   useEffect(() => {
     dispatch(getClientListApi());
     calculateValues();
@@ -584,12 +576,11 @@ export default function AjoutDevis1() {
                         }}
                       />
                       <Button block onClick={() => setAddArticle(true)}>
-                        {" "}
                         + Ajouter article
                       </Button>
-                      <p></p>
-                      <Articles />
                     </Row>
+                    <p></p>
+                    <Row><Articles /></Row>
                     <hr />
                     <Card
                       size="small"

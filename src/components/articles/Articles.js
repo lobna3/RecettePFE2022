@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Table, Space, Typography, Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getArticlesApi } from "../../redux/actions/article.action";
+import { CloseCircleOutlined } from "@ant-design/icons";
 
 const { Text } = Typography;
 
@@ -15,23 +16,20 @@ const Articles = () => {
         <>
           <Space direction="vertical">
             <button
+              className="btn btn-light"
               onClick={() => {
                 dispatch({
                   type: "DELETE_SELECTED_ARTICLE",
                   payload: record._id,
                 });
               }}
-              style={{
-                margin: 10,
-                paddingLeft: 10,
-              
-                marginBottom: 10,
-                borderWidth: 1,
-                borderStyle: "solid",
-                borderColor: "",
-              }}
             >
-              <Text strong>{record.service.titre} *</Text>
+              <Text strong>
+                {record.service.titre} {"  "}
+                <span>
+                  <CloseCircleOutlined style={{ fontSize: "22px" }} />
+                </span>
+              </Text>
             </button>
           </Space>
         </>
@@ -44,6 +42,14 @@ const Articles = () => {
         <>
           <Space direction="vertical">
             <Input
+              className="text-center"
+              style={{
+                padding: 0,
+                borderWidth: 1,
+                borderStyle: "dashed",
+                borderColor: "#0d6efd",
+                width: 80,
+              }}
               value={record.qte}
               type="text"
               onChange={(event) => {
@@ -65,19 +71,27 @@ const Articles = () => {
       dataIndex: "pu",
       render: (text, record) => (
         <Space direction="vertical">
-          <span
+          <Input
+            className="text-center"
             style={{
-              margin: 10,
-              paddingLeft: 10,
-              height: 300,
-              marginBottom: 10,
+              padding: 0,
               borderWidth: 1,
               borderStyle: "dashed",
               borderColor: "#0d6efd",
+              width: 80,
             }}
-          >
-            <Text>{record.pu}</Text>
-          </span>
+            value={record.pu}
+            type="text"
+            onChange={(event) => {
+              dispatch({
+                type: "UPDATE_PU_ARTICLE",
+                payload: {
+                  id: record._id,
+                  value: event.target.value,
+                },
+              });
+            }}
+          />
         </Space>
       ),
     },
@@ -86,19 +100,27 @@ const Articles = () => {
       dataIndex: "taxe",
       render: (text, record) => (
         <Space direction="vertical">
-          <span
+          <Input
+            className="text-center"
             style={{
-              margin: 10,
-              paddingLeft: 10,
-              height: 300,
-              marginBottom: 10,
+              padding: 0,
               borderWidth: 1,
               borderStyle: "dashed",
               borderColor: "#0d6efd",
+              width: 80,
             }}
-          >
-            <Text>{record.taxe}</Text>
-          </span>
+            value={record.taxe}
+            type="text"
+            onChange={(event) => {
+              dispatch({
+                type: "UPDATE_TAXE_ARTICLE",
+                payload: {
+                  id: record._id,
+                  value: event.target.value,
+                },
+              });
+            }}
+          />
         </Space>
       ),
     },
@@ -106,8 +128,26 @@ const Articles = () => {
       title: "Prix",
       dataIndex: "prix",
       render: (text, record) => (
-        <Space direction="vertical">
-          <Text>{record.prix}</Text>
+        <Space>
+          <Input
+            className="text-center"
+            style={{
+              padding: 0,
+              borderColor: "#ffff",
+              width: 80,
+            }}
+            value={record.prix}
+            type="text"
+            onChange={(event) => {
+              dispatch({
+                type: "UPDATE_PRIX_ARTICLE",
+                payload: {
+                  id: record._id,
+                  value: event.target.value,
+                },
+              });
+            }}
+          />DT
         </Space>
       ),
     },
@@ -120,7 +160,7 @@ const Articles = () => {
     dispatch(getArticlesApi());
   }, []);
 
-  return <Table columns={columns} dataSource={selectedArticles} />;
+  return <Table columns={columns} dataSource={selectedArticles} style={{width:1000}} />;
 };
 
 export default Articles;
