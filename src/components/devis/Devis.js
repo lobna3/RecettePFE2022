@@ -23,38 +23,25 @@ import Swal from "sweetalert2";
 import EnvoyerEmail from "./EnvoyerEmail";
 
 const { Text } = Typography;
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(
-      `selectedRowKeys: ${selectedRowKeys}`,
-      "selectedRows: ",
-      selectedRows
-    );
-  },
-  getCheckboxProps: (record) => ({
-    disabled: record.nReference === "Disabled User",
-    // Column configuration not to be checked
-    nReference: record.nReference,
-  }),
-};
+
 function onChange(pagination, filters, sorter, extra) {
   console.log("params", pagination, filters, sorter, extra);
 }
 
 const Devis = () => {
- 
   function onChange(pagination, filters, sorter, extra) {
     console.log("params", pagination, filters, sorter, extra);
   }
   const [isOpen, setIsopen] = useState(false);
-  const [selectionType] = useState("checkbox");
   const location = useLocation();
   const dispatch = useDispatch();
   const { addToast } = useToasts();
   const { commandeList } = useSelector((state) => state.commande);
 
   useEffect(() => {
-    dispatch(getCommandesApi());
+    dispatch(getCommandesApi(
+      "Devis"
+    ));
     console.log("URL", location.pathname);
   }, []);
 
@@ -81,13 +68,13 @@ const Devis = () => {
       case 2:
         return "Commandes en cours";
       case 0:
-        return "Devis en cours";
+        return "Devis";
 
       default:
-        return "Devis en cours";
+        return "Devis";
     }
   };
-  
+
   const imprimer_page = () => {
     window.print();
   };
@@ -97,7 +84,7 @@ const Devis = () => {
       title: "Référence",
       dataIndex: "nReference",
       render: (text, record) => (
-        <Space >
+        <Space>
           <input type="checkbox" className="checkmail" />
           <Link to="/" target="_blank">
             {record.nReference}
@@ -217,7 +204,8 @@ const Devis = () => {
             <Dropdown.Toggle variant="" id="dropdown-basic"></Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item>
-                <span  className="text-primary"
+                <span
+                  className="text-primary"
                   onClick={() => {
                     imprimer_page();
                   }}
@@ -316,7 +304,6 @@ const Devis = () => {
           >
             <div className="card-body">
               <Table
-               
                 columns={columns}
                 dataSource={commandeList}
                 onChange={onChange}

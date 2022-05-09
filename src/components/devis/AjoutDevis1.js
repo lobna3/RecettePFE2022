@@ -73,10 +73,10 @@ export default function AjoutDevis1() {
       adresseFacturation: "",
       adresseLivraison: "",
 
-      qte: "5",
-      pu: "150",
-      taxe: "8",
-      prix: "250",
+      qte: "",
+      pu: "",
+      taxe: "",
+      prix: "",
       service: "623efa58cef38dae7b89e586",
 
       typeS: "modifier",

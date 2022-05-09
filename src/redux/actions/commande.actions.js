@@ -31,6 +31,7 @@ export const getCommandesListSuccess = (data) => {
   return {
     type: GET_COMMANDE_LIST_SUCCESS,
     payload: data,
+   
   };
 };
 
@@ -41,7 +42,7 @@ export const updateCommande = (data) => {
   };
 };
 
-export const getCommandesApi = () => async (dispatch) => {
+export const getCommandesApi = (status) => async (dispatch) => {
   try {
     dispatch(getCommandesList());
     let config = {
