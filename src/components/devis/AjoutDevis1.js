@@ -45,6 +45,7 @@ export default function AjoutDevis1() {
   const { clientList } = useSelector((state) => state.client);
   const { selectedArticles } = useSelector((state) => state.commande);
   const dispatch = useDispatch();
+  
   const {
     handleSubmit,
     control,
@@ -95,6 +96,7 @@ export default function AjoutDevis1() {
       montantP: "20000",
     },
   });
+
   const calculateValues = () => {
     let initTotal = 0;
     let initRemise = 0;
@@ -104,23 +106,30 @@ export default function AjoutDevis1() {
       initTotal = initTotal + Number(article.prix);
       if (article.taxe != "") {
         totalTaxe = totalTaxe + (Number(article.taxe) * article.prix) / 100;
-        console.log("Taxe",totalTaxe)
       }
-
-     
     });
     console.log("Total", initTotal);
     setValue("total", initTotal);
-    setValue("taxes", totalTaxe);
-    setValue("totalTtc", totalTaxe+initTotal);
-    setValue("remise", 0);
-  };
 
+    console.log("Remise", initRemise);
+    setValue("remise", 0);
+
+    console.log("Taxes",totalTaxe);
+    setValue("taxes", totalTaxe);
+    
+    console.log("TotalTTc",totalTaxe+initTotal)
+    setValue("totalTtc", totalTaxe+initTotal);
+
+    console.log("Payé",-0.0001);
+    setValue("paye", -0.0001);
+
+    console.log("Solde",initTotal);
+    setValue("solde",initTotal);
+  };
 
   useEffect(() => {
     dispatch(getClientListApi());
     calculateValues();
-    // calculateRmise();
   }, [selectedArticles]);
 
   const onSubmit = (data) => {

@@ -42,12 +42,17 @@ function onChange(pagination, filters, sorter, extra) {
 }
 
 const Devis = () => {
+ 
+  function onChange(pagination, filters, sorter, extra) {
+    console.log("params", pagination, filters, sorter, extra);
+  }
   const [isOpen, setIsopen] = useState(false);
   const [selectionType] = useState("checkbox");
   const location = useLocation();
   const dispatch = useDispatch();
   const { addToast } = useToasts();
   const { commandeList } = useSelector((state) => state.commande);
+
   useEffect(() => {
     dispatch(getCommandesApi());
     console.log("URL", location.pathname);
@@ -92,7 +97,8 @@ const Devis = () => {
       title: "Référence",
       dataIndex: "nReference",
       render: (text, record) => (
-        <Space direction="vertical">
+        <Space >
+          <input type="checkbox" className="checkmail" />
           <Link to="/" target="_blank">
             {record.nReference}
           </Link>
@@ -310,7 +316,7 @@ const Devis = () => {
           >
             <div className="card-body">
               <Table
-                rowSelection={{ type: selectionType, ...rowSelection }}
+               
                 columns={columns}
                 dataSource={commandeList}
                 onChange={onChange}
