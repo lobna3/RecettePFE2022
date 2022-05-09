@@ -45,7 +45,7 @@ export default function AjoutDevis1() {
   const { clientList } = useSelector((state) => state.client);
   const { selectedArticles } = useSelector((state) => state.commande);
   const dispatch = useDispatch();
-  
+
   const {
     handleSubmit,
     control,
@@ -102,7 +102,7 @@ export default function AjoutDevis1() {
     let initRemise = 0;
     let totalTaxe = 0;
     selectedArticles.forEach((article) => {
-      console.log("article",article)
+      console.log("article", article);
       initTotal = initTotal + Number(article.prix);
       if (article.taxe != "") {
         totalTaxe = totalTaxe + (Number(article.taxe) * article.prix) / 100;
@@ -114,17 +114,17 @@ export default function AjoutDevis1() {
     console.log("Remise", initRemise);
     setValue("remise", 0);
 
-    console.log("Taxes",totalTaxe);
+    console.log("Taxes", totalTaxe);
     setValue("taxes", totalTaxe);
-    
-    console.log("TotalTTc",totalTaxe+initTotal)
-    setValue("totalTtc", totalTaxe+initTotal);
 
-    console.log("Payé",-0.0001);
-    setValue("paye", -0.0001);
+    console.log("TotalTTc", totalTaxe + initTotal);
+    setValue("totalTtc", totalTaxe + initTotal);
 
-    console.log("Solde",initTotal);
-    setValue("solde",initTotal);
+    console.log("Payé", -0.001);
+    setValue("paye", -0.001);
+
+    console.log("Solde", initTotal);
+    setValue("solde", initTotal);
   };
 
   useEffect(() => {
@@ -589,12 +589,14 @@ export default function AjoutDevis1() {
                       </Button>
                     </Row>
                     <p></p>
-                    <Row><Articles /></Row>
+                    <Row>
+                      <Articles />
+                    </Row>
                     <hr />
                     <Card
                       size="small"
                       style={{
-                        marginLeft: 400,
+                        marginLeft: 430,
                         borderRadius: "5px",
                         overflow: "hidden",
                         borderColor: "#ffffff",
@@ -616,9 +618,13 @@ export default function AjoutDevis1() {
                           >
                             <Input
                               {...field}
-                              placeholder="20.000TND"
-                              style={{ borderRadius: "5px 5px" }}
+                              style={{
+                                borderRadius: "5px 5px",
+                                width: 60,
+                                borderColor: "#ffff",
+                              }}
                             />
+                            TND
                           </Form.Item>
                         )}
                       />
@@ -637,12 +643,14 @@ export default function AjoutDevis1() {
                             }}
                           >
                             <Input
+                              className="text-center"
                               {...field}
                               style={{
                                 borderWidth: 1,
                                 borderStyle: "dashed",
                                 borderRadius: "5px 5px",
                                 borderColor: "#0d6efd",
+                                width: 100,
                               }}
                               placeholder=""
                             />
@@ -664,12 +672,14 @@ export default function AjoutDevis1() {
                             }}
                           >
                             <Input
+                              className="text-center"
                               {...field}
                               style={{
                                 borderWidth: 1,
                                 borderStyle: "dashed",
                                 borderColor: "#0d6efd",
                                 borderRadius: "5px 5px",
+                                width: 100,
                               }}
                               placeholder=""
                             />
@@ -693,9 +703,13 @@ export default function AjoutDevis1() {
                           >
                             <Input
                               {...field}
-                              placeholder="20.000TND"
-                              style={{ borderRadius: "5px 5px" }}
+                              style={{
+                                borderRadius: "5px 5px",
+                                width: 60,
+                                borderColor: "#ffff",
+                              }}
                             />
+                            TND
                           </Form.Item>
                         )}
                       />
@@ -715,9 +729,8 @@ export default function AjoutDevis1() {
                           >
                             <Input
                               {...field}
-                              placeholder="-0.000TND"
-                              style={{ borderRadius: "5px 5px" }}
-                            />
+                              style={{ borderRadius: "5px 5px",borderColor:"#ffff",width:60}}
+                            />TND
                           </Form.Item>
                         )}
                       />
@@ -737,72 +750,36 @@ export default function AjoutDevis1() {
                           >
                             <Input
                               {...field}
-                              placeholder="20.000TND"
-                              style={{ borderRadius: "5px 5px" }}
-                            />
+                         
+                              style={{ borderRadius: "5px 5px" ,borderColor:"#ffff",width:60}}
+                            />TND
                           </Form.Item>
                         )}
                       />
                     </Card>
-                    <br />
                     <Card
                       size="small"
-                      style={{ borderRadius: "5px", borderWidth: 2 }}
+                      className="d-flex"
+                      style={{ borderRadius: "5px" }}
                     >
                       <Button
                         type="primary"
-                        style={{ marginTop: 30 }}
+                        style={{ marginRight: 20,marginLeft:20 }}
                         onClick={() => {
                           setIsOpenListe(true);
                         }}
                       >
                         Payé
                       </Button>
-                      <Form.Item
-                        label="Remise"
-                        style={{
-                          display: "inline-block",
-                          width: "calc(25% - 8px)",
-                          marginLeft: 82,
-                          textAlign: "left",
-                        }}
-                      >
-                        <Input
-                          name="remise"
-                          placeholder="75.000Dt"
-                          style={{ borderRadius: "5px 5px" }}
-                        ></Input>
-                      </Form.Item>
-                      <Form.Item
-                        label="Taxes"
-                        style={{
-                          display: "inline-block",
-                          width: "calc(25% - 8px)",
-                          marginLeft: 8,
-                          textAlign: "left",
-                        }}
-                      >
-                        <Input
-                          name="taxes"
-                          placeholder="25.000Dt"
-                          style={{ borderRadius: "5px 5px" }}
-                        ></Input>
-                      </Form.Item>
-                      <Form.Item
-                        label="Total"
-                        style={{
-                          display: "inline-block",
-                          width: "calc(25% - 8px)",
-                          marginLeft: 8,
-                          textAlign: "left",
-                        }}
-                      >
-                        <Input
-                          name="total"
-                          placeholder="95.000"
-                          style={{ borderRadius: "5px 5px" }}
-                        ></Input>
-                      </Form.Item>
+                      <Text style={{ marginRight: 20,marginLeft:120 }}>
+                        Remise: <Text strong>20000 TND</Text>
+                      </Text>
+                      <Text  style={{ marginRight: 20 }}>
+                        Tax:  <Text strong>20000 TND</Text>
+                      </Text>
+                      <Text  style={{ marginRight: 20}}>
+                        Total: <Text strong>20000 TND</Text>
+                      </Text>
                     </Card>
                   </Form>
                 </Card>
