@@ -33,7 +33,7 @@ import TraitementFacture from "../factures/TraitementFacture";
 const { Text } = Typography;
 const { TextArea } = Input;
 const ModifierDevis = () => {
-  const { modifier } = useParams();
+  // const { modifier } = useParams();
   const location = useLocation();
   const [showAddArticle, setAddArticle] = useState(false);
   const [isOpen, setIsopen] = useState(false);
@@ -65,6 +65,7 @@ const ModifierDevis = () => {
   const { clientList } = useSelector((state) => state.client);
   useEffect(() => {
     dispatch(getClientListApi());
+
     setDateEmission(selectedCommande.dateEmission);
     setDateEcheance(selectedCommande.dateEcheance);
     setCondition(selectedCommande.condition);
@@ -189,6 +190,10 @@ const ModifierDevis = () => {
                   <Badge.Ribbon text="Note" color="">
                     <TextArea
                       name="note"
+                      value={note}
+                      onChange={(event) => {
+                        setNote(event.target.value);
+                      }}
                       style={{
                         borderWidth: 1,
                         borderStyle: "dashed",
@@ -203,6 +208,10 @@ const ModifierDevis = () => {
                   <Badge.Ribbon text="Condition" color="">
                     <TextArea
                       name="remarque"
+                      value={remarque}
+                      onChange={(event) => {
+                        setRemarque(event.target.value);
+                      }}
                       style={{
                         borderWidth: 1,
                         borderStyle: "dashed",
@@ -246,7 +255,6 @@ const ModifierDevis = () => {
                       </Form.Item>
 
                       <Form.Item
-                        name="dateEcheance"
                         label="Date échéance"
                         style={{
                           display: "inline-block",
@@ -255,11 +263,18 @@ const ModifierDevis = () => {
                           textAlign: "left",
                         }}
                       >
-                        <DatePicker dateFormat="DD MMM YYYY" />
+                        <DatePicker
+                          dateFormat="DD MMM YYYY"
+                          name="dateEcheance"
+                          value={dateEcheance}
+                          onChange={(event) => {
+                            setDateEcheance(event.target.value);
+                          }}
+                        />
                       </Form.Item>
 
                       <Form.Item
-                        name="condition"
+                        
                         label="Condition"
                         style={{
                           display: "inline-block",
@@ -268,7 +283,9 @@ const ModifierDevis = () => {
                           textAlign: "left",
                         }}
                       >
-                        <Select>
+                        <Select name="condition" value={condition}  onChange={(event) => {
+                            setCondition(event.target.value);
+                          }}>
                           <Select.Option value={"Personnalisé"}>
                             Personnalisé
                           </Select.Option>
