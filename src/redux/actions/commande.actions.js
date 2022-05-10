@@ -141,7 +141,7 @@ export const updateCommandeApi = (data, id) => async (dispatch) => {
 
     let result = await updateApi("maj_commande/" + id, data, config);
     if (result) {
-      dispatch(getCommandesApi());
+     // dispatch(getCommandesApi());
     }
     console.log("Resultat",result);
   } catch (error) {

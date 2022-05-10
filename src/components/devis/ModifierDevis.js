@@ -33,7 +33,7 @@ import TraitementFacture from "../factures/TraitementFacture";
 const { Text } = Typography;
 const { TextArea } = Input;
 const ModifierDevis = () => {
-  // const { modifier } = useParams();
+  //const { modifier } = useParams();
   const location = useLocation();
   const [showAddArticle, setAddArticle] = useState(false);
   const [isOpen, setIsopen] = useState(false);
@@ -61,11 +61,12 @@ const ModifierDevis = () => {
   const [etat, setEtat] = useState("");
 
   const dispatch = useDispatch();
+
   const { selectedCommande } = useSelector((state) => state.commande);
   const { clientList } = useSelector((state) => state.client);
   useEffect(() => {
     dispatch(getClientListApi());
-
+  
     setDateEmission(selectedCommande.dateEmission);
     setDateEcheance(selectedCommande.dateEcheance);
     setCondition(selectedCommande.condition);
@@ -109,7 +110,6 @@ const ModifierDevis = () => {
     };
     dispatch(updateCommandeApi(data, selectedCommande._id));
   };
-
   return (
     <div>
       <main id="main" class="main bg-light">
@@ -274,7 +274,6 @@ const ModifierDevis = () => {
                       </Form.Item>
 
                       <Form.Item
-                        
                         label="Condition"
                         style={{
                           display: "inline-block",
@@ -283,9 +282,13 @@ const ModifierDevis = () => {
                           textAlign: "left",
                         }}
                       >
-                        <Select name="condition" value={condition}  onChange={(event) => {
+                        <Select
+                          name="condition"
+                          value={condition}
+                          onChange={(event) => {
                             setCondition(event.target.value);
-                          }}>
+                          }}
+                        >
                           <Select.Option value={"Personnalisé"}>
                             Personnalisé
                           </Select.Option>
@@ -330,6 +333,10 @@ const ModifierDevis = () => {
                       <Form.Item>
                         <Input
                           name="nFacture"
+                          value={nFacture}
+                          onChange={(event) => {
+                            setNFacture(event.target.value);
+                          }}
                           style={{ display: "inline-block", marginLeft: 8 }}
                           placeholder="00001"
                         />
@@ -363,7 +370,6 @@ const ModifierDevis = () => {
 
                       <Form.Item
                         label="N de réference"
-                        name="nReference"
                         style={{
                           display: "inline-block",
                           width: "calc(44% - 8px)",
@@ -371,12 +377,17 @@ const ModifierDevis = () => {
                           textAlign: "left",
                         }}
                       >
-                        <Input />
+                        <Input
+                          name="nReference"
+                          value={nReference}
+                          onChange={(event) => {
+                            setNReference(event.target.value);
+                          }}
+                        />
                       </Form.Item>
                     </Row>
                     <Row>
                       <Form.Item
-                        name="adresseFacturation"
                         label="Adresse de Facturation"
                         style={{
                           display: "inline-block",
@@ -385,10 +396,16 @@ const ModifierDevis = () => {
                           textAlign: "left",
                         }}
                       >
-                        <Input placeholder="Sousse, Tunis..."></Input>
+                        <Input
+                          name="adresseFacturation"
+                          value={adresseFacturation}
+                          onChange={(event) => {
+                            setAdresseFacturation(event.target.value);
+                          }}
+                          placeholder="Sousse, Tunis..."
+                        ></Input>
                       </Form.Item>
                       <Form.Item
-                        name="adresseLivraison"
                         label="Adresse de Livraison"
                         style={{
                           display: "inline-block",
@@ -397,7 +414,14 @@ const ModifierDevis = () => {
                           textAlign: "left",
                         }}
                       >
-                        <Input placeholder="Tunis, Sousse..." />
+                        <Input
+                          name="adresseLivraison"
+                          value={adresseLivraison}
+                          onChange={(event) => {
+                            setAdresseLivraison(event.target.value);
+                          }}
+                          placeholder="Tunis, Sousse..."
+                        />
                       </Form.Item>
                     </Row>
 
@@ -428,7 +452,6 @@ const ModifierDevis = () => {
                       }}
                     >
                       <Form.Item
-                        name="total"
                         label="Total"
                         wrapperCol={{
                           span: 16,
@@ -438,6 +461,11 @@ const ModifierDevis = () => {
                         }}
                       >
                         <Input
+                          name="total"
+                          value={total}
+                          onChange={(event) => {
+                            setTotal(event.target.value);
+                          }}
                           style={{
                             borderRadius: "5px 5px",
                             width: 60,
@@ -458,6 +486,10 @@ const ModifierDevis = () => {
                       >
                         <Input
                           name="remise"
+                          value={remise}
+                          onChange={(event) => {
+                            setRemise(event.target.value);
+                          }}
                           className="text-center"
                           style={{
                             borderWidth: 1,
@@ -482,6 +514,10 @@ const ModifierDevis = () => {
                         <Input
                           className="text-center"
                           name="taxes"
+                          value={taxes}
+                          onChange={(event) => {
+                            setTaxes(event.target.value);
+                          }}
                           style={{
                             borderWidth: 1,
                             borderStyle: "dashed",
@@ -506,6 +542,10 @@ const ModifierDevis = () => {
                       >
                         <Input
                           name="totalTtc"
+                          value={totalTtc}
+                          onChange={(event) => {
+                            setTotalTtc(event.target.value);
+                          }}
                           style={{
                             borderRadius: "5px 5px",
                             width: 60,
@@ -526,6 +566,10 @@ const ModifierDevis = () => {
                       >
                         <Input
                           name="paye"
+                          value={paye}
+                          onChange={(event) => {
+                            setPaye(event.target.value);
+                          }}
                           style={{
                             borderRadius: "5px 5px",
                             borderColor: "#ffff",
@@ -546,6 +590,10 @@ const ModifierDevis = () => {
                       >
                         <Input
                           name="solde"
+                          value={solde}
+                          onChange={(event) => {
+                            setSolde(event.target.value);
+                          }}
                           style={{
                             borderRadius: "5px 5px",
                             borderColor: "#ffff",
