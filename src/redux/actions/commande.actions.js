@@ -5,7 +5,6 @@ import {
   ADD_COMMANDE_SUCCESS,
   GET_COMMANDE_LIST,
   UPDATE_COMMANDE,
- 
 } from "../actionTypes";
 
 export const addCommande = () => {
@@ -22,8 +21,8 @@ export const addStep = (data) => {
 };
 
 export const getCommandesList = () => {
-  return { 
-    type: GET_COMMANDE_LIST 
+  return {
+    type: GET_COMMANDE_LIST,
   };
 };
 
@@ -31,7 +30,6 @@ export const getCommandesListSuccess = (data) => {
   return {
     type: GET_COMMANDE_LIST_SUCCESS,
     payload: data,
-   
   };
 };
 
@@ -42,7 +40,6 @@ export const updateCommande = (data) => {
   };
 };
 
-
 export const getCommandesApi = (status) => async (dispatch) => {
   try {
     dispatch(getCommandesList());
@@ -51,19 +48,16 @@ export const getCommandesApi = (status) => async (dispatch) => {
         Authorization: localStorage.getItem("token"),
       },
     };
-    
     let result = await getApi("commandes", config);
-   
-    if(result){
-      result = result.filter(t=> t.status === status);
+    if (result) {
+      result = result.filter((t) => t.status === status);
       dispatch(getCommandesListSuccess(result));
     }
-    console.log("Liste des commandes:",result, "Status de commande:",status);
+    console.log("Liste des commandes:", result, "Status de commande:", status);
   } catch (error) {
     console.log("ERROR", error.message);
   }
 };
-
 
 export const addCommandetApi = (data, addToast) => async (dispatch) => {
   try {
@@ -72,15 +66,16 @@ export const addCommandetApi = (data, addToast) => async (dispatch) => {
     });
     let result = await postApi("ajouter_commande", data);
     console.log("Result", result);
-     
+
     if (result.success) {
       dispatch(getCommandesApi());
       addToast("Commande créer avec succées", { appearance: "success" });
-    }  
-    else {
+    } else {
       addToast("Erreur c'est produite , ressayer", { appearance: "error" });
     }
-  } catch (error) { console.log("ERROR", error.message);}
+  } catch (error) {
+    console.log("ERROR", error.message);
+  }
 };
 
 export const getCommandeListApi = () => async (dispatch) => {
@@ -90,7 +85,7 @@ export const getCommandeListApi = () => async (dispatch) => {
       type: GET_COMMANDE_LIST_SUCCESS,
       payload: result,
     });
-    console.log("Liste des commandes",result)
+    console.log("Liste des commandes", result);
   } catch (error) {
     console.log("ERROR", error.message);
   }
@@ -111,7 +106,7 @@ export const deleteCommandeApi = (id, addToast) => async (dispatch) => {
     } else {
       addToast("Erreur c'est produite , ressayer", { appearance: "error" });
     }
-    console.log("Resultat",result);
+    console.log("Resultat", result);
   } catch (error) {
     console.log("ERROR", error.message);
   }
@@ -128,11 +123,12 @@ export const getCommandeByUser = (id) => async (dispatch) => {
     let result = await getApi("commandeById/" + id, config);
     if (result) {
       dispatch(getCommandesListSuccess(result));
-   
     }
-   
-    console.log("details commandes",result);
-  } catch (error) {console.log("ERROR", error.message);}
+
+    console.log("details commandes", result);
+  } catch (error) {
+    console.log("ERROR", error.message);
+  }
 };
 
 export const updateCommandeApi = (data, id) => async (dispatch) => {
@@ -148,6 +144,7 @@ export const updateCommandeApi = (data, id) => async (dispatch) => {
       dispatch(getCommandesApi());
     }
     console.log(result);
-  } catch (error) { console.log("ERROR", error.message);}
+  } catch (error) {
+    console.log("ERROR", error.message);
+  }
 };
-

@@ -24,8 +24,6 @@ import EnvoyerEmail from "./EnvoyerEmail";
 
 const { Text } = Typography;
 
-
-
 const Devis = () => {
   function onChange(pagination, filters, sorter, extra) {
     console.log("params", pagination, filters, sorter, extra);
@@ -56,20 +54,6 @@ const Devis = () => {
       return <span className="badge bg-primary">{etat}</span>;
     } else {
       return <span className="badge bg-danger">{etat}</span>;
-    }
-  };
-
-  const displayRole = (status) => {
-    switch (status) {
-      case 1:
-        return "Facture";
-      case 2:
-        return "Commandes en cours";
-      case 0:
-        return "Devis";
-
-      default:
-        return "Devis";
     }
   };
 

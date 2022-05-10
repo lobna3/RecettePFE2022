@@ -1,92 +1,58 @@
-import { Menu, Dropdown,  message,  Typography } from "antd";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getCommandesApi,
+  deleteCommandeApi,
+} from "../../redux/actions/commande.actions";
+import { Link } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
+import Swal from "sweetalert2";
+import { Typography, Table, Space } from "antd";
+import { Dropdown } from "react-bootstrap";
 import {
   DownOutlined,
   PrinterFilled,
   PlusSquareFilled,
   DeleteOutlined,
   FundViewOutlined,
+  FormOutlined,
 } from "@ant-design/icons";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Table, Space, Tag } from "antd";
 import { CommandeHeader } from "../RacetteHeader";
-import { useDispatch, useSelector } from "react-redux";
-import { getCommandesApi } from "../../redux/actions/commande.actions";
 
 const { Text } = Typography;
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(
-      `selectedRowKeys: ${selectedRowKeys}`,
-      "selectedRows: ",
-      selectedRows
-    );
-  },
-  getCheckboxProps: (record) => ({
-    disabled: record.nReference === "Disabled User",
-    // Column configuration not to be checked
-    nReference: record.nReference,
-  }),
-};
-
-function handleButtonClick(e) {
-  message.info("Click on left button.");
-  console.log("click left button", e);
-}
-
-function handleMenuClick(e) {
-  message.info("Click on menu item.");
-  console.log("click", e);
-}
-
-function onChange(pagination, filters, sorter, extra) {
-  console.log("params", pagination, filters, sorter, extra);
-}
 
 export default function Commande() {
-  const [selectionType, setSelectionType] = useState("checkbox");
+  function onChange(pagination, filters, sorter, extra) {
+    console.log("params", pagination, filters, sorter, extra);
+  }
+  const { commandeList } = useSelector((state) => state.commande);
+  const dispatch = useDispatch();
+  const { addToast } = useToasts();
+  function onChange(pagination, filters, sorter, extra) {
+    console.log("params", pagination, filters, sorter, extra);
+  }
   const displayEtat = (etat) => {
-    if (etat== "Refusé") {
+    if (etat == "Refusé") {
       return <span className="badge bg-danger">{etat}</span>;
     } else if (etat == "Accepté") {
       return <span className="badge bg-success">{etat}</span>;
-    } 
-    else if (etat == "En attente") {
+    } else if (etat == "En attente") {
       return <span className="badge bg-warning">{etat}</span>;
-    } 
-    else if (etat == "Annuler") {
+    } else if (etat == "Annuler") {
       return <span className="badge bg-secondary">{etat}</span>;
-    } 
-    else if (etat == "Arrivé à l'échéance") {
+    } else if (etat == "Arrivé à l'échéance") {
       return <span className="badge bg-primary">{etat}</span>;
-    } 
-    else {
+    } else {
       return <span className="badge bg-info">{etat}</span>;
     }
   };
-  const menu = (
-    <Menu onClick={handleMenuClick}>
-      <Menu.Item key="1" icon={<PrinterFilled />}>
-        <Link to="/">Imprimer</Link>
-      </Menu.Item>
-      <Menu.Item key="2" icon={<FundViewOutlined />}>
-        <Link to="/detail_commande/${id}">Visualiser</Link>
-      </Menu.Item>
-      <Menu.Item key="3" icon={<DownOutlined />}>
-        <Link to="/">Parcours</Link>
-      </Menu.Item>
-      <Menu.Item key="4" icon={<DeleteOutlined />}>
-        <Link to="/">Supprimer</Link>
-      </Menu.Item>
-    </Menu>
-  );
-
   const columns = [
     {
       title: "Référence",
       dataIndex: "nReference",
       render: (text, record) => (
-        <Space direction="vertical">
+        <Space>
+          <input type="checkbox" className="checkmail" />
           <Link to="/" target="_blank">
             {record.nReference}
           </Link>
@@ -188,9 +154,7 @@ export default function Commande() {
       render: (text, record) => {
         return (
           <>
-            <Space direction="vertical">
-            {displayEtat(record.etat)}
-            </Space>
+            <Space direction="vertical">{displayEtat(record.etat)}</Space>
           </>
         );
       },
@@ -203,20 +167,67 @@ export default function Commande() {
       title: "Action",
       render: (text, record) => (
         <Space wrap size="middle">
-          <Dropdown.Button
-            onClick={handleButtonClick}
-            overlay={menu}
-          ></Dropdown.Button>
+          <Dropdown>
+            <Dropdown.Toggle variant="" id="dropdown-basic"></Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item>
+                <span
+                  className="text-primary"
+                  onClick={() => {
+                    imprimer_page();
+                  }}
+                >
+                  <PrinterFilled /> Imprimer
+                </span>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Link to={`/devis/${record._id}`}>
+                  <FundViewOutlined /> Visualiser
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Link to={`/devi/${record._id}`}>
+                  <FormOutlined /> Modifier
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <span className="text-primary">
+                  <DownOutlined style={{ color: "#1890ff" }} /> Parcours
+                </span>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <DeleteOutlined style={{ color: "#1890ff" }} />
+                <span
+                  className="text-primary"
+                  type="button"
+                  onClick={() => {
+                    Swal.fire({
+                      title: "Vous êtes sure de supprimer cet Commande ?",
+                      showCancelButton: true,
+                      confirmButtonText: `Confirmer`,
+                      cancelButtonText: `Annuler`,
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        dispatch(deleteCommandeApi(record._id, addToast));
+                      }
+                    });
+                  }}
+                >
+                  Supprimer
+                </span>
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Space>
       ),
     },
   ];
-
-  const { commandeList } = useSelector((state) => state.commande);
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCommandesApi("Commande en cours"));
   }, []);
+  const imprimer_page = () => {
+    window.print();
+  };
 
   return (
     <main id="main" className="main bg-light">
@@ -251,9 +262,9 @@ export default function Commande() {
         <div className="card" style={{ margin: "0 15px 40px 20px" }}>
           <div className="card-body">
             <Table
-              rowSelection={{ type: selectionType, ...rowSelection }}
               columns={columns}
               dataSource={commandeList}
+              onChange={onChange}
             />
           </div>
         </div>

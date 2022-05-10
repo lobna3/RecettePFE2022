@@ -13,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FactureHeader } from "../RacetteHeader";
 import { useDispatch, useSelector } from "react-redux";
-import { getCommandeListApi } from "../../redux/actions/commande.actions";
+import { getCommandesApi } from "../../redux/actions/commande.actions";
 
 const { Text } = Typography;
 const rowSelection = {
@@ -217,7 +217,7 @@ export default function Facture() {
   const { commandeList } = useSelector((state) => state.commande);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCommandeListApi());
+    dispatch(getCommandesApi("Facture"));
   }, []);
   return (
     <main id="main" className="main bg-light">
