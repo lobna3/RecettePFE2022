@@ -26,6 +26,7 @@ import Articles from "../articles/Articles";
 import { updateCommandeApi } from "../../redux/actions/commande.actions";
 import { getClientListApi } from "../../redux/actions/client.actions";
 import "./devis1.css";
+import { useToasts } from "react-toast-notifications";
 import AddArticleModal from "../AddArticleModal";
 import TraitementDevis from "./TraitementDevis";
 import EnvoyerEmail from "./EnvoyerEmail";
@@ -36,6 +37,7 @@ const ModifierDevis = () => {
   const { modifier } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
+  const { addToast } = useToasts();
   const [showAddArticle, setAddArticle] = useState(false);
   const [isOpen, setIsopen] = useState(false);
   const [isOpenListe, setIsOpenListe] = useState(false);
@@ -109,7 +111,7 @@ const ModifierDevis = () => {
       adresseLivraison,
       etat,
     };
-    dispatch(updateCommandeApi(data, modifier));
+    dispatch(updateCommandeApi(data, modifier,addToast));
     navigate('/devis')
   };
   return (

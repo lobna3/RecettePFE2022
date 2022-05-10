@@ -19,7 +19,7 @@ import {
   FileTextOutlined,
   AuditOutlined,
 } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import Articles from "../articles/Articles";
 import "./devis1.css";
@@ -41,6 +41,7 @@ export default function AjoutDevis1() {
   const [isOpenListe, setIsOpenListe] = useState(false);
   const [componentSize] = useState("default");
   const { addToast } = useToasts();
+  const navigate =useNavigate();
   const { addCommandeInfo } = useSelector((state) => state.commande);
   const { clientList } = useSelector((state) => state.client);
   const { selectedArticles } = useSelector((state) => state.commande);
@@ -227,7 +228,9 @@ export default function AjoutDevis1() {
         },
         addToast
       )
+    
     );
+    navigate('/devis')
   };
 
   return (
