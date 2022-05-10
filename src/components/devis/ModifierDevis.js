@@ -20,7 +20,7 @@ import {
   FileTextOutlined,
   AuditOutlined,
 } from "@ant-design/icons";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 //import { useForm, Controller } from "react-hook-form";
 import Articles from "../articles/Articles";
 import { updateCommandeApi } from "../../redux/actions/commande.actions";
@@ -35,6 +35,7 @@ const { TextArea } = Input;
 const ModifierDevis = () => {
   const { modifier } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const [showAddArticle, setAddArticle] = useState(false);
   const [isOpen, setIsopen] = useState(false);
   const [isOpenListe, setIsOpenListe] = useState(false);
@@ -66,7 +67,7 @@ const ModifierDevis = () => {
   const { clientList } = useSelector((state) => state.client);
   useEffect(() => {
     dispatch(getClientListApi());
-  
+
     setDateEmission(selectedCommande.dateEmission);
     setDateEcheance(selectedCommande.dateEcheance);
     setCondition(selectedCommande.condition);
@@ -109,14 +110,15 @@ const ModifierDevis = () => {
       etat,
     };
     dispatch(updateCommandeApi(data, modifier));
+    navigate('/devis')
   };
   return (
     <div>
       <main id="main" class="main bg-light">
         <DevisHeader />
         <Row>
-    
           <form>
+         
             <Row>
               <Col span={8} push={16}>
                 <Card
@@ -628,17 +630,17 @@ const ModifierDevis = () => {
                         Total: <Text strong>20000 TND</Text>
                       </Text>
                     </Card>
+                    <button style={{marginTop:30}}
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={confirmAdd}
+                    >
+                      Modifier Commande
+                    </button>
                   </Form>
                 </Card>
               </Col>
             </Row>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={confirmAdd}
-            >
-              Modifier Commande
-            </button>
           </form>
         </Row>
       </main>
