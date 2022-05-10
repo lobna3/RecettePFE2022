@@ -194,7 +194,7 @@ const commandeReducer = (state = commandeInitState, action) => {
 
     case GET_COMMANDE_LIST_SUCCESS:
       
-      return { ...state, loading: false, commandeList: payload };
+      return { ...state, loading: false, commandeList: payload};
 
     case UPDATE_COMMANDE:
       return { ...state, selectedCommande: payload };

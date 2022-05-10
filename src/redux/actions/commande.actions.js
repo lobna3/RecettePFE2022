@@ -42,6 +42,7 @@ export const updateCommande = (data) => {
   };
 };
 
+
 export const getCommandesApi = (status) => async (dispatch) => {
   try {
     dispatch(getCommandesList());
@@ -50,13 +51,19 @@ export const getCommandesApi = (status) => async (dispatch) => {
         Authorization: localStorage.getItem("token"),
       },
     };
+    
     let result = await getApi("commandes", config);
-    dispatch(getCommandesListSuccess(result));
-    console.log("Liste des commandes",result);
+   
+    if(result){
+      result = result.filter(t=> t.status === status);
+      dispatch(getCommandesListSuccess(result));
+    }
+    console.log("Liste des commandes:",result, "Status de commande:",status);
   } catch (error) {
     console.log("ERROR", error.message);
   }
 };
+
 
 export const addCommandetApi = (data, addToast) => async (dispatch) => {
   try {

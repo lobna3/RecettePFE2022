@@ -24,9 +24,7 @@ import EnvoyerEmail from "./EnvoyerEmail";
 
 const { Text } = Typography;
 
-function onChange(pagination, filters, sorter, extra) {
-  console.log("params", pagination, filters, sorter, extra);
-}
+
 
 const Devis = () => {
   function onChange(pagination, filters, sorter, extra) {
@@ -196,6 +194,7 @@ const Devis = () => {
         multiple: 3,
       },
     },
+    
     {
       title: "Action",
       render: (text, record) => (
@@ -296,8 +295,8 @@ const Devis = () => {
           <div
             className="card"
             style={{
-              marginLeft: 20,
-              marginRight: 15,
+              marginLeft: 15,
+              marginRight: 10,
               marginTop: 0,
               marginBottom: 40,
             }}

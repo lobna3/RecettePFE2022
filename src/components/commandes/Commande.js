@@ -1,4 +1,4 @@
-import { Menu, Dropdown, Button, message, Tooltip, Typography } from "antd";
+import { Menu, Dropdown,  message,  Typography } from "antd";
 import {
   DownOutlined,
   PrinterFilled,
@@ -9,10 +9,9 @@ import {
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Table, Space, Tag } from "antd";
-import axios from "../../config/axios";
 import { CommandeHeader } from "../RacetteHeader";
 import { useDispatch, useSelector } from "react-redux";
-import { getCommandeListApi } from "../../redux/actions/commande.actions";
+import { getCommandesApi } from "../../redux/actions/commande.actions";
 
 const { Text } = Typography;
 const rowSelection = {
@@ -216,7 +215,7 @@ export default function Commande() {
   const { commandeList } = useSelector((state) => state.commande);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCommandeListApi());
+    dispatch(getCommandesApi("Commande en cours"));
   }, []);
 
   return (
