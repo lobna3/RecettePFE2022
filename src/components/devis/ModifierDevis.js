@@ -33,7 +33,7 @@ import TraitementFacture from "../factures/TraitementFacture";
 const { Text } = Typography;
 const { TextArea } = Input;
 const ModifierDevis = () => {
-  //const { modifier } = useParams();
+  const { modifier } = useParams();
   const location = useLocation();
   const [showAddArticle, setAddArticle] = useState(false);
   const [isOpen, setIsopen] = useState(false);
@@ -108,13 +108,14 @@ const ModifierDevis = () => {
       adresseLivraison,
       etat,
     };
-    dispatch(updateCommandeApi(data, selectedCommande._id));
+    dispatch(updateCommandeApi(data, modifier));
   };
   return (
     <div>
       <main id="main" class="main bg-light">
         <DevisHeader />
         <Row>
+    
           <form>
             <Row>
               <Col span={8} push={16}>
