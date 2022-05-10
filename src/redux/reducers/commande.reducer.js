@@ -14,7 +14,7 @@ const commandeInitState = {
   loading: false,
   commandeList: [],
   selectedArticles: [],
-  selectedCommande: [],
+  selectedCommande: {},
   addCommandeInfo: {
     dateEmission: Date,
     dateEcheance: Date,
