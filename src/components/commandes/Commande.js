@@ -245,7 +245,7 @@ export default function Commande() {
               className="btn btn-primary btn-sm ml-2 "
             >
               <PlusSquareFilled /> Lancer une commande
-            </button>{" "}
+            </button>
           </Link>
           <button
             style={{ margin: "0 20px" }}

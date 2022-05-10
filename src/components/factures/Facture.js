@@ -1,4 +1,16 @@
-import { Menu, Dropdown, message, Typography, Table, Space } from "antd";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getCommandesApi,
+  deleteCommandeApi,
+} from "../../redux/actions/commande.actions";
+import Swal from "sweetalert2";
+import { Dropdown } from "react-bootstrap";
+import { useToasts } from "react-toast-notifications";
+import { Typography, Table, Space } from "antd";
+import { FactureHeader } from "../RacetteHeader";
+import EnvoyerEmail from "../devis/EnvoyerEmail";
 import {
   StopOutlined,
   PlusSquareFilled,
@@ -9,88 +21,38 @@ import {
   MailOutlined,
   DollarOutlined,
 } from "@ant-design/icons";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { FactureHeader } from "../RacetteHeader";
-import { useDispatch, useSelector } from "react-redux";
-import { getCommandesApi } from "../../redux/actions/commande.actions";
 
 const { Text } = Typography;
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(
-      `selectedRowKeys: ${selectedRowKeys}`,
-      "selectedRows: ",
-      selectedRows
-    );
-  },
-  getCheckboxProps: (record) => ({
-    disabled: record.nReference === "Disabled User",
-    // Column configuration not to be checked
-    nReference: record.nReference,
-  }),
-};
-
-function handleButtonClick(e) {
-  message.info("Click on left button.");
-  console.log("click left button", e);
-}
-
-function handleMenuClick(e) {
-  message.info("Click on menu item.");
-  console.log("click", e);
-}
-const displayEtat = (etat) => {
-  if (etat == "Retard - 4 jours") {
-    return <span className="badge bg-danger">{etat}</span>;
-  } else if (etat == "Déposé") {
-    return <span className="badge bg-success">{etat}</span>;
-  } else if (etat == "Echéance - 2 jours") {
-    return <span className="badge bg-warning">{etat}</span>;
-  } 
-  else {
-    return <span className="badge bg-info">{etat}</span>;
-  }
-};
-const menu = (
-  <Menu onClick={handleMenuClick}>
-    <Menu.Item key="2" icon={<DollarOutlined />}>
-      <Link to="/paiement">Paiement</Link>
-    </Menu.Item>
-    <Menu.Item key="1" icon={<FileDoneOutlined />}>
-      <Link to="/">Générer</Link>
-    </Menu.Item>
-    <Menu.Item key="3" icon={<MailOutlined />}>
-      <Link to="/"> Envoyer </Link>
-    </Menu.Item>
-    <Menu.Item key="2" icon={<AuditOutlined />}>
-      <Link to="/">Générer le borderau d'expédition</Link>
-    </Menu.Item>
-    <Menu.Item key="1" icon={<FormOutlined />}>
-      <Link to="/"> Modifier</Link>
-    </Menu.Item>
-    <Menu.Item key="4" icon={<DeleteOutlined />}>
-      <Link to="/"> Supprimer</Link>
-    </Menu.Item>
-    <Menu.Item key="1" icon={<StopOutlined />}>
-      <Link to="/"> Annuler</Link>
-    </Menu.Item>
-  </Menu>
-);
-
-function onChange(pagination, filters, sorter, extra) {
-  console.log("params", pagination, filters, sorter, extra);
-}
 
 export default function Facture() {
-  const [selectionType, setSelectionType] = useState("checkbox");
-
+  const [isOpen, setIsopen] = useState(false);
+  const dispatch = useDispatch();
+  const { addToast } = useToasts();
+  function onChange(pagination, filters, sorter, extra) {
+    console.log("params", pagination, filters, sorter, extra);
+  }
+  const { commandeList } = useSelector((state) => state.commande);
+  useEffect(() => {
+    dispatch(getCommandesApi("Facture"));
+  }, []);
+  const displayEtat = (etat) => {
+    if (etat == "Retard - 4 jours") {
+      return <span className="badge bg-danger">{etat}</span>;
+    } else if (etat == "Déposé") {
+      return <span className="badge bg-success">{etat}</span>;
+    } else if (etat == "Echéance - 2 jours") {
+      return <span className="badge bg-warning">{etat}</span>;
+    } else {
+      return <span className="badge bg-info">{etat}</span>;
+    }
+  };
   const columns = [
     {
       title: "N facture",
       dataIndex: "nFacture",
       render: (text, record) => (
-        <Space direction="vertical">
+        <Space>
+          <input type="checkbox" className="checkmail" />
           <Link to="/" target="_blank">
             {record.nFacture}
           </Link>
@@ -205,59 +167,119 @@ export default function Facture() {
       title: "Action",
       render: (text, record) => (
         <Space wrap size="middle">
-          <Dropdown.Button
-            onClick={handleButtonClick}
-            overlay={menu}
-          ></Dropdown.Button>
+          <Dropdown>
+            <Dropdown.Toggle variant="" id="dropdown-basic"></Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item>
+                <Link to="/paiement">
+                  <DollarOutlined /> Paiement
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Link to="/">
+                  <FileDoneOutlined /> Générer
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <span
+                  className="text-primary"
+                  onClick={() => {
+                    setIsopen(true);
+                  }}
+                >
+                  <MailOutlined style={{ color: "#1890ff" }} /> Envoyer
+                </span>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Link to="/">
+                  <AuditOutlined /> Générer le borderau d'expédition
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Link to={`/devi/${record._id}`}>
+                  <FormOutlined /> Modifier
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <DeleteOutlined style={{ color: "#1890ff" }} />
+                <span
+                  className="text-primary"
+                  type="button"
+                  onClick={() => {
+                    Swal.fire({
+                      title: "Vous êtes sure de supprimer cet Commande ?",
+                      showCancelButton: true,
+                      confirmButtonText: `Confirmer`,
+                      cancelButtonText: `Annuler`,
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        dispatch(deleteCommandeApi(record._id, addToast));
+                      }
+                    });
+                  }}
+                >
+                  Supprimer
+                </span>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Link to="/">
+                  <StopOutlined /> Annuler
+                </Link>
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Space>
       ),
     },
   ];
 
-  const { commandeList } = useSelector((state) => state.commande);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getCommandesApi("Facture"));
-  }, []);
   return (
-    <main id="main" className="main bg-light">
-      <FactureHeader />
-      <div className="pagetitle">
-        <div
-          style={{ display: "flex", justifyContent: "flex-end" }}
-          className="col-lg-12 "
-        >
-          <Link className="" to="/ajouter_facture">
+    <div>
+      <main id="main" className="main bg-light">
+        <FactureHeader />
+        <div className="pagetitle">
+          <div
+            style={{ display: "flex", justifyContent: "flex-end" }}
+            className="col-lg-12 "
+          >
+            <Link className="" to="/ajouter_facture">
+              <button
+                style={{ margin: "0 20px" }}
+                type="button"
+                className="btn btn-primary btn-sm ml-2 "
+              >
+                <PlusSquareFilled /> Ajouter facture
+              </button>{" "}
+            </Link>
             <button
               style={{ margin: "0 20px" }}
               type="button"
-              className="btn btn-primary btn-sm ml-2 "
+              className="btn btn-primary  btn-sm ml-2 "
             >
-              <PlusSquareFilled /> Ajouter facture
-            </button>{" "}
-          </Link>
-          <button
-            style={{ margin: "0 20px" }}
-            type="button"
-            className="btn btn-primary  btn-sm ml-2 "
-          >
-            <PlusSquareFilled /> Nouvelle Opération
-          </button>
+              <PlusSquareFilled /> Nouvelle Opération
+            </button>
+          </div>
+          <br />
         </div>
-        <br />
-      </div>
 
-      <div className="col-lg-12 grid-margin stretch-card">
-        <div className="card" style={{ margin: "0 15px 40px 20px" }}>
-          <div className="card-body">
-            <Table
-              rowSelection={{ type: selectionType, ...rowSelection }}
-              columns={columns}
-              dataSource={commandeList}
-            />
+        <div className="col-lg-12 grid-margin stretch-card">
+          <div className="card" style={{ margin: "0 15px 40px 20px" }}>
+            <div className="card-body">
+              <Table
+                columns={columns}
+                dataSource={commandeList}
+                onChange={onChange}
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+      <EnvoyerEmail
+        isOpen={isOpen}
+        handleClose={() => {
+          setIsopen(false);
+        }}
+      />
+    </div>
   );
 }
