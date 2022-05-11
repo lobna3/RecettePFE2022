@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getCommandesApi,
   deleteCommandeApi,
+  updateCommande,
 } from "../../redux/actions/commande.actions";
 import Swal from "sweetalert2";
 import EnvoyerEmail from "./EnvoyerEmail";
@@ -35,9 +36,7 @@ const Devis = () => {
   const { commandeList } = useSelector((state) => state.commande);
 
   useEffect(() => {
-    dispatch(getCommandesApi(
-      "Devis"
-    ));
+    dispatch(getCommandesApi("Devis"));
     console.log("URL", location.pathname);
   }, []);
 
@@ -178,7 +177,7 @@ const Devis = () => {
         multiple: 3,
       },
     },
-    
+
     {
       title: "Action",
       render: (text, record) => (
@@ -202,7 +201,16 @@ const Devis = () => {
                 </Link>
               </Dropdown.Item>
               <Dropdown.Item>
-                <Link to={`/devi/${record._id}`}>
+                <Link
+                  to={`/devi/${record._id}`}
+                  onClick={() => {
+                    dispatch(updateCommande(record));
+                    dispatch({
+                      type: "SET_SELECTED_ARTICLE",
+                      payload: record.articles,
+                    });
+                  }}
+                >
                   <FormOutlined /> Modifier
                 </Link>
               </Dropdown.Item>

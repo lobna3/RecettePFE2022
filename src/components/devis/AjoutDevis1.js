@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { AjoutDHeader } from "../RacetteHeader";
 import {
   Row,
@@ -41,7 +41,7 @@ export default function AjoutDevis1() {
   const [isOpenListe, setIsOpenListe] = useState(false);
   const [componentSize] = useState("default");
   const { addToast } = useToasts();
-  const navigate =useNavigate();
+  const navigate = useNavigate();
   const { addCommandeInfo } = useSelector((state) => state.commande);
   const { clientList } = useSelector((state) => state.client);
   const { selectedArticles } = useSelector((state) => state.commande);
@@ -51,6 +51,8 @@ export default function AjoutDevis1() {
     handleSubmit,
     control,
     setValue,
+    getValues,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -112,7 +114,6 @@ export default function AjoutDevis1() {
     console.log("Total", initTotal);
     setValue("total", initTotal);
 
-    console.log("Remise", initRemise);
     setValue("remise", 0);
 
     console.log("Taxes", totalTaxe);
@@ -127,110 +128,123 @@ export default function AjoutDevis1() {
     console.log("Solde", initTotal);
     setValue("solde", initTotal);
   };
-
+  const calculateRemise = () => {
+    let remise = getValues("remise");
+    let totalValue = getValues("total");
+    let totalTaxe = getValues("taxes");
+    let remiseVal = (remise * totalValue) / 100;
+    setValue("totalTtc", totalValue - remiseVal + totalTaxe);
+  };
   useEffect(() => {
     dispatch(getClientListApi());
     calculateValues();
   }, [selectedArticles]);
-
+  useMemo(() => {
+    calculateRemise();
+  }, [watch("remise")]);
   const onSubmit = (data) => {
-    dispatch(addStep(data));
-    console.log("Commande info", addCommandeInfo);
-    let {
-      dateEmission,
-      dateEcheance,
-      condition,
-      nFacture,
-      nReference,
-      total,
-      taxes,
-      remise,
-      totalTtc,
-      paye,
-      solde,
-      note,
-      remarque,
-      recurrente,
-      status,
-      adresseFacturation,
-      adresseLivraison,
-      qte,
-      pu,
-      taxe,
-      prix,
-      service,
-      etat,
-      typeS,
-      titreS,
-      descriptionS,
-      soldeP: soldeP,
-      typePaiement,
-      regPaiement,
-      etatP,
-      reste,
-      avance,
-      mis,
-      nCarte,
-      ccv,
-      dataP,
-      montantP,
-    } = addCommandeInfo;
-    let commande = {
-      dateEmission,
-      dateEcheance,
-      condition,
-      nFacture,
-      nReference,
-      total,
-      taxes,
-      remise,
-      totalTtc,
-      paye,
-      solde,
-      note,
-      remarque,
-      recurrente,
-      status,
-      etat,
-      client: "625d279312fbb95eed52430a",
-      adresseFacturation,
-      adresseLivraison,
-      qte,
-      pu,
-      taxe,
-      prix,
-      service: "623efa58cef38dae7b89e586",
-      typeS,
-      titreS,
-      descriptionS,
-      soldeP: soldeP,
-      typePaiement,
-      regPaiement,
-      etatP,
-      reste,
-      avance,
-      mis,
-      nCarte,
-      ccv,
-      dataP,
-      montantP,
+    console.log("Devis Data", data);
+    let body = {
+      ...data,
+      dateEmission: data.dateEmission.toDate(),
+      dateEcheance: data.dateEcheance.toDate(),
     };
-    let { articles } = addCommandeInfo;
-    let { suivies } = addCommandeInfo;
-    let { paiements } = addCommandeInfo;
+    // let {
+    //   dateEmission,
+    //   dateEcheance,
+    //   condition,
+    //   nFacture,
+    //   nReference,
+    //   total,
+    //   taxes,
+    //   remise,
+    //   totalTtc,
+    //   paye,
+    //   solde,
+    //   note,
+    //   remarque,
+    //   recurrente,
+    //   status,
+    //   adresseFacturation,
+    //   adresseLivraison,
+    //   qte,
+    //   pu,
+    //   taxe,
+    //   prix,
+    //   service,
+    //   etat,
+    //   typeS,
+    //   titreS,
+    //   descriptionS,
+    //   soldeP: soldeP,
+    //   typePaiement,
+    //   regPaiement,
+    //   etatP,
+    //   reste,
+    //   avance,
+    //   mis,
+    //   nCarte,
+    //   ccv,
+    //   dataP,
+    //   montantP,
+    // } = addCommandeInfo;
+    // let commande = {
+    //   dateEmission,
+    //   dateEcheance,
+    //   condition,
+    //   nFacture,
+    //   nReference,
+    //   total,
+    //   taxes,
+    //   remise,
+    //   totalTtc,
+    //   paye,
+    //   solde,
+    //   note,
+    //   remarque,
+    //   recurrente,
+    //   status,
+    //   etat,
+    //   client: "625d279312fbb95eed52430a",
+    //   adresseFacturation,
+    //   adresseLivraison,
+    //   qte,
+    //   pu,
+    //   taxe,
+    //   prix,
+    //   service: "623efa58cef38dae7b89e586",
+    //   typeS,
+    //   titreS,
+    //   descriptionS,
+    //   soldeP: soldeP,
+    //   typePaiement,
+    //   regPaiement,
+    //   etatP,
+    //   reste,
+    //   avance,
+    //   mis,
+    //   nCarte,
+    //   ccv,
+    //   dataP,
+    //   montantP,
+    // };
+    // let { articles } = addCommandeInfo;
+    // let { suivies } = addCommandeInfo;
+    // let { paiements } = addCommandeInfo;
+
     dispatch(
       addCommandetApi(
         {
-          commande: commande,
-          articles: selectedArticles,
-          suivies: suivies,
-          paiements: paiements,
+          commande: body,
+          articles: selectedArticles.map((elm) => {
+            delete elm.key;
+            delete elm._id;
+            return { ...elm, service: elm.service._id };
+          }),
         },
         addToast
       )
-    
     );
-
   };
 
   return (
@@ -732,8 +746,13 @@ export default function AjoutDevis1() {
                           >
                             <Input
                               {...field}
-                              style={{ borderRadius: "5px 5px",borderColor:"#ffff",width:60}}
-                            />TND
+                              style={{
+                                borderRadius: "5px 5px",
+                                borderColor: "#ffff",
+                                width: 60,
+                              }}
+                            />
+                            TND
                           </Form.Item>
                         )}
                       />
@@ -753,9 +772,13 @@ export default function AjoutDevis1() {
                           >
                             <Input
                               {...field}
-                         
-                              style={{ borderRadius: "5px 5px" ,borderColor:"#ffff",width:60}}
-                            />TND
+                              style={{
+                                borderRadius: "5px 5px",
+                                borderColor: "#ffff",
+                                width: 60,
+                              }}
+                            />
+                            TND
                           </Form.Item>
                         )}
                       />
@@ -767,21 +790,21 @@ export default function AjoutDevis1() {
                     >
                       <Button
                         type="primary"
-                        style={{ marginRight: 20,marginLeft:20 }}
+                        style={{ marginRight: 20, marginLeft: 20 }}
                         onClick={() => {
                           setIsOpenListe(true);
                         }}
                       >
                         Payé
                       </Button>
-                      <Text style={{ marginRight: 20,marginLeft:120 }}>
+                      <Text style={{ marginRight: 20, marginLeft: 120 }}>
                         Remise: <Text strong>20000 TND</Text>
                       </Text>
-                      <Text  style={{ marginRight: 20 }}>
-                        Tax:  <Text strong>20000 TND</Text>
+                      <Text style={{ marginRight: 20 }}>
+                        Tax: <Text strong>20000 TND</Text>
                       </Text>
-                      <Text  style={{ marginRight: 20}}>
-                        Total: <Text strong>20000 TND</Text>
+                      <Text style={{ marginRight: 20 }}>
+                        Total: <Text strong>{getValues("total")} TND</Text>
                       </Text>
                     </Card>
                   </Form>

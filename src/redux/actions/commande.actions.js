@@ -68,7 +68,7 @@ export const addCommandetApi = (data, addToast) => async (dispatch) => {
     console.log("Result", result);
 
     if (result.success) {
-      dispatch(getCommandesApi());
+      //dispatch(getCommandesApi());
       addToast("Commande créer avec succées", { appearance: "success" });
     } else {
       addToast("Erreur c'est produite , ressayer", { appearance: "error" });
@@ -101,7 +101,7 @@ export const deleteCommandeApi = (id, addToast) => async (dispatch) => {
     // dispatch(addCommande());
     let result = await deleteApi("delete_commande/" + id, config);
     if (result) {
-      dispatch(getCommandesApi());
+      dispatch(getCommandesApi("Devis"));
       addToast("Commande supprimer avec succées", { appearance: "success" });
     } else {
       addToast("Erreur c'est produite , ressayer", { appearance: "error" });
@@ -142,7 +142,7 @@ export const updateCommandeApi = (data, id,addToast) => async (dispatch) => {
 
     let result = await updateApi("maj_commande/" + id, data, config);
     if (result) {
-     dispatch(getCommandesApi());
+     //dispatch(getCommandesApi());
     
      addToast("Mise à jour effectuées avec succées", { appearance: "success" });
     }else {

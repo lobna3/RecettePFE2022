@@ -31,6 +31,7 @@ import AddArticleModal from "../AddArticleModal";
 import TraitementDevis from "./TraitementDevis";
 import EnvoyerEmail from "./EnvoyerEmail";
 import TraitementFacture from "../factures/TraitementFacture";
+import moment from "moment";
 const { Text } = Typography;
 const { TextArea } = Input;
 const ModifierDevis = () => {
@@ -70,8 +71,8 @@ const ModifierDevis = () => {
   useEffect(() => {
     dispatch(getClientListApi());
 
-    setDateEmission(selectedCommande.dateEmission);
-    setDateEcheance(selectedCommande.dateEcheance);
+    setDateEmission(moment(selectedCommande.dateEmission));
+    setDateEcheance(moment(selectedCommande.dateEcheance));
     setCondition(selectedCommande.condition);
     setNFacture(selectedCommande.nFacture);
     setNReference(selectedCommande.nReference);
@@ -87,7 +88,7 @@ const ModifierDevis = () => {
     setAdresseFacturation(selectedCommande.adresseFacturation);
     setAdresseLivraison(selectedCommande.adresseLivraison);
     setEtat(selectedCommande.etat);
-
+    console.log("Selected Commande", selectedCommande);
     console.log("URL", location.pathname);
   }, [selectedCommande]);
   const confirmAdd = () => {
