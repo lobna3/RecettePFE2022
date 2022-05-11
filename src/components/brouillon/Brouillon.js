@@ -1,13 +1,13 @@
 import React, { useEffect} from "react";
 import { BrouillonHeader } from "../RacetteHeader";
 import { useDispatch, useSelector } from "react-redux";
-import { getCommandesApi } from "../../redux/actions/commande.actions";
+import { getCommandeListApi } from "../../redux/actions/commande.actions";
 
 export default function Brouilon() {
   const dispatch = useDispatch();
   const { commandeList } = useSelector((state) => state.commande);
   useEffect(() => {
-    dispatch(getCommandesApi());
+    dispatch(getCommandeListApi());
   }, []);
 
   return (
