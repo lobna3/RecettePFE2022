@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import moment from 'moment';
 import { Dropdown } from "react-bootstrap";
 import { Typography } from "antd";
 import {
@@ -147,12 +148,13 @@ const Devis = () => {
     },
     {
       title: "Date",
-      dataIndex: "dateEmission",
+      dataIndex: "dateEchance",
       render: (text, record) => {
         return (
           <>
             <Space direction="vertical">
-              <Text strong>{record.dateEmission}</Text>
+              <Text strong>{moment(record.dateEcheance).format('MMMM Do YYYY')} </Text>
+             
             </Space>
           </>
         );
