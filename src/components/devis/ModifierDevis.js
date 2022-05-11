@@ -63,6 +63,7 @@ const ModifierDevis = () => {
   const [adresseFacturation, setAdresseFacturation] = useState("");
   const [adresseLivraison, setAdresseLivraison] = useState("");
   const [etat, setEtat] = useState("");
+  const [client, setClient] = useState("");
 
   const dispatch = useDispatch();
 
@@ -83,11 +84,13 @@ const ModifierDevis = () => {
     setPaye(selectedCommande.paye);
     setSolde(selectedCommande.solde);
     setRemarque(selectedCommande.remarque);
+    setNote(selectedCommande.note);
     setRecurrente(selectedCommande.recurrente);
     setStatus(selectedCommande.status);
     setAdresseFacturation(selectedCommande.adresseFacturation);
     setAdresseLivraison(selectedCommande.adresseLivraison);
     setEtat(selectedCommande.etat);
+    setClient(selectedCommande.client);
     console.log("Selected Commande", selectedCommande);
     console.log("URL", location.pathname);
   }, [selectedCommande]);
@@ -111,6 +114,7 @@ const ModifierDevis = () => {
       adresseFacturation,
       adresseLivraison,
       etat,
+      client,
     };
     dispatch(updateCommandeApi(data, modifier, addToast));
     navigate("/devis");
@@ -194,10 +198,10 @@ const ModifierDevis = () => {
                   </p>
                   <Badge.Ribbon text="Note" color="">
                     <TextArea
-                      name="note"
-                      value={note}
+                      name="etat"
+                      value={etat}
                       onChange={(event) => {
-                        setNote(event.target.value);
+                        setEtat(event.target.value);
                       }}
                       style={{
                         borderWidth: 1,
@@ -360,6 +364,10 @@ const ModifierDevis = () => {
                       >
                         <Select
                           name="client"
+                          value={client}
+                          onChange={(event) => {
+                            setClient(event.target.value);
+                          }}
                           onClick={() => {
                             dispatch(getClientListApi);
                           }}
@@ -623,13 +631,13 @@ const ModifierDevis = () => {
                         Payé
                       </Button>
                       <Text style={{ marginRight: 20, marginLeft: 120 }}>
-                        Remise: <Text strong>20000 TND</Text>
+                        Remise: <Text strong>{remise}TND</Text>
                       </Text>
                       <Text style={{ marginRight: 20 }}>
-                        Tax: <Text strong>20000 TND</Text>
+                        Tax: <Text strong>{taxes} TND</Text>
                       </Text>
                       <Text style={{ marginRight: 20 }}>
-                        Total: <Text strong>20000 TND</Text>
+                        Total: <Text strong>{total} TND</Text>
                       </Text>
                     </Card>
                     <button

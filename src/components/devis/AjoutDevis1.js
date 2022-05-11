@@ -42,7 +42,7 @@ export default function AjoutDevis1() {
   const [componentSize] = useState("default");
   const { addToast } = useToasts();
   const navigate = useNavigate();
-  const { addCommandeInfo } = useSelector((state) => state.commande);
+ // const { addCommandeInfo } = useSelector((state) => state.commande);
   const { clientList } = useSelector((state) => state.client);
   const { selectedArticles } = useSelector((state) => state.commande);
   const dispatch = useDispatch();
@@ -67,11 +67,11 @@ export default function AjoutDevis1() {
       totalTtc: "",
       paye: "",
       solde: "",
-      note: "",
+      note: "NonPayé",
       remarque: "",
       recurrente: "oui",
       status: "Devis",
-      etat: "NonPayé",
+      etat: "",
       client: "625d279312fbb95eed52430a",
       adresseFacturation: "",
       adresseLivraison: "",
@@ -102,7 +102,7 @@ export default function AjoutDevis1() {
 
   const calculateValues = () => {
     let initTotal = 0;
-    let initRemise = 0;
+   // let initRemise = 0;
     let totalTaxe = 0;
     selectedArticles.forEach((article) => {
       console.log("article", article);
@@ -326,7 +326,7 @@ export default function AjoutDevis1() {
                   </p>
                   <Badge.Ribbon text="Note" color="">
                     <Controller
-                      name="note"
+                      name="etat"
                       control={control}
                       rules={{ required: false }}
                       render={({ field }) => (
@@ -798,10 +798,10 @@ export default function AjoutDevis1() {
                         Payé
                       </Button>
                       <Text style={{ marginRight: 20, marginLeft: 120 }}>
-                        Remise: <Text strong>20000 TND</Text>
+                        Remise: <Text strong>{getValues("remise")}</Text>
                       </Text>
                       <Text style={{ marginRight: 20 }}>
-                        Tax: <Text strong>20000 TND</Text>
+                        Tax: <Text strong>{getValues("taxes")} TND</Text>
                       </Text>
                       <Text style={{ marginRight: 20 }}>
                         Total: <Text strong>{getValues("total")} TND</Text>
