@@ -111,8 +111,8 @@ const ModifierDevis = () => {
       adresseLivraison,
       etat,
     };
-    dispatch(updateCommandeApi(data, modifier,addToast));
-    navigate('/devis')
+    dispatch(updateCommandeApi(data, modifier, addToast));
+    navigate("/devis");
   };
   return (
     <div>
@@ -120,7 +120,6 @@ const ModifierDevis = () => {
         <DevisHeader />
         <Row>
           <form>
-         
             <Row>
               <Col span={8} push={16}>
                 <Card
@@ -351,7 +350,6 @@ const ModifierDevis = () => {
                     <Row>
                       <Form.Item
                         label="Client"
-                        name="client"
                         style={{
                           display: "inline-block",
                           width: "calc(45% - 8px)",
@@ -360,6 +358,7 @@ const ModifierDevis = () => {
                         }}
                       >
                         <Select
+                          name="client"
                           onClick={() => {
                             dispatch(getClientListApi);
                           }}
@@ -632,7 +631,8 @@ const ModifierDevis = () => {
                         Total: <Text strong>20000 TND</Text>
                       </Text>
                     </Card>
-                    <button style={{marginTop:30}}
+                    <button
+                      style={{ marginTop: 30 }}
                       type="button"
                       className="btn btn-primary"
                       onClick={confirmAdd}

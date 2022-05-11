@@ -222,7 +222,7 @@ export default function AjoutDevis1() {
       addCommandetApi(
         {
           commande: commande,
-          articles: articles,
+          articles: selectedArticles,
           suivies: suivies,
           paiements: paiements,
         },
@@ -230,7 +230,7 @@ export default function AjoutDevis1() {
       )
     
     );
-    navigate('/devis')
+
   };
 
   return (

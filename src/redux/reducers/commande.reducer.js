@@ -104,6 +104,7 @@ const commandeReducer = (state = commandeInitState, action) => {
         ccv,
         dataP,
         montantP,
+        client,
       } = payload;
       return {
         ...state,
@@ -127,7 +128,7 @@ const commandeReducer = (state = commandeInitState, action) => {
           etat: etat,
           adresseFacturation,
           adresseLivraison,
-
+          client: client,
           articles: [
             ...state.addCommandeInfo.articles,
             {
@@ -193,8 +194,7 @@ const commandeReducer = (state = commandeInitState, action) => {
       return { ...state, loading: true };
 
     case GET_COMMANDE_LIST_SUCCESS:
-      
-      return { ...state, loading: false, commandeList: payload};
+      return { ...state, loading: false, commandeList: payload };
 
     case UPDATE_COMMANDE:
       return { ...state, selectedCommande: payload };

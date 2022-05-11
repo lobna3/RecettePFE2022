@@ -138,10 +138,12 @@ export const updateCommandeApi = (data, id,addToast) => async (dispatch) => {
         Authorization: localStorage.getItem("token"),
       },
     };
+   
 
     let result = await updateApi("maj_commande/" + id, data, config);
     if (result) {
-     //dispatch(getCommandesApi());
+     dispatch(getCommandesApi());
+    
      addToast("Mise à jour effectuées avec succées", { appearance: "success" });
     }else {
       addToast("Erreur c'est produite , ressayer", { appearance: "error" });
