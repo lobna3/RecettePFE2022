@@ -16,6 +16,7 @@ import Table from "react-bootstrap/Table";
 import { Card, Typography, DatePicker } from "antd";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { getCommandesListDetailsApi } from "../../redux/actions/commande.details.actions";
+import moment from 'moment';
 const { Title, Text } = Typography;
 
 const DetailDevis = () => {
@@ -26,6 +27,7 @@ const DetailDevis = () => {
   useEffect(() => {
     dispatch(getCommandesListDetailsApi(detail));
     console.log("URL", location.pathname);
+    console.log("Commande détails:", commandeDetails);
   }, [detail]);
 
   const displayIcon = (description) => {
@@ -106,12 +108,14 @@ const DetailDevis = () => {
                 <tr>
                   <td>
                     <DatePicker />
-                    {commandeDetails.dateEcheance}
+                  
+                    {moment(commandeDetails.dateEcheance).format('MMMM Do YYYY')}
                     <hr />
                   </td>
                   <td>
                     <DatePicker />
-                    {commandeDetails.dateEmission}
+                    {moment(commandeDetails.dateEmission).format('MMMM Do YYYY')}
+                   
                      <hr />
                   </td>
                 </tr>

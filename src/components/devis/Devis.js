@@ -21,6 +21,7 @@ import {
   deleteCommandeApi,
   updateCommande,
 } from "../../redux/actions/commande.actions";
+import {getCommandeDetails} from "../../redux/actions/commande.details.actions";
 import Swal from "sweetalert2";
 import EnvoyerEmail from "./EnvoyerEmail";
 
@@ -197,7 +198,11 @@ const Devis = () => {
                 </span>
               </Dropdown.Item>
               <Dropdown.Item>
-                <Link to={`/devis/${record._id}`}>
+                <Link to={`/devis/${record._id}`}
+                onClick={() => {
+                  dispatch(getCommandeDetails(record));
+                }}
+                >
                   <FundViewOutlined /> Visualiser
                 </Link>
               </Dropdown.Item>
