@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 import { VenteHeader } from "../RacetteHeader";
 import EnvoyerEmail from "../devis/EnvoyerEmail";
+import moment from 'moment';
 const { Text } = Typography;
 
 export default function Vente() {
@@ -75,7 +76,7 @@ export default function Vente() {
         return (
           <>
             <Space direction="vertical">
-              <Text strong>{record.dateEcheance}</Text>
+              <Text strong>{moment(record.dateEcheance).format('MMMM Do YYYY')}</Text>
             </Space>
           </>
         );

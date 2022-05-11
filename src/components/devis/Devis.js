@@ -154,7 +154,6 @@ const Devis = () => {
           <>
             <Space direction="vertical">
               <Text strong>{moment(record.dateEcheance).format('MMMM Do YYYY')} </Text>
-             
             </Space>
           </>
         );

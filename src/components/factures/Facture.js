@@ -21,6 +21,7 @@ import {
   MailOutlined,
   DollarOutlined,
 } from "@ant-design/icons";
+import moment from 'moment';
 
 const { Text } = Typography;
 
@@ -87,7 +88,7 @@ export default function Facture() {
         return (
           <>
             <Space direction="vertical">
-              <Text strong>{record.dateEcheance}</Text>
+              <Text strong>{moment(record.dateEcheance).format('MMMM Do YYYY')}</Text>
             </Space>
           </>
         );
