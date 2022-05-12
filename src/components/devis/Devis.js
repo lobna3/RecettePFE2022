@@ -86,7 +86,7 @@ const Devis = () => {
         return (
           <>
             <Space direction="vertical">
-              <Text type="secondary">{record.client.nom}</Text>
+              <Text type="secondary">{record.client.nom} {record.client.prenom}</Text>
             </Space>
           </>
         );
@@ -137,7 +137,7 @@ const Devis = () => {
         return (
           <>
             <Space direction="vertical">
-              <Text strong>{record.total}</Text>
+              <Text strong>{record.total} <span>DT</span></Text>
             </Space>
           </>
         );
@@ -154,7 +154,7 @@ const Devis = () => {
         return (
           <>
             <Space direction="vertical">
-              <Text strong>{moment(record.dateEcheance).format('MMMM Do YYYY')} </Text>
+              <Text strong>{moment(record.dateEcheance).format('DD-MM-YYYY')} </Text>
             </Space>
           </>
         );

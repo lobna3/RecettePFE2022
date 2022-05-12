@@ -1,28 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Table, Space, Typography } from "antd";
-//import axios from "../config/axios";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getClientListApi } from "../redux/actions/client.actions";
 
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(
-      `selectedRowKeys: ${selectedRowKeys}`,
-      "selectedRows: ",
-      selectedRows
-    );
-  },
-  getCheckboxProps: (record) => ({
-    disabled: record.name === "Disabled User",
-    // Column configuration not to be checked
-    name: record.name,
-  }),
-};
 const { Text } = Typography;
 
 const TableClient = () => {
-  const [selectionType, setSelectionType] = useState("checkbox");
   const displayStatus = (etat) => {
     if (etat == "NonPayé") {
       return <span className="badge bg-danger">{etat}</span>;
@@ -37,9 +21,10 @@ const TableClient = () => {
       title: "Client",
       dataIndex: "nom",
       render: (text, record) => (
-        <Space direction="vertical">
+        <Space >
+            <input type="checkbox" className="checkmail" />
           <Link to="/" target="_blank">
-            {record.nom}
+            {record.nom} {record.prenom}
           </Link>
         </Space>
       ),
@@ -108,10 +93,7 @@ const TableClient = () => {
       <Table
         dataSource={clientList}
         columns={columns}
-        rowSelection={{
-          type: selectionType,
-          ...rowSelection,
-        }}
+       
       />
     </div>
   );

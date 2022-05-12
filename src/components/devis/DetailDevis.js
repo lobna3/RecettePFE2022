@@ -108,14 +108,12 @@ const DetailDevis = () => {
                 <tr>
                   <td>
                     <DatePicker />
-                  
-                    {moment(commandeDetails.dateEcheance).format('MMMM Do YYYY')}
+                    {moment(commandeDetails.dateEmission).format('DD-MM-YYYY')}
                     <hr />
                   </td>
                   <td>
                     <DatePicker />
-                    {moment(commandeDetails.dateEmission).format('MMMM Do YYYY')}
-                   
+                    {moment(commandeDetails.dateEcheance).format('DD-MM-YYYY')}
                      <hr />
                   </td>
                 </tr>
@@ -151,6 +149,7 @@ const DetailDevis = () => {
                     <Text className="d-flex">Contact:</Text>
                   </td>
                   <td>
+                  
                     <Text type="secondary">{/*{commandeDetails.client.email} */} </Text>
                   </td>
                 </tr>

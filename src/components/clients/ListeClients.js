@@ -9,7 +9,7 @@ const ListeClients = ({ isOpen, handleClose, handleFirstBtn }) => {
       className="modalStyle"
       visible={isOpen}
       onCancel={handleClose}
-      width={700}
+      width={750}
       title={
         <div>
           <h6 className="text-white">Tableau des clients</h6>
