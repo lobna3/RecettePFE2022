@@ -188,14 +188,11 @@ const Devis = () => {
             <Dropdown.Toggle variant="" id="dropdown-basic"></Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item>
-                <span
-                  className="text-primary"
-                  onClick={() => {
-                    imprimer_page();
-                  }}
+                <Link to="/imprimer"
+                  
                 >
                   <PrinterFilled /> Imprimer
-                </span>
+                </Link>
               </Dropdown.Item>
               <Dropdown.Item>
                 <Link to={`/devis/${record._id}`}

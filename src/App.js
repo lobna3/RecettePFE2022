@@ -18,54 +18,54 @@ import Brouillon from "./components/brouillon/Brouillon";
 //import ProtectedRoute from './components/ProtectedRoute';
 import ModifierDevis from "./components/devis/ModifierDevis";
 import DetailDevis from "./components/devis/DetailDevis";
-import { Routes, Route,Outlet } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 //import { store } from "./components/store";
 import { Provider } from "react-redux";
 //import { useState } from "react";
 import DetailCommande from "./components/commandes/DetailCommande";
 import Paiement from "./components/factures/Paiement";
 import store from "./redux/store";
-import { ToastProvider } from 'react-toast-notifications';
-
+import { ToastProvider } from "react-toast-notifications";
+import MyDocument from "./components/MyDocument";
 
 
 function App() {
- // const [user, setUser] = useState(null);
- // const login = () => setUser({ name: "test", role: "admin" });
- // const logout = () => setUser(null);
+  // const [user, setUser] = useState(null);
+  // const login = () => setUser({ name: "test", role: "admin" });
+  // const logout = () => setUser(null);
 
   return (
     <div className="App">
       <ToastProvider>
-      <Provider store={store}>
-        <Navbare />
-        <SideBar />
-        <p>
-          <br />
-        </p>
-        <Routes>
-          <Route path="/*" element={<p>There's nothing here : 401 !</p>} />
-          <Route path="/login/:id" element={<Login />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/recette" element={<Recette />} />
-          <Route path="/devis" element={<Devis />} />
-          <Route path="/ajouter_devis" element={<AjoutDevis1 />} />
-          <Route path="/devis/:detail" element={<DetailDevis />} />
-          <Route path="/devi/:modifier" element={<ModifierDevis />} />
-          <Route path="/factures" element={<Facture />} />
-          <Route path="/commandes" element={<Commande />} />
-          <Route path="/ventes" element={<Ventes />} />
-          <Route path="/brouillon" element={<Brouillon />} />
-          <Route path="/not_connected" element={<AlertProtection />} />
-          <Route path="/" element={<Dashbord />} />
-          <Route path="/detail_commande/:id" element={<DetailCommande />} />
-          <Route path="/paiement" element={<Paiement />} />
+        <Provider store={store}>
+          <Navbare />
+          <SideBar />
+          <p>
+            <br />
+          </p>
+        
+          <Routes>
+            <Route path="/*" element={<p>There's nothing here : 401 !</p>} />
+            <Route path="/login/:id" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/recette" element={<Recette />} />
+            <Route path="/devis" element={<Devis />} />
+            <Route path="/ajouter_devis" element={<AjoutDevis1 />} />
+            <Route path="/devis/:detail" element={<DetailDevis />} />
+            <Route path="/devi/:modifier" element={<ModifierDevis />} />
+            <Route path="/factures" element={<Facture />} />
+            <Route path="/commandes" element={<Commande />} />
+            <Route path="/ventes" element={<Ventes />} />
+            <Route path="/brouillon" element={<Brouillon />} />
+            <Route path="/not_connected" element={<AlertProtection />} />
+            <Route path="/" element={<Dashbord />} />
+            <Route path="/detail_commande/:id" element={<DetailCommande />} />
+            <Route path="/paiement" element={<Paiement />} />
+            <Route path="/imprimer" element={<MyDocument />} />
+          </Routes>
           
-     
-        </Routes>
-
-        <Footer />
-      </Provider>
+          <Footer />
+        </Provider>
       </ToastProvider>
     </div>
   );
