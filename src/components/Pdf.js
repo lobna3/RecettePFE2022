@@ -7,24 +7,20 @@ import { useParams, useLocation } from "react-router-dom";
 export class ComponentToPrint extends React.PureComponent {
   render() {
     return (
-      <div
-        className="card"
-        style={{ marginTop: 20, marginLeft: 20, marginRight: 20 }}
-      >
-        
+      
         <div class="container">
           <div className="card">
             <div className="card-header">
-              Invoice
-              <strong>01/01/01/2018</strong>
-              <span class="float-right">
-                <strong>Status:</strong> Pending
+              Facturer: {" "}
+              <strong>01/01/2018</strong> {" "}
+              <span className="float-right">
+                <strong>Status:</strong> En attente
               </span>
             </div>
-            <div class="card-body">
-              <div class="row mb-4">
-                <div class="col-sm-6">
-                  <h6 class="mb-3">From:</h6>
+            <div className="card-body">
+              <div className="row mb-4">
+                <div className="col-sm-6">
+                  <h6 className="mb-3">Depuis:</h6>
                   <div>
                     <strong>Webz Poland</strong>
                   </div>
@@ -33,9 +29,8 @@ export class ComponentToPrint extends React.PureComponent {
                   <div>Email: info@webz.com.pl</div>
                   <div>Phone: +48 444 666 3333</div>
                 </div>
-
                 <div class="col-sm-6">
-                  <h6 class="mb-3">To:</h6>
+                  <h6 class="mb-3">Pour:</h6>
                   <div>
                     <strong>Bob Mart</strong>
                   </div>
@@ -51,19 +46,19 @@ export class ComponentToPrint extends React.PureComponent {
                   <thead>
                     <tr>
                       <th class="center">#</th>
-                      <th>Item</th>
+                      <th>Article</th>
                       <th>Description</th>
 
-                      <th class="right">Unit Cost</th>
-                      <th class="center">Qty</th>
+                      <th class="right">Coût unitaire</th>
+                      <th class="center">Qté</th>
                       <th class="right">Total</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td class="center">1</td>
-                      <td class="left strong">Origin License</td>
-                      <td class="left">Extended License</td>
+                      <td class="left strong">Licence d'origine</td>
+                      <td class="left">Licence étendue</td>
 
                       <td class="right">$999,00</td>
                       <td class="center">1</td>
@@ -109,19 +104,19 @@ export class ComponentToPrint extends React.PureComponent {
                     <tbody>
                       <tr>
                         <td class="left">
-                          <strong>Subtotal</strong>
+                          <strong>SubTotal</strong>
                         </td>
                         <td class="right">$8.497,00</td>
                       </tr>
                       <tr>
                         <td class="left">
-                          <strong>Discount (20%)</strong>
+                          <strong>Remise (20%)</strong>
                         </td>
                         <td class="right">$1,699,40</td>
                       </tr>
                       <tr>
                         <td class="left">
-                          <strong>VAT (10%)</strong>
+                          <strong>Tax(10%)</strong>
                         </td>
                         <td class="right">$679,76</td>
                       </tr>
@@ -140,7 +135,7 @@ export class ComponentToPrint extends React.PureComponent {
             </div>
           </div>
         </div>
-      </div>
+    
     );
   }
 }
