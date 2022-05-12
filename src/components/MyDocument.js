@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef} from "react";
 import { CommandeDetailHeader } from "./RacetteHeader";
 import { useReactToPrint } from "react-to-print";
 import { ComponentToPrint } from "./Pdf";
@@ -8,15 +8,16 @@ const MyDocument = () => {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
+
   return (
     <div>
       <main id="main" className="main bg-light">
         <CommandeDetailHeader />
         <div>
-          <button onClick={handlePrint} className="btn btn-primary">
+          <ComponentToPrint ref={componentRef} />
+          <button onClick={handlePrint} className="btn btn-primary" style={{marginBottom:20}}>
             Imprimer
           </button>
-          <ComponentToPrint ref={componentRef} />
         </div>
       </main>
     </div>

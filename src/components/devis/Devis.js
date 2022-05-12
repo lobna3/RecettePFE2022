@@ -188,7 +188,10 @@ const Devis = () => {
             <Dropdown.Toggle variant="" id="dropdown-basic"></Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item>
-                <Link to="/imprimer"
+                <Link to={`/imprimer/${record._id}`}
+                onClick={() => {
+                  dispatch(getCommandeDetails(record));
+                }}
                   
                 >
                   <PrinterFilled /> Imprimer

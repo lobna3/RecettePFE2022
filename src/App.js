@@ -61,7 +61,7 @@ function App() {
             <Route path="/" element={<Dashbord />} />
             <Route path="/detail_commande/:id" element={<DetailCommande />} />
             <Route path="/paiement" element={<Paiement />} />
-            <Route path="/imprimer" element={<MyDocument />} />
+            <Route path="/imprimer/:id" element={<MyDocument />} />
           </Routes>
           
           <Footer />
