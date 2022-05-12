@@ -235,8 +235,7 @@ const AddNewClient = ({ isOpen, handleClose }) => {
             </div>
             {errors && (
               <span className="text-danger">
-                {" "}
-                Vérifier vos informations !!!{" "}
+               
               </span>
             )}
           </form>

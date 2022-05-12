@@ -363,7 +363,6 @@ const ModifierDevis = () => {
                         }}
                       >
                         <Select
-                          name="client"
                           value={client}
                           onChange={(event) => {
                             setClient(event.target.value);

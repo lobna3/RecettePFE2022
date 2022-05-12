@@ -27,8 +27,7 @@ const DetailDevis = () => {
   useEffect(() => {
     dispatch(getCommandesListDetailsApi(detail));
     console.log("URL", location.pathname);
-    console.log("Commande détails:", commandeDetails);
-  }, [detail]);
+  }, []);
 
   const displayIcon = (description) => {
     if (description === "Commande créer") {
@@ -143,7 +142,7 @@ const DetailDevis = () => {
                       </Text>
                     </div>
                   </td>
-                </tr>
+                </tr>   
                 <tr>
                   <td>
                     <Text className="d-flex">Contact:</Text>
@@ -197,8 +196,10 @@ const DetailDevis = () => {
                   </tr>
                 </thead>
                 <tbody style={{ borderWidth: 1 }}>
-                  <tr>
-                    <td className="d-flex">{/* {commandeDetails.articles.service}*/}</td>
+                {commandeDetails &&
+                   commandeDetails.content &&
+                   commandeDetails.content.map((elm) => ( <tr key={elm._id}>
+                    <td className="d-flex"> {elm.articles.service.title}</td>
                     <td>
                       <span
                         style={{
@@ -208,10 +209,10 @@ const DetailDevis = () => {
                           padding: 2,
                         }}
                       >
-                    {/* {commandeDetails.articles.qte}*/}
+                     {elm.articles.qte}
                       </span>
                     </td>
-                    <td>{/*{commandeDetails.articles.prix} */}</td>
+                    <td>{elm.articles.prix}</td>
                     <td>
                       <Switch
                         size="small"
@@ -220,7 +221,8 @@ const DetailDevis = () => {
                         defaultChecked
                       />
                     </td>
-                  </tr>
+                  </tr>))}
+                 
                   
                   <p></p>
                 </tbody>
@@ -278,9 +280,9 @@ const DetailDevis = () => {
                         style={{ fontSize: "24px", color: "#ffff" }}
                       />
                     </td>
-                    <td className="text-muted d-flex">{/*{commandeDetails.suivies.titre} */} </td>
-                    <td className="text-muted">{/*{commandeDetails.suivies.createdAt} */}</td>
-                    <td className="text-muted">{/*{commandeDetails.suivies.createdAt}*/}</td>
+                    <td className="text-muted d-flex">{/*{commandeDetails.suivies.titre} */}Commande crée </td>
+                    <td className="text-muted">{/*{commandeDetails.suivies.createdAt} */}Janvier04, 2022</td>
+                    <td className="text-muted">{/*{commandeDetails.suivies.createdAt}*/}11:40Am</td>
                   </tr>
                   <p></p>
                   <tr>

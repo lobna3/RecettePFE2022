@@ -76,7 +76,7 @@ export default function Vente() {
         return (
           <>
             <Space direction="vertical">
-              <Text strong>{moment(record.dateEcheance).format('MMMM Do YYYY')}</Text>
+              <Text strong>{moment(record.dateEcheance).format('DD-MM-YYYY')}</Text>
             </Space>
           </>
         );

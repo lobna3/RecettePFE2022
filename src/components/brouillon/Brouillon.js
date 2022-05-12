@@ -2,6 +2,7 @@ import React, { useEffect} from "react";
 import { BrouillonHeader } from "../RacetteHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { getCommandeListApi } from "../../redux/actions/commande.actions";
+import moment from 'moment';
 
 export default function Brouilon() {
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ export default function Brouilon() {
                           <td>
                             <i className="fa fa-paperclip"></i>
                           </td>
-                          <td className="mail-date">{elm.dateEcheance}</td>
+                          <td className="mail-date">{moment(elm.dateEcheance).format('DD-MM-YYYY')} </td>
                         </tr>
                       ))}
                     </tbody>
