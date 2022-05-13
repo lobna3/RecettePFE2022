@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getCommandesApi,
   deleteCommandeApi,
+  updateCommande
 } from "../../redux/actions/commande.actions";
 import { Link } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
@@ -70,7 +71,7 @@ export default function Commande() {
         return (
           <>
             <Space direction="vertical">
-              <Text type="secondary">{record.client.nom}</Text>
+              <Text type="secondary">{record.client.nom} {record.client.prenom}</Text>
             </Space>
           </>
         );
@@ -186,7 +187,15 @@ export default function Commande() {
                 </Link>
               </Dropdown.Item>
               <Dropdown.Item>
-                <Link to={`/devi/${record._id}`}>
+                <Link to={`/devi/${record._id}`}
+                 onClick={() => {
+                  dispatch(updateCommande(record));
+                  dispatch({
+                    type: "SET_SELECTED_ARTICLE",
+                    payload: record.articles,
+                  });
+                }}
+                >
                   <FormOutlined /> Modifier
                 </Link>
               </Dropdown.Item>

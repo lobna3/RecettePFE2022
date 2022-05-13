@@ -29,8 +29,8 @@ export class ComponentToPrint extends React.PureComponent {
                   <div>Email: info@webz.com.pl</div>
                   <div>Phone: +48 444 666 3333</div>
                 </div>
-                <div class="col-sm-6">
-                  <h6 class="mb-3">Pour:</h6>
+                <div className="col-sm-6">
+                  <h6 className="mb-3">Pour:</h6>
                   <div>
                     <strong>Bob Mart</strong>
                   </div>
@@ -40,9 +40,8 @@ export class ComponentToPrint extends React.PureComponent {
                   <div>Phone: +48 123 456 789</div>
                 </div>
               </div>
-
-              <div class="table-responsive-sm">
-                <table class="table table-striped">
+              <div className="table-responsive-sm">
+                <table className="table table-striped">
                   <thead>
                     <tr>
                       <th class="center">#</th>
@@ -96,10 +95,10 @@ export class ComponentToPrint extends React.PureComponent {
                   </tbody>
                 </table>
               </div>
-              <div class="row">
-                <div class="col-lg-4 col-sm-5"></div>
+              <div className="row">
+                <div className="col-lg-4 col-sm-5"></div>
 
-                <div class="col-lg-4 col-sm-5 ml-auto">
+                <div className="col-lg-4 col-sm-5 ml-auto">
                   <table class="table table-clear">
                     <tbody>
                       <tr>
@@ -131,6 +130,9 @@ export class ComponentToPrint extends React.PureComponent {
                     </tbody>
                   </table>
                 </div>
+              </div>
+              <div className="">
+
               </div>
             </div>
           </div>
