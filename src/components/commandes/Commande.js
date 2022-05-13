@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCommandesApi,
@@ -17,8 +17,10 @@ import {
   DeleteOutlined,
   FundViewOutlined,
   FormOutlined,
+  FileDoneOutlined 
 } from "@ant-design/icons";
 import { CommandeHeader } from "../RacetteHeader";
+import ModStatus from "../devis/ModStatus";
 
 const { Text } = Typography;
 
@@ -26,6 +28,7 @@ export default function Commande() {
   function onChange(pagination, filters, sorter, extra) {
     console.log("params", pagination, filters, sorter, extra);
   }
+  const [isOpenStatus, setIsopenStatus] = useState(false);
   const { commandeList } = useSelector((state) => state.commande);
   const dispatch = useDispatch();
   const { addToast } = useToasts();
@@ -171,6 +174,17 @@ export default function Commande() {
           <Dropdown>
             <Dropdown.Toggle variant="" id="dropdown-basic"></Dropdown.Toggle>
             <Dropdown.Menu>
+            <Dropdown.Item>
+                <span
+                  className="text-primary"
+                  onClick={() => {
+                    setIsopenStatus(true);
+                    dispatch(updateCommande(record._id));
+                  }}
+                >
+                  <FileDoneOutlined style={{ color: "#1890ff" }} /> Générer
+                </span>
+              </Dropdown.Item>
               <Dropdown.Item>
                 <span
                   className="text-primary"
@@ -239,45 +253,52 @@ export default function Commande() {
   };
 
   return (
-    <main id="main" className="main bg-light">
-      <CommandeHeader />
+    <div><main id="main" className="main bg-light">
+    <CommandeHeader />
 
-      <div className="pagetitle">
-        <div
-          style={{ display: "flex", justifyContent: "flex-end" }}
-          className="col-lg-12 "
-        >
-          <Link className="" to="/ajouter_devis">
-            <button
-              style={{ margin: "0 20px" }}
-              type="button"
-              className="btn btn-primary btn-sm ml-2 "
-            >
-              <PlusSquareFilled /> Lancer une commande
-            </button>
-          </Link>
+    <div className="pagetitle">
+      <div
+        style={{ display: "flex", justifyContent: "flex-end" }}
+        className="col-lg-12 "
+      >
+        <Link className="" to="/ajouter_devis">
           <button
             style={{ margin: "0 20px" }}
             type="button"
-            className="btn btn-primary  btn-sm ml-2 "
+            className="btn btn-primary btn-sm ml-2 "
           >
-            <PlusSquareFilled /> Nouvelle Opération
+            <PlusSquareFilled /> Lancer une commande
           </button>
-        </div>
-        <br />
+        </Link>
+        <button
+          style={{ margin: "0 20px" }}
+          type="button"
+          className="btn btn-primary  btn-sm ml-2 "
+        >
+          <PlusSquareFilled /> Nouvelle Opération
+        </button>
       </div>
+      <br />
+    </div>
 
-      <div className="col-lg-12 grid-margin stretch-card">
-        <div className="card" style={{ margin: "0 15px 40px 20px" }}>
-          <div className="card-body">
-            <Table
-              columns={columns}
-              dataSource={commandeList}
-              onChange={onChange}
-            />
-          </div>
+    <div className="col-lg-12 grid-margin stretch-card">
+      <div className="card" style={{ margin: "0 15px 40px 20px" }}>
+        <div className="card-body">
+          <Table
+            columns={columns}
+            dataSource={commandeList}
+            onChange={onChange}
+          />
         </div>
       </div>
-    </main>
+    </div>
+  </main>
+    <ModStatus
+    isOpen={isOpenStatus}
+    handleClose={() => {
+      setIsopenStatus(false);
+    }}
+  /></div>
+    
   );
 }

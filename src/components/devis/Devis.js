@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import moment from 'moment';
+import moment from "moment";
 import { Dropdown } from "react-bootstrap";
 import { Typography } from "antd";
 import {
@@ -9,6 +9,7 @@ import {
   FundViewOutlined,
   MailOutlined,
   FormOutlined,
+  FileDoneOutlined,
 } from "@ant-design/icons";
 import { Link, useLocation } from "react-router-dom";
 import { Table, Space } from "antd";
@@ -21,9 +22,10 @@ import {
   deleteCommandeApi,
   updateCommande,
 } from "../../redux/actions/commande.actions";
-import {getCommandeDetails} from "../../redux/actions/commande.details.actions";
+import { getCommandeDetails } from "../../redux/actions/commande.details.actions";
 import Swal from "sweetalert2";
 import EnvoyerEmail from "./EnvoyerEmail";
+import ModStatus from "./ModStatus";
 
 const { Text } = Typography;
 
@@ -32,10 +34,12 @@ const Devis = () => {
     console.log("params", pagination, filters, sorter, extra);
   }
   const [isOpen, setIsopen] = useState(false);
+  const [isOpenStatus, setIsopenStatus] = useState(false);
   const location = useLocation();
   const dispatch = useDispatch();
   const { addToast } = useToasts();
   const { commandeList } = useSelector((state) => state.commande);
+  
 
   useEffect(() => {
     dispatch(getCommandesApi("Devis"));
@@ -86,7 +90,9 @@ const Devis = () => {
         return (
           <>
             <Space direction="vertical">
-              <Text type="secondary">{record.client.nom} {record.client.prenom}</Text>
+              <Text type="secondary">
+                {record.client.nom} {record.client.prenom}
+              </Text>
             </Space>
           </>
         );
@@ -137,7 +143,9 @@ const Devis = () => {
         return (
           <>
             <Space direction="vertical">
-              <Text strong>{record.total} <span>DT</span></Text>
+              <Text strong>
+                {record.total} <span>DT</span>
+              </Text>
             </Space>
           </>
         );
@@ -154,7 +162,9 @@ const Devis = () => {
         return (
           <>
             <Space direction="vertical">
-              <Text strong>{moment(record.dateEcheance).format('DD-MM-YYYY')} </Text>
+              <Text strong>
+                {moment(record.dateEcheance).format("DD-MM-YYYY")}
+              </Text>
             </Space>
           </>
         );
@@ -188,20 +198,32 @@ const Devis = () => {
             <Dropdown.Toggle variant="" id="dropdown-basic"></Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item>
-                <Link to={`/imprimer/${record._id}`}
-                onClick={() => {
-                  dispatch(getCommandeDetails(record));
-                }}
-                  
+                <span
+                  className="text-primary"
+                  onClick={() => {
+                    setIsopenStatus(true);
+                    dispatch(updateCommande(record._id));
+                  }}
+                >
+                  <FileDoneOutlined style={{ color: "#1890ff" }} /> Générer
+                </span>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Link
+                  to={`/imprimer/${record._id}`}
+                  onClick={() => {
+                    dispatch(getCommandeDetails(record));
+                  }}
                 >
                   <PrinterFilled /> Imprimer
                 </Link>
               </Dropdown.Item>
               <Dropdown.Item>
-                <Link to={`/devis/${record._id}`}
-                onClick={() => {
-                  dispatch(getCommandeDetails(record));
-                }}
+                <Link
+                  to={`/devis/${record._id}`}
+                  onClick={() => {
+                    dispatch(getCommandeDetails(record));
+                  }}
                 >
                   <FundViewOutlined /> Visualiser
                 </Link>
@@ -313,6 +335,12 @@ const Devis = () => {
         isOpen={isOpen}
         handleClose={() => {
           setIsopen(false);
+        }}
+      />
+       <ModStatus
+        isOpen={isOpenStatus}
+        handleClose={() => {
+          setIsopenStatus(false);
         }}
       />
     </div>

@@ -153,3 +153,23 @@ export const updateCommandeApi = (data, id,addToast) => async (dispatch) => {
     console.log("ERROR", error.message);
   }
 };
+
+export const updateCommandeSatausApi = (data, id,addToast) => async () => {
+  try {
+    let config = {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    };
+   
+    let result = await updateApi("mod_status/" + id, data, config);
+    if (result) {
+     addToast("Mise à jour effectuées avec succées", { appearance: "success" });
+    }else {
+      addToast("Erreur c'est produite , ressayer", { appearance: "error" });
+    }
+    console.log("Resultat",result);
+  } catch (error) {
+    console.log("ERROR", error.message);
+  }
+};
