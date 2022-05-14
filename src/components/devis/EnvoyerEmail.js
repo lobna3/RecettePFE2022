@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Button } from "antd";
 import { MailOutlined } from "@ant-design/icons";
 import "../../components/clients/modal.css";
-import { useForm } from "react-hook-form";
+import axios from "axios";
 
 const EnvoyerEmail = ({ isOpen, handleClose }) => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const [msg, setMsg] = useState("");
+  const [user, setUser] = useState({
+    to: "",
+    subject: "",
+    description: "",
+  });
+
+  const { to, subject, description } = user;
+  const onInputChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await axios
+      .post("https://localhost:5000/envoyerEmail/", user)
+      .then((response) => setMsg(response.data.respMesg));
+      console.log(user)
+  };
 
   return (
     <Modal
@@ -25,45 +42,29 @@ const EnvoyerEmail = ({ isOpen, handleClose }) => {
       onOK={() => {
         handleClose();
       }}
-      footer={[
-        <Button onClick={handleClose}>Annuler</Button>,
-        <Button type="primary" icon={<MailOutlined />}>
-          Envoyer Message
-        </Button>,
-      ]}
+      footer={null}
     >
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form>
+        {" "}
+        {msg}
         <div className="row">
           <div className="col-md-12">
             <input
-              {...register("nom", { required: true, maxLength: 20 })}
+              name="to"
+              onChange={onInputChange}
+              value={to}
               type="text"
               className="form-control"
               placeholder="To"
             ></input>
           </div>
           <p></p>
+
           <div className="col-md-12">
             <input
-              {...register("prenom", { required: true, maxLength: 20 })}
-              type="text"
-              className="form-control"
-              placeholder="Cc"
-            ></input>
-          </div>
-          <p></p>
-          <div className="col-md-12">
-            <input
-              {...register("email", { required: true, maxLength: 20 })}
-              type="text"
-              className="form-control"
-              placeholder="Bcc"
-            ></input>
-          </div>
-          <p></p>
-          <div className="col-md-12">
-            <input
-              {...register("note", { required: true, maxLength: 20 })}
+              name="subject"
+              onChange={onInputChange}
+              value={subject}
               type="text"
               className="form-control"
               placeholder="Subject"
@@ -72,24 +73,27 @@ const EnvoyerEmail = ({ isOpen, handleClose }) => {
           <p></p>
           <div className="col-md-12">
             <textarea
-              {...register("message", { required: true})}
+              name="description"
+              onChange={onInputChange}
+              value={description}
               type="text"
               className="form-control"
               placeholder="Message"
             ></textarea>
           </div>
           <p></p>
-          <div className="form-group">
+
+          <div className="col-md-12"   style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              gap: "15px",
+            }}>
+            <button className="btn btn-secondary" onClick={handleClose}>Annuler</button>
             <input
-              {...register("file", { required: true})}
-              type="file"
-              className="form-control-file"
-              id="exampleFormControlFile1"
+              type="submit"
+              onClick={onSubmit}
+              className="btn btn-primary"
             />
-          </div>
-          <p></p>
-          <div className="col-md-6" >
-            <input type="submit" className="btn btn-primary" />,
           </div>
         </div>
       </form>
@@ -98,3 +102,29 @@ const EnvoyerEmail = ({ isOpen, handleClose }) => {
 };
 
 export default EnvoyerEmail;
+/*
+    <div className="col-md-12">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Cc"
+            ></input>
+          </div>
+          <p></p>
+          <div className="col-md-12">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Bcc"
+            ></input>
+          </div>
+          <p></p>
+               <div className="form-group">
+            <input
+              type="file"
+              className="form-control-file"
+              id="exampleFormControlFile1"
+            />
+          </div>
+          <p></p>
+ */
