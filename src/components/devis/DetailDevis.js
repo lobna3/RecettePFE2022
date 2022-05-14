@@ -16,7 +16,7 @@ import Table from "react-bootstrap/Table";
 import { Card, Typography, DatePicker } from "antd";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { getCommandesListDetailsApi } from "../../redux/actions/commande.details.actions";
-import moment from 'moment';
+import moment from "moment";
 const { Title, Text } = Typography;
 
 const DetailDevis = () => {
@@ -31,45 +31,37 @@ const DetailDevis = () => {
 
   const displayIcon = (description) => {
     if (description === "Commande créer") {
-      return <>  <td
-      style={{ backgroundColor: "#95de64" }}
-      className="rounded-circle"
-    >
-      <FormOutlined
-        style={{ fontSize: "24px", color: "#ffff" }}
-      />{description}
-    </td>
-      </>
-      
+      return (
+        <>
+          {" "}
+          <td style={{ backgroundColor: "#95de64" }} className="rounded-circle">
+            <FormOutlined style={{ fontSize: "24px", color: "#ffff" }} />
+            {description}
+          </td>
+        </>
+      );
     } else if (description === "La commande vu par") {
-      return  <td
-      style={{ backgroundColor: "#bfbfbf" }}
-      className="rounded-circle"
-    >
-      <EyeOutlined
-        style={{ fontSize: "24px", color: "#ffff" }}
-      />
-    </td>;
+      return (
+        <td style={{ backgroundColor: "#bfbfbf" }} className="rounded-circle">
+          <EyeOutlined style={{ fontSize: "24px", color: "#ffff" }} />
+        </td>
+      );
     } else if (description === "La commande livré avec succées") {
-      return  <td
-      style={{ backgroundColor: "#135200" }}
-      className="rounded-circle"
-    >
-      <DollarCircleOutlined
-        style={{ fontSize: "24px", color: "#ffff" }}
-      />{description}
-    </td>;
+      return (
+        <td style={{ backgroundColor: "#135200" }} className="rounded-circle">
+          <DollarCircleOutlined style={{ fontSize: "24px", color: "#ffff" }} />
+          {description}
+        </td>
+      );
     } else if (description === "La commande a été modifié ") {
-      return <td
-      style={{ backgroundColor: "#ff7875" }}
-      className="rounded-circle"
-    >
-      <SyncOutlined
-        style={{ fontSize: "24px", color: "#ffff" }}
-      />{description}
-    </td>;
+      return (
+        <td style={{ backgroundColor: "#ff7875" }} className="rounded-circle">
+          <SyncOutlined style={{ fontSize: "24px", color: "#ffff" }} />
+          {description}
+        </td>
+      );
     } else {
-      return {description};
+      return { description };
     }
   };
 
@@ -89,7 +81,6 @@ const DetailDevis = () => {
               borderRadius: "15px 15px",
             }}
           >
-           
             <Title level={5}>Devis #{commandeDetails.nFacture}</Title>
 
             <Table borderless>
@@ -107,13 +98,13 @@ const DetailDevis = () => {
                 <tr>
                   <td>
                     <DatePicker />
-                    {moment(commandeDetails.dateEmission).format('DD-MM-YYYY')}
+                    {moment(commandeDetails.dateEmission).format("DD-MM-YYYY")}
                     <hr />
                   </td>
                   <td>
                     <DatePicker />
-                    {moment(commandeDetails.dateEcheance).format('DD-MM-YYYY')}
-                     <hr />
+                    {moment(commandeDetails.dateEcheance).format("DD-MM-YYYY")}
+                    <hr />
                   </td>
                 </tr>
               </tbody>
@@ -142,14 +133,18 @@ const DetailDevis = () => {
                       </Text>
                     </div>
                   </td>
-                </tr>   
+                </tr>
                 <tr>
                   <td>
                     <Text className="d-flex">Contact:</Text>
                   </td>
                   <td>
-                  
-                    <Text type="secondary">{/*{commandeDetails.client.email} */} </Text>
+                    <Text type="secondary">
+                      {commandeDetails &&
+                        commandeDetails.client &&
+                        commandeDetails.client.email &&
+                        commandeDetails.client.email}
+                    </Text>
                   </td>
                 </tr>
                 <tr>
@@ -157,7 +152,13 @@ const DetailDevis = () => {
                     <Text className="d-flex">Société: </Text>
                   </td>
                   <td>
-                    <Text type="secondary">{/* {commandeDetails.client.entreprise}*/}</Text>
+                    <Text type="secondary">
+                      {" "}
+                      {commandeDetails &&
+                        commandeDetails.client &&
+                        commandeDetails.client.entreprise &&
+                        commandeDetails.client.entreprise}
+                    </Text>
                   </td>
                 </tr>
                 <tr>
@@ -165,7 +166,12 @@ const DetailDevis = () => {
                     <Text className="d-flex"> Adresse: </Text>
                   </td>
                   <td>
-                    <Text type="secondary">{/*{commandeDetails.client.siteinternet} */}</Text>
+                    <Text type="secondary">
+                      {commandeDetails &&
+                        commandeDetails.client &&
+                        commandeDetails.client.siteinternetcc &&
+                        commandeDetails.client.siteinternet}{" "}
+                    </Text>
                   </td>
                 </tr>
               </tbody>
@@ -196,34 +202,38 @@ const DetailDevis = () => {
                   </tr>
                 </thead>
                 <tbody style={{ borderWidth: 1 }}>
-                {commandeDetails &&
-                   commandeDetails.content &&
-                   commandeDetails.content.map((elm) => ( <tr key={elm._id}>
-                    <td className="d-flex"> {elm.articles.service.title}</td>
-                    <td>
-                      <span
-                        style={{
-                          borderWidth: 1,
-                          borderStyle: "dashed",
-                          borderColor: "#0d6efd",
-                          padding: 2,
-                        }}
-                      >
-                     {elm.articles.qte}
-                      </span>
-                    </td>
-                    <td>{elm.articles.prix}</td>
-                    <td>
-                      <Switch
-                        size="small"
-                        checkedChildren={<CheckOutlined />}
-                        unCheckedChildren={<CloseOutlined />}
-                        defaultChecked
-                      />
-                    </td>
-                  </tr>))}
-                 
-                  
+                  {commandeDetails &&
+                    commandeDetails.content &&
+                    commandeDetails.content.map((elm) => (
+                      <tr key={elm._id}>
+                        <td className="d-flex">
+                          {" "}
+                          {elm.articles.service.title}
+                        </td>
+                        <td>
+                          <span
+                            style={{
+                              borderWidth: 1,
+                              borderStyle: "dashed",
+                              borderColor: "#0d6efd",
+                              padding: 2,
+                            }}
+                          >
+                            {elm.articles.qte}
+                          </span>
+                        </td>
+                        <td>{elm.articles.prix}</td>
+                        <td>
+                          <Switch
+                            size="small"
+                            checkedChildren={<CheckOutlined />}
+                            unCheckedChildren={<CloseOutlined />}
+                            defaultChecked
+                          />
+                        </td>
+                      </tr>
+                    ))}
+
                   <p></p>
                 </tbody>
               </Table>
@@ -240,12 +250,14 @@ const DetailDevis = () => {
                       Status
                       <Text type="success" style={{ marginLeft: 20 }}>
                         <CheckCircleOutlined />
-                         {commandeDetails.status}
+                        {commandeDetails.status}
                       </Text>
                       <Text strong style={{ marginLeft: 230 }}>
                         Total:
                       </Text>
-                      <Text style={{ marginLeft: 20 }}>{commandeDetails.total} </Text>
+                      <Text style={{ marginLeft: 20 }}>
+                        {commandeDetails.total}{" "}
+                      </Text>
                     </Text>
                   </div>
                 </thead>
@@ -269,7 +281,7 @@ const DetailDevis = () => {
               <Title level={5} className="d-flex">
                 Suivie
               </Title>
-              <Table  borderless>
+              <Table borderless>
                 <tbody>
                   <tr>
                     <td
@@ -280,9 +292,15 @@ const DetailDevis = () => {
                         style={{ fontSize: "24px", color: "#ffff" }}
                       />
                     </td>
-                    <td className="text-muted d-flex">{/*{commandeDetails.suivies.titre} */}Commande crée </td>
-                    <td className="text-muted">{/*{commandeDetails.suivies.createdAt} */}Janvier04, 2022</td>
-                    <td className="text-muted">{/*{commandeDetails.suivies.createdAt}*/}11:40Am</td>
+                    <td className="text-muted d-flex">
+                      {/*{commandeDetails.suivies.titre} */}Commande crée{" "}
+                    </td>
+                    <td className="text-muted">
+                      {/*{commandeDetails.suivies.createdAt} */}Janvier04, 2022
+                    </td>
+                    <td className="text-muted">
+                      {/*{commandeDetails.suivies.createdAt}*/}11:40Am
+                    </td>
                   </tr>
                   <p></p>
                   <tr>
