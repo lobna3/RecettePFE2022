@@ -10,11 +10,16 @@ const ModStatus = ({ isOpen, handleClose }) => {
   const { addToast } = useToasts();
   const [status, setStatus] = useState("");
   const dispatch = useDispatch();
-  const { selectedCommande } = useSelector((state) => state.commande);
+  const { selectedCommande, commandeList } = useSelector(
+    (state) => state.commande
+  );
   useEffect(() => {
-    setStatus(selectedCommande.status);
-    console.log("Selected Commande", selectedCommande);
-  }, [selectedCommande]);
+    let cmd = commandeList.find((elm) => elm._id == selectedCommande);
+    if (cmd) {
+      setStatus(cmd.status);
+      console.log("Seelectd Status", status);
+    }
+  }, [selectedCommande, commandeList]);
   const confirmAdd = () => {
     let data = {
       status,
@@ -47,7 +52,18 @@ const ModStatus = ({ isOpen, handleClose }) => {
           <div className="col-md-12">
             <div className="form-group">
               <label>Status:</label>
-              <input
+              <select
+                className="form-control"
+                value={status}
+                onChange={(event) => {
+                  setStatus(event.target.value);
+                }}
+              >
+                <option value={"Devis"}>Devis</option>
+                <option value={"Facture"}>Facture</option>
+                <option value={"Commande en cours"}>Commande en cours</option>
+              </select>
+              {/* <input
                 type="text"
                 className="form-control"
                 name="status"
@@ -55,7 +71,7 @@ const ModStatus = ({ isOpen, handleClose }) => {
                 onChange={(event) => {
                   setStatus(event.target.value);
                 }}
-              ></input>
+              ></input> */}
             </div>
           </div>
         </div>
