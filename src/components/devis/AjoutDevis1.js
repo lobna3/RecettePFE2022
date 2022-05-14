@@ -42,7 +42,7 @@ export default function AjoutDevis1() {
   const [componentSize] = useState("default");
   const { addToast } = useToasts();
   const navigate = useNavigate();
- // const { addCommandeInfo } = useSelector((state) => state.commande);
+  // const { addCommandeInfo } = useSelector((state) => state.commande);
   const { clientList } = useSelector((state) => state.client);
   const { selectedArticles } = useSelector((state) => state.commande);
   const dispatch = useDispatch();
@@ -69,7 +69,7 @@ export default function AjoutDevis1() {
       solde: "",
       note: "NonPayé",
       remarque: "",
-      recurrente: "oui",
+      recurrente: "",
       status: "Devis",
       etat: "",
       client: "625d279312fbb95eed52430a",
@@ -102,15 +102,17 @@ export default function AjoutDevis1() {
 
   const calculateValues = () => {
     let initTotal = 0;
-   // let initRemise = 0;
     let totalTaxe = 0;
+    let initPrix = 0;
     selectedArticles.forEach((article) => {
       console.log("article", article);
-      initTotal = initTotal + Number(article.prix);
+      initPrix = initPrix + (Number(article.qte)* (article.pu));
+      initTotal = initTotal + initPrix ;
       if (article.taxe != "") {
         totalTaxe = totalTaxe + (Number(article.taxe) * article.prix) / 100;
       }
     });
+
     console.log("Total", initTotal);
     setValue("total", initTotal);
 
@@ -122,18 +124,18 @@ export default function AjoutDevis1() {
     console.log("TotalTTc", totalTaxe + initTotal);
     setValue("totalTtc", totalTaxe + initTotal);
 
-    console.log("Payé", -0.001);
-    setValue("paye", -0.001);
-
-    console.log("Solde", initTotal);
-    setValue("solde", initTotal);
+    // setValue("paye", 0);
+    //console.log("Solde", initTotal + totalTaxe - paye);
+    // setValue("solde", initTotal + totalTaxe-paye);
   };
   const calculateRemise = () => {
     let remise = getValues("remise");
     let totalValue = getValues("total");
     let totalTaxe = getValues("taxes");
+    let paye = getValues("paye");
     let remiseVal = (remise * totalValue) / 100;
     setValue("totalTtc", totalValue - remiseVal + totalTaxe);
+    setValue("solde", totalValue - remiseVal + totalTaxe - paye);
   };
   useEffect(() => {
     dispatch(getClientListApi());
@@ -804,7 +806,7 @@ export default function AjoutDevis1() {
                         Tax: <Text strong>{getValues("taxes")} TND</Text>
                       </Text>
                       <Text style={{ marginRight: 20 }}>
-                        Total: <Text strong>{getValues("total")} TND</Text>
+                        Total: <Text strong>{getValues("totalTtc")} TND</Text>
                       </Text>
                     </Card>
                   </Form>

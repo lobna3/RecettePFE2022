@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCommandesListDetailsApi } from "../redux/actions/commande.details.actions";
 import { useParams, useLocation } from "react-router-dom";
+import moment from "moment";
 
 export const ComponentToPrint = React.forwardRef((props, ref) => {
   const { id } = useParams();
@@ -17,32 +18,64 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
     <div class="container" ref={ref}>
       <div className="card">
         <div className="card-header">
-          Facturer: <strong>01/01/2018</strong>{" "}
+           <strong>NFacture:{" "}</strong> {commandeDetails.nFacture}{" "}
           <span className="float-right">
-            <strong>Status:</strong> En attente
+            <strong>Facturer:</strong>{" "}
+            {moment(commandeDetails.dateEmission).format("DD-MM-YYYY")}{" "}
+          </span>
+          <span className="float-right">
+            <strong>Status:</strong> {commandeDetails.etat}
           </span>
         </div>
         <div className="card-body">
           <div className="row mb-4">
             <div className="col-sm-6">
-              <h6 className="mb-3">Depuis:</h6>
+              <h6 className="mb-3"></h6>
               <div>
-                <strong>Webz Poland</strong>
+                <strong>Arsela</strong>
               </div>
-              <div>Madalinskiego 8</div>
-              <div>71-101 Szczecin, Poland</div>
-              <div>Email: info@webz.com.pl</div>
-              <div>Phone: +48 444 666 3333</div>
+              <div> Boulevard Khalifa Karoui, Immeuble T.M.S</div>
+              <div>4ème étage Bureau D-2, Sahloul 4054 Sousse, Tunisie</div>
+              <div>Email: info@arsela.co</div>
+              <div>Phone: (+216) 26 314 922</div>
             </div>
             <div className="col-sm-6">
-              <h6 className="mb-3">Pour:</h6>
+              <h6 className="mb-3"></h6>
               <div>
-                <strong>Bob Mart</strong>
+                <strong>Client</strong>
               </div>
-              <div>Attn: Daniel Marek</div>
-              <div>43-190 Mikolow, Poland</div>
-              <div>Email: marek@daniel.com</div>
-              <div>Phone: +48 123 456 789</div>
+              <div>
+                Attn:{" "}
+                {commandeDetails &&
+                  commandeDetails.client &&
+                  commandeDetails.client.nom &&
+                  commandeDetails.client.nom}{" "}
+                {commandeDetails &&
+                  commandeDetails.client &&
+                  commandeDetails.client.prenom &&
+                  commandeDetails.client.prenom}
+              </div>
+              <div>
+                {" "}
+                {commandeDetails &&
+                  commandeDetails.client &&
+                  commandeDetails.client.activite &&
+                  commandeDetails.client.activite}
+              </div>
+              <div>
+                Email:{" "}
+                {commandeDetails &&
+                  commandeDetails.client &&
+                  commandeDetails.client.email &&
+                  commandeDetails.client.email}
+              </div>
+              <div>
+                Phone:{" "}
+                {commandeDetails &&
+                  commandeDetails.client &&
+                  commandeDetails.client.telephone &&
+                  commandeDetails.client.telephone}
+              </div>
             </div>
           </div>
           <div className="table-responsive-sm">
@@ -110,33 +143,35 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
                     <td class="left">
                       <strong>SubTotal</strong>
                     </td>
-                    <td class="right">$8.497,00</td>
+                    <td class="right"> {commandeDetails.total} DT</td>
                   </tr>
                   <tr>
                     <td class="left">
                       <strong>Remise (20%)</strong>
                     </td>
-                    <td class="right">$1,699,40</td>
+                    <td class="right"> {commandeDetails.remise} DT</td>
                   </tr>
                   <tr>
                     <td class="left">
                       <strong>Tax(10%)</strong>
                     </td>
-                    <td class="right">$679,76</td>
+                    <td class="right"> {commandeDetails.taxes} DT</td>
                   </tr>
                   <tr>
                     <td class="left">
                       <strong>Total</strong>
                     </td>
                     <td class="right">
-                      <strong>$7.477,36</strong>
+                      <strong>{commandeDetails.solde}DT</strong>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-          <div className=""></div>
+          <div className="card">
+            <p>Note: {commandeDetails.remarque}</p>
+          </div>
         </div>
       </div>
     </div>

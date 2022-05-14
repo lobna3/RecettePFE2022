@@ -153,7 +153,6 @@ const DetailDevis = () => {
                   </td>
                   <td>
                     <Text type="secondary">
-                      {" "}
                       {commandeDetails &&
                         commandeDetails.client &&
                         commandeDetails.client.entreprise &&
@@ -169,8 +168,8 @@ const DetailDevis = () => {
                     <Text type="secondary">
                       {commandeDetails &&
                         commandeDetails.client &&
-                        commandeDetails.client.siteinternetcc &&
-                        commandeDetails.client.siteinternet}{" "}
+                        commandeDetails.client.siteinternet &&
+                        commandeDetails.client.siteinternet}
                     </Text>
                   </td>
                 </tr>
@@ -202,37 +201,49 @@ const DetailDevis = () => {
                   </tr>
                 </thead>
                 <tbody style={{ borderWidth: 1 }}>
-                  {commandeDetails &&
-                    commandeDetails.content &&
-                    commandeDetails.content.map((elm) => (
-                      <tr key={elm._id}>
-                        <td className="d-flex">
-                          {" "}
-                          {elm.articles.service.title}
-                        </td>
-                        <td>
-                          <span
-                            style={{
-                              borderWidth: 1,
-                              borderStyle: "dashed",
-                              borderColor: "#0d6efd",
-                              padding: 2,
-                            }}
-                          >
-                            {elm.articles.qte}
-                          </span>
-                        </td>
-                        <td>{elm.articles.prix}</td>
-                        <td>
-                          <Switch
-                            size="small"
-                            checkedChildren={<CheckOutlined />}
-                            unCheckedChildren={<CloseOutlined />}
-                            defaultChecked
-                          />
-                        </td>
-                      </tr>
-                    ))}
+                  <tr>
+                    {commandeDetails &&
+                      commandeDetails.articles &&
+                      commandeDetails.articles.service &&
+                      commandeDetails.articles.service.map((elm) => (
+                        <>
+                          <td>
+                            <td className="d-flex">
+                              {elm.articles.service._id}
+                            </td>
+                          </td>
+                        </>
+                      ))}
+
+                    <td>
+                      <span
+                        style={{
+                          borderWidth: 1,
+                          borderStyle: "dashed",
+                          borderColor: "#0d6efd",
+                          padding: 2,
+                        }}
+                      >
+                        {commandeDetails &&
+                          commandeDetails.articles &&
+                          commandeDetails.articles.qte &&
+                          commandeDetails.articles.qte}
+                      </span>
+                    </td>
+                    <td></td>
+                    <td>
+                      <Switch
+                        size="small"
+                        checkedChildren={<CheckOutlined />}
+                        unCheckedChildren={<CloseOutlined />}
+                        defaultChecked
+                      />
+                      {commandeDetails &&
+                        commandeDetails.articles &&
+                        commandeDetails.articles.prix &&
+                        commandeDetails.articles.prix}
+                    </td>
+                  </tr>
 
                   <p></p>
                 </tbody>
@@ -256,7 +267,7 @@ const DetailDevis = () => {
                         Total:
                       </Text>
                       <Text style={{ marginLeft: 20 }}>
-                        {commandeDetails.total}{" "}
+                        {commandeDetails.total}
                       </Text>
                     </Text>
                   </div>

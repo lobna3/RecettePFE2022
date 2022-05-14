@@ -60,8 +60,8 @@ const ModStatus = ({ isOpen, handleClose }) => {
                 }}
               >
                 <option value={"Devis"}>Devis</option>
-                <option value={"Facture"}>Facture</option>
                 <option value={"Commande en cours"}>Commande en cours</option>
+                <option value={"Facture"}>Facture</option>
               </select>
               {/* <input
                 type="text"
