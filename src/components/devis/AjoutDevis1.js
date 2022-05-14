@@ -103,15 +103,19 @@ export default function AjoutDevis1() {
   const calculateValues = () => {
     let initTotal = 0;
     let totalTaxe = 0;
-    let initPrix = 0;
+    let totalPrix = 0;
     selectedArticles.forEach((article) => {
       console.log("article", article);
-      initPrix = initPrix + (Number(article.qte)* (article.pu));
-      initTotal = initTotal + initPrix ;
+      totalPrix = totalPrix + article.qte * Number(article.pu);
+      initTotal =  totalPrix;
       if (article.taxe != "") {
         totalTaxe = totalTaxe + (Number(article.taxe) * article.prix) / 100;
       }
+      console.log("prix", totalPrix);
+      setValue("prix", totalPrix);
     });
+
+   
 
     console.log("Total", initTotal);
     setValue("total", initTotal);
@@ -125,8 +129,8 @@ export default function AjoutDevis1() {
     setValue("totalTtc", totalTaxe + initTotal);
 
     // setValue("paye", 0);
-    //console.log("Solde", initTotal + totalTaxe - paye);
-    // setValue("solde", initTotal + totalTaxe-paye);
+    //console.log("Solde", initTotal + totalTaxe );
+   // setValue("solde", initTotal + totalTaxe);
   };
   const calculateRemise = () => {
     let remise = getValues("remise");
