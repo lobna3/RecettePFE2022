@@ -216,10 +216,10 @@ const ModifierDevis = () => {
                   <p></p>
                   <Badge.Ribbon text="Condition" color="">
                     <TextArea
-                      name="remarque"
-                      value={remarque}
+                      name="note"
+                      value={note}
                       onChange={(event) => {
-                        setRemarque(event.target.value);
+                        setNote(event.target.value);
                       }}
                       style={{
                         borderWidth: 1,

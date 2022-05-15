@@ -25,13 +25,13 @@ export default function Vente() {
   useEffect(() => {
     dispatch(getCommandeListApi());
   }, []);
-  const displayEtat = (etat) => {
-    if (etat == "NonPayé") {
-      return <span className="badge bg-danger">{etat}</span>;
-    } else if (etat == "Payé") {
-      return <span className="badge bg-success">{etat}</span>;
+  const displayEtat = (note) => {
+    if (note == "Non Payé") {
+      return <span className="badge bg-danger">{note}</span>;
+    } else if (note == "Payé") {
+      return <span className="badge bg-success">{note}</span>;
     } else {
-      return <span className="badge bg-info">{etat}</span>;
+      return <span className="badge bg-secondary">{note}</span>;
     }
   };
 
@@ -58,8 +58,8 @@ export default function Vente() {
       render: (text, record) => {
         return (
           <>
-            <Space direction="vertical">
-              <Text type="secondary">{record.client.nom}</Text>
+            <Space >
+              <Text type="secondary">{record.client.nom} {record.client.prenom}</Text>
             </Space>
           </>
         );
@@ -93,7 +93,7 @@ export default function Vente() {
         return (
           <>
             <Space direction="vertical">
-              <Text strong>{record.solde}</Text>
+              <Text strong>{record.solde} TND</Text>
             </Space>
           </>
         );
@@ -110,7 +110,7 @@ export default function Vente() {
         return (
           <>
             <Space direction="vertical">
-              <Text strong>{record.total}</Text>
+              <Text strong>{record.total} TND</Text>
             </Space>
           </>
         );
@@ -139,11 +139,11 @@ export default function Vente() {
     },
     {
       title: "Etat",
-      dataIndex: "etat",
+      dataIndex: "note",
       render: (text, record) => {
         return (
           <>
-            <Space direction="vertical">{displayEtat(record.etat)}</Space>
+            <Space direction="vertical">{displayEtat(record.note)}</Space>
           </>
         );
       },

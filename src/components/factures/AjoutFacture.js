@@ -353,7 +353,7 @@ export default function AjoutFacture() {
                   <p></p>
                   <Badge.Ribbon text="Condition" color="">
                     <Controller
-                      name="remarque"
+                      name="note"
                       control={control}
                       rules={{ required: false }}
                       render={({ field }) => (
