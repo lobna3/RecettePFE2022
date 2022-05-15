@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getCommandeListApi } from "../../redux/actions/commande.actions";
-import { Menu, Typography, Table, Space } from "antd";
+import { getCommandeListApi , updateCommande} from "../../redux/actions/commande.actions";
+import {  Typography, Table, Space } from "antd";
 import { Dropdown } from "react-bootstrap";
 import {
   FileDoneOutlined,
@@ -13,10 +13,13 @@ import {
 import { VenteHeader } from "../RacetteHeader";
 import EnvoyerEmail from "../devis/EnvoyerEmail";
 import moment from 'moment';
+import ModStatus from "../devis/ModStatus";
+
 const { Text } = Typography;
 
 export default function Vente() {
   const [isOpen, setIsopen] = useState(false);
+  const [isOpenStatus, setIsopenStatus] = useState(false);
   function onChange(pagination, filters, sorter, extra) {
     console.log("params", pagination, filters, sorter, extra);
   }
@@ -160,9 +163,15 @@ export default function Vente() {
             <Dropdown.Toggle variant="" id="dropdown-basic"></Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item>
-                <Link to="">
-                  <FileDoneOutlined />  Générer
-                </Link>
+              <span
+                  className="text-primary"
+                  onClick={() => {
+                    setIsopenStatus(true);
+                    dispatch(updateCommande(record._id));
+                  }}
+                >
+                  <FileDoneOutlined style={{ color: "#1890ff" }} /> Générer
+                </span>
               </Dropdown.Item>
               <Dropdown.Item>
                 <Link to="/paiement">
@@ -231,6 +240,12 @@ export default function Vente() {
         isOpen={isOpen}
         handleClose={() => {
           setIsopen(false);
+        }}
+      />
+        <ModStatus
+        isOpen={isOpenStatus}
+        handleClose={() => {
+          setIsopenStatus(false);
         }}
       />
     </div>

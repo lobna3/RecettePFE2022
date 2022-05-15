@@ -11,7 +11,7 @@ import {
   CheckCircleOutlined,
 } from "@ant-design/icons";
 import Table from "react-bootstrap/Table";
-import { Card, Typography, Space, DatePicker } from "antd";
+import { Card, Typography,  DatePicker } from "antd";
 import { Link } from "react-router-dom";
 const { Title, Text } = Typography;
 

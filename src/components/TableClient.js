@@ -3,17 +3,17 @@ import { Table, Space, Typography } from "antd";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getClientListApi } from "../redux/actions/client.actions";
-
+import moment from 'moment';
 const { Text } = Typography;
 
 const TableClient = () => {
-  const displayStatus = (etat) => {
-    if (etat == "NonPayé") {
-      return <span className="badge bg-danger">{etat}</span>;
-    } else if (etat == "Payé") {
-      return <span className="badge bg-success">{etat}</span>;
+  const displayStatus = (note) => {
+    if (note == "Non Payé") {
+      return <span className="badge bg-danger">{note}</span>;
+    } else if (note == "Payé") {
+      return <span className="badge bg-success">{note}</span>;
     } else {
-      return <span className="badge bg-secondary">{etat}</span>;
+      return <span className="badge bg-secondary">{note}</span>;
     }
   };
   const columns = [
@@ -44,7 +44,7 @@ const TableClient = () => {
     },
     {
       title: "Status de paiemet",
-      dataIndex: "etat",
+      dataIndex: "note",
       render: (text, record) => {
         return (
           <>
@@ -52,7 +52,7 @@ const TableClient = () => {
               return (
                 <>
                   <Space direction="vertical">
-                    {displayStatus(item.etat)}
+                    {displayStatus(item.note)}
                   </Space>
                 </>
               );
@@ -71,7 +71,7 @@ const TableClient = () => {
               return (
                 <>
                   <Space direction="vertical">
-                    <Text strong> {item.total}</Text>
+                    <Text strong> {item.total} TND</Text>
                   </Space>
                 </>
               );

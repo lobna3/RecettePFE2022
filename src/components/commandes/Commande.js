@@ -5,6 +5,7 @@ import {
   deleteCommandeApi,
   updateCommande
 } from "../../redux/actions/commande.actions";
+import { getCommandeDetails } from "../../redux/actions/commande.details.actions";
 import { Link } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 import Swal from "sweetalert2";
@@ -21,6 +22,7 @@ import {
 } from "@ant-design/icons";
 import { CommandeHeader } from "../RacetteHeader";
 import ModStatus from "../devis/ModStatus";
+import moment from "moment";
 
 const { Text } = Typography;
 
@@ -73,7 +75,7 @@ export default function Commande() {
       render: (text, record) => {
         return (
           <>
-            <Space direction="vertical">
+            <Space >
               <Text type="secondary">{record.client.nom} {record.client.prenom}</Text>
             </Space>
           </>
@@ -125,7 +127,7 @@ export default function Commande() {
         return (
           <>
             <Space direction="vertical">
-              <Text strong>{record.total}</Text>
+              <Text strong>{record.total} TND</Text>
             </Space>
           </>
         );
@@ -137,12 +139,12 @@ export default function Commande() {
     },
     {
       title: "Montant Récurrence",
-      dataIndex: "recurrente",
+      dataIndex: "dateEcheance",
       render: (text, record) => {
         return (
           <>
             <Space direction="vertical">
-              <Text strong>{record.recurrente}</Text>
+              <Text strong> {moment(record.dateEcheance).format("DD-MM-YYYY")}</Text>
             </Space>
           </>
         );
@@ -186,14 +188,14 @@ export default function Commande() {
                 </span>
               </Dropdown.Item>
               <Dropdown.Item>
-                <span
-                  className="text-primary"
+              <Link
+                  to={`/imprimer/${record._id}`}
                   onClick={() => {
-                    imprimer_page();
+                    dispatch(getCommandeDetails(record));
                   }}
                 >
                   <PrinterFilled /> Imprimer
-                </span>
+                </Link>
               </Dropdown.Item>
               <Dropdown.Item>
                 <Link to={`/devis/${record._id}`}>
