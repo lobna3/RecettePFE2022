@@ -43,7 +43,7 @@ const ModalOP = ({ isOpen, handleClose, handleFirstBtn, handleSecondBtn }) => {
           </span>
         </Button>
       </Link>
-      <Link to="/">
+      <Link to="/ajouter_facture">
         <Button
           style={{ height: "80px", width: "370px", margin: "8px 40px",  borderRadius: "10px 10px", }}
           onClick={handleSecondBtn}

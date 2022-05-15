@@ -149,7 +149,7 @@ export default function AjoutFacture() {
     calculateRemise();
   }, [watch("remise")]);
   const onSubmit = (data) => {
-    console.log("Devis Data", data);
+    console.log("Facture Data", data);
     let body = {
       ...data,
       dateEmission: data.dateEmission.toDate(),
@@ -307,8 +307,8 @@ export default function AjoutFacture() {
                     }
                     block
                     onClick={() => {
-                      setIsopen(true);
-                    }}
+                        setIsOpenListe(true);
+                      }}
                   >
                     Valider et générer
                   </Button>

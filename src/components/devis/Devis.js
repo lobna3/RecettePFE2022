@@ -62,10 +62,7 @@ const Devis = () => {
     }
   };
 
-  const imprimer_page = () => {
-    window.print();
-  };
-
+ 
   const columns = [
     {
       title: "Référence",

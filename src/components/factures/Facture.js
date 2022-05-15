@@ -23,10 +23,12 @@ import {
   DollarOutlined,
 } from "@ant-design/icons";
 import moment from 'moment';
+import ModStatus from "../devis/ModStatus";
 
 const { Text } = Typography;
 
 export default function Facture() {
+  const [isOpenStatus, setIsopenStatus] = useState(false);
   const [isOpen, setIsopen] = useState(false);
   const dispatch = useDispatch();
   const { addToast } = useToasts();
@@ -106,7 +108,7 @@ export default function Facture() {
         return (
           <>
             <Space direction="vertical">
-              <Text strong>{record.solde}</Text>
+              <Text strong>{record.solde} TND</Text>
             </Space>
           </>
         );
@@ -123,30 +125,13 @@ export default function Facture() {
         return (
           <>
             <Space direction="vertical">
-              <Text strong>{record.total}</Text>
+              <Text strong>{record.total} TND</Text>
             </Space>
           </>
         );
       },
       sorter: {
         compare: (a, b) => a.total - b.total,
-        multiple: 3,
-      },
-    },
-    {
-      title: "Condition",
-      dataIndex: "status",
-      render: (text, record) => {
-        return (
-          <>
-            <Space direction="condition">
-              <Text strong>{record.status}</Text>
-            </Space>
-          </>
-        );
-      },
-      sorter: {
-        compare: (a, b) => a.status - b.status,
         multiple: 3,
       },
     },
@@ -178,9 +163,15 @@ export default function Facture() {
                 </Link>
               </Dropdown.Item>
               <Dropdown.Item>
-                <Link to="/">
-                  <FileDoneOutlined /> Générer
-                </Link>
+              <span
+                  className="text-primary"
+                  onClick={() => {
+                    setIsopenStatus(true);
+                    dispatch(updateCommande(record._id));
+                  }}
+                >
+                  <FileDoneOutlined style={{ color: "#1890ff" }} /> Générer
+                </span>
               </Dropdown.Item>
               <Dropdown.Item>
                 <span
@@ -288,6 +279,12 @@ export default function Facture() {
         isOpen={isOpen}
         handleClose={() => {
           setIsopen(false);
+        }}
+      />
+       <ModStatus
+        isOpen={isOpenStatus}
+        handleClose={() => {
+          setIsopenStatus(false);
         }}
       />
     </div>
