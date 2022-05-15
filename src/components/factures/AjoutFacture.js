@@ -22,19 +22,19 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import Articles from "../articles/Articles";
-import "./devis1.css";
+import "../devis/devis1.css";
 import { useToasts } from "react-toast-notifications";
 import { useDispatch, useSelector } from "react-redux";
 import { addCommandetApi, addStep } from "../../redux/actions/commande.actions";
 import { getClientListApi } from "../../redux/actions/client.actions";
-import TraitementDevis from "./TraitementDevis";
-import EnvoyerEmail from "./EnvoyerEmail";
+import TraitementDevis from "../devis/TraitementDevis";
+import EnvoyerEmail from "../devis/EnvoyerEmail";
 import TraitementFacture from "../factures/TraitementFacture";
 import AddArticleModal from "../AddArticleModal";
 const { Text } = Typography;
 const { TextArea } = Input;
 
-export default function AjoutDevis1() {
+export default function AjoutFacture() {
   const [showAddArticle, setAddArticle] = useState(false);
   const [isOpen, setIsopen] = useState(false);
   const [isOpenOperation, setIsOpenOperation] = useState(false);
@@ -70,7 +70,7 @@ export default function AjoutDevis1() {
       note: "NonPayé",
       remarque: "",
       recurrente: "",
-      status: "Devis",
+      status: "Facture",
       etat: "",
       client: "625d279312fbb95eed52430a",
       adresseFacturation: "",
@@ -822,7 +822,7 @@ export default function AjoutDevis1() {
               className="btn btn-primary "
               style={{ marginBottom: 20 }}
             >
-            Créer Devis
+            Créer Facture
             </button>
           </form>
         </Row>
@@ -852,3 +852,4 @@ export default function AjoutDevis1() {
     </div>
   );
 }
+

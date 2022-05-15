@@ -45,7 +45,7 @@ export default function Facture() {
     } else if (etat == "Echéance - 2 jours") {
       return <span className="badge bg-warning">{etat}</span>;
     } else {
-      return <span className="badge bg-info">{etat}</span>;
+      return <span className="badge bg-secondary">{etat}</span>;
     }
   };
   const columns = [

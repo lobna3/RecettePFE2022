@@ -27,6 +27,7 @@ import Paiement from "./components/factures/Paiement";
 import store from "./redux/store";
 import { ToastProvider } from "react-toast-notifications";
 import MyDocument from "./components/MyDocument";
+import AjoutFacture from "./components/factures/AjoutFacture";
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
             <Route path="/recette" element={<Recette />} />
             <Route path="/devis" element={<Devis />} />
             <Route path="/ajouter_devis" element={<AjoutDevis1 />} />
+            <Route path="/ajouter_facture" element={<AjoutFacture />} />
             <Route path="/devis/:detail" element={<DetailDevis />} />
             <Route path="/devi/:modifier" element={<ModifierDevis />} />
             <Route path="/factures" element={<Facture />} />
