@@ -170,7 +170,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
             </div>
           </div>
           <div className="card">
-            <p>Note: {commandeDetails.remarque}</p>
+            <p>Note: {commandeDetails.note}</p>
           </div>
         </div>
       </div>

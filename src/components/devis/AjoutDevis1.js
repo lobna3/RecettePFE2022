@@ -67,7 +67,7 @@ export default function AjoutDevis1() {
       totalTtc: "",
       paye: "",
       solde: "",
-      note: "NonPayé",
+      note: "",
       remarque: "",
       recurrente: "",
       status: "Devis",

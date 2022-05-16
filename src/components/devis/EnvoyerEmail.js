@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button } from "antd";
+import { Modal} from "antd";
 import { MailOutlined } from "@ant-design/icons";
 import "../../components/clients/modal.css";
 import axios from "axios";

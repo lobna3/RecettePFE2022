@@ -67,7 +67,7 @@ export default function AjoutFacture() {
       totalTtc: "",
       paye: "",
       solde: "",
-      note: "NonPayé",
+      note: "",
       remarque: "",
       recurrente: "",
       status: "Facture",
