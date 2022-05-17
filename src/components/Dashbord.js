@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
+import { Pie } from "@ant-design/plots";
+import {
+  getCommandeListApi
+} from "../redux/actions/commande.actions";
+import { useDispatch, useSelector } from "react-redux";
 import { BottomHeader } from "./RacetteHeader";
 import AddNewClient from "./clients/AddNewClient";
 import NewOpModal from "./clients/NewOpModal";
@@ -10,6 +15,63 @@ const Dashbord = () => {
   const [isOpenOperation, setIsOpenOperation] = useState(false);
   const [isOpenListe, setIsOpenListe] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const dispatch = useDispatch();
+  const { commandeList } = useSelector((state) => state.commande);
+  const paye= commandeList.filter((u) => u.note === "Payé");
+  const nonpaye= commandeList.filter((u) => u.note === "Non Payé");
+  const accepte= commandeList.filter((u) => u.etat === "Accepté");
+  const enattente= commandeList.filter((u) => u.etat === "En attente");
+  const annuler= commandeList.filter((u) => u.etat === "Annuler");
+  const echenace= commandeList.filter((u) => u.etat === "Arrivé à l'échéance");
+  const data = [
+    {
+      type: "Payé",
+      value: paye.length,
+    },
+    {
+      type: "Non payé",
+      value: nonpaye.length,
+    },
+    {
+      type: "Accepté",
+      value: accepte.length,
+    },
+    {
+      type: "En attente",
+      value: enattente.length,
+    },
+    {
+      type: "Annuler",
+      value: annuler.length,
+    },
+    {
+      type: "Arrivé à l'échéance",
+      value: echenace.length,
+    },
+  ];
+  const config = {
+    appendPadding: 10,
+    data,
+    angleField: "value",
+    colorField: "type",
+    radius: 0.75,
+    label: {
+      type: "spider",
+      labelHeight: 28,
+      content: "{name}\n{percentage}",
+    },
+    interactions: [
+      {
+        type: "element-selected",
+      },
+      {
+        type: "element-active",
+      },
+    ],
+  };
+  useEffect(() => {
+    dispatch(getCommandeListApi());
+  }, []);
 
   return (
     <div>
@@ -18,36 +80,38 @@ const Dashbord = () => {
         <section className="section dashboard">
           <div className="row">
             <div className="col-lg-9">
-              <div className="row"></div>
+              <div className="row">
+                <h5>Ant Design Charts</h5>
+                  <Pie {...config} />;
+              </div>
             </div>
             <div className="col-lg-3">
               <div
                 className="card"
                 style={{
-                  marginTop:20,
+                  marginTop: 20,
                   margin: "0 0",
                   height: "120px",
                   width: "300px",
                   borderWidth: 1,
                   backgroundColor: "#fafafa",
                   borderRadius: "60px 0 0 10px",
-                 
                 }}
               >
                 <div className="card-body">
                   <p className=" text-center text-primary">
                     Créer votre opération vente
                   </p>
-                  <div className="media text-center" >
+                  <div className="media text-center">
                     <div className="media-body">
                       <button
-                        type="button" style={{backgroundColor:"#0050b3"}}
+                        type="button"
+                        style={{ backgroundColor: "#0050b3" }}
                         className="btn btn-primary rounded-pill btn-sm"
                         onClick={() => {
                           setIsOpenOperation(true);
                         }}
                       >
-                    
                         Nouvelle Opération
                       </button>
                     </div>
@@ -73,7 +137,8 @@ const Dashbord = () => {
                   <div className="media text-center">
                     <div className="media-body">
                       <button
-                        type="button" style={{backgroundColor:"#0050b3"}}
+                        type="button"
+                        style={{ backgroundColor: "#0050b3" }}
                         className="btn btn-primary rounded-pill btn-sm "
                       >
                         Nouveau Projet
@@ -102,8 +167,12 @@ const Dashbord = () => {
                         <br></br>
                       </div>
                       <button
-                        type="button" 
-                        style={{ marginTop: 80, marginLeft:60 ,backgroundColor:"#0050b3"}}
+                        type="button"
+                        style={{
+                          marginTop: 80,
+                          marginLeft: 60,
+                          backgroundColor: "#0050b3",
+                        }}
                         className="btn btn-primary rounded-pill btn-sm"
                       >
                         Contactez Nous

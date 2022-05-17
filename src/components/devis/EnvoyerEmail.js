@@ -20,7 +20,7 @@ const EnvoyerEmail = ({ isOpen, handleClose }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .post("https://localhost:5000/envoyerEmail/", user)
+      //.post("https://localhost:5000/envoyerEmail/", user)
       .then((response) => setMsg(response.data.respMesg));
       console.log(user)
   };
@@ -91,7 +91,7 @@ const EnvoyerEmail = ({ isOpen, handleClose }) => {
             <button className="btn btn-secondary" onClick={handleClose}>Annuler</button>
             <input
               type="submit"
-              onClick={onSubmit}
+        
               className="btn btn-primary"
             />
           </div>

@@ -7,6 +7,7 @@ import { CloseCircleOutlined } from "@ant-design/icons";
 const { Text } = Typography;
 
 const Articles = () => {
+  
   const columns = [
     {
       title: "Produits/ Services",
@@ -147,7 +148,8 @@ const Articles = () => {
                 },
               });
             }}
-          />DT
+          />
+          DT
         </Space>
       ),
     },
@@ -158,6 +160,7 @@ const Articles = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getArticlesApi());
+  
   }, []);
 
   return (
