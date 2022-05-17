@@ -1,131 +1,79 @@
 import React, { useState, useEffect } from "react";
+import { getCommandeListApi } from "../../redux/actions/commande.actions";
+import { useDispatch, useSelector } from "react-redux";
 import { Bar } from "@ant-design/plots";
 
 const Chart = () => {
+  const dispatch = useDispatch();
+  const { commandeList } = useSelector((state) => state.commande);
+  const paye = commandeList.filter((u) => u.note === "Payé");
+  const nonpaye = commandeList.filter((u) => u.note === "Non Payé");
+  // const accepte = commandeList.filter((u) => u.etat === "Accepté");
+  // const enattente = commandeList.filter((u) => u.etat === "En attente");
+  // const annuler = commandeList.filter((u) => u.etat === "Annuler");
+  // const echenace = commandeList.filter((u) => u.etat === "Arrivé à l'échéance");
+  useEffect(() => {
+    dispatch(getCommandeListApi());
+  }, []);
   const data = [
     {
-      country: "Asia",
-      year: "1750",
-      value: 502,
+      type: "Payé",
+      year: "2022",
+      value: paye.length,
     },
     {
-      country: "Asia",
-      year: "1800",
-      value: 635,
+      type: "Non Payé",
+      year: "2022",
+      value: nonpaye.length,
     },
     {
-      country: "Asia",
-      year: "1850",
-      value: 809,
+      type: "Payé",
+      year: "2021",
+      value: 75,
     },
     {
-      country: "Asia",
-      year: "1900",
-      value: 947,
+      type: "Non Payé",
+      year: "2021",
+      value: 25,
     },
     {
-      country: "Asia",
-      year: "1950",
-      value: 1402,
+      type: "Payé",
+      year: "2020",
+      value: 65,
     },
     {
-      country: "Asia",
-      year: "1999",
-      value: 3634,
+      type: "Non Payé",
+      year: "2020",
+      value: 35,
     },
     {
-      country: "Asia",
-      year: "2050",
-      value: 5268,
+      type: "Payé",
+      year: "2019",
+      value: 80,
     },
     {
-      country: "Africa",
-      year: "1750",
-      value: 106,
-    },
-    {
-      country: "Africa",
-      year: "1800",
-      value: 107,
-    },
-    {
-      country: "Africa",
-      year: "1850",
-      value: 111,
-    },
-    {
-      country: "Africa",
-      year: "1900",
-      value: 133,
-    },
-    {
-      country: "Africa",
-      year: "1950",
-      value: 221,
-    },
-    {
-      country: "Africa",
-      year: "1999",
-      value: 767,
-    },
-    {
-      country: "Africa",
-      year: "2050",
-      value: 1766,
-    },
-    {
-      country: "Europe",
-      year: "1750",
-      value: 163,
-    },
-    {
-      country: "Europe",
-      year: "1800",
-      value: 203,
-    },
-    {
-      country: "Europe",
-      year: "1850",
-      value: 276,
-    },
-    {
-      country: "Europe",
-      year: "1900",
-      value: 408,
-    },
-    {
-      country: "Europe",
-      year: "1950",
-      value: 547,
-    },
-    {
-      country: "Europe",
-      year: "1999",
-      value: 729,
-    },
-    {
-      country: "Europe",
-      year: "2050",
-      value: 628,
+      type: "Non Payé",
+      year: "2019",
+      value: 20,
     },
   ];
   const config = {
     data,
-    xField: 'value',
-    yField: 'year',
-    seriesField: 'country',
+    xField: "value",
+    yField: "year",
+    seriesField: "type",
     isPercent: true,
     isStack: true,
 
     /** 自定义颜色 */
     // color: ['#2582a1', '#f88c24', '#c52125', '#87f4d0'],
     label: {
-      position: 'middle',
+      position: "middle",
       content: (item) => {
         return item.value.toFixed(2);
       },
       style: {
-        fill: '#fff',
+        fill: "#fff",
       },
     },
   };
@@ -133,3 +81,44 @@ const Chart = () => {
 };
 
 export default Chart;
+
+/*{
+     type: "Accepté",
+     year: "2022",
+      value: accepte.length,
+    },
+    {
+      type: "En attente",
+      year: "2022",
+      value: enattente.length,
+    },
+    {
+      type: "Annuler",
+      year: "2022",
+      value: annuler.length,
+    },
+    {
+      type: "Arrivé à l'échéance",
+      year: "2022",
+      value: echenace.length,
+    },
+    {
+      type: "Accepté",
+      year: "2021",
+      value:  628,
+    },
+    {
+      type: "En attente",
+      year: "2021",
+      value: 780,
+    },
+    {
+      type: "Annuler",
+      year: "2021",
+      value: 200,
+    },
+    {
+      type: "Arrivé à l'échéance",
+      year: "2021",
+      value: 1000,
+    }, */
