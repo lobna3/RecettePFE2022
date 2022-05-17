@@ -80,9 +80,8 @@ const Dashbord = () => {
         <section className="section dashboard">
           <div className="row">
             <div className="col-lg-9">
-              <div className="row">
-                <h5>Ant Design Charts</h5>
-                  <Pie {...config} />;
+              <div className="card" style={{marginLeft:20,marginRight:70,  borderRadius: "10px 10px",}}>
+                  <Pie {...config} />
               </div>
             </div>
             <div className="col-lg-3">
