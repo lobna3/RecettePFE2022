@@ -26,7 +26,7 @@ import { getCommandeDetails } from "../../redux/actions/commande.details.actions
 import Swal from "sweetalert2";
 import EnvoyerEmail from "./EnvoyerEmail";
 import ModStatus from "./ModStatus";
-
+import { BASE_URL } from "../../utils/apiHelpers";
 const { Text } = Typography;
 
 const Devis = () => {
@@ -39,7 +39,6 @@ const Devis = () => {
   const dispatch = useDispatch();
   const { addToast } = useToasts();
   const { commandeList } = useSelector((state) => state.commande);
-  
 
   useEffect(() => {
     dispatch(getCommandesApi("Devis"));
@@ -62,7 +61,6 @@ const Devis = () => {
     }
   };
 
- 
   const columns = [
     {
       title: "Référence",
@@ -206,14 +204,17 @@ const Devis = () => {
                 </span>
               </Dropdown.Item>
               <Dropdown.Item>
-                <Link
+                {/* <Link
                   to={`/imprimer/${record._id}`}
                   onClick={() => {
                     dispatch(getCommandeDetails(record));
                   }}
                 >
                   <PrinterFilled /> Imprimer
-                </Link>
+                </Link> */}
+                <a href={`${BASE_URL}/${record.documentUrl}`} target="_blank">
+                  <PrinterFilled /> Imprimer
+                </a>
               </Dropdown.Item>
               <Dropdown.Item>
                 <Link
@@ -334,7 +335,7 @@ const Devis = () => {
           setIsopen(false);
         }}
       />
-       <ModStatus
+      <ModStatus
         isOpen={isOpenStatus}
         handleClose={() => {
           setIsopenStatus(false);

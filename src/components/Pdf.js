@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCommandesListDetailsApi } from "../redux/actions/commande.details.actions";
 import { useParams, useLocation } from "react-router-dom";
 import moment from "moment";
+import { postApi } from "../utils/apiHelpers";
 
 export const ComponentToPrint = React.forwardRef((props, ref) => {
   const { id } = useParams();
@@ -14,11 +15,12 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
     dispatch(getCommandesListDetailsApi(id));
     console.log("URL", location.pathname);
   }, []);
+  
   return (
     <div class="container" ref={ref}>
       <div className="card">
         <div className="card-header">
-           <strong>NFacture:{" "}</strong> {commandeDetails.nFacture}{" "}
+          <strong>NFacture: </strong> {commandeDetails.nFacture}{" "}
           <span className="float-right">
             <strong>Facturer:</strong>{" "}
             {moment(commandeDetails.dateEmission).format("DD-MM-YYYY")}{" "}

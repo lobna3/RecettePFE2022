@@ -201,11 +201,12 @@ const DetailDevis = () => {
                   </tr>
                 </thead>
                 <tbody style={{ borderWidth: 1 }}>
-                  <tr>
+                  {/* <tr>
                     {commandeDetails &&
                       commandeDetails.articles &&
                       commandeDetails.articles.service &&
-                      commandeDetails.articles.service.map((elm) => (
+                      commandeDetails.articles.service.titre &&
+                      commandeDetails.articles.service.titre.map((elm) => (
                         <>
                           <td>
                             <td className="d-flex">
@@ -243,8 +244,17 @@ const DetailDevis = () => {
                         commandeDetails.articles.prix &&
                         commandeDetails.articles.prix}
                     </td>
-                  </tr>
-
+                  </tr> */}
+                  {commandeDetails &&
+                    commandeDetails.articles &&
+                    commandeDetails.articles.map((elm) => (
+                      <tr>
+                        <td>{elm.service.titre}</td>
+                        <td>{elm.qte}</td>
+                        <td>{elm.prix}</td>
+                        <td>{elm._id}</td>
+                      </tr>
+                    ))}
                   <p></p>
                 </tbody>
               </Table>
