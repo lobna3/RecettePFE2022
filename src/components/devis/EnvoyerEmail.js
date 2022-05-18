@@ -6,23 +6,23 @@ import axios from "axios";
 
 const EnvoyerEmail = ({ isOpen, handleClose }) => {
   const [msg, setMsg] = useState("");
-  const [user, setUser] = useState({
-    to: "",
+  const [form, setForm] = useState({
+    email: "",
     subject: "",
     description: "",
   });
 
-  const { to, subject, description } = user;
+  const { email, subject, description } = form;
   const onInputChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios
-      //.post("https://localhost:5000/envoyerEmail/", user)
+      .post("http://localhost:5000/test", form)
       .then((response) => setMsg(response.data.respMesg));
-      console.log(user)
+      console.log(form)
   };
 
   return (
@@ -44,15 +44,15 @@ const EnvoyerEmail = ({ isOpen, handleClose }) => {
       }}
       footer={null}
     >
-      <form>
+      <form onSubmit={onSubmit}>
         {" "}
         {msg}
         <div className="row">
           <div className="col-md-12">
             <input
-              name="to"
+              name="email"
               onChange={onInputChange}
-              value={to}
+              value={email}
               type="text"
               className="form-control"
               placeholder="To"
