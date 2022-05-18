@@ -3,8 +3,10 @@ import { Modal} from "antd";
 import { MailOutlined } from "@ant-design/icons";
 import "../../components/clients/modal.css";
 import axios from "axios";
+import { useToasts } from "react-toast-notifications";
 
 const EnvoyerEmail = ({ isOpen, handleClose }) => {
+  const { addToast } = useToasts();
   const [msg, setMsg] = useState("");
   const [form, setForm] = useState({
     email: "",
@@ -22,7 +24,11 @@ const EnvoyerEmail = ({ isOpen, handleClose }) => {
     await axios
       .post("http://localhost:5000/test", form)
       .then((response) => setMsg(response.data.respMesg));
-      console.log(form)
+      console.log("Email envoyer avec succssée!!!",form)
+      if (setMsg) {
+        addToast("Email envoyée avec succées", { appearance: "success" });
+      } 
+      handleClose()
   };
 
   return (
