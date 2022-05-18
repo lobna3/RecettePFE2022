@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCommandesListDetailsApi } from "../redux/actions/commande.details.actions";
 import { useParams, useLocation } from "react-router-dom";
 import moment from "moment";
-import { postApi } from "../utils/apiHelpers";
+
 
 export const ComponentToPrint = React.forwardRef((props, ref) => {
   const { id } = useParams();
@@ -94,44 +94,19 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
                 </tr>
               </thead>
               <tbody>
+              {commandeDetails &&
+                    commandeDetails.articles &&
+                    commandeDetails.articles.map((elm) => (
                 <tr>
-                  <td class="center">1</td>
-                  <td class="left strong">Licence d'origine</td>
-                  <td class="left">Licence étendue</td>
+                  <td class="center">#{elm._id}</td>
+                  <td class="left strong">{elm.service.titre}</td>
+                  <td class="left">{elm.service.description}</td>
 
-                  <td class="right">$999,00</td>
-                  <td class="center">1</td>
-                  <td class="right">$999,00</td>
+                  <td class="right">{elm.pu}DT</td>
+                  <td class="center">{elm.qte}</td>
+                  <td class="right">{elm.prix}DT</td>
                 </tr>
-                <tr>
-                  <td class="center">2</td>
-                  <td class="left">Custom Services</td>
-                  <td class="left">
-                    Instalation and Customization (cost per hour)
-                  </td>
-
-                  <td class="right">$150,00</td>
-                  <td class="center">20</td>
-                  <td class="right">$3.000,00</td>
-                </tr>
-                <tr>
-                  <td class="center">3</td>
-                  <td class="left">Hosting</td>
-                  <td class="left">1 year subcription</td>
-
-                  <td class="right">$499,00</td>
-                  <td class="center">1</td>
-                  <td class="right">$499,00</td>
-                </tr>
-                <tr>
-                  <td class="center">4</td>
-                  <td class="left">Platinum Support</td>
-                  <td class="left">1 year subcription 24/7</td>
-
-                  <td class="right">$3.999,00</td>
-                  <td class="center">1</td>
-                  <td class="right">$3.999,00</td>
-                </tr>
+                    ))}
               </tbody>
             </table>
           </div>

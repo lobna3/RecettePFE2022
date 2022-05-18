@@ -10,7 +10,7 @@ import {
   SyncOutlined,
   FormOutlined,
   CheckOutlined,
-  CheckCircleOutlined,
+
 } from "@ant-design/icons";
 import Table from "react-bootstrap/Table";
 import { Card, Typography, DatePicker } from "antd";
@@ -196,63 +196,26 @@ const DetailDevis = () => {
                   <tr>
                     <td className="text-muted d-flex">Produits / Services</td>
                     <td className="text-muted">Qté</td>
+                    <td className="text-muted">PU</td>
                     <td className="text-muted">Prix</td>
                     <td className="text-muted">Récurrente</td>
                   </tr>
                 </thead>
                 <tbody style={{ borderWidth: 1 }}>
-                  {/* <tr>
-                    {commandeDetails &&
-                      commandeDetails.articles &&
-                      commandeDetails.articles.service &&
-                      commandeDetails.articles.service.titre &&
-                      commandeDetails.articles.service.titre.map((elm) => (
-                        <>
-                          <td>
-                            <td className="d-flex">
-                              {elm.articles.service._id}
-                            </td>
-                          </td>
-                        </>
-                      ))}
-
-                    <td>
-                      <span
-                        style={{
-                          borderWidth: 1,
-                          borderStyle: "dashed",
-                          borderColor: "#0d6efd",
-                          padding: 2,
-                        }}
-                      >
-                        {commandeDetails &&
-                          commandeDetails.articles &&
-                          commandeDetails.articles.qte &&
-                          commandeDetails.articles.qte}
-                      </span>
-                    </td>
-                    <td></td>
-                    <td>
-                      <Switch
-                        size="small"
-                        checkedChildren={<CheckOutlined />}
-                        unCheckedChildren={<CloseOutlined />}
-                        defaultChecked
-                      />
-                      {commandeDetails &&
-                        commandeDetails.articles &&
-                        commandeDetails.articles.prix &&
-                        commandeDetails.articles.prix}
-                    </td>
-                  </tr> */}
                   {commandeDetails &&
                     commandeDetails.articles &&
                     commandeDetails.articles.map((elm) => (
                       <tr>
-                        <td>{elm.service.titre}</td>
+                        <td className="d-flex">{elm.service.titre}</td>
                         <td>{elm.qte}</td>
-                        <td>{elm.prix}</td>
-                        <td>{elm._id}</td>
+                        <td>{elm.pu}DT</td>
+                        <td>{elm.prix}DT</td>
+                        <td>  <Switch
+                        size="small"
+                        checkedChildren={<CheckOutlined />}
+                        unCheckedChildren={<CloseOutlined />}
+                        defaultChecked
+                      /></td>
                       </tr>
                     ))}
                   <p></p>
@@ -268,16 +231,16 @@ const DetailDevis = () => {
                     }}
                   >
                     <Text type="secondary" className="d-flex">
-                      Status
-                      <Text type="success" style={{ marginLeft: 20 }}>
-                        <CheckCircleOutlined />
+                      Status:
+                      <Text type="success" style={{ marginLeft: 5 }}>
+                      
                         {commandeDetails.status}
                       </Text>
                       <Text strong style={{ marginLeft: 230 }}>
                         Total:
                       </Text>
                       <Text style={{ marginLeft: 20 }}>
-                        {commandeDetails.total}
+                        {commandeDetails.total} TND
                       </Text>
                     </Text>
                   </div>
@@ -304,7 +267,8 @@ const DetailDevis = () => {
               </Title>
               <Table borderless>
                 <tbody>
-                  <tr>
+                  
+                   <tr>    
                     <td
                       style={{ backgroundColor: "#95de64" }}
                       className="rounded-circle"
@@ -334,8 +298,8 @@ const DetailDevis = () => {
                       />
                     </td>
                     <td className="text-muted d-flex">
-                      La commande a été vu par{" "}
-                      <Link to=""> Foulen ben Foulen</Link>{" "}
+                      La commande a été vu par {" "}
+                      <Link to=""> Foulen ben Foulen</Link> {" "}
                     </td>
                     <td className="text-muted">Janvier04, 2022</td>
                     <td className="text-muted">11:40Am</td>

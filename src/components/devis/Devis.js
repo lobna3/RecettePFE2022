@@ -10,6 +10,7 @@ import {
   MailOutlined,
   FormOutlined,
   FileDoneOutlined,
+  FileTextOutlined
 } from "@ant-design/icons";
 import { Link, useLocation } from "react-router-dom";
 import { Table, Space } from "antd";
@@ -204,14 +205,16 @@ const Devis = () => {
                 </span>
               </Dropdown.Item>
               <Dropdown.Item>
-                {/* <Link
+                <Link
                   to={`/imprimer/${record._id}`}
                   onClick={() => {
                     dispatch(getCommandeDetails(record));
                   }}
                 >
-                  <PrinterFilled /> Imprimer
-                </Link> */}
+                  <FileTextOutlined/> Enregister 
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item>
                 <a href={`${BASE_URL}/${record.documentUrl}`} target="_blank">
                   <PrinterFilled /> Imprimer
                 </a>

@@ -26,7 +26,7 @@ const MyDocument = () => {
             className="btn btn-primary"
             style={{ marginBottom: 20 }}
           >
-            Imprimer
+            Enregistrer
           </button>
         </div>
       </main>
