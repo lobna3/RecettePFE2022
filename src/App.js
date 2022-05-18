@@ -28,7 +28,9 @@ import store from "./redux/store";
 import { ToastProvider } from "react-toast-notifications";
 import MyDocument from "./components/MyDocument";
 import AjoutFacture from "./components/factures/AjoutFacture";
-
+import Payment from "./components/payments/Payment";
+import Success from "./components/payments/Success";
+import Fail from "./components/payments/Fail";
 
 function App() {
   // const [user, setUser] = useState(null);
@@ -64,6 +66,9 @@ function App() {
             <Route path="/detail_commande/:id" element={<DetailCommande />} />
             <Route path="/paiement" element={<Paiement />} />
             <Route path="/imprimer/:id" element={<MyDocument />} />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/success" element={<Success />} />
+            <Route path="/fail" element={<Fail/>} />
           </Routes>
           
           <Footer />

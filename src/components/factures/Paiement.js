@@ -14,7 +14,7 @@ const { Text , Title } = Typography;
 const { Meta } = Card;
 const Paiement = () => {
   return (
-    <main id="main" class="main bg-light">
+    <main id="main" className="main bg-light">
       <PaiementHeader />
       <Row>
         <Col lg={{ span: 8 }} style={{ marginBottom: 20 }}>

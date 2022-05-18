@@ -794,15 +794,14 @@ export default function AjoutFacture() {
                       className="d-flex"
                       style={{ borderRadius: "5px" }}
                     >
+                      <Link to="/payment">
                       <Button
                         type="primary"
                         style={{ marginRight: 20, marginLeft: 20 }}
-                        onClick={() => {
-                          setIsOpenListe(true);
-                        }}
                       >
                         Payé
                       </Button>
+                      </Link>
                       <Text style={{ marginRight: 20, marginLeft: 120 }}>
                         Remise: <Text strong>{getValues("remise")}</Text>
                       </Text>

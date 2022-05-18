@@ -85,7 +85,7 @@ export default function Recette() {
       <RecettesHeader />
 
       <div className="row">
-        <div className="col-md-7">
+        <div className="col-md-8">
           <div
             className="card"
             style={{ marginLeft: 10, borderRadius: "5px 5px" }}
@@ -93,7 +93,7 @@ export default function Recette() {
             <Pie {...config} />
           </div>
         </div>
-        <div className="col-md-5">
+        <div className="col-md-4">
           <div className="card" style={{ borderRadius: "5px 5px" }}>
             <Chart />
           </div>
