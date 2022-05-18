@@ -14,7 +14,10 @@ const Payment = () => {
     e.preventDefault();
     axios.post("/payment",form)
     .then(res=>{
-     console.log(res.data)   
+        console.log(res.data)  
+        const{result}=res.data
+        window.location.href=result.link;
+     
     }).catch(err=>console.error(err))
   };
   return (
