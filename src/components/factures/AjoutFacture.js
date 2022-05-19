@@ -25,7 +25,7 @@ import Articles from "../articles/Articles";
 import "../devis/devis1.css";
 import { useToasts } from "react-toast-notifications";
 import { useDispatch, useSelector } from "react-redux";
-import { addCommandetApi} from "../../redux/actions/commande.actions";
+import { addFacturetApi} from "../../redux/actions/commande.actions";
 import { getClientListApi } from "../../redux/actions/client.actions";
 import TraitementDevis from "../devis/TraitementDevis";
 import EnvoyerEmail from "../devis/EnvoyerEmail";
@@ -243,7 +243,7 @@ export default function AjoutFacture() {
     // let { paiements } = addCommandeInfo;
 
     dispatch(
-      addCommandetApi(
+      addFacturetApi(
         {
           commande: body,
           articles: selectedArticles.map((elm) => {

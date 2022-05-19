@@ -78,6 +78,25 @@ export const addCommandetApi = (data, addToast) => async (dispatch) => {
   }
 };
 
+export const addFacturetApi = (data, addToast) => async (dispatch) => {
+  try {
+    dispatch({
+      type: ADD_COMMANDE_SUCCESS,
+    });
+    let result = await postApi("ajouter_facture", data);
+    console.log("Result", result);
+
+    if (result.success) {
+      //dispatch(getCommandesApi());
+      addToast(" Facture créer avec succées", { appearance: "success" });
+    } else {
+      addToast("Erreur c'est produite , ressayer", { appearance: "error" });
+    }
+  } catch (error) {
+    console.log("ERROR", error.message);
+  }
+};
+
 export const getCommandeListApi = () => async (dispatch) => {
   try {
     let result = await getApi("commandes");
