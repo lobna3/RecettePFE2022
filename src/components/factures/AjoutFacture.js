@@ -31,6 +31,7 @@ import TraitementDevis from "../devis/TraitementDevis";
 import EnvoyerEmail from "../devis/EnvoyerEmail";
 import TraitementFacture from "../factures/TraitementFacture";
 import AddArticleModal from "../AddArticleModal";
+import Payment from "../payments/Payment";
 const { Text } = Typography;
 const { TextArea } = Input;
 
@@ -39,6 +40,7 @@ export default function AjoutFacture() {
   const [isOpen, setIsopen] = useState(false);
   const [isOpenOperation, setIsOpenOperation] = useState(false);
   const [isOpenListe, setIsOpenListe] = useState(false);
+  const [isOpenPaye, setIsOpenPaye] = useState(false);
   const [componentSize] = useState("default");
   const { addToast } = useToasts();
   const navigate = useNavigate();
@@ -794,14 +796,17 @@ export default function AjoutFacture() {
                       className="d-flex"
                       style={{ borderRadius: "5px" }}
                     >
-                      <Link to="/payment">
+                    
                       <Button
                         type="primary"
+                        onClick={() => {
+                          setIsOpenPaye(true);
+                        }}
                         style={{ marginRight: 20, marginLeft: 20 }}
                       >
                         Payé
                       </Button>
-                      </Link>
+                     
                       <Text style={{ marginRight: 20, marginLeft: 120 }}>
                         Remise: <Text strong>{getValues("remise")}</Text>
                       </Text>
@@ -846,6 +851,12 @@ export default function AjoutFacture() {
         isOpen={isOpenListe}
         handleClose={() => {
           setIsOpenListe(false);
+        }}
+      />
+      <Payment
+        isOpen={isOpenPaye}
+        handleClose={() => {
+          setIsOpenPaye(false);
         }}
       />
     </div>

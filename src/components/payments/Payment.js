@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { PaiementHeader } from "../RacetteHeader";
 import axios from "axios";
+import { Modal } from "antd";
+import "../../components/clients/modal.css";
 
-const Payment = () => {
+const Payment = ({ isOpen, handleClose }) => {
   const [form, setForm] = useState({});
   const onChange = (e) => {
     setForm({
@@ -12,37 +13,56 @@ const Payment = () => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    axios.post("/payment",form)
-    .then(res=>{
-        console.log(res.data)  
-        const{result}=res.data
-        window.location.href=result.link;
-     
-    }).catch(err=>console.error(err))
+    axios
+      .post("/payment", form)
+      .then((res) => {
+        console.log(res.data);
+        const { result } = res.data;
+        window.location.href = result.link;
+      })
+      .catch((err) => console.error(err));
   };
   return (
-    <main id="main" className="main bg-light">
-      <PaiementHeader />
-      <div className="p-4" style={{ marginLeft: 200 }}>
-        <form className="m-4" onSubmit={onSubmit}>
-          <div className="col-md-4">
-            <div className="form-group">
-              <input
-                type="text"
-                className="form-control"
-                name="amount"
-                onChange={onChange}
-              ></input>
-              <button type="submit" className="btn btn-primary mt-4">
-                Payé
-              </button>
-            </div>
+    <div>
+      <Modal
+        className="modalStyle"
+        visible={isOpen}
+        width={500}
+        onCancel={handleClose}
+        title={
+          <div>
+            <h6 className="text-white">Payment facture</h6>
           </div>
-        </form>
-      </div>
-      <br />
-      <p></p>
-    </main>
+        }
+        onOK={() => {
+          handleClose();
+        }}
+        footer={null}
+      >
+        <div className="row">
+        
+              <div className="">
+                <form className="m-12" onSubmit={onSubmit}>
+                  <div className="col-md-12">
+                    <div className="form-group">
+                    <label className="form-label">Montant à payer</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="amount"
+                        onChange={onChange}
+                      ></input>
+                      <button type="submit" className="btn btn-primary mt-4 btn-block">
+                        Payé
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          
+      </Modal>
+    </div>
   );
 };
 
