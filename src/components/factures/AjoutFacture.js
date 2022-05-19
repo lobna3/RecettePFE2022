@@ -19,19 +19,20 @@ import {
   FileTextOutlined,
   AuditOutlined,
 } from "@ant-design/icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import Articles from "../articles/Articles";
 import "../devis/devis1.css";
 import { useToasts } from "react-toast-notifications";
 import { useDispatch, useSelector } from "react-redux";
-import { addCommandetApi, addStep } from "../../redux/actions/commande.actions";
+import { addCommandetApi} from "../../redux/actions/commande.actions";
 import { getClientListApi } from "../../redux/actions/client.actions";
 import TraitementDevis from "../devis/TraitementDevis";
 import EnvoyerEmail from "../devis/EnvoyerEmail";
 import TraitementFacture from "../factures/TraitementFacture";
 import AddArticleModal from "../AddArticleModal";
 import Payment from "../payments/Payment";
+
 const { Text } = Typography;
 const { TextArea } = Input;
 
@@ -43,12 +44,13 @@ export default function AjoutFacture() {
   const [isOpenPaye, setIsOpenPaye] = useState(false);
   const [componentSize] = useState("default");
   const { addToast } = useToasts();
-  const navigate = useNavigate();
+ 
+  const dispatch = useDispatch();
   // const { addCommandeInfo } = useSelector((state) => state.commande);
   const { clientList } = useSelector((state) => state.client);
   const { selectedArticles } = useSelector((state) => state.commande);
-  const dispatch = useDispatch();
-
+  
+  
   const {
     handleSubmit,
     control,

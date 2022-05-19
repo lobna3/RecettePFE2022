@@ -2,9 +2,20 @@ import React from "react";
 import { Modal, Steps, Button } from "antd";
 import "../../components/clients/modal.css";
 import { MailOutlined } from "@ant-design/icons";
+
+import { Viewer, Worker } from "@react-pdf-viewer/core";
+import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
+
+import "@react-pdf-viewer/core/lib/styles/index.css";
+import "@react-pdf-viewer/default-layout/lib/styles/index.css";
+import { BASE_URL } from "../../utils/apiHelpers";
+
 const { Step } = Steps;
 
 const TraitementFacture = ({ isOpen, handleClose }) => {
+
+  const defaultLayoutPluginInstance = defaultLayoutPlugin();
+
   return (
     <Modal
       className="modalStyle"
@@ -54,6 +65,23 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
         <div className="col-md-6">
           <div className="card">
             <h1>Facture</h1>
+            <div>
+              <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.12.313/build/pdf.worker.js">
+                <div
+                  style={{
+                    height: "100%",
+                    width: "100%",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                >
+                  <Viewer
+                    fileUrl={`${process.env.PUBLIC_URL}/pdf-open-parameters.pdf`}
+                    plugins={[defaultLayoutPluginInstance]}
+                  />
+                </div>
+              </Worker>
+            </div>
           </div>
         </div>
       </div>

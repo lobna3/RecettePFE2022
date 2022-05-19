@@ -10,7 +10,7 @@ import {
   MailOutlined,
   FormOutlined,
   FileDoneOutlined,
-  FileTextOutlined
+  FileTextOutlined,
 } from "@ant-design/icons";
 import { Link, useLocation } from "react-router-dom";
 import { Table, Space } from "antd";
@@ -28,6 +28,7 @@ import Swal from "sweetalert2";
 import EnvoyerEmail from "./EnvoyerEmail";
 import ModStatus from "./ModStatus";
 import { BASE_URL } from "../../utils/apiHelpers";
+
 const { Text } = Typography;
 
 const Devis = () => {
@@ -211,11 +212,18 @@ const Devis = () => {
                     dispatch(getCommandeDetails(record));
                   }}
                 >
-                  <FileTextOutlined/> Enregister 
+                  <FileTextOutlined /> Enregister
                 </Link>
               </Dropdown.Item>
               <Dropdown.Item>
-                <a href={`${BASE_URL}/${record.documentUrl}`} target="_blank">
+                <a
+                  href={`${BASE_URL}/${record.documentUrl}`}
+                  target="_blank"
+                  onClick={() => {
+                    console.log("clicked");
+                    window.open(`${BASE_URL}/${record.documentUrl}`, "_blank");
+                  }}
+                >
                   <PrinterFilled /> Imprimer
                 </a>
               </Dropdown.Item>
