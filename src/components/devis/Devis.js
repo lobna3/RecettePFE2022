@@ -227,7 +227,7 @@ const Devis = () => {
                   <PrinterFilled /> Imprimer
                 </a>
               </Dropdown.Item>
-              <Dropdown.Item>
+              {/*<Dropdown.Item>
                 <Link
                   to={`/devis/${record._id}`}
                   onClick={() => {
@@ -236,7 +236,7 @@ const Devis = () => {
                 >
                   <FundViewOutlined /> Visualiser
                 </Link>
-              </Dropdown.Item>
+              </Dropdown.Item>*/}
               <Dropdown.Item>
                 <Link
                   to={`/devi/${record._id}`}

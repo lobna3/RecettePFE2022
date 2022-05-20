@@ -65,14 +65,13 @@ export const addCommandetApi = (data, addToast) => async (dispatch) => {
       type: ADD_COMMANDE_SUCCESS,
     });
     let result = await postApi("ajouter_commande", data);
-    console.log("Result", result);
-
-    if (result.success) {
+    if (result) {
       //dispatch(getCommandesApi());
       addToast("Commande créer avec succées", { appearance: "success" });
     } else {
       addToast("Erreur c'est produite , ressayer", { appearance: "error" });
     }
+    console.log("Result", result);
   } catch (error) {
     console.log("ERROR", error.message);
   }
@@ -84,14 +83,13 @@ export const addFacturetApi = (data, addToast) => async (dispatch) => {
       type: ADD_COMMANDE_SUCCESS,
     });
     let result = await postApi("ajouter_facture", data);
-    console.log("Result", result);
-
-    if (result.success) {
+    if (result) {
       //dispatch(getCommandesApi());
       addToast(" Facture créer avec succées", { appearance: "success" });
     } else {
       addToast("Erreur c'est produite , ressayer", { appearance: "error" });
     }
+    console.log("Result", result);
   } catch (error) {
     console.log("ERROR", error.message);
   }
@@ -120,7 +118,7 @@ export const deleteCommandeApi = (id, addToast) => async (dispatch) => {
     // dispatch(addCommande());
     let result = await deleteApi("delete_commande/" + id, config);
     if (result) {
-      dispatch(getCommandesApi("Devis"));
+     // dispatch(getCommandesApi("Devis"));
       addToast("Commande supprimer avec succées", { appearance: "success" });
     } else {
       addToast("Erreur c'est produite , ressayer", { appearance: "error" });
