@@ -1,186 +1,182 @@
-<section class="card">
-  <div id="invoice-template" class="card-body p-4">
- 
-    <div id="invoice-company-details" class="row">
-      <div class="col-sm-6 col-12 text-center text-sm-left">
-        <div class="media row">
-          <div class="col-12 col-sm-3 col-xl-2">
-            <img src="../../../app-assets/images/logo/logo-80x80.png" alt="company logo" class="mb-1 mb-sm-0"/>
-          </div>
-          <div class="col-12 col-sm-9 col-xl-10">
-            <div class="media-body">
-              <ul class="ml-2 px-0 list-unstyled">
-                <li class="text-bold-800">Modern Creative Studio</li>
-                <li>4025 Oak Avenue,</li>
-                <li>Melbourne,</li>
-                <li>Florida 32940,</li>
-                <li>USA</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-12 text-center text-sm-right">
-        <h2>INVOICE</h2>
-        <p class="pb-sm-3"># INV-001001</p>
-        <ul class="px-0 list-unstyled">
-          <li>Balance Due</li>
-          <li class="lead text-bold-800">$12,000.00</li>
-        </ul>
-      </div>
-    </div>
+<title>FACTURE</title>
+<style>
+  body {
+    padding: 60px;
+    font-family: "Hevletica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  body > h4 {
+    font-size: 24px;
+    line-height: 24px;
+    text-transform: uppercase;
+    margin-bottom: 60px;
+  }
 
-    <div id="invoice-customer-details" class="row pt-2">
-      <div class="col-12 text-center text-sm-left">
-        <p class="text-muted">Bill To</p>
-      </div>
-      <div class="col-sm-6 col-12 text-center text-sm-left">
-        <ul class="px-0 list-unstyled">
-          <li class="text-bold-800">Mr. Bret Lezama</li>
-          <li>4879 Westfall Avenue,</li>
-          <li>Albuquerque,</li>
-          <li>New Mexico-87102.</li>
-        </ul>
-      </div>
-      <div class="col-sm-6 col-12 text-center text-sm-right">
-        <p><span class="text-muted">Invoice Date :</span> 06/05/2019</p>
-        <p><span class="text-muted">Terms :</span> Due on Receipt</p>
-        <p><span class="text-muted">Due Date :</span> 10/05/2019</p>
-      </div>
-    </div>
-  
-    <div id="invoice-items-details" class="pt-2">
-      <div class="row">
-        <div class="table-responsive col-12">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Item &amp; Description</th>
-                <th class="text-right">Rate</th>
-                <th class="text-right">Hours</th>
-                <th class="text-right">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>
-                  <p>Create PSD for mobile APP</p>
-                  <p class="text-muted">Simply dummy text of the printing and typesetting industry.
-                  </p>
-                </td>
-                <td class="text-right">$20.00/hr</td>
-                <td class="text-right">120</td>
-                <td class="text-right">$2400.00</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>
-                  <p>iOS Application Development</p>
-                  <p class="text-muted">Pellentesque maximus feugiat lorem at cursus.</p>
-                </td>
-                <td class="text-right">$25.00/hr</td>
-                <td class="text-right">260</td>
-                <td class="text-right">$6500.00</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>
-                  <p>WordPress Template Development</p>
-                  <p class="text-muted">Vestibulum convallis.</p>
-                </td>
-                <td class="text-right">$20.00/hr</td>
-                <td class="text-right">300</td>
-                <td class="text-right">$6000.00</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-7 col-12 text-center text-sm-left">
-          <p class="lead">Payment Methods:</p>
-          <div class="row">
-            <div class="col-sm-8">
-              <div class="table-responsive">
-                <table class="table table-borderless table-sm">
-                  <tbody>
-                    <tr>
-                      <td>Bank name:</td>
-                      <td class="text-right">ABC Bank, USA</td>
-                    </tr>
-                    <tr>
-                      <td>Acc name:</td>
-                      <td class="text-right">Amanda Orton</td>
-                    </tr>
-                    <tr>
-                      <td>IBAN:</td>
-                      <td class="text-right">FGS165461646546AA</td>
-                    </tr>
-                    <tr>
-                      <td>SWIFT code:</td>
-                      <td class="text-right">BTNPP34</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-5 col-12">
-          <p class="lead">Total due</p>
-          <div class="table-responsive">
-            <table class="table">
-              <tbody>
-                <tr>
-                  <td>Sub Total</td>
-                  <td class="text-right">$14,900.00</td>
-                </tr>
-                <tr>
-                  <td>TAX (12%)</td>
-                  <td class="text-right">$1,788.00</td>
-                </tr>
-                <tr>
-                  <td class="text-bold-800">Total</td>
-                  <td class="text-bold-800 text-right"> $16,688.00</td>
-                </tr>
-                <tr>
-                  <td>Payment Made</td>
-                  <td class="pink text-right">(-) $4,688.00</td>
-                </tr>
-                <tr class="bg-grey bg-lighten-4">
-                  <td class="text-bold-800">Balance Due</td>
-                  <td class="text-bold-800 text-right">$12,000.00</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="text-center">
-            <p class="mb-0 mt-1">Authorized person</p>
-            <img src="../../../app-assets/images/pages/signature-scan.png" alt="signature" class="height-100"/>
-            <h6>Amanda Orton</h6>
-            <p class="text-muted">Managing Director</p>
-          </div>
-        </div>
-      </div>
-    </div>
+  body > header {
+    display: flex;
+  }
 
-  
-    <div id="invoice-footer">
-      <div class="row">
-        <div class="col-sm-7 col-12 text-center text-sm-left">
-          <h6>Terms &amp; Condition</h6>
-          <p>Test pilot isn't always the healthiest business.</p>
-        </div>
-        <div class="col-sm-5 col-12 text-center">
-          <button type="button" class="btn btn-info btn-print btn-lg my-1"><i class="la la-paper-plane-o mr-50"></i>
-            Print
-            Invoice</button>
-        </div>
-      </div>
-    </div>
-  
+  body > header > .address-block:nth-child(2) {
+    margin-left: 100px;
+  }
 
+  .address-block address {
+    font-style: normal;
+  }
+
+  .address-block > h5 {
+    font-size: 14px;
+    line-height: 14px;
+    margin: 0px 0px 15px;
+    text-transform: uppercase;
+    color: #aaa;
+  }
+
+  .table {
+    width: 100%;
+    margin-top: 60px;
+  }
+
+  .table table {
+    width: 100%;
+    border: 1px solid #eee;
+    border-collapse: collapse;
+  }
+
+  .table table tr th,
+  .table table tr td {
+    font-size: 15px;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-collapse: collapse;
+  }
+
+  .table table tfoot tr td {
+    border-top: 3px solid #eee;
+  }
+</style>
+</head>
+<body>
+<h4>Facture</h4>
+<header>
+<div class="address-block">
+  <div className="card">
+  <div className="card-header">
+    <strong>NFacture: </strong> ${commandeDetails.nFacture}
+    <span className="float-right">
+      <strong>Facturer:</strong>
+      ${commandeDetails.dateEmission}
+    </span>
+    <span className="float-right">
+      <strong>Status:</strong>${commandeDetails.status}
+    </span>
   </div>
-</section>
+  </div>
+  </div>
+  </header>
+  <div className="card-body">
+    <div className="row">
+      <div className="col-md-6">
+        <h6 className="mb-3"></h6>
+        <div>
+          <strong>Arsela</strong>
+        </div>
+        <div> Boulevard Khalifa Karoui</div>
+        <div> Sahloul 4054 Sousse, Tunisie</div>
+        <div>Email: info@arsela.com</div>
+        <div>Phone: (+216) 26 314 922</div>
+      </div>
+      <div className="col-md-6">
+        <h6 className="mb-3"></h6>
+        <div>
+          <strong>Client</strong>
+        </div>
+        <div>
+          Attn:
+          ${commandeDetails.client.nom}
+          ${commandeDetails.client.prenom}
+        </div>
+        <div>
+          ${commandeDetails.client.activite}
+        </div>
+        <div>
+          Email:
+          ${commandeDetails.client.email}
+        </div>
+        <div>
+          Phone:
+          ${commandeDetails.client.telephone}
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="table">
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align:left;">PRODUIT</th>
+          <th style="text-align:left;">DESCRIPTION</th>
+          <th>PRIX U</th>
+          <th>QUANITE</th>
+          <th>TAXE</th>
+          <th>PRIX</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${commandeDetails.articles.map(
+          (elm) => `  <tr>
+        <td style="text-align:left;">${elm.service.titre}</td>
+        <td style="text-align:left;">${elm.service.description}</td>
+        <td style="text-align:center;">${elm.pu}DT</td>
+        <td style="text-align:center;">${elm.qte}</td>
+        <td style="text-align:center;">${elm.taxe}</td>
+        <td style="text-align:center;">${elm.prix}DT</td>
+      </tr>`
+        )}
+     
+      </tbody>
+      
+    </table>
+   
+    <div className="row">
+     
+        <table class="table table-clear">
+          <tbody>
+            <tr>
+              <td class="left">
+                <strong>SubTotal</strong>
+              </td>
+              <td class="right"> ${commandeDetails.total} DT</td>
+            </tr>
+            <tr>
+              <td class="left">
+                <strong>Remise (20%)</strong>
+              </td>
+              <td class="right"> ${commandeDetails.remise} DT</td>
+            </tr>
+            <tr>
+              <td class="left">
+                <strong>Tax(10%)</strong>
+              </td>
+              <td class="right">${commandeDetails.taxes} DT</td>
+            </tr>
+            <tr>
+              <td class="left">
+                <strong>Total</strong>
+              </td>
+              <td class="right">
+                <strong> ${commandeDetails.totalTtc}DT</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+     
+    <div className="card">
+      <p>Note:${commandeDetails.note}</p>
+    </div>
+  </div>
+  
+  </div>
+  
+  

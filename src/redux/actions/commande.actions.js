@@ -5,6 +5,7 @@ import {
   ADD_COMMANDE_SUCCESS,
   GET_COMMANDE_LIST,
   UPDATE_COMMANDE,
+  ADD_SAVED_COMMANDE,
 } from "../actionTypes";
 
 export const addCommande = () => {
@@ -79,17 +80,19 @@ export const addCommandetApi = (data, addToast) => async (dispatch) => {
 
 export const addFacturetApi = (data, addToast) => async (dispatch) => {
   try {
-    dispatch({
-      type: ADD_COMMANDE_SUCCESS,
-    });
     let result = await postApi("ajouter_facture", data);
     if (result) {
+      console.log("Here")
       //dispatch(getCommandesApi());
       addToast(" Facture créer avec succées", { appearance: "success" });
+      dispatch({
+        type: ADD_SAVED_COMMANDE,
+        payload: result.data,
+      });
     } else {
       addToast("Erreur c'est produite , ressayer", { appearance: "error" });
     }
-    console.log("Result", result);
+    console.log("Add Result", result);
   } catch (error) {
     console.log("ERROR", error.message);
   }
@@ -118,7 +121,7 @@ export const deleteCommandeApi = (id, addToast) => async (dispatch) => {
     // dispatch(addCommande());
     let result = await deleteApi("delete_commande/" + id, config);
     if (result) {
-     // dispatch(getCommandesApi("Devis"));
+      dispatch(getCommandesApi("Devis"));
       addToast("Commande supprimer avec succées", { appearance: "success" });
     } else {
       addToast("Erreur c'est produite , ressayer", { appearance: "error" });
@@ -148,44 +151,47 @@ export const getCommandeByUser = (id) => async (dispatch) => {
   }
 };
 
-export const updateCommandeApi = (data, id,addToast) => async (dispatch) => {
+export const updateCommandeApi = (data, id, addToast) => async (dispatch) => {
   try {
     let config = {
       headers: {
         Authorization: localStorage.getItem("token"),
       },
     };
-   
 
     let result = await updateApi("maj_commande/" + id, data, config);
     if (result) {
-     //dispatch(getCommandesApi());
-    
-     addToast("Mise à jour effectuées avec succées", { appearance: "success" });
-    }else {
+      //dispatch(getCommandesApi());
+
+      addToast("Mise à jour effectuées avec succées", {
+        appearance: "success",
+      });
+    } else {
       addToast("Erreur c'est produite , ressayer", { appearance: "error" });
     }
-    console.log("Resultat",result);
+    console.log("Resultat", result);
   } catch (error) {
     console.log("ERROR", error.message);
   }
 };
 
-export const updateCommandeSatausApi = (data, id,addToast) => async () => {
+export const updateCommandeSatausApi = (data, id, addToast) => async () => {
   try {
     let config = {
       headers: {
         Authorization: localStorage.getItem("token"),
       },
     };
-   
+
     let result = await updateApi("mod_status/" + id, data, config);
     if (result) {
-     addToast("Mise à jour effectuées avec succées", { appearance: "success" });
-    }else {
+      addToast("Mise à jour effectuées avec succées", {
+        appearance: "success",
+      });
+    } else {
       addToast("Erreur c'est produite , ressayer", { appearance: "error" });
     }
-    console.log("Resultat",result);
+    console.log("Resultat", result);
   } catch (error) {
     console.log("ERROR", error.message);
   }

@@ -67,8 +67,49 @@ const ModifierDevis = () => {
 
   const dispatch = useDispatch();
 
-  const { selectedCommande } = useSelector((state) => state.commande);
+  const { selectedCommande, selectedArticles } = useSelector(
+    (state) => state.commande
+  );
   const { clientList } = useSelector((state) => state.client);
+  const calculateValues = () => {
+    let initTotal = 0;
+    let totalTaxe = 0;
+    let totalPrix = 0;
+    selectedArticles.forEach((article) => {
+      console.log("article", article);
+      totalPrix = totalPrix + article.qte * Number(article.pu);
+      initTotal = totalPrix;
+      if (article.taxe != "") {
+        totalTaxe = totalTaxe + (Number(article.taxe) * article.prix) / 100;
+      }
+      console.log("prix", totalPrix);
+      //setValue("prix", totalPrix);
+    });
+
+    console.log("Total", initTotal);
+    //setValue("total", initTotal);
+
+   //// setValue("remise", 0);
+
+    console.log("Taxes", totalTaxe);
+    //setValue("taxes", totalTaxe);
+
+    console.log("TotalTTc", totalTaxe + initTotal);
+    //setValue("totalTtc", totalTaxe + initTotal);
+
+    // setValue("paye", 0);
+    //console.log("Solde", initTotal + totalTaxe );
+    // setValue("solde", initTotal + totalTaxe);
+  };
+  const calculateRemise = () => {
+    let remise = remiseVal;
+    let totalValue = total;
+    let totalTaxe = taxes;
+    let paye = 0;
+    let remiseVal = (remise * totalValue) / 100;
+    setTotalTtc(totalValue - remiseVal + totalTaxe);
+    setSolde(totalValue - remiseVal + totalTaxe - paye);
+  };
   useEffect(() => {
     dispatch(getClientListApi());
 
@@ -93,7 +134,8 @@ const ModifierDevis = () => {
     setClient(selectedCommande.client);
     console.log("Selected Commande", selectedCommande);
     console.log("URL", location.pathname);
-  }, [selectedCommande]);
+    calculateValues();
+  }, [selectedCommande, selectedArticles]);
   const confirmAdd = () => {
     let data = {
       dateEmission,
@@ -119,6 +161,7 @@ const ModifierDevis = () => {
     dispatch(updateCommandeApi(data, modifier, addToast));
     navigate("/devis");
   };
+
   return (
     <div>
       <main id="main" class="main bg-light">

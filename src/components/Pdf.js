@@ -19,7 +19,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
 
   return (
     <div class="container" ref={ref}>
-      <section className="card" style={{marginLeft:40,marginRight:40, marginTop:20}}>
+      <section className="card" style={{marginLeft:50,marginRight:50, marginTop:20}}>
         <div id="invoice-template" className="card-body p-4">
           <div id="invoice-company-details" className="row">
             <div className="col-sm-6 col-12 text-center text-sm-left">

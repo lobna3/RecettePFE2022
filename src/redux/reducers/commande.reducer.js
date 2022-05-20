@@ -8,6 +8,7 @@ import {
   SET_SELECTED_ARTICLE,
   UPDATE_QTE_ARTICLE,
   DELETE_SELECTED_ARTICLE,
+  ADD_SAVED_COMMANDE,
 } from "../actionTypes";
 
 const commandeInitState = {
@@ -15,6 +16,7 @@ const commandeInitState = {
   commandeList: [],
   selectedArticles: [],
   selectedCommande: {},
+  savedCommande: null,
   addCommandeInfo: {
     dateEmission: Date,
     dateEcheance: Date,
@@ -201,6 +203,10 @@ const commandeReducer = (state = commandeInitState, action) => {
 
     case DELETE_COMMANDE:
       return { ...state, loading: true };
+
+    case ADD_SAVED_COMMANDE:
+      console.log("Payload here",payload)
+      return { ...state, savedCommande: payload };
 
     case "SET_SELECTED_ARTICLE":
       return {
