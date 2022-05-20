@@ -1,4 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import { Viewer, Worker } from "@react-pdf-viewer/core";
+import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
+import { useSelector } from "react-redux";
+import "@react-pdf-viewer/core/lib/styles/index.css";
+import "@react-pdf-viewer/default-layout/lib/styles/index.css";
+import { BASE_URL } from "../../utils/apiHelpers";
 import { PaiementHeader } from "../RacetteHeader";
 import { Row, Col, Card, Typography, DatePicker, Button } from "antd";
 import {
@@ -13,6 +19,8 @@ import { Link } from "react-router-dom";
 const { Text , Title } = Typography;
 const { Meta } = Card;
 const Paiement = () => {
+  const defaultLayoutPluginInstance = defaultLayoutPlugin();
+  const { savedCommande } = useSelector((state) => state.commande);
   return (
     <main id="main" className="main bg-light">
       <PaiementHeader />
@@ -219,6 +227,25 @@ const Paiement = () => {
               Pour trouver une facture <Link to="/"> Cliquer ici.</Link>
             </Text>
             <p></p>
+            <div>
+              {savedCommande && (
+                <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.12.313/build/pdf.worker.js">
+                  <div
+                    style={{
+                      height: "100%",
+                      width: "100%",
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                    }}
+                  >
+                    <Viewer
+                      fileUrl={`${BASE_URL}/${savedCommande.documentUrl}`}
+                      plugins={[defaultLayoutPluginInstance]}
+                    />
+                  </div>
+                </Worker>
+              )}
+            </div>
             <Button
               type="dashed"
               icon={

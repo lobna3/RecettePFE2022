@@ -81,7 +81,7 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
     <Modal
       className="modalStyle"
       visible={isOpen}
-      width={1500}
+      width={1200}
       onCancel={handleClose}
       title={
         <div>
