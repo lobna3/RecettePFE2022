@@ -141,7 +141,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
             <div class="row">
             
               <div class="col-sm-7 col-12 text-center text-sm-left">
-  {/* <p class="lead d-flex">Méthodes de payement:</p>
+               <p class="lead d-flex">Méthodes de payement:</p>
                 <div class="row">
                   <div class="col-sm-8">
                     <div class="table-responsive">
@@ -167,7 +167,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
                       </table>
                     </div>
                   </div>
-                </div> */}
+                </div> 
                
               </div>
               <div class="col-sm-5 col-12">

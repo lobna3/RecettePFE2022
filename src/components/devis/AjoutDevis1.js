@@ -41,8 +41,8 @@ export default function AjoutDevis1() {
   const [isOpenListe, setIsOpenListe] = useState(false);
   const [componentSize] = useState("default");
   const { addToast } = useToasts();
-  const navigate = useNavigate();
-  // const { addCommandeInfo } = useSelector((state) => state.commande);
+  //const navigate = useNavigate();
+  const { addCommandeInfo } = useSelector((state) => state.commande);
   const { clientList } = useSelector((state) => state.client);
   const { selectedArticles } = useSelector((state) => state.commande);
   const dispatch = useDispatch();
@@ -98,6 +98,7 @@ export default function AjoutDevis1() {
       dateP: Date,
       montantP: "20000",
     },
+  
   });
 
   const calculateValues = () => {
@@ -107,15 +108,13 @@ export default function AjoutDevis1() {
     selectedArticles.forEach((article) => {
       console.log("article", article);
       totalPrix = totalPrix + article.qte * Number(article.pu);
-      initTotal =  totalPrix;
+      initTotal = totalPrix;
       if (article.taxe != "") {
         totalTaxe = totalTaxe + (Number(article.taxe) * article.prix) / 100;
       }
       console.log("prix", totalPrix);
       setValue("prix", totalPrix);
     });
-
-   
 
     console.log("Total", initTotal);
     setValue("total", initTotal);
@@ -130,7 +129,7 @@ export default function AjoutDevis1() {
 
     // setValue("paye", 0);
     //console.log("Solde", initTotal + totalTaxe );
-   // setValue("solde", initTotal + totalTaxe);
+    // setValue("solde", initTotal + totalTaxe);
   };
   const calculateRemise = () => {
     let remise = getValues("remise");
@@ -154,7 +153,33 @@ export default function AjoutDevis1() {
       ...data,
       dateEmission: data.dateEmission.toDate(),
       dateEcheance: data.dateEcheance.toDate(),
+      suivies: [
+        {
+          typeS: data.typeS,
+          titreS: data.titreS,
+          descriptionS: data.descriptionS,
+        },
+      ],
+      paiements: [
+        {
+          soldeP: data.soldeP,
+          typePaiement: data.typePaiement,
+          regPaiement: data.regPaiement,
+          etatP: data.etatP,
+          reste: data.reste,
+          avance: data.avance,
+          mis: data.mis,
+          nCarte: data.nCarte,
+          ccv: data.ccv,
+          dateP: Date,
+          montantP: data.montantP,
+        },
+      ],
+      
     };
+
+   
+   
     // let {
     //   dateEmission,
     //   dateEcheance,
@@ -235,13 +260,16 @@ export default function AjoutDevis1() {
     //   montantP,
     // };
     // let { articles } = addCommandeInfo;
-    // let { suivies } = addCommandeInfo;
-    // let { paiements } = addCommandeInfo;
+   // let { suivies } = addCommandeInfo;
+    //let { paiements } = addCommandeInfo;
 
     dispatch(
       addCommandetApi(
         {
+          
           commande: body,
+          suivies: body.suivies,
+          paiements:body.paiements,
           articles: selectedArticles.map((elm) => {
             delete elm.key;
             delete elm._id;
@@ -822,7 +850,7 @@ export default function AjoutDevis1() {
               className="btn btn-primary "
               style={{ marginBottom: 20 }}
             >
-            Créer Devis
+              Créer Devis
             </button>
           </form>
         </Row>
