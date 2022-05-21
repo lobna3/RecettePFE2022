@@ -64,6 +64,7 @@ const ModifierDevis = () => {
   const [adresseLivraison, setAdresseLivraison] = useState("");
   const [etat, setEtat] = useState("");
   const [client, setClient] = useState("");
+  const [prix, setPrix]=useState("");
 
   const dispatch = useDispatch();
 
@@ -83,32 +84,32 @@ const ModifierDevis = () => {
         totalTaxe = totalTaxe + (Number(article.taxe) * article.prix) / 100;
       }
       console.log("prix", totalPrix);
-      //setValue("prix", totalPrix);
+     setPrix( totalPrix);
     });
 
     console.log("Total", initTotal);
-    //setValue("total", initTotal);
+    setTotal(initTotal);
 
-   //// setValue("remise", 0);
+    setRemise(remise);
 
     console.log("Taxes", totalTaxe);
-    //setValue("taxes", totalTaxe);
+    setTaxes( totalTaxe);
 
     console.log("TotalTTc", totalTaxe + initTotal);
-    //setValue("totalTtc", totalTaxe + initTotal);
+    setTotalTtc( totalTaxe + initTotal);
 
     // setValue("paye", 0);
     //console.log("Solde", initTotal + totalTaxe );
     // setValue("solde", initTotal + totalTaxe);
   };
   const calculateRemise = () => {
-    let remise = remiseVal;
-    let totalValue = total;
-    let totalTaxe = taxes;
-    let paye = 0;
-    let remiseVal = (remise * totalValue) / 100;
-    setTotalTtc(totalValue - remiseVal + totalTaxe);
-    setSolde(totalValue - remiseVal + totalTaxe - paye);
+    let remise1 =(remise);
+    let totalValue =(total);
+    let totalTaxe = (taxes);
+    let paye1 = (paye);
+    let remiseVal = (remise1 * totalValue) / 100;
+    setTotalTtc( totalValue - remiseVal + totalTaxe);
+    setSolde( totalValue - remiseVal + totalTaxe - paye1);
   };
   useEffect(() => {
     dispatch(getClientListApi());
@@ -135,7 +136,12 @@ const ModifierDevis = () => {
     console.log("Selected Commande", selectedCommande);
     console.log("URL", location.pathname);
     calculateValues();
+    //calculateRemise();
   }, [selectedCommande, selectedArticles]);
+  useMemo(() => {
+    calculateRemise();
+  }, [(remise)]);
+ 
   const confirmAdd = () => {
     let data = {
       dateEmission,
@@ -531,7 +537,7 @@ const ModifierDevis = () => {
                       </Form.Item>
 
                       <Form.Item
-                        label="Rmise"
+                        label="Remise"
                         wrapperCol={{
                           span: 16,
                         }}
@@ -679,7 +685,7 @@ const ModifierDevis = () => {
                         Tax: <Text strong>{taxes} TND</Text>
                       </Text>
                       <Text style={{ marginRight: 20 }}>
-                        Total: <Text strong>{total} TND</Text>
+                        Total: <Text strong>{totalTtc} TND</Text>
                       </Text>
                     </Card>
                     <button

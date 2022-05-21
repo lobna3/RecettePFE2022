@@ -45,24 +45,20 @@ export const getSuivieApi = () => async dispatch => {
     }
 };
 
-export const addSuivieApi = (body) => async dispatch => {
+export const addSuivieApi = (data) => async dispatch => {
 
-    try {
-        let config = {
-            headers: {
-                'Authorization': localStorage.getItem('token')
-            }
-        }
-        dispatch(addSuivie());
-        let result = await postApi("ajouter_suivie", body, config);
-        if (result) {
-            dispatch(getSuivieApi());
-        }
-        console.log(result);
+    try { dispatch({
+        type: ADD_SUIVIE
+      });
+       
+        let result = await postApi("ajouter_suivie", data);
+       
+        console.log("result Suivie",result);
     } catch (error) {
         console.log("ERROR", error.message)
     }
 };
+
 
 export const deleteSuivie = (id) => async dispatch => {
     try {

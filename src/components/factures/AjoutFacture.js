@@ -158,6 +158,29 @@ export default function AjoutFacture() {
       ...data,
       dateEmission: data.dateEmission.toDate(),
       dateEcheance: data.dateEcheance.toDate(),
+      suivies: [
+        {
+          typeS: data.typeS,
+          titreS: data.titreS,
+          descriptionS: data.descriptionS,
+        },
+      ],
+      paiements: [
+        {
+          soldeP: data.soldeP,
+          typePaiement: data.typePaiement,
+          regPaiement: data.regPaiement,
+          etatP: data.etatP,
+          reste: data.reste,
+          avance: data.avance,
+          mis: data.mis,
+          nCarte: data.nCarte,
+          ccv: data.ccv,
+          dateP: Date,
+          montantP: data.montantP,
+        },
+      ],
+      
     };
     // let {
     //   dateEmission,
@@ -246,6 +269,8 @@ export default function AjoutFacture() {
       addFacturetApi(
         {
           commande: body,
+          suivies: body.suivies,
+          paiements:body.paiements,
           articles: selectedArticles.map((elm) => {
             delete elm.key;
             delete elm._id;

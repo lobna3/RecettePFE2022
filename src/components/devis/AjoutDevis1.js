@@ -25,7 +25,7 @@ import Articles from "../articles/Articles";
 import "./devis1.css";
 import { useToasts } from "react-toast-notifications";
 import { useDispatch, useSelector } from "react-redux";
-import { addCommandetApi, addStep } from "../../redux/actions/commande.actions";
+import { addCommandetApi} from "../../redux/actions/commande.actions";
 import { getClientListApi } from "../../redux/actions/client.actions";
 import TraitementDevis from "./TraitementDevis";
 import EnvoyerEmail from "./EnvoyerEmail";
@@ -131,6 +131,7 @@ export default function AjoutDevis1() {
     //console.log("Solde", initTotal + totalTaxe );
     // setValue("solde", initTotal + totalTaxe);
   };
+
   const calculateRemise = () => {
     let remise = getValues("remise");
     let totalValue = getValues("total");
@@ -140,13 +141,16 @@ export default function AjoutDevis1() {
     setValue("totalTtc", totalValue - remiseVal + totalTaxe);
     setValue("solde", totalValue - remiseVal + totalTaxe - paye);
   };
+
   useEffect(() => {
     dispatch(getClientListApi());
     calculateValues();
   }, [selectedArticles]);
+
   useMemo(() => {
     calculateRemise();
   }, [watch("remise")]);
+
   const onSubmit = (data) => {
     console.log("Devis Data", data);
     let body = {
