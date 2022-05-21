@@ -31,20 +31,20 @@ const DetailDevis = () => {
     console.log("URL", location.pathname);
   }, []);
 
-  const displayIcon = (descriptionS) => {
-    if (descriptionS === "Commande créer") {
+  const displayIcon = (typeS) => {
+    if (typeS === "Commande créer") {
       return (
-        <>
+       
           <FormOutlined style={{ fontSize: "24px", color: "#ffff" }} />
-        </>
+      
       );
-    } else if (descriptionS === "La commande vu par") {
+    } else if (typeS === "La commande vu par") {
       return <EyeOutlined style={{ fontSize: "24px", color: "#ffff" }} />;
-    } else if (descriptionS === "La commande livré avec succées") {
+    } else if (typeS === "La commande livré avec succées") {
       return (
         <DollarCircleOutlined style={{ fontSize: "24px", color: "#ffff" }} />
       );
-    } else if (descriptionS === "La commande a été modifié ") {
+    } else if (typeS === "La commande a été modifié ") {
       return <SyncOutlined style={{ fontSize: "24px", color: "#ffff" }} />;
     } else {
       return <FormOutlined style={{ fontSize: "24px", color: "#ffff" }} />;
@@ -247,7 +247,7 @@ const DetailDevis = () => {
                 size="small"
                 style={{
                   width: 800,
-                  height: 300,
+                 // height: 300,
                   marginLeft: 50,
                   marginBottom: 40,
                   borderWidth: 1,
@@ -275,9 +275,10 @@ const DetailDevis = () => {
                             style={{ backgroundColor: "#95de64", width: 1 }}
                             className="rounded-circle"
                           >
-                            {displayIcon(elm.descriptionS)}
+                            {displayIcon(elm.typeS)}
                           </td>
                           <td className="text-muted d-flex">
+                            {elm.typeS}
                             {elm.descriptionS}
                             {elm.titreS}
                           </td>

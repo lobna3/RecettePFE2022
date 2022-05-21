@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateCommandeApi } from "../../redux/actions/commande.actions";
-import { useToasts } from "react-toast-notifications";
-import { Modal, DatePicker, Form, Select } from "antd";
-import { useForm, Controller, get } from "react-hook-form";
+import { Modal,  Form, Select } from "antd";
+import { useForm, Controller} from "react-hook-form";
 import { getCommandeListApi } from "../../redux/actions/commande.actions";
 import { addSuivieApi } from "../../redux/actions/suivie.actions";
-import moment from "moment";
+import {
+   
+    FormOutlined,
+  
+  } from "@ant-design/icons";
 import "../../components/clients/modal.css";
 
 const SuivieCommande = ({ isOpen, handleClose }) => {
-  const { addToast } = useToasts();
   const dispatch = useDispatch();
   const { commandeList } = useSelector((state) => state.commande);
   const {
@@ -18,7 +19,7 @@ const SuivieCommande = ({ isOpen, handleClose }) => {
     control,
   } = useForm({
     defaultValues: {
-      typeS: "",
+      typeS: "La commande vu par",
       titreS: "",
       descriptionS: "",
       commande: "6287b5d6afa37ef9b6818c18",
@@ -35,6 +36,7 @@ const SuivieCommande = ({ isOpen, handleClose }) => {
     };
 
     dispatch(addSuivieApi(body));
+    handleClose();
   };
 
   return (
@@ -46,7 +48,7 @@ const SuivieCommande = ({ isOpen, handleClose }) => {
       title={
         <div>
           <h6 className="text-white">
-            {/* <FileDoneOutlined style={{ fontSize: "24px", color: "" }} />*/}
+             <FormOutlined style={{ fontSize: "24px", color: "" }} />{" "}
             Ajouter un suivie
           </h6>
         </div>
@@ -60,19 +62,32 @@ const SuivieCommande = ({ isOpen, handleClose }) => {
         <div className="row">
           <div className="col-md-12">
             <div className="form-group">
-              <label>TypeSuivie:</label>
               <Controller
-                name="typeS"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <input
-                    {...field}
-                    type="text"
-                    className="form-control"
-                  ></input>
-                )}
-              />
+                        name="typeS"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                          <Form.Item
+                            label="TypeSuivie:"
+                           
+                          >
+                            <Select {...field}>
+                              <Select.Option value={"La commande vu par"}>
+                              La commande vu par
+                              </Select.Option>
+                              <Select.Option
+                                value={"La commande livré avec succées"}
+                              ></Select.Option>
+                              <Select.Option
+                                value={"La commande a été modifié"}
+                              ></Select.Option>
+                              <Select.Option
+                                value={"Commande créer"}
+                              ></Select.Option>
+                            </Select>
+                          </Form.Item>
+                        )}
+                      />
             </div>
           </div>
           <div className="col-md-12">
@@ -126,8 +141,8 @@ const SuivieCommande = ({ isOpen, handleClose }) => {
                     >
                       <Select.Option>Selectionner une commande</Select.Option>
                       {commandeList.map((elm) => (
-                        <Select.Option value={elm._id}>
-                          {elm._id} {elm.nFacture}
+                        <Select.Option value={elm._id}>{elm.status}: {" "}
+                          {elm._id}  
                         </Select.Option>
                       ))}
                     </Select>
@@ -154,7 +169,7 @@ const SuivieCommande = ({ isOpen, handleClose }) => {
             >
               Annuler
             </button>
-            <input type="submit" className="btn btn-primary" />
+            <input type="submit" className="btn btn-primary" style={{ marginTop: 10 }} />
           </div>
         </div>
       </form>
