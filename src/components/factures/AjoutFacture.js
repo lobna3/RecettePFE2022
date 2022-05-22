@@ -99,7 +99,7 @@ export default function AjoutFacture() {
       mis: "2",
       nCarte: "123456789",
       ccv: "2",
-      dateP: Date,
+      dateP: "MMAA",
       montantP: "20000",
     },
   });
@@ -176,7 +176,7 @@ export default function AjoutFacture() {
           mis: data.mis,
           nCarte: data.nCarte,
           ccv: data.ccv,
-          dateP: Date,
+          dateP: data.dateP,
           montantP: data.montantP,
         },
       ],

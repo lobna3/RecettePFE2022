@@ -1,21 +1,41 @@
-import React, { useState } from "react";
-import { Modal, Steps, Button, Collapse, Input, Radio, Space } from "antd";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  Modal,
+  Steps,
+  Button,
+  Collapse,
+  Input,
+  Radio,
+  Space,
+  Select,
+  Form,
+} from "antd";
 import "../../components/clients/modal.css";
-import { MailOutlined } from "@ant-design/icons";
-
+import {
+  MailOutlined,
+  DollarCircleOutlined,
+  LaptopOutlined,
+  CreditCardOutlined,
+  EuroOutlined,
+} from "@ant-design/icons";
+import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
+import { addPaiementApi } from "../../redux/actions/paiement.actions";
+import { useForm, Controller } from "react-hook-form";
+import { useToasts } from "react-toast-notifications";
 import { Viewer, Worker } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
-
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { BASE_URL } from "../../utils/apiHelpers";
-import { useSelector } from "react-redux";
 
 const { Step } = Steps;
 
 const TraitementFacture = ({ isOpen, handleClose }) => {
+  const { addToast } = useToasts();
   const [mailSent, setMailSent] = useState(false);
   const [payed, setPayed] = useState(false);
+  const [value1, setValue1] = useState(false);
   const paymentSTeps = [
     {
       title: "envoi facture",
@@ -68,6 +88,7 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
   const { Panel } = Collapse;
   const [selectedStep, setSelectedStep] = useState(0);
   const [value, setValue] = useState(["TOTAL"]);
+  const dispatch = useDispatch();
   const handleMailSent = () => {
     setMailSent(true);
     console.log("Mail sent");
@@ -77,6 +98,30 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
+  const { handleSubmit, control } = useForm({
+    defaultValues: {
+      soldeP: "",
+      typePaiement: "chéque",
+      regPaiement: "carte",
+      etatP: "non payé",
+      reste: "",
+      avance: "",
+      mis: "",
+      nCarte: "",
+      ccv: "",
+      dateP: "",
+      montantP: "",
+      commande: "6287b5d6afa37ef9b6818c18",
+    },
+  });
+  const onSubmit = (data) => {
+    console.log("Paiements Data", data);
+    let body = {
+      ...data,
+    };
+
+    dispatch(addPaiementApi(body));
+  };
   return (
     <Modal
       className="modalStyle"
@@ -85,7 +130,9 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
       onCancel={handleClose}
       title={
         <div>
-          <h6 className="text-white">Traitement facture</h6>
+          <h6 className="text-white">
+            Traitement facture: {savedCommande._id}
+          </h6>
         </div>
       }
       onOK={() => {
@@ -95,26 +142,44 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
     >
       <div className="row">
         <div className="col-md-6">
-          <div className="card">
-            <div className="card-body">
-              <h6>NFacture:</h6>
-              <p>Vous devez envoyer le facture pour passer au paiement</p>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  flexWrap: "nowrap",
-                  width: "100%",
-                  height: "100%",
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="card">
+              <div className="card-body">
+                <h6>NFacture: {savedCommande.nFacture}</h6>
+                <Controller
+                  name="commande"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <Form.Item label="Commande">
+                      <Select {...field}>
+                        <Select.Option>Selectionner une commande</Select.Option>
+                        <Select.Option value={savedCommande._id}>
+                          {savedCommande.status} {savedCommande._id}
+                        </Select.Option>
+                      </Select>
+                    </Form.Item>
+                  )}
+                />
+                <p className="alert alert-primary">
+                  Vous devez envoyer la facture pour passer au paiement
+                </p>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    flexWrap: "nowrap",
+                    width: "100%",
+                    height: "100%",
 
-                  flexDirection: "row",
-                  position: "relative",
-                  minHeight: 350,
-                  flex: 1,
-                }}
-              >
-                {/* <Steps
+                    flexDirection: "row",
+                    position: "relative",
+                    minHeight: 350,
+                    flex: 1,
+                  }}
+                >
+                  {/* <Steps
                   current={selectedStep}
                   direction="vertical"
                   style={{ maxWidth: "250px" }}
@@ -123,7 +188,7 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
                     <Step key={item.title} title={item.title} />
                   ))}
                 </Steps> */}
-                {/* <div
+                  {/* <div
                   style={{
                     backgroundColor: "blue",
                     height: 100,
@@ -135,101 +200,138 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
                 >
                   {paymentSTeps[selectedStep].content({ handleMailSent })}
                 </div> */}
-                <div
-                  style={{
-                    minWidth: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    flexDirection: "column",
-                  }}
-                >
-                  {" "}
-                  <Button
-                    block
-                    style={{ marginBottom: 10, height: 100 }}
-                    onClick={() => {
-                      handleMailSent();
-                    }}
-                  >
-                    <MailOutlined
-                      style={{
-                        fontSize: "42px",
-                        color: "#1890ff",
-                      }}
-                    />
-                    <br />
-                    <span className="text-primary">Envoyer par mail</span>{" "}
-                    <br />
-                    <span className="text-muted">
-                      Envoyer votre facture Par Mail
-                    </span>
-                  </Button>
                   <div
                     style={{
-                      // border: "solid 1px gray",
-                      width: "30%",
-                      minHeight: 100,
-                      borderRadius: 10,
+                      minWidth: "100%",
                       display: "flex",
                       justifyContent: "center",
+                      alignItems: "center",
                       flexDirection: "column",
-                      gap: 20,
                     }}
                   >
-                    <Input
-                      style={{ borderRadius: "10px", border: "solid 1px blue" }}
-                    />
+                    {" "}
+                    <Button
+                      block
+                      style={{
+                        marginBottom: 10,
+                        height: 100,
+                        borderRadius: "10px",
+                      }}
+                      onClick={() => {
+                        handleMailSent();
+                      }}
+                    >
+                      <MailOutlined
+                        style={{
+                          fontSize: "42px",
+                          color: "#1890ff",
+                        }}
+                      />
+                      <br />
+                      <span className="text-primary">
+                        Envoyer par mail
+                      </span>{" "}
+                      <br />
+                      <span className="text-muted">
+                        Envoyer votre facture Par Mail
+                      </span>
+                    </Button>
+                    <p></p>
                     <div
                       style={{
+                        // border: "solid 1px gray",
+                        width: "40%",
+                        minHeight: 100,
+                        borderRadius: 10,
+                        display: "flex",
+                        justifyContent: "center",
+                        flexDirection: "column",
+                        gap: 20,
+                      }}
+                    >
+                      {/* <p>Vous devez payé,</p>*/}
+                      <Controller
+                        name="soldeP"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => <Input {...field}
+                        placeholder="1250.00 TND"
+                        className="text-center"
+                        style={{ borderRadius: "10px" }}
+                      />}
+                      />
+                     
+                      {/*<p>choisir votre type de paiement,</p>*/}
+                      <div
+                        className="card"
+                        style={{
+                          borderRadius: "10px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          flexDirection: "column",
+                          padding: "0.7em",
+                        }}
+                      >
+                        <Radio.Group onChange={onChange} value={value}>
+                          <Space direction="vertical">
+                            <Radio value={"TOTAL"}>Totalité</Radio>
+                            <Radio value={"AVANCE"}>Avance</Radio>
+                          </Space>
+                        </Radio.Group>
+                        {value == "AVANCE" && (
+                          <>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                marginLeft: "20",
+                              }}
+                            >
+                              <span
+                                className="text-primary"
+                                style={{ marginLeft: 40 }}
+                              >
+                                Avance:
+                              </span>
+                              <Input
+                                style={{ marginLeft: 10, borderRadius: "10px" }}
+                                placeholder="500.00TND"
+                              />
+                            </div>
+                            <p></p>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                              }}
+                            >
+                              <span
+                                className="text-primary"
+                                style={{ marginLeft: 40 }}
+                              >
+                                Reste:
+                              </span>
+                              <Input
+                                style={{ marginLeft: 20, borderRadius: "10px" }}
+                                placeholder="750.00TND"
+                              />
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                    <div
+                      className="card"
+                      style={{
                         borderRadius: "10px",
-                        border: "solid 1px blue",
+                        minWidth: "100%",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
                         flexDirection: "column",
-                        padding: "0.7em",
-                      }}
-                    >
-                      <Radio.Group onChange={onChange} value={value}>
-                        <Space direction="vertical">
-                          <Radio value={"TOTAL"}>Totalité</Radio>
-                          <Radio value={"AVANCE"}>Avance</Radio>
-                        </Space>
-                      </Radio.Group>
-                      {value == "AVANCE" && (
-                        <>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              alignItems: "center",
-                            }}
-                          >
-                            <span>Avance</span> <Input />
-                          </div>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              alignItems: "center",
-                            }}
-                          >
-                            <span>Reste</span> <Input />
-                          </div>
-                        </>
-                      )}
-                    </div>
-                    <div
-                      style={{
-                        borderRadius: "10px",
-                        border: "solid 1px blue",
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        alignItems: "center",
-                        flexDirection: "column",
-                        padding: "0.7em",
-                        width: "100%",
                       }}
                     >
                       <button
@@ -238,12 +340,12 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
                         }}
                         style={{
                           width: "100%",
-                          height: "10%",
+                          height: 100,
                           backgroundColor: "transparent",
                           borderColor: "transparent",
                         }}
                       >
-                        <MailOutlined
+                        <DollarCircleOutlined
                           style={{
                             fontSize: "42px",
                             color: "#1890ff",
@@ -251,19 +353,228 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
                         />
                         <br />
                         <span className="text-primary">
-                          PAYER PAR CARTE BANCAIRE
+                          Réglé votre paiement par
                         </span>{" "}
                         <br />
                         <span className="text-muted">
-                          Envoyer votre facture Par Mail
+                          Vous pouvez choisir plusieures méthodes de paiements
                         </span>
                       </button>
                       {payed && (
                         <>
                           <ul>
-                            <li>Payment method 1</li>
-                            <li>Payment method 1</li>
-                            <li>Payment method 1</li>
+                            <li
+                              className="card"
+                              style={{
+                                borderRadius: 10,
+                                display: "flex",
+                                marginRight: "60px",
+                                justifyContent: "center",
+                                gap: 20,
+                              }}
+                            >
+                              <div
+                                className="card-body"
+                                style={{ marginRight: "40" }}
+                              >
+                                <div className="row">
+                                  <div className="col-md-4">
+                                    <div className="form-group row">
+                                      <label style={{ marginLeft: 40 }}>
+                                        Mis:
+                                      </label>
+                                      <input
+                                        type="text"
+                                        className="form-control"
+                                        style={{
+                                          marginLeft: "40px",
+                                          borderRadius: "10px",
+                                        }}
+                                        placeholder="250.000TND"
+                                      />
+                                    </div>
+                                  </div>
+
+                                  <div className="col-md-4">
+                                    <div className="form-group row">
+                                      <label style={{ marginLeft: 100 }}>
+                                        Reste:
+                                      </label>
+                                      <input
+                                        type="text"
+                                        className="form-control"
+                                        style={{
+                                          marginLeft: "100px",
+                                          borderRadius: "10px",
+                                        }}
+                                        placeholder="250.000TND"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                            <li
+                              className="card"
+                              style={{
+                                display: "flex",
+                                marginRight: "60px",
+                                justifyContent: "center",
+                                gap: 20,
+                              }}
+                            >
+                              <div
+                                class="form-check"
+                                style={{
+                                  marginLeft: 20,
+                                  marginTop: 10,
+                                  marginBottom: 10,
+                                }}
+                                value=""
+                                onClick={() => {
+                                  setValue1(!value1);
+                                }}
+                              >
+                                <input
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  value={"Carte"}
+                                  id="flexCheckDefault"
+                                />
+                                <label
+                                  class="form-check-label"
+                                  for="flexCheckDefault"
+                                >
+                                  <CreditCardOutlined
+                                    style={{
+                                      fontSize: "24px",
+                                      color: "#1890ff",
+                                    }}
+                                  />{" "}
+                                  Carte Bancaire
+                                </label>
+                              </div>
+                              {value1 && (
+                                <>
+                                  {" "}
+                                  <div
+                                    className="row"
+                                    style={{
+                                      marginLeft: 20,
+                                      marginBottom: 20,
+                                      gap: 10,
+                                    }}
+                                  >
+                                    <div className="row">
+                                      <div className="col-md-8">
+                                        <input
+                                          type="text"
+                                          className="form-control"
+                                          placeholder="Numéro de carte"
+                                        />
+                                      </div>
+                                      <div className="col-md-4">
+                                        <input
+                                          type="text"
+                                          className="form-control"
+                                          placeholder="CCV"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="row">
+                                      <div className="col-md-5">
+                                        <input
+                                          type="text"
+                                          className="form-control"
+                                          placeholder="MM/AA"
+                                        />
+                                      </div>
+                                      <div className="col-md-5">
+                                        <input
+                                          type="text"
+                                          className="form-control"
+                                          placeholder="250"
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </>
+                              )}
+                            </li>
+                            <li
+                              className="card"
+                              style={{
+                                display: "flex",
+                                marginRight: "60px",
+                                justifyContent: "center",
+                                gap: 20,
+                              }}
+                            >
+                              <div
+                                class="form-check"
+                                style={{
+                                  marginLeft: 20,
+                                  marginTop: 10,
+                                  marginBottom: 10,
+                                }}
+                              >
+                                <input
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  value=""
+                                  id="flexCheckDefault"
+                                />
+                                <label
+                                  class="form-check-label"
+                                  for="flexCheckDefault"
+                                >
+                                  <LaptopOutlined
+                                    style={{
+                                      fontSize: "24px",
+                                      color: "#1890ff",
+                                    }}
+                                  />{" "}
+                                  Paiement en ligne
+                                </label>
+                              </div>
+                            </li>
+                            <li
+                              className="card"
+                              style={{
+                                display: "flex",
+                                marginRight: "60px",
+                                justifyContent: "center",
+                                gap: 20,
+                              }}
+                            >
+                              <div
+                                class="form-check"
+                                style={{
+                                  marginLeft: 20,
+                                  marginTop: 10,
+                                  marginBottom: 10,
+                                }}
+                              >
+                                <input
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  value=""
+                                  id="flexCheckDefault"
+                                />
+                                <label
+                                  class="form-check-label"
+                                  for="flexCheckDefault"
+                                >
+                                  <EuroOutlined
+                                    style={{
+                                      fontSize: "24px",
+                                      color: "#1890ff",
+                                    }}
+                                  />{" "}
+                                  Espéces
+                                </label>
+                              </div>
+                            </li>
                           </ul>
                         </>
                       )}
@@ -272,8 +583,14 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
                 </div>
               </div>
             </div>
-          </div>
+            <input
+              type="submit"
+              className="btn btn-primary"
+              style={{ marginTop: 10 }}
+            />
+          </form>
         </div>
+
         <div className="col-md-6">
           <div className="card">
             {/* <h1>Facture</h1> */}

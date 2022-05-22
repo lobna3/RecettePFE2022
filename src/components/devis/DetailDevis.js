@@ -39,15 +39,16 @@ const DetailDevis = () => {
       
       );
     } else if (typeS === "La commande vu par") {
-      return <EyeOutlined style={{ fontSize: "24px", color: "#ffff" }} />;
+
+      return(<EyeOutlined style={{ fontSize: "24px", color: "#ffff" }} />) ;
     } else if (typeS === "La commande livré avec succées") {
       return (
         <DollarCircleOutlined style={{ fontSize: "24px", color: "#ffff" }} />
       );
     } else if (typeS === "La commande a été modifié ") {
-      return <SyncOutlined style={{ fontSize: "24px", color: "#ffff" }} />;
+      return (<SyncOutlined style={{ fontSize: "24px", color: "#ffff" }} />);
     } else {
-      return <FormOutlined style={{ fontSize: "24px", color: "#ffff" }} />;
+      return (<FormOutlined style={{ fontSize: "24px", color: "#ffff" }} />);
     }
   };
 

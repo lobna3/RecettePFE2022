@@ -1,4 +1,4 @@
-import { ADD_PAIEMENT, GET_PAIEMENT_LIST, GET_PAIEMENT_LIST_SUCCESS, UPDATE_PAIEMENT} from '../actionTypes'
+import { ADD_PAIEMENT,  GET_PAIEMENT_LIST, GET_PAIEMENT_LIST_SUCCESS, UPDATE_PAIEMENT} from '../actionTypes'
 import { getApi, postApi, deleteApi, updateApi } from '../../utils/apiHelpers'
 
 export const addPaiement = () => {
@@ -45,19 +45,17 @@ export const getPaiementApi = () => async dispatch => {
     }
 };
 
-export const addPaiementApi = (body) => async dispatch => {
+export const addPaiementApi = (data) => async dispatch => {
 
-    try {
-        let config = {
-            headers: {
-                'Authorization': localStorage.getItem('token')
-            }
-        }
-        dispatch(addPaiement());
-        let result = await postApi("ajouter_paiement", body, config);
-        if (result) {
-            dispatch(getPaiementApi());
-        }
+    try { 
+        dispatch({
+        type: ADD_PAIEMENT
+      });
+       
+        let result = await postApi("ajouter_paiement", data);
+      
+        console.log("ADD Paiements", result)
+     
         console.log(result);
     } catch (error) {
         console.log("ERROR", error.message)
