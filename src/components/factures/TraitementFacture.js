@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Modal,
@@ -19,10 +19,8 @@ import {
   CreditCardOutlined,
   EuroOutlined,
 } from "@ant-design/icons";
-import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import { addPaiementApi } from "../../redux/actions/paiement.actions";
 import { useForm, Controller } from "react-hook-form";
-import { useToasts } from "react-toast-notifications";
 import { Viewer, Worker } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import "@react-pdf-viewer/core/lib/styles/index.css";
@@ -32,7 +30,6 @@ import { BASE_URL } from "../../utils/apiHelpers";
 const { Step } = Steps;
 
 const TraitementFacture = ({ isOpen, handleClose }) => {
-  const { addToast } = useToasts();
   const [mailSent, setMailSent] = useState(false);
   const [payed, setPayed] = useState(false);
   const [value1, setValue1] = useState(false);
@@ -98,11 +95,15 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
-  const { handleSubmit, control } = useForm({
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       soldeP: "",
-      typePaiement: "chéque",
-      regPaiement: "carte",
+      typePaiement: "TOTAL",
+      regPaiement: "carte bancaire",
       etatP: "non payé",
       reste: "",
       avance: "",
@@ -130,9 +131,7 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
       onCancel={handleClose}
       title={
         <div>
-          <h6 className="text-white">
-            Traitement facture: {savedCommande._id}
-          </h6>
+          <h6 className="text-white">Traitement facture</h6>
         </div>
       }
       onOK={() => {
@@ -145,7 +144,7 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="card">
               <div className="card-body">
-                <h6>NFacture: {savedCommande.nFacture}</h6>
+                {/*<h6>NFacture: {savedCommande.nFacture}</h6> */}
                 <Controller
                   name="commande"
                   control={control}
@@ -254,13 +253,16 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
                         name="soldeP"
                         control={control}
                         rules={{ required: true }}
-                        render={({ field }) => <Input {...field}
-                        placeholder="1250.00 TND"
-                        className="text-center"
-                        style={{ borderRadius: "10px" }}
-                      />}
+                        render={({ field }) => (
+                          <Input
+                            {...field}
+                            placeholder="1250.00 TND"
+                            className="text-center"
+                            style={{ borderRadius: "10px" }}
+                          />
+                        )}
                       />
-                     
+
                       {/*<p>choisir votre type de paiement,</p>*/}
                       <div
                         className="card"
@@ -273,12 +275,24 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
                           padding: "0.7em",
                         }}
                       >
-                        <Radio.Group onChange={onChange} value={value}>
-                          <Space direction="vertical">
-                            <Radio value={"TOTAL"}>Totalité</Radio>
-                            <Radio value={"AVANCE"}>Avance</Radio>
-                          </Space>
-                        </Radio.Group>
+                        <Controller
+                          name="typePaiement"
+                          control={control}
+                          rules={{ required: true }}
+                          render={({ field }) => (
+                            <Radio.Group
+                              {...field}
+                              onChange={onChange}
+                              value={value}
+                            >
+                              <Space direction="vertical">
+                                <Radio value={"TOTAL"}>Totalité</Radio>
+                                <Radio value={"AVANCE"}>Avance</Radio>
+                              </Space>
+                            </Radio.Group>
+                          )}
+                        />
+
                         {value == "AVANCE" && (
                           <>
                             <div
@@ -295,9 +309,20 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
                               >
                                 Avance:
                               </span>
-                              <Input
-                                style={{ marginLeft: 10, borderRadius: "10px" }}
-                                placeholder="500.00TND"
+                              <Controller
+                                name="avance"
+                                control={control}
+                                rules={{ required: false }}
+                                render={({ field }) => (
+                                  <Input
+                                    {...field}
+                                    style={{
+                                      marginLeft: 10,
+                                      borderRadius: "10px",
+                                    }}
+                                    placeholder="500.00TND"
+                                  />
+                                )}
                               />
                             </div>
                             <p></p>
@@ -314,9 +339,20 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
                               >
                                 Reste:
                               </span>
-                              <Input
-                                style={{ marginLeft: 20, borderRadius: "10px" }}
-                                placeholder="750.00TND"
+                              <Controller
+                                name="reste"
+                                control={control}
+                                rules={{ required: false }}
+                                render={({ field }) => (
+                                  <Input
+                                    {...field}
+                                    style={{
+                                      marginLeft: 20,
+                                      borderRadius: "10px",
+                                    }}
+                                    placeholder="750.00TND"
+                                  />
+                                )}
                               />
                             </div>
                           </>
@@ -383,14 +419,22 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
                                       <label style={{ marginLeft: 40 }}>
                                         Mis:
                                       </label>
-                                      <input
-                                        type="text"
-                                        className="form-control"
-                                        style={{
-                                          marginLeft: "40px",
-                                          borderRadius: "10px",
-                                        }}
-                                        placeholder="250.000TND"
+                                      <Controller
+                                        name="mis"
+                                        control={control}
+                                        rules={{ required: false }}
+                                        render={({ field }) => (
+                                          <input
+                                            {...field}
+                                            type="text"
+                                            className="form-control"
+                                            style={{
+                                              marginLeft: "40px",
+                                              borderRadius: "10px",
+                                            }}
+                                            placeholder="250.000TND"
+                                          />
+                                        )}
                                       />
                                     </div>
                                   </div>
@@ -400,14 +444,22 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
                                       <label style={{ marginLeft: 100 }}>
                                         Reste:
                                       </label>
-                                      <input
-                                        type="text"
-                                        className="form-control"
-                                        style={{
-                                          marginLeft: "100px",
-                                          borderRadius: "10px",
-                                        }}
-                                        placeholder="250.000TND"
+                                      <Controller
+                                        name="reste"
+                                        control={control}
+                                        rules={{ required: false }}
+                                        render={({ field }) => (
+                                          <input
+                                            {...field}
+                                            type="text"
+                                            className="form-control"
+                                            style={{
+                                              marginLeft: "100px",
+                                              borderRadius: "10px",
+                                            }}
+                                            placeholder="250.000TND"
+                                          />
+                                        )}
                                       />
                                     </div>
                                   </div>
@@ -422,38 +474,46 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
                                 justifyContent: "center",
                                 gap: 20,
                               }}
+                              onClick={() => {
+                                setValue1(!value1);
+                              }}
                             >
-                              <div
-                                class="form-check"
-                                style={{
-                                  marginLeft: 20,
-                                  marginTop: 10,
-                                  marginBottom: 10,
-                                }}
-                                value=""
-                                onClick={() => {
-                                  setValue1(!value1);
-                                }}
-                              >
-                                <input
-                                  class="form-check-input"
-                                  type="checkbox"
-                                  value={"Carte"}
-                                  id="flexCheckDefault"
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="flexCheckDefault"
-                                >
-                                  <CreditCardOutlined
+                              <Controller
+                                name="regPaiement"
+                                control={control}
+                                rules={{ required: false }}
+                                render={({ field }) => (
+                                  <div
+                                    {...field}
+                                    class="form-check"
                                     style={{
-                                      fontSize: "24px",
-                                      color: "#1890ff",
+                                      marginLeft: 20,
+                                      marginTop: 10,
+                                      marginBottom: 10,
                                     }}
-                                  />{" "}
-                                  Carte Bancaire
-                                </label>
-                              </div>
+                                  >
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      value={"carte bancaire"}
+                                      id="flexCheckDefault"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="flexCheckDefault"
+                                    >
+                                      <CreditCardOutlined
+                                        style={{
+                                          fontSize: "24px",
+                                          color: "#1890ff",
+                                        }}
+                                      />
+                                      Carte Bancaire
+                                    </label>
+                                  </div>
+                                )}
+                              />
+
                               {value1 && (
                                 <>
                                   {" "}
@@ -467,33 +527,88 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
                                   >
                                     <div className="row">
                                       <div className="col-md-8">
-                                        <input
-                                          type="text"
-                                          className="form-control"
-                                          placeholder="Numéro de carte"
+                                        <Controller
+                                          name="nCarte"
+                                          control={control}
+                                          rules={{
+                                            required: false,
+                                            maxLength: 8,
+                                          }}
+                                          render={({ field }) => (
+                                            <input
+                                              {...field}
+                                              type="text"
+                                              className="form-control"
+                                              placeholder="Numéro de carte"
+                                            />
+                                          )}
                                         />
+                                        <span className="text-danger">
+                                          {" "}
+                                          {errors.nCarte &&
+                                            "Numéro de carte doit contenir seulement 8 chiffres"}
+                                        </span>
                                       </div>
                                       <div className="col-md-4">
-                                        <input
-                                          type="text"
-                                          className="form-control"
-                                          placeholder="CCV"
+                                        <Controller
+                                          name="ccv"
+                                          control={control}
+                                          rules={{
+                                            required: false,
+                                            maxLength: 3,
+                                          }}
+                                          render={({ field }) => (
+                                            <input
+                                              {...field}
+                                              type="text"
+                                              className="form-control"
+                                              placeholder="CCV"
+                                            />
+                                          )}
                                         />
+                                        <span className="text-danger">
+                                          {errors.cvv &&
+                                            "CVV doit contenir seulement 3 chiffres"}
+                                        </span>
                                       </div>
                                     </div>
                                     <div className="row">
                                       <div className="col-md-5">
-                                        <input
-                                          type="text"
-                                          className="form-control"
-                                          placeholder="MM/AA"
+                                        <Controller
+                                          name="dateP"
+                                          control={control}
+                                          rules={{
+                                            required: false,
+                                            maxLength: 5,
+                                          }}
+                                          render={({ field }) => (
+                                            <input
+                                              {...field}
+                                              type="text"
+                                              className="form-control"
+                                              placeholder="MM/AA"
+                                            />
+                                          )}
                                         />
+                                        <span className="text-danger">
+                                          {" "}
+                                          {errors.dateP &&
+                                            "Vous devez respecter la forme MM/AA"}
+                                        </span>
                                       </div>
                                       <div className="col-md-5">
-                                        <input
-                                          type="text"
-                                          className="form-control"
-                                          placeholder="250"
+                                        <Controller
+                                          name="montantP"
+                                          control={control}
+                                          rules={{ required: true }}
+                                          render={({ field }) => (
+                                            <input
+                                              {...field}
+                                              type="text"
+                                              className="form-control"
+                                              placeholder="250"
+                                            />
+                                          )}
                                         />
                                       </div>
                                     </div>
@@ -533,7 +648,7 @@ const TraitementFacture = ({ isOpen, handleClose }) => {
                                       fontSize: "24px",
                                       color: "#1890ff",
                                     }}
-                                  />{" "}
+                                  />
                                   Paiement en ligne
                                 </label>
                               </div>

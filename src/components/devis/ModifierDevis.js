@@ -729,6 +729,8 @@ const ModifierDevis = () => {
   );
 };
 
+/* */
+
 export default ModifierDevis;
 
 /*<form onSubmit={handleSubmit(confirmAdd)}>

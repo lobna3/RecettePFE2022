@@ -95,7 +95,7 @@ export default function AjoutDevis1() {
       mis: "2",
       nCarte: "123456789",
       ccv: "2",
-      dateP: "MMAA",
+      dateP: "12",
       montantP: "20000",
     },
   

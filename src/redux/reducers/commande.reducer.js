@@ -55,7 +55,7 @@ const commandeInitState = {
     mis: "",
     nCarte: "",
     ccv: "",
-    dateP: Date,
+    dateP: "",
     montantP: "",
 
     articles: [],
