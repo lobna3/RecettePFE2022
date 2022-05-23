@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCommandeListApi , updateCommande} from "../../redux/actions/commande.actions";
+import { getCommandeDetails } from "../../redux/actions/commande.details.actions";
 import {  Typography, Table, Space } from "antd";
 import { Dropdown } from "react-bootstrap";
 import {
@@ -123,23 +124,7 @@ export default function Vente() {
         multiple: 3,
       },
     },
-    {
-      title: "Status",
-      dataIndex: "status",
-      render: (text, record) => {
-        return (
-          <>
-            <Space direction="vertical">
-              <Text strong>{record.status}</Text>
-            </Space>
-          </>
-        );
-      },
-      sorter: {
-        compare: (a, b) => a.status - b.status,
-        multiple: 3,
-      },
-    },
+  
     {
       title: "Etat",
       dataIndex: "note",
@@ -174,7 +159,12 @@ export default function Vente() {
                 </span>
               </Dropdown.Item>
               <Dropdown.Item>
-                <Link to="/paiement">
+              <Link
+                  to={`/paiement/${record._id}`}
+                  onClick={() => {
+                    dispatch(getCommandeDetails(record));
+                  }}
+                >
                   <DollarOutlined />  Payée
                 </Link>
               </Dropdown.Item>

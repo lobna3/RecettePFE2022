@@ -61,3 +61,11 @@ export const GET_ADRESSE_LIST = "GET_ADRESSE_LIST";
 export const GET_ADRESSE_LIST_SUCCESS = "GET_ADRESSE_LIST_SUCCESS";
 export const UPDATE_ADRESSE = "UPDATE_ADRESSE";
 export const DELETE_ADRESSE = "DELETE_ADRESSE";
+
+
+//Action User
+export const SET_USER = "SET_USER";
+export const ERRORS = "ERRORS";
+export const SET_PROFILE = "SET_PROFILE";
+export const SET_PROFILES = "SET_PROFILES";
+export const DELETE_PROFILE = "DELETE_PROFILE";

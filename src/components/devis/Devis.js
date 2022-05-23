@@ -47,8 +47,8 @@ const Devis = () => {
     console.log("URL", location.pathname);
   }, []);
 
-  const displayEtat = (etat) => {
-    if (etat == "Refusé") {
+  const displayEtat = (etat,dateEcheance,dateEmission) => {
+    if ( dateEcheance == dateEmission && etat == "Refusé") {
       return <span className="badge bg-danger">{etat}</span>;
     } else if (etat == "Accepté") {
       return <span className="badge bg-success">{etat}</span>;

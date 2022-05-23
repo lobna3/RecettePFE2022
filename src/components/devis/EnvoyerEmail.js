@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal} from "antd";
+import { Modal } from "antd";
 import { MailOutlined } from "@ant-design/icons";
 import "../../components/clients/modal.css";
 import axios from "axios";
@@ -24,11 +24,11 @@ const EnvoyerEmail = ({ isOpen, handleClose }) => {
     await axios
       .post("http://localhost:5000/test", form)
       .then((response) => setMsg(response.data.respMesg));
-      console.log("Email envoyer avec succssée!!!",form)
-      if (setMsg) {
-        addToast("Email envoyée avec succées", { appearance: "success" });
-      } 
-      handleClose()
+    console.log("Email envoyer avec succssée!!!", form);
+    if (setMsg) {
+      addToast("Email envoyée avec succées", { appearance: "success" });
+    }
+    handleClose();
   };
 
   return (
@@ -88,18 +88,28 @@ const EnvoyerEmail = ({ isOpen, handleClose }) => {
             ></textarea>
           </div>
           <p></p>
+          <div className="col-md-12">
+            <label for="avatar">Choisir votre commande:</label>
+            <input
+              type="file"
+              id="avatar"
+              name="avatar"
+              accept="image/png, image/jpeg"
+            />
+          </div>
 
-          <div className="col-md-12"   style={{
+          <div
+            className="col-md-12"
+            style={{
               display: "flex",
               justifyContent: "flex-end",
               gap: "15px",
-            }}>
-            <button className="btn btn-secondary" onClick={handleClose}>Annuler</button>
-            <input
-              type="submit"
-        
-              className="btn btn-primary"
-            />
+            }}
+          >
+            <button className="btn btn-secondary" onClick={handleClose}>
+              Annuler
+            </button>
+            <input type="submit" className="btn btn-primary" />
           </div>
         </div>
       </form>

@@ -1,8 +1,20 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import { BrouillonHeader } from "../RacetteHeader";
 import { useDispatch, useSelector } from "react-redux";
-import { getCommandeListApi } from "../../redux/actions/commande.actions";
-import moment from 'moment';
+import {
+  getCommandeListApi,
+  updateCommande,
+} from "../../redux/actions/commande.actions";
+import { getCommandeDetails } from "../../redux/actions/commande.details.actions";
+import moment from "moment";
+import { Link } from "react-router-dom";
+import { Dropdown } from "react-bootstrap";
+import {
+  FileDoneOutlined,
+  PlusSquareFilled,
+  MailOutlined,
+  DollarOutlined,
+} from "@ant-design/icons";
 
 export default function Brouilon() {
   const dispatch = useDispatch();
@@ -21,6 +33,17 @@ export default function Brouilon() {
               <div className="email-content">
                 <div className="table-responsive">
                   <table class="table table-inbox table-hover">
+                    <thead className="text-muted">
+                      <tr>
+                        <th>#</th>
+                        <th>nFacture</th>
+                        <th>Status</th>
+                        <th>Client</th>
+                        <th>Email</th>
+                        <th>Date Echéance</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
                     <tbody>
                       {commandeList.map((elm) => (
                         <tr
@@ -30,11 +53,7 @@ export default function Brouilon() {
                           <td>
                             <input type="checkbox" className="checkmail" />
                           </td>
-                          <td>
-                            <span className="mail-important">
-                              <i className="fa fa-star starred"></i>
-                            </span>
-                          </td>
+
                           <td className="name text-primary">
                             N: {elm.nFacture}
                           </td>
@@ -45,10 +64,32 @@ export default function Brouilon() {
                           <td className="subject text-muted">
                             {elm.client.email}
                           </td>
-                          <td>
-                            <i className="fa fa-paperclip"></i>
+
+                          <td className="mail-date">
+                            {moment(elm.dateEcheance).format("DD-MM-YYYY")}{" "}
                           </td>
-                          <td className="mail-date">{moment(elm.dateEcheance).format('DD-MM-YYYY')} </td>
+                          <td>
+                            <Dropdown>
+                              <Dropdown.Toggle
+                                variant=""
+                                id="dropdown-basic"
+                              ></Dropdown.Toggle>
+                              <Dropdown.Menu>
+                                <Dropdown.Item></Dropdown.Item>
+                                <Dropdown.Item>
+                                  <Link
+                                    to={`/paiement/${elm._id}`}
+                                    onClick={() => {
+                                      dispatch(getCommandeDetails(elm));
+                                    }}
+                                  >
+                                    <DollarOutlined /> Payée
+                                  </Link>
+                                </Dropdown.Item>
+                                <Dropdown.Item></Dropdown.Item>
+                              </Dropdown.Menu>
+                            </Dropdown>
+                          </td>
                         </tr>
                       ))}
                     </tbody>

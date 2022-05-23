@@ -7,6 +7,9 @@ import paiementReducer from "./paiement.reducer";
 import commandeDetailsReducer from "./commande.details.reducer";
 import adresseReducer from "./adresse.reducer";
 import produitReducer from "./produit.reducer";
+import authReducer from './authReducer';
+import errorsReducer from './errorsReducer';
+import profileReducer from './profileReducer';
 
 const rootReducer = combineReducers({ 
     client: clientReducer, 
@@ -16,7 +19,10 @@ const rootReducer = combineReducers({
     paiement:paiementReducer,
     detailsCommande:commandeDetailsReducer,
     produit:produitReducer,
-    adresse:adresseReducer
+    adresse:adresseReducer,
+    auth: authReducer,
+     errors: errorsReducer,
+     profiles: profileReducer
 });
 export default rootReducer;
 
