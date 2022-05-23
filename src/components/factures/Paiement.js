@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Viewer, Worker } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
-import { useSelector } from "react-redux";
+import { useSelector ,useDispatch} from "react-redux";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
+import { useParams, useLocation } from "react-router-dom";
+import { getCommandesListDetailsApi } from "../../redux/actions/commande.details.actions";
+import moment from "moment";
 import { BASE_URL } from "../../utils/apiHelpers";
 import { PaiementHeader } from "../RacetteHeader";
 import { Row, Col, Card, Typography, DatePicker, Button } from "antd";
@@ -16,18 +19,31 @@ import {
 } from "@ant-design/icons";
 import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
+import ImprimerFacture from "./ImprimerFacture";
+
 const { Text , Title } = Typography;
 const { Meta } = Card;
+
 const Paiement = () => {
+  const [isOpen, setIsopen] = useState(false);
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
   const { savedCommande } = useSelector((state) => state.commande);
+  const {id} = useParams();
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const { commandeDetails } = useSelector((state) => state.detailsCommande);
+  useEffect(() => {
+    dispatch(getCommandesListDetailsApi(id));
+    console.log("URL", location.pathname);
+  }, []);
   return (
-    <main id="main" className="main bg-light">
+    <>
+     <main id="main" className="main bg-light">
       <PaiementHeader />
       <Row>
         <Col lg={{ span: 8 }} style={{ marginBottom: 20 }}>
           <Card size="small" style={{ marginLeft: 20 , borderRadius: "10px 10px",}}>
-            <Title level={5}> Facture #000584</Title>
+            <Title level={5}> Facture #{commandeDetails.nFacture}</Title>
             <p></p>
             <Table borderless>
               <tbody>
@@ -44,10 +60,17 @@ const Paiement = () => {
                 <tr>
                   <td>
                     <DatePicker />
+                    {moment(commandeDetails.dateEmission).format(
+                        "DD-MM-YYYY"
+                      )}
                     <hr />
                   </td>
                   <td>
-                    <DatePicker /> <hr />
+                    <DatePicker /> 
+                    {moment(commandeDetails.dateEcheance).format(
+                        "DD-MM-YYYY"
+                      )}
+                    <hr />
                   </td>
                 </tr>
               </tbody>
@@ -59,7 +82,10 @@ const Paiement = () => {
                     <Text className="d-flex">
                       Contact:{" "}
                       <Text type="secondary" style={{ marginLeft: 8 }}>
-                        Mouhamed@gmail.com
+                      {commandeDetails &&
+                          commandeDetails.client &&
+                          commandeDetails.client.email &&
+                          commandeDetails.client.email}
                       </Text>
                     </Text>
                   </td>
@@ -69,7 +95,13 @@ const Paiement = () => {
                     <Text className="d-flex">
                       Client:{" "}
                       <Text type="secondary" style={{ marginLeft: 8 }}>
-                        SuperVision plus+
+                      {commandeDetails &&
+                          commandeDetails.client &&
+                          commandeDetails.client.nom &&
+                          commandeDetails.client.nom}  {commandeDetails &&
+                            commandeDetails.client &&
+                            commandeDetails.client.prenom &&
+                            commandeDetails.client.prenom}
                       </Text>
                     </Text>
                   </td>
@@ -79,7 +111,10 @@ const Paiement = () => {
                     <Text className="d-flex">
                       Adresse:{" "}
                       <Text type="secondary" style={{ marginLeft: 8 }}>
-                        Oinville-sur-Montcient
+                      {commandeDetails &&
+                          commandeDetails.client &&
+                          commandeDetails.client.siteinternet &&
+                          commandeDetails.client.siteinternet}
                       </Text>
                     </Text>
                   </td>
@@ -99,11 +134,8 @@ const Paiement = () => {
                       }}
                     >
                       <Text type="secondary" className="">
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500.
+                      {commandeDetails.remarque}
                         <p>
-                         
                           <br />
                           <br />
                           <br />
@@ -117,14 +149,14 @@ const Paiement = () => {
           </Card>
         </Col>
         <Col lg={{ span: 8 }}>
-          <Card size="small" style={{ marginRight: 20, marginLeft: 20,   borderRadius: "10px 10px", }}>
+          <Card size="small" style={{ marginRight: 20, marginLeft: 20,   borderRadius: "10px 10px",marginBottom:20 }}>
             <Title level={5}>Opération financière</Title>
             <p></p>
             <Table borderless>
               <tbody>
                 <tr>
                   <Text strong className="d-flex">
-                    {" "}
+              
                     Mode de paiement:
                   </Text>
                 </tr>
@@ -132,7 +164,7 @@ const Paiement = () => {
                   <Text>La facture est payée par:</Text>
                 </tr>
                 <tr className="d-flex">
-                  {" "}
+             
                   <td>
                     <CreditCardOutlined
                       style={{ fontSize: "18px", color: "#8c8c8c" }}
@@ -149,7 +181,7 @@ const Paiement = () => {
                     />
                   </td>
                   <td>
-                    {" "}
+                  
                     <Text className="d-flex">Chéque</Text>
                   </td>
                 </tr>
@@ -173,7 +205,7 @@ const Paiement = () => {
                   </td>
                 </tr>
                 <tr className="d-flex">
-                  {" "}
+                 
                   <Text strong>Montant reçu:</Text>
                 </tr>
                 <tr
@@ -184,7 +216,7 @@ const Paiement = () => {
                     backgroundColor: "#f6ffed",
                   }}
                 >
-                  {" "}
+                  
                   <Text type="secondary" style={{ marginLeft: 90 }}>
                     <Text type="success">1083</Text> TND
                   </Text>
@@ -203,13 +235,9 @@ const Paiement = () => {
               title=""
               description={[
                 <div className="d-flex">
-                  <Text type="secondary">Status</Text>
+                  <Text type="secondary">Status:</Text>
                   <Text type="success" style={{ marginLeft: 8 }}>
-                    {" "}
-                    <CheckCircleOutlined
-                      style={{ fontSize: "15px", color: "" }}
-                    />
-                    Payée
+                   {commandeDetails.status}
                   </Text>
                 </div>,
               ]}
@@ -224,11 +252,13 @@ const Paiement = () => {
               <FileDoneOutlined
                 style={{ fontSize: "28px", color: "#fff566" }}
               />
-              Pour trouver une facture <Link to="/"> Cliquer ici.</Link>
+              Pour trouver une facture <span className="text-primary" onClick={() => {
+                    setIsopen(true);
+                  }}> Cliquer ici.</span>
             </Text>
             <p></p>
             <div>
-              {savedCommande && (
+              {commandeDetails && (
                 <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.12.313/build/pdf.worker.js">
                   <div
                     style={{
@@ -239,21 +269,23 @@ const Paiement = () => {
                     }}
                   >
                     <Viewer
-                      fileUrl={`${BASE_URL}/${savedCommande.documentUrl}`}
+                      fileUrl={`${BASE_URL}/${commandeDetails.documentUrl}`}
                       plugins={[defaultLayoutPluginInstance]}
                     />
                   </div>
                 </Worker>
               )}
             </div>
-            <Button
+            <Button  onClick={() => {
+                    setIsopen(true);
+                  }}
               type="dashed"
               icon={
                 <PrinterOutlined
                   style={{ fontSize: "18px", color: "#1890ff" }}
                 />
               }
-              style={{ width: 245 }}
+              style={{ width: 245 ,marginTop:10}}
             >
               Imprimer
             </Button>
@@ -261,6 +293,14 @@ const Paiement = () => {
         </Col>
       </Row>
     </main>
+     <ImprimerFacture
+        isOpen={isOpen}
+        handleClose={() => {
+          setIsopen(false);
+        }}
+      />
+    </>
+   
   );
 };
 

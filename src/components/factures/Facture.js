@@ -6,6 +6,7 @@ import {
   deleteCommandeApi,
   updateCommande
 } from "../../redux/actions/commande.actions";
+import { getCommandeDetails } from "../../redux/actions/commande.details.actions";
 import Swal from "sweetalert2";
 import { Dropdown } from "react-bootstrap";
 import { useToasts } from "react-toast-notifications";
@@ -158,7 +159,12 @@ export default function Facture() {
             <Dropdown.Toggle variant="" id="dropdown-basic"></Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item>
-                <Link to="/paiement">
+              <Link
+                  to={`/paiement/${record._id}`}
+                  onClick={() => {
+                    dispatch(getCommandeDetails(record));
+                  }}
+                >
                   <DollarOutlined /> Paiement
                 </Link>
               </Dropdown.Item>

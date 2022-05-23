@@ -35,18 +35,18 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
                 <div className="col-12 col-sm-9 col-xl-10">
                   <div className="media-body">
                     <ul className="ml-2 px-0 list-unstyled">
-                      <li className="text-bold-800">Arsela</li>
+                      <li className="text-bold-800"></li>
                       <li>Boulevard Khalifa Karoui,</li>
                       <li>Sahloul 4054 Sousse, Tunisie,</li>
                       <li>Email: info@arsela.com,</li>
-                      <li>Phone: (+216) 26 314 922</li>
+                      <li></li>
                     </ul>
                   </div>
                 </div>
               </div>
             </div>
             <div className="col-sm-6 col-12 text-center text-sm-right">
-              <h2>FACTURE</h2>
+              <h2>{commandeDetails.status}</h2>
               <p className="pb-sm-3"># INV-{commandeDetails.nFacture}</p>
               <ul className="px-0 list-unstyled">
                 <li>Solde</li>

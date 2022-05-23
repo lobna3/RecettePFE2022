@@ -64,7 +64,7 @@ function App() {
             <Route path="/not_connected" element={<AlertProtection />} />
             <Route path="/" element={<Dashbord />} />
             <Route path="/detail_commande/:id" element={<DetailCommande />} />
-            <Route path="/paiement" element={<Paiement />} />
+            <Route path="/paiement/:id" element={<Paiement />} />
             <Route path="/imprimer/:id" element={<MyDocument />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/success" element={<Success />} />

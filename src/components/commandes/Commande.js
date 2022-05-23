@@ -23,7 +23,7 @@ import {
 import { CommandeHeader } from "../RacetteHeader";
 import ModStatus from "../devis/ModStatus";
 import moment from "moment";
-
+import { BASE_URL } from "../../utils/apiHelpers";
 const { Text } = Typography;
 
 export default function Commande() {
@@ -188,14 +188,16 @@ export default function Commande() {
                 </span>
               </Dropdown.Item>
               <Dropdown.Item>
-              <Link
-                  to={`/imprimer/${record._id}`}
+              <a
+                  href={`${BASE_URL}/${record.documentUrl}`}
+                  target="_blank"
                   onClick={() => {
-                    dispatch(getCommandeDetails(record));
+                    console.log("clicked");
+                    window.open(`${BASE_URL}/${record.documentUrl}`, "_blank");
                   }}
                 >
                   <PrinterFilled /> Imprimer
-                </Link>
+                </a>
               </Dropdown.Item>
               <Dropdown.Item>
                 <Link to={`/devis/${record._id}`}>
@@ -216,9 +218,14 @@ export default function Commande() {
                 </Link>
               </Dropdown.Item>
               <Dropdown.Item>
-                <span className="text-primary">
-                  <DownOutlined style={{ color: "#1890ff" }} /> Parcours
-                </span>
+              <Link
+                  to={`/imprimer/${record._id}`}
+                  onClick={() => {
+                    dispatch(getCommandeDetails(record));
+                  }}
+                >
+                  <DownOutlined style={{ color: "#1890ff" }} /> Enregister
+                </Link>
               </Dropdown.Item>
               <Dropdown.Item>
                 <DeleteOutlined style={{ color: "#1890ff" }} />
