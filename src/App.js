@@ -134,12 +134,54 @@ function App() {
                 </PrivateRouter>
               }
             />
-            <Route path="/devis/:detail" element={<DetailDevis />} />
-            <Route path="/devi/:modifier" element={<ModifierDevis />} />
-            <Route path="/factures" element={<Facture />} />
-            <Route path="/commandes" element={<Commande />} />
-            <Route path="/ventes" element={<Ventes />} />
-            <Route path="/brouillon" element={<Brouillon />} />
+            <Route
+              path="/devis/:detail"
+              element={
+                <PrivateRouter user={user}>
+                  <DetailDevis />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/devi/:modifier"
+              element={
+                <PrivateRouter user={user}>
+                  <ModifierDevis />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/factures"
+              element={
+                <PrivateRouter user={user}>
+                  <Facture />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/commandes"
+              element={
+                <PrivateRouter user={user}>
+                  <Commande />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/ventes"
+              element={
+                <PrivateRouter user={user}>
+                  <Ventes />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/brouillon"
+              element={
+                <PrivateRouter user={user}>
+                  <Brouillon />
+                </PrivateRouter>
+              }
+            />
             <Route
               path="/"
               element={
@@ -148,12 +190,54 @@ function App() {
                 </PrivateRouter>
               }
             />
-            <Route path="/detail_commande/:id" element={<DetailCommande />} />
-            <Route path="/paiement/:id" element={<Paiement />} />
-            <Route path="/imprimer/:id" element={<MyDocument />} />
-            <Route path="/payment" element={<Payment />} />
-            <Route path="/success" element={<Success />} />
-            <Route path="/fail" element={<Fail />} />
+            <Route
+              path="/detail_commande/:id"
+              element={
+                <PrivateRouter user={user}>
+                  <DetailCommande />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/paiement/:id"
+              element={
+                <PrivateRouter user={user}>
+                  <Paiement />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/imprimer/:id"
+              element={
+                <PrivateRouter user={user}>
+                  <MyDocument />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/payment"
+              element={
+                <PrivateRouter user={user}>
+                  <Payment />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/success"
+              element={
+                <PrivateRouter user={user}>
+                  <Success />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/fail"
+              lement={
+                <PrivateRouter user={user}>
+                  <Fail />
+                </PrivateRouter>
+              }
+            />
           </Routes>
 
           <Footer user={user} />
