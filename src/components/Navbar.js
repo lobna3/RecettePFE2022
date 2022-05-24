@@ -12,11 +12,11 @@ export default function Navbare() {
       <header id="header" className="header fixed-top d-flex align-items-center">
 
         <div className="d-flex align-items-center justify-content-between">
-          <a href="index.html" className="logo d-flex align-items-center">
+          <Link to="" className="logo d-flex align-items-center">
 
             <img src="assets/img/logo.png" alt="" />
            <span className="d-none d-sm-block">SuperVision</span>
-          </a>
+          </Link>
           <i className="bi bi-list toggle-sidebar-btn"></i>
         </div>
 
@@ -194,30 +194,30 @@ export default function Navbare() {
                 </li>
 
                 <li>
-                  <a className="dropdown-item d-flex align-items-center" href="users-profile.html">
+                  <Link className="dropdown-item d-flex align-items-center" to="/profile">
                     <i className="bi bi-person"></i>
-                    <span>My Profile</span>
-                  </a>
+                    <span>Mon profil</span>
+                  </Link>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
                 </li>
 
                 <li>
-                  <a className="dropdown-item d-flex align-items-center" href="users-profile.html">
+                  <Link className="dropdown-item d-flex align-items-center" to="">
                     <i className="bi bi-gear"></i>
-                    <span>Account Settings</span>
-                  </a>
+                    <span>Paramètres du compte</span>
+                  </Link>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
                 </li>
 
                 <li>
-                  <a className="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                  <Link className="dropdown-item d-flex align-items-center" to="">
                     <i className="bi bi-question-circle"></i>
-                    <span>Need Help?</span>
-                  </a>
+                    <span>Besoin d'aide?</span>
+                  </Link>
                 </li>
                 <li>
                   <hr class="dropdown-divider" />
@@ -226,7 +226,7 @@ export default function Navbare() {
                 <li>
                   <Link className="dropdown-item d-flex align-items-center" to="">
                     <i className="bi bi-box-arrow-right"></i>
-                    <span>Sign Out</span>
+                    <span>Se déconnecter</span>
                   </Link>
                 </li>
 
