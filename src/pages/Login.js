@@ -5,24 +5,24 @@ import Inputs from "../component/Inputs";
 //import { LoginAction } from "../redux/actions/authActions";
 
 function Login() {
-  const [form, setForm] = useState({})
-  const dispatch = useDispatch()
-  const errors = useSelector(state=>state.errors)
-  const navigate = useNavigate()
-  /* 
-   const onChangeHandler = (e)=>{
+  const [form, setForm] = useState({});
+  const dispatch = useDispatch();
+  const errors = useSelector((state) => state.errors);
+  const navigate = useNavigate();
+
+  const onChangeHandler = (e) => {
     setForm({
       ...form,
-      [e.target.name]: e.target.value
-    })
-  }
-
+      [e.target.name]: e.target.value,
+    });
+  };
+  /*
   const onSubmit = (e)=>{
   e.preventDefault();
   dispatch(LoginAction(form, navigate))
   }
   */
- 
+
   return (
     <div className="container p-4 mt-4">
       <div className="row justify-content-evenly mt-4">
@@ -35,22 +35,22 @@ function Login() {
             className="p-6 shadow-lg p-3 mb-5 bg-body rounded"
             style={{ backgroundColor: "white" }}
           >
-              <form >
+            <form>
               <Inputs
                 name="email"
                 label="Email"
                 type="text"
                 icon="fa-solid fa-at"
-               // onChangeHandler={onChangeHandler}
-              //  errors={errors.email}
+                onChangeHandler={onChangeHandler}
+                errors={errors.email}
               />
               <Inputs
                 name="password"
                 label="Password"
                 type="password"
                 icon="fa-solid fa-key"
-              //  onChangeHandler={onChangeHandler}
-              //  errors={errors.password}
+                onChangeHandler={onChangeHandler}
+                errors={errors.password}
               />
               <div className="d-flex justify-content-between">
                 <button type="submit" className="btn btn-outline-primary">
@@ -58,8 +58,7 @@ function Login() {
                 </button>
                 <Link to="/register">Je n'ai pas de compte</Link>
               </div>
-            </form> 
-         
+            </form>
           </div>
         </div>
       </div>

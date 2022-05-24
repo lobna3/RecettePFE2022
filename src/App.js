@@ -37,7 +37,7 @@ import ForceRedirect from "./component/ForceRedirect";
 function App() {
   const user = {
     isConnected: false,
-    role: "ADMIN",
+    role: "USER",
     //isConnected: auth.isConnected,
     //role: auth.user.role
   };
@@ -46,8 +46,8 @@ function App() {
     <div className="App">
       <ToastProvider>
         <Provider store={store}>
-          <Navbare />
-          <SideBar />
+          <Navbare user={user} />
+          <SideBar user={user} />
           <p>
             <br />
           </p>
@@ -106,7 +106,7 @@ function App() {
             <Route path="/fail" element={<Fail />} />
           </Routes>
 
-          <Footer />
+          <Footer user={user} />
         </Provider>
       </ToastProvider>
     </div>

@@ -9,7 +9,7 @@ function Register() {
   const dispatch = useDispatch();
   const errors = useSelector((state) => state.errors);
   const navigate = useNavigate();
-   const onChangeHandler = (e) => {
+  const onChangeHandler = (e) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
@@ -20,8 +20,6 @@ function Register() {
     e.preventDefault();
     dispatch(Registration(form, navigate));
   };
-   
- 
 
   return (
     <div className="container p-4 mt-4">
@@ -36,23 +34,30 @@ function Register() {
             style={{ backgroundColor: "white" }}
           >
             <form onSubmit={onSubmit}>
+              <div className="row">
+                <div className="col-md-6">
+                  <Inputs
+                    name="nom"
+                    label="Nom"
+                    type="text"
+                    icon="fa-solid fa-user"
+                    onChangeHandler={onChangeHandler}
+                    errors={errors.nom}
+                  />
+                </div>
+                <div className="col-md-6">
+                  <Inputs
+                    name="prenom"
+                    label="Prénom"
+                    type="text"
+                    icon="fa-solid fa-user"
+                    onChangeHandler={onChangeHandler}
+                    errors={errors.prenom}
+                  />
+                </div>
+              </div>
+
               <Inputs
-                name="nom"
-                label="Nom"
-                type="text"
-                icon="fa-solid fa-user"
-                onChangeHandler={onChangeHandler}
-                errors={errors.nom}
-              />
-               <Inputs
-                name="prenom"
-                label="Prénom"
-                type="text"
-                icon="fa-solid fa-user"
-                onChangeHandler={onChangeHandler}
-                errors={errors.prenom}
-              />
-               <Inputs
                 name="numTelp"
                 label="Téléphonne"
                 type="text"
@@ -65,34 +70,41 @@ function Register() {
                 label="Email"
                 type="text"
                 icon="fa-solid fa-at"
-                 onChangeHandler={onChangeHandler}
-                 errors={errors.email}
+                onChangeHandler={onChangeHandler}
+                errors={errors.email}
               />
-              <Inputs
-                name="password"
-                label="Password"
-                type="password"
-                icon="fa-solid fa-key"
-                 onChangeHandler={onChangeHandler}
-                errors={errors.password}
-              />
-              <Inputs
-                name="confirm"
-                label="Confirm password"
-                type="password"
-                icon="fa-solid fa-key"
-                 onChangeHandler={onChangeHandler}
-                errors={errors.confirm}
-              />
+              <div className="row">
+                <div className="col-md-6">
+                  
+                  <Inputs
+                    name="password"
+                    label="Password"
+                    type="password"
+                    icon="fa-solid fa-key"
+                    onChangeHandler={onChangeHandler}
+                    errors={errors.password}
+                  />
+                </div>
+                <div className="col-md-6">
+                
+                  <Inputs
+                    name="confirm"
+                    label="Confirm password"
+                    type="password"
+                    icon="fa-solid fa-key"
+                    onChangeHandler={onChangeHandler}
+                    errors={errors.confirm}
+                  />
+                </div>
+              </div>
+
               <div className="d-flex justify-content-between">
                 <button type="submit" className="btn btn-outline-primary">
-                  Save <i className="fa-solid fa-floppy-disk"></i>
+                  Enregistrer <i className="fa-solid fa-floppy-disk"></i>
                 </button>
                 <Link to="/login">J'ai un compte</Link>
               </div>
             </form>
-           
-          
           </div>
         </div>
       </div>

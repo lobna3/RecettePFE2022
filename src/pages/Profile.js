@@ -44,7 +44,6 @@ function Profile() {
             style={{ backgroundColor: "white" }}
           >
             <form onSubmit={onSubmit}>
-              <Inputs name="tel" label="Telephone" value={form && form.tel ? form.tel : ""} type="text" onChangeHandler={onChangeHandler} errors={errors.tel}/>
               <Inputs name="city" label="City" value={form && form.city ? form.city : ""} type="text" onChangeHandler={onChangeHandler} errors={errors.city}/>
               <Inputs name="country" label="Country" value={form && form.country ? form.country : ""} type="text" onChangeHandler={onChangeHandler} errors={errors.country}/>
               <Inputs name="bio" label="Bio" type="text" value={form && form.bio ? form.bio : ""} onChangeHandler={onChangeHandler} errors={errors.bio}/>

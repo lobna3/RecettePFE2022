@@ -13,12 +13,11 @@ import { HomeOutlined} from '@ant-design/icons';
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-const SideBar = () => {
+const SideBar = ({user}) => {
 
     return (
 <div>
-      
-<aside id="sidebar" className="sidebar">
+{user.role === "ADMIN" ? (<><aside id="sidebar" className="sidebar">
   <ul className="sidebar-nav" id="sidebar-nav">
     
    <li className="nav-item">
@@ -140,7 +139,8 @@ const SideBar = () => {
 
 
   </ul>
-</aside>
+</aside></>):( "" )}
+
 </div>
     )
 };
