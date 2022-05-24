@@ -3,7 +3,7 @@ import Classnames from 'classnames'
 function Inputs({name, label, value, type, icon, onChangeHandler, errors}) {
   return (
     <div className=" mb-3">
-      <label className="form-label">{label}</label>
+      <label className="form-label d-flex">{label}</label>
       <div className="input-group">
         <span className="input-group-text">
           <i className={icon}></i>

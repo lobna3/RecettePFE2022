@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ERRORS, SET_USER } from '../actionTypes';
-import jwt_decode from 'jwt-decode'
+//import jwt_decode from 'jwt-decode'
 import { setAuth } from '../../utils/setAuth';
 
 export const Registration = (form, navigate)=>dispatch=>{
@@ -45,8 +45,7 @@ export const Logout = ()=>dispatch=>{
         payload: {}
     })
 }
-
-export const setUser = (decode)=>({
+/*export const setUser = (decode)=>({
     type: SET_USER,
     payload: decode
-})
+}) */

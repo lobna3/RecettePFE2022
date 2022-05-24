@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Inputs from "../component/Inputs";
-//import { Registration } from "../redux/actions/authActions";
+import { Registration } from "../redux/actions/authActions";
 
 function Register() {
   const [form, setForm] = useState({});
   const dispatch = useDispatch();
   const errors = useSelector((state) => state.errors);
   const navigate = useNavigate();
-  /*
    const onChangeHandler = (e) => {
     setForm({
       ...form,
@@ -21,7 +20,7 @@ function Register() {
     e.preventDefault();
     dispatch(Registration(form, navigate));
   };
-   */
+   
  
 
   return (
@@ -36,38 +35,54 @@ function Register() {
             className="p-6 shadow-lg p-3 mb-5 bg-body rounded"
             style={{ backgroundColor: "white" }}
           >
-            <form>
+            <form onSubmit={onSubmit}>
               <Inputs
                 name="nom"
                 label="Nom"
                 type="text"
                 icon="fa-solid fa-user"
-               // onChangeHandler={onChangeHandler}
-               // errors={errors.name}
+                onChangeHandler={onChangeHandler}
+                errors={errors.nom}
+              />
+               <Inputs
+                name="prenom"
+                label="Prénom"
+                type="text"
+                icon="fa-solid fa-user"
+                onChangeHandler={onChangeHandler}
+                errors={errors.prenom}
+              />
+               <Inputs
+                name="numTelp"
+                label="Téléphonne"
+                type="text"
+                icon="fa-solid fa-phone"
+                onChangeHandler={onChangeHandler}
+                errors={errors.numTelp}
               />
               <Inputs
                 name="email"
                 label="Email"
                 type="text"
                 icon="fa-solid fa-at"
-              //  onChangeHandler={onChangeHandler}
-               // errors={errors.email}
+                 onChangeHandler={onChangeHandler}
+                 errors={errors.email}
               />
               <Inputs
                 name="password"
                 label="Password"
                 type="password"
                 icon="fa-solid fa-key"
-               // onChangeHandler={onChangeHandler}
-               // errors={errors.password}
+                 onChangeHandler={onChangeHandler}
+                errors={errors.password}
               />
               <Inputs
                 name="confirm"
                 label="Confirm password"
                 type="password"
                 icon="fa-solid fa-key"
-               // onChangeHandler={onChangeHandler}
-               // errors={errors.confirm}
+                 onChangeHandler={onChangeHandler}
+                errors={errors.confirm}
               />
               <div className="d-flex justify-content-between">
                 <button type="submit" className="btn btn-outline-primary">
