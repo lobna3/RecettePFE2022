@@ -34,12 +34,27 @@ import NoAccess from "./pages/NoAccess";
 import PrivateRouter from "./component/PrivateRouter";
 import AdminRouter from "./component/AdminRouter";
 import ForceRedirect from "./component/ForceRedirect";
+import jwt_decode from "jwt-decode";
+import { Logout, setUser } from "./redux/actions/authActions";
+import { useSelector } from "react-redux";
+import { setAuth } from "./utils/setAuth";
+
+if (window.localStorage.jwt) {
+  const decode = jwt_decode(window.localStorage.jwt);
+  store.dispatch(setUser(decode));
+  setAuth(window.localStorage.jwt);
+  const currentDate = Date.now / 1000;
+
+  if (decode.exp > currentDate) {
+    store.dispatch(Logout());
+  }
+}
+
 function App() {
+  const auth = useSelector((state) => state.auth);
   const user = {
-    isConnected: false,
-    role: "USER",
-    //isConnected: auth.isConnected,
-    //role: auth.user.role
+    isConnected: auth.isConnected,
+    role: auth.user.role,
   };
 
   return (
@@ -87,17 +102,52 @@ function App() {
                 </AdminRouter>
               }
             />
-            <Route path="/recette" element={<Recette />} />
-            <Route path="/devis" element={<Devis />} />
-            <Route path="/ajouter_devis" element={<AjoutDevis1 />} />
-            <Route path="/ajouter_facture" element={<AjoutFacture />} />
+            <Route
+              path="/recette"
+              element={
+                <PrivateRouter user={user}>
+                  <Recette />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/devis"
+              element={
+                <PrivateRouter user={user}>
+                  <Devis />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/ajouter_devis"
+              element={
+                <PrivateRouter user={user}>
+                  <AjoutDevis1 />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/ajouter_facture"
+              element={
+                <PrivateRouter user={user}>
+                  <AjoutFacture />
+                </PrivateRouter>
+              }
+            />
             <Route path="/devis/:detail" element={<DetailDevis />} />
             <Route path="/devi/:modifier" element={<ModifierDevis />} />
             <Route path="/factures" element={<Facture />} />
             <Route path="/commandes" element={<Commande />} />
             <Route path="/ventes" element={<Ventes />} />
             <Route path="/brouillon" element={<Brouillon />} />
-            <Route path="/" element={<Dashbord />} />
+            <Route
+              path="/"
+              element={
+                <PrivateRouter user={user}>
+                  <Dashbord />
+                </PrivateRouter>
+              }
+            />
             <Route path="/detail_commande/:id" element={<DetailCommande />} />
             <Route path="/paiement/:id" element={<Paiement />} />
             <Route path="/imprimer/:id" element={<MyDocument />} />

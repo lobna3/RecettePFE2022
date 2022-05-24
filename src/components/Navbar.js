@@ -1,8 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Logout } from "../redux/actions/authActions";
 import { Form } from "react-bootstrap";
 
 export default function Navbare({ user }) {
+  const dispatch = useDispatch()
+  const LogoutHanlder = ()=>{
+     dispatch(Logout())
+  }
+  
   return (
     <div>
       <header
@@ -14,9 +21,9 @@ export default function Navbare({ user }) {
             <img src="assets/img/logo.png" alt="" />
             <span className="d-none d-sm-block">SuperVision</span>
           </Link>
-          <i className="bi bi-list toggle-sidebar-btn"></i>
+         
         </div>
-        {user.role === "ADMIN" ? (
+        {user.isConnected ? (
           <>
             <div className="search-bar">
               <form
@@ -284,7 +291,7 @@ export default function Navbare({ user }) {
                     <li>
                       <Link
                         className="dropdown-item d-flex align-items-center"
-                        to=""
+                        to="" onClick={LogoutHanlder}
                       >
                         <i className="bi bi-box-arrow-right"></i>
                         <span>Se déconnecter</span>

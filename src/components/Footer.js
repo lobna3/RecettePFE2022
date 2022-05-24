@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function Footer({ user }) {
   return (
     <div>
-      {user.role === "ADMIN" ? (
+      {user.isConnected ? (
         <>
           {" "}
           <footer id="footer" className="footer">

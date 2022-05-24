@@ -6,11 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom';
 import 'antd/dist/antd.css';
 import 'react-toastify/dist/ReactToastify.css';
+import { Provider } from "react-redux";
+import store from './redux/store';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+    <Provider store={store}>
       <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

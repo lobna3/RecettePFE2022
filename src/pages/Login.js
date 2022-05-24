@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Inputs from "../component/Inputs";
-//import { LoginAction } from "../redux/actions/authActions";
+import { LoginAction } from "../redux/actions/authActions";
 
 function Login() {
   const [form, setForm] = useState({});
@@ -16,12 +16,12 @@ function Login() {
       [e.target.name]: e.target.value,
     });
   };
-  /*
+
   const onSubmit = (e)=>{
   e.preventDefault();
   dispatch(LoginAction(form, navigate))
   }
-  */
+  
 
   return (
     <div className="container p-4 mt-4">
@@ -35,7 +35,7 @@ function Login() {
             className="p-6 shadow-lg p-3 mb-5 bg-body rounded"
             style={{ backgroundColor: "white" }}
           >
-            <form>
+            <form onSubmit={onSubmit}>
               <Inputs
                 name="email"
                 label="Email"
@@ -54,7 +54,7 @@ function Login() {
               />
               <div className="d-flex justify-content-between">
                 <button type="submit" className="btn btn-outline-primary">
-                  Save <i className="fa-solid fa-floppy-disk"></i>
+                  Se connecter <i className="fa-solid fa-floppy-disk"></i>
                 </button>
                 <Link to="/register">Je n'ai pas de compte</Link>
               </div>
