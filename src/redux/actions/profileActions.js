@@ -1,12 +1,12 @@
 import axios from 'axios'
-import { ERRORS, SET_PROFILE, SET_PROFILES, DELETE_PROFILE } from '../actionsTypes';
+import { ERRORS, SET_PROFILE, SET_PROFILES, DELETE_PROFILE } from '../actionTypes';
 
 export const AddProfile = (form, setShow, setMessage)=>dispatch=>{
     axios
       .post("/profiles", form)
       .then(res => {
         setShow(true)
-        setMessage("User added with success")
+        setMessage("Utilisateur ajouté avec succées")
         dispatch({
             type: ERRORS,
             payload: {}
@@ -58,7 +58,7 @@ export const GetProfiles = ()=>dispatch=>{
 }
 
 export const DeleteProfile = (id)=>dispatch=>{
-   if(window.confirm("are you sure to delete this user?")){
+   if(window.confirm("vous etes sur de supprimer cette utilisateur?")){
     axios
     .delete(`/profiles/${id}`)
     .then(res => {

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-//import Inputs from "../component/Inputs";
+import Inputs from "../component/Inputs";
 import { useDispatch, useSelector } from 'react-redux'
 import Classnames from 'classnames'
-//import { AddProfile, GetProfile } from "../redux/actions/profileActions";
+import { AddProfile, GetProfile } from "../redux/actions/profileActions";
 function Profile() {
   const [form, setForm] = useState({})
   const dispatch = useDispatch()
@@ -10,7 +10,7 @@ function Profile() {
   const profiles = useSelector(state=>state.profiles)
   const [message, setMessage] = useState("")
   const [show, setShow] = useState(false)
-  /*  const onChangeHandler = (e)=>{
+   const onChangeHandler = (e)=>{
     setForm({
       ...form,
       [e.target.name]: e.target.value
@@ -22,14 +22,14 @@ function Profile() {
   dispatch(AddProfile(form, setShow, setMessage))
   }
 
-  useEffect(async ()=>{
-   await dispatch(GetProfile())
+  useEffect( ()=>{
+    dispatch(GetProfile())
    setForm(profiles.profile)
-  },[])*/
+  },[])
  
   return (
-    <div className="container p-4 mt-4">
-        {/* <div class="alert alert-success" role="alert" style={{ display: show ? "block" : "none"}}>
+    <div className="container mt-4">
+         <div class="alert alert-success" role="alert" style={{ display: show ? "block" : "none"}}>
           {message}
         </div>
         
@@ -67,13 +67,13 @@ function Profile() {
               </div>
               <div className="d-flex justify-content-between">
                 <button type="submit" className="btn btn-outline-primary">
-                  Update <i className="fa-solid fa-floppy-disk"></i>
+                  Modifier <i className="fa-solid fa-floppy-disk"></i>
                 </button>
               </div>
             </form>
           </div>
         </div>
-      </div> */}
+      </div> 
       
         
          

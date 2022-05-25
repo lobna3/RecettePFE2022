@@ -241,7 +241,7 @@ export default function Navbare({ user }) {
 
                   <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li className="dropdown-header">
-                      <h6>Mme Foulena</h6>
+                      <h6>Mme Foulena </h6>
                       <span>Chef de projet</span>
                     </li>
                     <li>

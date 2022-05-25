@@ -9,9 +9,10 @@ function RowDetails({_id, user, city, country, bio}) {
     }
   return (
     <tr>
-      <th>{user.nom}</th>
+      <th>{user.nom} {user.prenom}</th>
       <td>{user.email}</td>
       <td>{user.role}</td>
+      <td>{user.numTelp}</td>
       <td>{city}</td>
       <td>{country}</td>
       <td>{bio}</td>
